@@ -1,0 +1,25 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdoran35/discordbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdoran35/discordbot/issues"
+  },
+  "homepage": "https://github.com/sdoran35/discordbot#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
