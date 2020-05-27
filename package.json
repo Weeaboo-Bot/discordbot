@@ -19,7 +19,11 @@
   },
   "homepage": "https://github.com/sdoran35/discordbot#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.3.2",
     "discord.js": "^12.2.0",
-    "nodemon": "^2.0.4"
+    "ffmpeg": "0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "nodemon": "^2.0.4",
+    "ytdl-core": "^2.1.5"
   }
 }
