@@ -15,7 +15,7 @@ const kick =  {
 /**
  * Prune Command
  */
-const prune = {
+module.exports = {
     name: 'prune',
     description: 'Prune Messages from Channel',
     args: true,
@@ -27,5 +27,5 @@ const prune = {
 }
 
 
-module.exports = { kick,prune };
+//module.exports = { kick,prune };
 
