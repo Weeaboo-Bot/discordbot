@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
-const { weather_token } = require('../../config.json');
+const { weather_token } = require('../../config/config.json');
 
 
 function toTitleCase(str) {
