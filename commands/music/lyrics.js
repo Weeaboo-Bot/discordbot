@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
-const { genius_token } = require('../../config/config.json');
+const genius_token = process.env.genius_token;
 
 module.exports = class LyricsCommand extends Command {
   constructor(client) {

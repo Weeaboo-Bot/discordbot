@@ -1,7 +1,12 @@
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { Structures } = require('discord.js');
-const {token,prefix,discord_owner_id} = require('./config/config.json');
+const {token,prefix,discord_owner_id} = process.env;
+
+//DEBUG
+//const token = process.env.token;
+//const prefix = process.env.prefix;
+//const discord_owner_id = process.env.discord_owner_id;
 
 
 

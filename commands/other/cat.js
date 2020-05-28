@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { tenorAPI } = require('../../config/config.json');
+const tenor_token = process.env.tenor_token
 const { Command } = require('discord.js-commando');
 
 module.exports = class CatCommand extends Command {
@@ -18,7 +18,7 @@ module.exports = class CatCommand extends Command {
   }
 
   run(message) {
-    fetch(`https://api.tenor.com/v1/random?key=${tenorAPI}&q=cat&limit=1`)
+    fetch(`https://api.tenor.com/v1/random?key=${tenor_token}&q=cat&limit=1`)
       .then(res => res.json())
       .then(json => message.say(json.results[0].url))
       .catch(err => {
