@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
-const {youtube_token }= require('../../config');
+const {youtube_token, discord_owner_id}= require('../../config');
 const youtube = new Youtube(youtube_token);
 
 module.exports = class PlayCommand extends Command {
@@ -36,7 +36,7 @@ module.exports = class PlayCommand extends Command {
     const voiceChannel = message.member.voice.channel;
     if (!voiceChannel) return message.say('Join a channel and try again');
 
-    if(this.throttling.usages >= 2) {
+    if(this.throttling.usages >= 2 && message.member.id != discord_owner_id ) {
       return message.say('You have reached the throttle limit for the Bot, please wait about 5 seconds!')
     }
     
