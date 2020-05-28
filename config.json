@@ -1,0 +1,15 @@
+{
+	"prefix": "!",
+	"token": "MzAyMjg1MzMwMDIxNjEzNTY5.Xs8WRA.hu285pz2atfgJJMen8i2Mtsx6r4",
+	"discord_owner_id":"106089884585861120",
+	"meaning_of_life": 42,
+	"passwords_array": ["please", "dont", "hack", "me"],
+	"secret_passcodes": {
+		"bank": 1234,
+		"home": 4321
+	},
+	"genius_token":"k3F6ZfFwxk4PO8GfVjV5LGUjyzSKhDO10LIjlmoUIdtwqO4dWSxwRKUvn0D2wYL5",
+	"youtube_token":"AIzaSyAZRhm4sxmNqlgNGxGiRGgT2Iy0u0y_dL0",
+	"news_token":"bef909f0c2f244479ceaa489f8295f8c",
+	"weather_token":"a255cb8478a3c2167f3528df90ea6447"
+}

@@ -20,11 +20,14 @@
   "homepage": "https://github.com/sdoran35/discordbot#readme",
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
+    "cheerio": "^1.0.0-rc.3",
     "discord.js": "^12.2.0",
     "discord.js-commando": "github:discordjs/Commando",
     "ffmpeg": "0.0.4",
     "fluent-ffmpeg": "^2.1.2",
+    "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4",
+    "simple-youtube-api": "^5.2.1",
     "ytdl-core": "^2.1.5"
   }
 }

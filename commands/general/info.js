@@ -18,7 +18,7 @@ module.exports = class InfoCommand extends Command {
 	run(msg) {
         
         
-		return msg.say(`Server Name: ${msg.guild.name}\nTotal Memberssss: ${msg.guild.memberCount}`);
+		return msg.say(`Server Name: ${msg.guild.name}\nTotal Members: ${msg.guild.memberCount}`);
 	}
 }
 

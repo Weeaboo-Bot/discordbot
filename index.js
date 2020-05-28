@@ -1,10 +1,29 @@
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
-const {token,prefix} = require('./config/discord-config.json');
+const { Structures } = require('discord.js');
+const {token,prefix,discord_owner_id} = require('./config.json');
+
+Structures.extend('Guild', function(Guild) {
+  class MusicGuild extends Guild {
+    constructor(client, data) {
+      super(client, data);
+      this.musicData = {
+        queue: [],
+        isPlaying: false,
+        nowPlaying: null,
+        songDispatcher: null,
+        volume: 1
+      };
+      
+    }
+  }
+  return MusicGuild;
+});
+
 
 const client = new CommandoClient({
   commandPrefix: prefix,
-  owner: '106089884585861120',
+  owner: discord_owner_id,
  
 });
 
@@ -16,21 +35,47 @@ client.registry
     ['music', 'Music Bot Commands'],
     ['roles', 'Role Commands'],
     ['channels', 'Channel Commands'],
-    ['members', 'Member Commands']
+    ['members', 'Member Commands'],
+    ['roles', 'Admin Role Commands'],
+    ['members', 'Admin Member Commands'],
+    ['news', 'News Commands'],
+    ['other', 'Other Commands']
   ])
   .registerDefaultGroups()
   .registerDefaultCommands({
-    
+    eval: false,
+    prefix: false,
+    commandState: false,
     ping: false
   })
-  .registerCommandsIn(path.join(__dirname, 'commands'));
+  .registerCommandsIn(path.join(__dirname, 'commands'))
+  
 
 
   client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
-    client.user.setActivity('with Commando');
+    console.log('Ready!');
+    client.user.setActivity(`${prefix}help`, {
+      type: 'WATCHING',
+      url: 'https://github.com/sdoran35/discordbot'
+    });
   });
   
-  client.on('error', console.error);
-
+  client.on('voiceStateUpdate', async (___, newState) => {
+    if (
+      newState.member.user.bot &&
+      !newState.channelID &&
+      newState.guild.musicData.songDispatcher &&
+      newState.member.user.id == client.user.id
+    ) {
+      newState.guild.musicData.queue.length = 0;
+      newState.guild.musicData.songDispatcher.end();
+    }
+  });
+  
+  client.on('guildMemberAdd', member => {
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'general'); // change this to the channel name you want to send the greeting to
+    if (!channel) return;
+    channel.send(`Welcome ${member}!`);
+  });
+  
   client.login(token);
