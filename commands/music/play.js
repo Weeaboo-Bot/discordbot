@@ -36,6 +36,9 @@ module.exports = class PlayCommand extends Command {
     const voiceChannel = message.member.voice.channel;
     if (!voiceChannel) return message.say('Join a channel and try again');
 
+    if(this.throttling.usages >= 2) {
+      return message.say('You have reached the throttle limit for the Bot, please wait about 5 seconds!')
+    }
     
 
     if (
