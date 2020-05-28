@@ -60,7 +60,7 @@ client.registry
 
 
   client.once('ready', () => {
-    console.log('Ready!');
+    console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
     client.user.setActivity(`${prefix}help`, {
       type: 'WATCHING',
       url: 'https://github.com/sdoran35/discordbot'
