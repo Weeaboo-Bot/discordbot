@@ -1,69 +1,36 @@
-const fs = require('fs');
-const Discord = require('discord.js');
-const { prefix, token } = require('./config/discord-config.json');
+const { CommandoClient } = require('discord.js-commando');
+const path = require('path');
+const {token,prefix} = require('./config/discord-config.json');
 
-const client = new Discord.Client();
-const queue = new Map();
-client.commands = new Discord.Collection();
-
-
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
-}
-
-// when the client is ready, run this code
-// this event will only trigger one time after logging in
-client.once('ready', () => {
-	console.log('Ready!');
+const client = new CommandoClient({
+  commandPrefix: prefix,
+  owner: '106089884585861120',
+ 
 });
 
-client.once("reconnecting", () => {
-  console.log("Reconnecting!");
-});
-
-client.once("disconnect", () => {
-  console.log("Disconnect!");
-});
-
-
-client.on('message', async message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-  const serverQueue = queue.get(message.guild.id);
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const commandName = args.shift().toLowerCase();
-
-  if (!client.commands.has(commandName)) return;
-
-  const command = client.commands.get(commandName);
-
-  if(command.args && !args.length) {
-    let reply = `You didn't provide any arguments, ${message.author}!`;
-
-		if (command.usage) {
-			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-		}
-
-		return message.channel.send(reply);
-  }
-
-  try {
-    //Execute the command
+client.registry
+  .registerDefaultTypes()
+  .registerGroups([
+    ['admin', 'Admin Commands'],
+    ['general', 'General Commands'],
+    ['music', 'Music Bot Commands'],
+    ['roles', 'Role Commands'],
+    ['channels', 'Channel Commands'],
+    ['members', 'Member Commands']
+  ])
+  .registerDefaultGroups()
+  .registerDefaultCommands({
     
-    command.execute(message,args);
-    
+    ping: false
+  })
+  .registerCommandsIn(path.join(__dirname, 'commands'));
 
 
-  } catch (error) {
-    console.error(error);
-    message.reply('there was an error trying to execute that command!');
-  }
-});
+  client.once('ready', () => {
+    console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
+    client.user.setActivity('with Commando');
+  });
+  
+  client.on('error', console.error);
 
-
-
-// login to Discord with your app's token
-client.login(token);
+  client.login(token);

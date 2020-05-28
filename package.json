@@ -21,6 +21,7 @@
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
     "discord.js": "^12.2.0",
+    "discord.js-commando": "github:discordjs/Commando",
     "ffmpeg": "0.0.4",
     "fluent-ffmpeg": "^2.1.2",
     "nodemon": "^2.0.4",
