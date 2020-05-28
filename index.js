@@ -3,13 +3,7 @@ const path = require('path');
 const { Structures } = require('discord.js');
 const {token,prefix,discord_owner_id} = require('./config/config.json');
 
-const admin = require('firebase-admin');
 
-
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
-});
 
 Structures.extend('Guild', function(Guild) {
   class MusicGuild extends Guild {
