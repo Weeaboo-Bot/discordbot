@@ -16,7 +16,7 @@ module.exports = class PingCommand extends Command {
     }
 
     run(message) {
-        return message.say('Pong!')
+        return message.say('Pong!!!')
     }
 }
 
