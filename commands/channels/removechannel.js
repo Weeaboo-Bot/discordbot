@@ -30,9 +30,18 @@ module.exports = class RemoveChannelCommand extends Command {
    run(message, {channelName,channelReason}) {
 
         var channelGuild = message.guild;
-        var channel = new discord.GuildChannel(channelGuild);
+        var channeList = message.guild.channels.cache;
 
-        channel.delete(channelReason);
+
+
+        for(var charrr in channeList){
+            if(channeList[charrr].name == channelName){
+                var channel = channeList[charrr];
+                channel.delete(channelReason);
+            }
+        }
+
+
                
             
            

@@ -8,13 +8,29 @@ module.exports = class ListMembersCommand extends Command {
             aliases: ['members', 'listmember'],
             memberName: 'listmembers',
             group: 'members',
-            
-            
+
+
         });
     }
-    run(message){
-        const memberList = message.guild.members.fetch();
 
-        return message.say(`Here is a List of All Members: ${memberList}`)
+    async run(message) {
+
+        const members = message.guild.members;
+        //JSON Array of all the members
+        const memberList = members.cache;
+
+
+        var msg = ""
+        for (var key in memberList) {
+
+
+            msg = `${ memberList.entries().next().value[1].user.username} : ${ memberList.values().next().value[1].user.discriminator}\n`
+
+
+
+
+        }
+
+        message.say("hi")
     }
 }

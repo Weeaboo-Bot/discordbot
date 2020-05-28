@@ -23,8 +23,8 @@ module.exports = class ListRolesCommand extends Command{
 
         var msg = ""
         for(var key in roleList){
-            delete roleList[0]
 
+            delete  roleList[0]
             msg = `${roleList[key].name} : ${roleList[key].id}\n`
 
             message.say(msg)

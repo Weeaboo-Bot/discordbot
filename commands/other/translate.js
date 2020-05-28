@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando');
+const fetch = require('node-fetch');
 
 module.exports = class TranslateCommand extends Command {
     constructor(client){
@@ -27,6 +28,8 @@ module.exports = class TranslateCommand extends Command {
           });
     }
     run(message, {input,language}) {
+
+
         
     }
 }

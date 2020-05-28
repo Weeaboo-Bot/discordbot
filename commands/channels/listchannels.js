@@ -25,7 +25,7 @@ module.exports = class ListChannels extends Command{
         for(var key in channelList){
 
 
-                msg = `${channelList[key].name} : ${channelList[key].id}\n`
+                msg = `${channelList[key].name} : ${channelList[key].id} NSFW : ${channelList[key].nsfw}`
                 message.say(msg)
 
 
