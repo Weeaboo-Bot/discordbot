@@ -1,5 +1,4 @@
 name: Node CI
-
 on:
   push:
     branches: [ master ]
@@ -15,6 +14,7 @@ jobs:
       matrix:
         node-version: [10.x, 12.x, 14.x]
 
+
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -22,16 +22,16 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - name: Run build task
+    - name: Build Application
     - run: npm run build --if-present
-    - name: Run Tests
+    - name: Run Tests 
     - run: npm test --if-present
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.1
       env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "/"
+          SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
