@@ -80,9 +80,13 @@ client.registry
   });
   
   client.on('guildMemberAdd', member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'general'); // change this to the channel name you want to send the greeting to
+    // Send the message to a designated channel on a server:
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'general');
+  
+    // Do nothing if the channel wasn't found on this server
     if (!channel) return;
-    channel.send(`Welcome ${member}!`);
+    // Send the message, mentioning the member
+    channel.send(`Welcome to the server, ${member}\nPlease use the !help command to learn about our bot.\nPlease use the !roles command to update your server Roles`);
   });
   
   client.login(token);
