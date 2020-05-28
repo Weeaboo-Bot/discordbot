@@ -50,7 +50,7 @@ module.exports = class AddVoiceChannelCommand extends Command {
        // message.author.addrole(newrole);
      
           
-                guild.channels.create(channelName,{reason: channelReason, type: voice, bitrate: 96,   topic: channelTopic, nsfw: channelNSFW});
+                guild.channels.create(channelName,{reason: channelReason, type: "voice", bitrate: 96,   topic: channelTopic, nsfw: channelNSFW});
                
             
            
