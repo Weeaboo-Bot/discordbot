@@ -1,0 +1,8 @@
+module.exports =  ErrorEnum = Object.freeze({
+    'API': 'API Error',
+    'DISCORD_API': 'Discord API Error',
+    'USER': 'User Error',
+    'COMMAND': 'Command Error'
+
+});
+

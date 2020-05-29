@@ -79,6 +79,7 @@ client.registry
         prefix: false,
         commandState: false,
         ping: false,
+        commands: false
 
 
     })

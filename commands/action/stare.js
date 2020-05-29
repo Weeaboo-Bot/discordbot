@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
+const {error_log} = require('../../config');
 const { disgustP } = require('../../assets/json/actions.json');
 
 module.exports = class StareCommand extends Command {
@@ -37,24 +38,41 @@ module.exports = class StareCommand extends Command {
             return message.channel.send(`${message.author} stares at... themselves..?`, { embed: embed });
 
         } else if (message.mentions.users.first() == this.client.user) {
-            var res = await snekfetch.get(`https://rra.ram.moe/i/r?type=stare`);
-            var body = JSON.parse(res.text);
 
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(`https://rra.ram.moe${body.path}`);
-            return message.channel.send(`Y-Yes? (๑´•ω • \`๑)`, { embed: embed });
+
+            await axios.get('https://rra.ram.moe/i/r?type=stare')
+                .then(function(res){
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${res.data.path}`);
+                    return message.channel.send(`Y-Yes? (๑´•ω • \`๑)`, { embed: embed });
+                })
+                .catch(function(err){
+                    var channel = client.channels.fetch(error_log);
+                    channel.send(err);
+                    console.log(err)
+                })
+
+
 
 
         } else {
 
-            var res = await snekfetch.get(`https://rra.ram.moe/i/r?type=stare`);
-            var body = JSON.parse(res.text);
 
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(`https://rra.ram.moe${body.path}`);
-            return message.channel.send(`${message.author} stares at ${recipient}...`, { embed: embed });
+            await axios.get('https://rra.ram.moe/i/r?type=stare')
+                .then(function(res){
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${res.data.path}`);
+                    return message.channel.send(`${message.author} stares at ${recipient}...`, { embed: embed });
+                })
+                .catch(function(err) {
+                    var channel = client.channels.fetch(error_log);
+                    channel.send(err);
+                    console.log(err);
+                })
+
+
 
         }
     }

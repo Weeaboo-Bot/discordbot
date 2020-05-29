@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
+const {error_log} = require('../../config');
 const { disgustP } = require('../../assets/json/actions.json');
 
 module.exports = class NomCommand extends Command {
@@ -37,23 +38,44 @@ module.exports = class NomCommand extends Command {
 
         } else if (message.mentions.users.first() == this.client.user) {
 
-            var text = await snekfetch.get(`https://rra.ram.moe/i/r?type=nom`);
-            var body = JSON.parse(text.text);
 
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(`https://rra.ram.moe${body.path}`)
-            return message.channel.send(`Nyaa~ s-senpai... (´Å\`∗)... `, { embed: embed })
+
+            await axios.get('https://rra.ram.moe/i/r?type=nom')
+                .then(function (response) {
+                    // handle success
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${response.data.path}`)
+                    return message.channel.send(`Nyaa~ s-senpai... (´Å\`∗)... `, { embed: embed })
+
+                })
+                .catch(function (error) {
+                    // handle error
+                    //message.client.channels.cache.get(error_log).send(error);
+                    console.log(error);
+                });
+
+
 
         } else {
 
-            var text = await snekfetch.get(`https://rra.ram.moe/i/r?type=nom`);
-            var body = JSON.parse(text.text);
 
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(`https://rra.ram.moe${body.path}`)
-            return message.channel.send(`${message.author} noms on ${recipient}!`, { embed: embed })
+
+
+            await axios.get('https://rra.ram.moe/i/r?type=nom')
+                .then(function (response) {
+                    // handle success
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${response.data.path}`)
+                    return message.channel.send(`${message.author} noms on ${recipient}!`, { embed: embed })
+
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                });
+
         }
     }
 }

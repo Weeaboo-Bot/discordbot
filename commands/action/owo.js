@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const axios = require('axios').default;
 
 module.exports = class OwoCommand extends Command {
     constructor(client) {
@@ -20,12 +20,21 @@ module.exports = class OwoCommand extends Command {
     }
 
     async run(message) {
-        var text = await snekfetch.get(`https://rra.ram.moe/i/r?type=owo`);
-        var body = JSON.parse(text.text);
 
-        var embed = new Discord.MessageEmbed()
-            .setColor('#FBCFCF')
-            .setImage(`https://rra.ram.moe${body.path}`);
-        return message.channel.send({ embed });
+        await axios.get(`https://rra.ram.moe/i/r?type=owo`)
+            .then(function (res) {
+
+                var embed = new Discord.MessageEmbed()
+                    .setColor('#FBCFCF')
+                    .setImage(`https://rra.ram.moe${res.data.path}`);
+                return message.channel.send({ embed });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+
+
     }
 }

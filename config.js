@@ -14,6 +14,7 @@ module.exports = {
   status_log: process.env.status_log,
   dm_log: process.env.dm_log,
   support_log: process.env.support_log,
+  error_log: process.env.error_log,
   general_id: process.env.general_id,
   osu_key: process.env.osu_key,
   google_api_key: process.env.google_api_key,

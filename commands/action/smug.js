@@ -2,7 +2,7 @@
 
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+
 
 module.exports = class SmugCommand extends Command {
     constructor(client) {

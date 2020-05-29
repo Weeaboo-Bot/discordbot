@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
 
 module.exports = class TickleCommand extends Command {
@@ -37,23 +37,33 @@ module.exports = class TickleCommand extends Command {
 
         } else if (message.mentions.users.first() == this.client.user) {
 
-            var text = await snekfetch.get(`https://rra.ram.moe/i/r?type=tickle`);
-            var body = JSON.parse(text.text);
+            await axios.get('https://rra.ram.moe/r?type=tickle')
+                .then(function(res){
+                    var embed = new Discord.MessageEmbed()
+                    .setColor('#FBCFCF')
+                    .setImage(`https://rra.ram.moe${res.data.path}`);
+                return message.channel.send(`NyaAhaha! ⊂(( ^ ▽ ^ ))⊃`, { embed: embed });
+                })
+                .catch(function(err){
+                    console.log(err);
 
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(`https://rra.ram.moe${body.path}`);
-            return message.channel.send(`NyaAhaha! ⊂(( ^ ▽ ^ ))⊃`, { embed: embed });
+                });
+
+
+
+            
 
         } else {
 
-            var text = await snekfetch.get(`https://rra.ram.moe/i/r?type=tickle`);
-            var body = JSON.parse(text.text);
 
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(`https://rra.ram.moe${body.path}`);
-            return message.channel.send(`${message.author} tickles ${recipient}!`, { embed: embed });
+
+            await axios.get('https://rra.ram.moe/i/r?type=tickle')
+                .then(function(res){
+                    return message.channel.send(`${message.author} tickles ${recipient}!`, { embed: new Discord.MessageEmbed().setColor('#FBCFCF').setImage(`https://rra.ram.moe${res.data.path}`)});
+                })
+                .catch(function(err){
+                    console.log(err)
+                })
 
         }
     }

@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
+const {error_log} = require('../../config');
 const { disgustP } = require('../../assets/json/actions.json');
 
 module.exports = class LickCommand extends Command {
@@ -38,23 +39,42 @@ module.exports = class LickCommand extends Command {
 
         } else if (message.mentions.users.first() == this.client.user) {
 
-            var res = await snekfetch.get(`https://rra.ram.moe/i/r?type=lick`);
-            var body = JSON.parse(res.text);
 
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(`https://rra.ram.moe${body.path}`);
-            return message.channel.send(`Nyaa..♡(｡￫ˇ艸￩) where are you...licking me...`, { embed: embed });
+
+            await axios.get('https://rra.ram.moe/i/r?type=lick')
+                .then(function(res) {
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${res.data.path}`);
+                    return message.channel.send(`Nyaa..♡(｡￫ˇ艸￩) where are you...licking me...`, { embed: embed });
+                })
+                .catch(function (error) {
+                    // handle error
+                    var channel = message.client.channels.cache.get(error_log);
+                    channel.send(err);
+                    console.log(error);
+                });
+
+
+
 
         } else {
 
-            var res = await snekfetch.get(`https://rra.ram.moe/i/r?type=lick`);
-            var body = JSON.parse(res.text);
 
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(`https://rra.ram.moe${body.path}`);
-            return message.channel.send(`${message.author} licks ${recipient}!`, { embed: embed });
+
+            await axios.get('https://rra.ram.moe/i/r?type=lick')
+                .then(function(res) {
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${body.path}`);
+                    return message.channel.send(`${message.author} licks ${recipient}!`, { embed: embed });
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                });
+
+
         }
     }
 }

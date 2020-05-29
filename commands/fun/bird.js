@@ -1,6 +1,9 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const snekfetch = require('snekfetch');
+const axios = require('axios');
+const {error_log } = require('../../config');
+const {errorMessage} = require('../../functions/errorHandler');
+const ErrorEnum = require('../../functions/errorTypes');
 
 module.exports = class BirdCommand extends Command {
     constructor(client) {
@@ -20,13 +23,22 @@ module.exports = class BirdCommand extends Command {
     }
 
     async run(message) {
-        const res = await snekfetch.get('http://random.birb.pw/tweet/');
-        const image = res.body
 
-        const embed = new Discord.MessageEmbed()
-            .setImage(`http://random.birb.pw/img/${image}`)
-            .setFooter('http://random.birb.pw/ ©', 'http://random.birb.pw/img/BPVpe.jpg')
-            .setColor('#71A3BE');
-        return message.channel.send({ embed });
+
+        await axios.get('http://random.birb.pw/tweet/')
+            .then(function(res){
+
+                return message.channel.send({ embed: new Discord.MessageEmbed().setImage(`http://random.birb.pw/img/${res.data.image}`)
+                        .setFooter('http://random.birb.pw/ ©', 'http://random.birb.pw/img/BPVpe.jpg')
+                        .setColor('#71A3BE') });
+            })
+            .catch(function(err){
+
+
+                message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
+                console.log(err)
+            })
+
+
     }
 }
