@@ -47,6 +47,7 @@ client.registry
     ['members', 'Admin Member Commands'],
     ['news', 'News Commands'],
     ['other', 'Other Commands']
+      ['nsfw', 'NSFW Commands']
   ])
   .registerDefaultGroups()
   .registerDefaultCommands({

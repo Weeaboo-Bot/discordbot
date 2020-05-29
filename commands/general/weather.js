@@ -62,9 +62,9 @@ module.exports = class WeatherCommand extends Command {
     
         function embedWeather(weather_data,temp_data) {
           return new MessageEmbed()
-            .setColor('#FF0000')
+            .setColor('#013453')
             .setTitle(`Weather for ${zipCode}`)
-            .setURL('https://openweathermap.org/')
+            .setURL(`https://openweathermap.org/find?q=${zipCode}`)
             .setImage(`https://openweathermap.org/img/wn/${weather_data[0].icon}@4x.png`)
             
             .setDescription('Current Conditions: ' +  toTitleCase(weather_data[0].description) + '\nCurrent Temp: ' + temp_data + ' \u2109')
