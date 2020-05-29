@@ -1,8 +1,9 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const osu = require('node-osu');
+const {osu_key} = require('../../config')
 
-var osuApi = new osu.Api(process.env.OSUKEY, {
+var osuApi = new osu.Api(osu_key, {
     notFoundAsError: false,
     completeScores: false
 })

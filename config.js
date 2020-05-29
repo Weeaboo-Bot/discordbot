@@ -10,9 +10,16 @@ module.exports = {
   tenor_token: process.env.tenor_token,
   discord_owner_id: process.env.discord_owner_id,
   prefix: '!',
-  GUILDLOG: process.env.GUILDLOG,
-  STATUSLOG: process.env.STATUSLOG,
-  DMLOG: process.env.DMLOG
+  guild_log: process.env.guild_log,
+  status_log: process.env.status_log,
+  dm_log: process.env.dm_log,
+  support_log: process.env.support_log,
+  general_id: process.env.general_id,
+  osu_key: process.env.osu_key,
+  google_api_key: process.env.google_api_key,
+  google_cse_key: process.env.google_cse_key,
+  giphy_key: process.env.giphy_key,
+  client_id: process.env.client_id
 
 
 };

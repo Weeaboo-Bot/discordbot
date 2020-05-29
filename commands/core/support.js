@@ -1,5 +1,6 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
+const {support_log} = require('../../config')
 
 module.exports = class SupportCommand extends Command {
     constructor(client) {
@@ -9,9 +10,9 @@ module.exports = class SupportCommand extends Command {
             group: 'core',
             memberName: 'support',
             guildOnly: true,
-            description: 'Sends a support message to Komugari\'s main server!',
+            description: 'Sends a support message to Techies\'s main server!',
             examples: ['~support [bugs, issues, etc]'],
-            details: 'Komugari might reply back in the channel you asked for support in!',
+            details: 'Techie might reply back in the channel you asked for support in!',
             throttling: {
                 usages: 1,
                 duration: 30
@@ -28,7 +29,7 @@ module.exports = class SupportCommand extends Command {
     async run(message, args) {
         var { support } = args;
         console.log(support)
-        var channel = this.client.channels.get(process.env.SUPPORTLOG);
+        var channel = this.client.channels.cache.get(support_log);
 
         if (support == 'N////A') {
             message.react("💢");

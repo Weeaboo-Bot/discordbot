@@ -1,6 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const snekfetch = require('snekfetch');
+const {giphy_key} = require('../../config')
 
 module.exports = class GiphyCommand extends Command {
     constructor(client) {
@@ -27,7 +28,7 @@ module.exports = class GiphyCommand extends Command {
             .get('http://api.giphy.com/v1/gifs/search')
             .query({
                 q: query.split(' ').join('+'),
-                api_key: process.env.GIPHYKEY,
+                api_key: giphy_key,
                 rating: message.channel.nsfw ? 'r' : 'pg',
                 limit: 5
             })

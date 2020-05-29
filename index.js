@@ -1,7 +1,7 @@
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { Structures } = require('discord.js');
-const {token,prefix,discord_owner_id,GUILDLOG,DMLOG,STATUSLOG, generalID} = require('./config');
+const {token,prefix,discord_owner_id,guild_log,dm_log,status_log, g} = require('./config');
 
 
 //DEBUG
@@ -80,6 +80,7 @@ client.registry
         commandState: false,
         ping: false,
 
+
     })
   .registerCommandsIn(path.join(__dirname, 'commands'))
 
@@ -100,15 +101,18 @@ setInterval(function() {
 */
 
 client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
-    client.user.setActivity(`${prefix}help`, {
-        type: 'WATCHING',
-        url: 'https://github.com/sdoran35/discordbot'
-    });
+    client.user.setActivity('with you | ~help')
 
-    const channel = client.channels.cache.get('715785746463850567');
-    const msg = 'Weaboo Bot is Online and Ready!!'
-    channel.send(msg)
+    var channel = client.channels.cache.get(status_log);
+    const embed = new Discord.MessageEmbed()
+        .setAuthor('Weaboo has (re)started!', client.user.displayAvatarURL({ format: 'png' }))
+        .setColor('#727293')
+        .setDescription(`•\u2000\Serving ${client.users.cache.size} users in ${client.guilds.cache.size} servers and ${client.channels.cache.size} channels!\n\•\u2000**Commands:** ${client.registry.commands.size}`)
+        .setFooter(`v${version}`)
+        .setTimestamp();
+    channel.send({ embed });
+
+    return console.log(`Weaboo is live and ready in ${client.guilds.cache.size} servers!`);
 });
 
 client.on('voiceStateUpdate', async (___, newState) => {
@@ -123,17 +127,93 @@ client.on('voiceStateUpdate', async (___, newState) => {
     }
 });
 
-client.on('guildMemberAdd', member => {
-    // Send the message to a designated channel on a server:
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'general');
+client.on('guildCreate', guild => {
+    var channel = client.channels.cache.get(guild_log);
 
-    // Do nothing if the channel wasn't found on this server
-    if (!channel) return;
-    // Send the message, mentioning the member
-    channel.send(`Welcome to the server, ${member}\nPlease use the !help command to learn about our bot.\nPlease use the !roles command to update your server Roles`);
+    var online = guild.members.cache.filter(m => m.user.presence.status === "online").size;
+    var bots = guild.members.cache.filter(m => m.user.bot).size;
+    var highestRole = guild.roles.cache.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse()[0];
+
+    var textChannels = guild.channels.cache.filter(c => c.type === 'text');
+    var voiceChannels = guild.channels.cache.filter(c => c.type === 'voice');
+
+    const embed = new Discord.MessageEmbed()
+        .setAuthor(`Added to ${guild.name}!`, guild.iconURL())
+        .setDescription(`Server infomation for **${guild.name}**`)
+        .setColor('#78AEE8')
+        .setThumbnail(guild.iconURL())
+        .addField('❯\u2000\Information', `•\u2000\**ID:** ${guild.id}\n\•\u2000\**${guild.owner ? 'Owner' : 'Owner ID'}:** ${guild.owner ? `${guild.owner.user.tag} (${guild.owner.id})` : guild.ownerID}\n\•\u2000\**Created:** ${moment(guild.createdAt).format('MMMM Do YYYY')} \`(${fromNow(guild.createdAt)})\`\n\•\u2000\**Region:** ${guild.region}\n\•\u2000\**Verification:** ${verificationLevels[guild.verificationLevel]}\n\•\u2000\**Content Filter:** ${explicitContentFilters[guild.explicitContentFilter]}`)
+        .addField('❯\u2000\Quantitative Statistics', `•\u2000\**Channels** [${guild.channels.size}]: ${textChannels.size} text - ${voiceChannels.size} voice\n\•\u2000\**Members** [${guild.memberCount}]: ${online} online - ${bots} bots\n\•\u2000\**Roles:** ${guild.roles.size}`, true)
+        .addField('❯\u2000\Miscellaneous', `•\u2000\**Emojis:** ${guild.emojis.size}`, true)
+        .setTimestamp()
+        .setFooter(`(${client.guilds.cache.size})`);
+    return channel.send({embed});
+});
+
+client.on('guildDelete', guild => {
+    var channel = client.channels.cache.get(guild_log);
+
+    var online = guild.members.cache.filter(m => m.user.presence.status === "online").size
+    var bots = guild.members.cache.filter(m => m.user.bot).size
+    var highestRole = guild.roles.cache.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse()[0]
+
+    var textChannels = guild.channels.cache.filter(c => c.type === 'text');
+    var voiceChannels = guild.channels.cache.filter(c => c.type === 'voice');
+
+    const embed = new Discord.MessageEmbed()
+        .setAuthor('Removed from a Server!', guild.iconURL())
+        .setColor('#898276')
+        .setThumbnail(guild.iconURL())
+        .setDescription(`Server infomation for **${guild.name}**`)
+        .addField('❯\u2000\Information', `•\u2000\**ID:** ${guild.id}\n\•\u2000\**${guild.owner ? 'Owner' : 'Owner ID'}:** ${guild.owner ? `${guild.owner.user.tag} (${guild.owner.id})` : guild.ownerID}\n\•\u2000\**Created:** ${moment(guild.createdAt).format('MMMM Do YYYY')} \`(${fromNow(guild.createdAt)})\`\n\•\u2000\**Region:** ${guild.region}\n\•\u2000\**Verification:** ${verificationLevels[guild.verificationLevel]}\n\•\u2000\**Content Filter:** ${explicitContentFilters[guild.explicitContentFilter]}`)
+        .addField('❯\u2000\Quantitative Statistics', `•\u2000\**Channels** [${guild.channels.cache.size}]: ${textChannels.size} text - ${voiceChannels.size} voice\n\•\u2000\**Members** [${guild.memberCount}]: ${online} online - ${bots} bots\n\•\u2000\**Roles:** ${guild.roles.size}`, true)
+        .addField('❯\u2000\Miscellaneous', `•\u2000\**Emojis:** ${guild.emojis.size}`, true)
+        .setTimestamp()
+        .setFooter(`(${client.guilds.cache.size})`);
+    return channel.send({embed});
 });
 
 
+//removes bot's message if reacted with card thing
+client.on("messageReactionAdd", async (messageReaction, user) => {
+    if(messageReaction.message.author.id !== client.user.id) return undefined;
+    if(user.bot) return undefined;
+    if(messageReaction.emoji == '🎴') {
+
+        setTimeout(async function() {
+            await messageReaction.message.edit('5⃣');
+
+            setTimeout(async function() {
+                await messageReaction.message.edit('4⃣');
+
+                setTimeout(async function() {
+                    await messageReaction.message.edit('3⃣');
+
+                    setTimeout(async function() {
+                        await messageReaction.message.edit('2⃣');
+
+                        setTimeout(async function() {
+                            await messageReaction.message.edit('1⃣');
+
+                            setTimeout(async function() {
+                                await messageReaction.message.delete()
+                            }, 1000);
+
+                        }, 1000);
+
+                    }, 1000);
+
+                }, 1000);
+
+            }, 1000);
+
+        }, 1000);
+
+        return null;
+    }
+
+    return null;
+})
 
 
 //basic message replies
@@ -142,7 +222,7 @@ client.on("message", async message => {
 
     if(message.channel.type == "dm") {
         if(message.content.startsWith('~')) return;
-        var channel = client.channels.fetch(DMLOG, true);
+        var channel = client.channels.cache.get(dm_log);
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -152,7 +232,7 @@ client.on("message", async message => {
         return channel.send({embed});
     }
 
-    if (!message.channel.permissionsFor(client.user.id).has('SEND_MESSAGES')) return undefined;
+  //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
 
 
     if(message.content.toUpperCase().includes('PRESS F')) {
