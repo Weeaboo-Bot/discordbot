@@ -106,7 +106,9 @@ client.once('ready', () => {
         url: 'https://github.com/sdoran35/discordbot'
     });
 
-    client.channels.get(generalID).send('@everyone Weaboo Bot is Online and Ready!!')
+    const channel = client.channels.cache.get('715785746463850567');
+    const msg = 'Weaboo Bot is Online and Ready!!'
+    channel.send(msg)
 });
 
 client.on('voiceStateUpdate', async (___, newState) => {
@@ -174,5 +176,7 @@ client.on("message", async message => {
 process.on('unhandledRejection', err => {
     console.error('Uncaught Promise Error! \n' + err.stack);
 });
+
+
 
 client.login(token);

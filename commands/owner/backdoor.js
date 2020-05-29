@@ -22,10 +22,10 @@ module.exports = class BackdoorCommand extends Command {
         return this.client.isOwner(msg.author);
     }
 
-    async run(message, args) {
+    async run(message, {guild}) {
 
         if (!message.guild) {
-            const getGuild = this.client.guilds.get(args.guild)
+            const getGuild = message.guild.fetch(guild)
             const toInv = getGuild.channels.first()
 
             const invite = toInv.createInvite({
