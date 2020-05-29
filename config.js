@@ -19,7 +19,9 @@ module.exports = {
   google_api_key: process.env.google_api_key,
   google_cse_key: process.env.google_cse_key,
   giphy_key: process.env.giphy_key,
-  client_id: process.env.client_id
+  client_id: process.env.client_id,
+  azure_translate_api: process.env.azure_translate_api,
+  azure_img_api: process.env.azure_img_api
 
 
 };
