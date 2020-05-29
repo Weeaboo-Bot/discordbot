@@ -10,6 +10,9 @@ module.exports = {
   tenor_token: process.env.tenor_token,
   discord_owner_id: process.env.discord_owner_id,
   prefix: '!',
+  GUILDLOG: process.env.GUILDLOG,
+  STATUSLOG: process.env.STATUSLOG,
+  DMLOG: process.env.DMLOG
 
 
 };
