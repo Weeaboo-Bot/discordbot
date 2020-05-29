@@ -32,13 +32,11 @@ module.exports = class PlayCommand extends Command {
     });
   }
 
-  async run(message, { query }) {
+  async run(message, { query, client }) {
     const voiceChannel = message.member.voice.channel;
     if (!voiceChannel) return message.say('Join a channel and try again');
 
-    if(this.throttling.usages >= 2 && message.member.id != discord_owner_id ) {
-      return message.say('You have reached the throttle limit for the Bot, please wait about 5 seconds!')
-    }
+
     
 
     if (
@@ -221,6 +219,7 @@ module.exports = class PlayCommand extends Command {
       });
   }
   static playSong(queue, message) {
+
     const classThis = this; // use classThis instead of 'this' because of lexical scope below
     queue[0].voiceChannel
       .join()
