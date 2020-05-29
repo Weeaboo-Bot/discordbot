@@ -1,7 +1,7 @@
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { Structures } = require('discord.js');
-const {token,prefix,discord_owner_id,GUILDLOG,DMLOG,STATUSLOG} = require('./config');
+const {token,prefix,discord_owner_id,GUILDLOG,DMLOG,STATUSLOG, generalID} = require('./config');
 
 
 //DEBUG
@@ -105,6 +105,8 @@ client.once('ready', () => {
         type: 'WATCHING',
         url: 'https://github.com/sdoran35/discordbot'
     });
+
+    client.channels.get(generalID).send('@everyone Weaboo Bot is Online and Ready!!')
 });
 
 client.on('voiceStateUpdate', async (___, newState) => {
