@@ -4,7 +4,6 @@ const axios = require('axios');
 const {error_log,weather_token} = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');
 const ErrorEnum = require('../../functions/errorTypes');
-
 function toTitleCase(str) {
     return str.replace(
         /\w\S*/g,
@@ -31,10 +30,12 @@ module.exports = class WeatherCommand extends Command{
                     type: 'string',
                     prompt: 'Please Enter a ZIP Code OR City Name'
                 }
+
             ]
         });
     }
    async run(message, {query}){
+
 
 
 
@@ -50,7 +51,7 @@ module.exports = class WeatherCommand extends Command{
 
                     const msg = new Discord.MessageEmbed().setColor('#013453')
                             .setTitle(`Weather for ${query}`)
-                            .setImage(`${res.data.current.condition.icon}`)
+                            .setImage(`https:${res.data.current.condition.icon}`)
                             .setDescription('Current Conditions: ' +  toTitleCase(res.data.current.condition.text) + '\nCurrent Temp: ' + res.data.current.temp_f)
                             .setFooter('Powered by https://weatherapi.com');
 
