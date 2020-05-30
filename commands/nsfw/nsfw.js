@@ -45,7 +45,9 @@ module.exports = class NSFWCommand extends Command{
             return message.say('This is **NOT** a NSFW Channel!!!!');
         }
 
-        if(Object.values(SubsToSearch).includes(subList)) {
+
+
+        if(Object.keys(SubsToSearch).includes(subList)) {
 
 
             await axios.get(`https://www.reddit.com/r/${SubsToSearch[subList][getRndInteger(0, SubsToSearch[subList].length)]}.json`)
