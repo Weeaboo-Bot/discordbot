@@ -45,9 +45,10 @@ module.exports = class NSFWCommand extends Command{
             return message.say('This is **NOT** a NSFW Channel!!!!');
         }
 
+        if(Object.values(SubsToSearch).includes(subList)) {
 
 
-            await axios.get(`https://www.reddit.com/r/${SubsToSearch[subList][getRndInteger(0,SubsToSearch[subList].length)]}.json`)
+            await axios.get(`https://www.reddit.com/r/${SubsToSearch[subList][getRndInteger(0, SubsToSearch[subList].length)]}.json`)
                 .then(function (res) {
 
                     for (var value in res.data.data.children) {
@@ -70,7 +71,9 @@ module.exports = class NSFWCommand extends Command{
 
                 });
 
-
+        } else {
+            message.say('This Section is not searchable thru Subs');
+        }
 
     }
 
