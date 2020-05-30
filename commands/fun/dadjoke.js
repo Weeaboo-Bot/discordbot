@@ -29,10 +29,12 @@ module.exports = class DadJokeCommand extends Command {
             headers: {'Accept': 'application/json'}
         })
             .then(function(res){
-                return message.channel.send({ embed: new Discord.MessageEmbed()
+                const msg = new Discord.MessageEmbed()
                         .setAuthor(`Here's a joke!`, 'https://a.safe.moe/X1gKJ.png')
                         .setDescription(res.data.joke)
-                        .setColor('#727684') });
+                        .setColor('#727684');
+
+                return message.channel.send({embed: msg});
             })
             .catch(function(err){
                 message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});

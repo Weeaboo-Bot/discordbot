@@ -26,11 +26,13 @@ module.exports = class BirdCommand extends Command {
 
 
         await axios.get('http://random.birb.pw/tweet/')
-            .then(function(res){
+            .then(function(res) {
 
-                return message.channel.send({ embed: new Discord.MessageEmbed().setImage(`http://random.birb.pw/img/${res.data.image}`)
-                        .setFooter('http://random.birb.pw/ ©', 'http://random.birb.pw/img/BPVpe.jpg')
-                        .setColor('#71A3BE') });
+                const msg = new Discord.MessageEmbed().setImage(`http://random.birb.pw/img/${res.data.image}`)
+                    .setFooter('http://random.birb.pw/ ©', 'http://random.birb.pw/img/BPVpe.jpg')
+                    .setColor('#71A3BE');
+
+                return message.channel.send({embed: msg});
             })
             .catch(function(err){
                 message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});

@@ -48,14 +48,14 @@ module.exports = class WeatherCommand extends Command{
                 .then(function(res){
 
 
-
-                    return message.channel.send({ embed: new Discord.MessageEmbed()
-                            .setColor('#013453')
+                    const msg = new Discord.MessageEmbed().setColor('#013453')
                             .setTitle(`Weather for ${query}`)
-                            .setImage(`http:${res.data.current.condition.icon}`)
+                            .setImage(`${res.data.current.condition.icon}`)
                             .setDescription('Current Conditions: ' +  toTitleCase(res.data.current.condition.text) + '\nCurrent Temp: ' + res.data.current.temp_f)
+                            .setFooter('Powered by https://weatherapi.com');
 
-                            .setFooter('Powered by https://weatherapi.com')});
+
+                    return message.channel.send({embed: msg});
                 })
                 .catch(function(err){
                     message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
