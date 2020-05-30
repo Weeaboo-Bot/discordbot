@@ -1,0 +1,31 @@
+module.exports = SubsToSearch = {
+    '4knsfw':
+        [
+            'nsfw_wallpapers',
+            'SexyWallpapers',
+            'HighResNSFW',
+            'nsfw_hd',
+            'UHDnsfw'
+        ],
+    'ahegao':
+        [
+         'ahegao'
+        ],
+    'amateur':
+        [
+            'RealGirls',
+            'amateur',
+            'gonewild'
+
+        ],
+    nsfw:
+        [
+            "nsfw",
+            "porn",
+            "BonerMaterial",
+            "adorableporn",
+            "nsfw2",
+            "Sexy",
+            "NSFW_nospam"
+        ]
+};

@@ -2,6 +2,9 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
+const {error_log } = require('../../config');
+const {errorMessage} = require('../../functions/logHandler');
+const ErrorEnum = require('../../functions/errorTypes');
 
 module.exports = class TickleCommand extends Command {
     constructor(client) {
@@ -45,7 +48,7 @@ module.exports = class TickleCommand extends Command {
                 return message.channel.send(`NyaAhaha! ⊂(( ^ ▽ ^ ))⊃`, { embed: embed });
                 })
                 .catch(function(err){
-                    console.log(err);
+                    message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
 
                 });
 
@@ -62,7 +65,7 @@ module.exports = class TickleCommand extends Command {
                     return message.channel.send(`${message.author} tickles ${recipient}!`, { embed: new Discord.MessageEmbed().setColor('#FBCFCF').setImage(`https://rra.ram.moe${res.data.path}`)});
                 })
                 .catch(function(err){
-                    console.log(err)
+                    message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
                 })
 
         }

@@ -1,6 +1,8 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios').default;
+const {errorMessage} = require('../../functions/logHandler');
+const ErrorEnum = require('../../functions/errorTypes');
 
 module.exports = class OwoCommand extends Command {
     constructor(client) {
@@ -29,9 +31,8 @@ module.exports = class OwoCommand extends Command {
                     .setImage(`https://rra.ram.moe${res.data.path}`);
                 return message.channel.send({ embed });
             })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
+            .catch(function (err) {
+                message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
             });
 
 

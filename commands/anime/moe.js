@@ -22,6 +22,7 @@ module.exports = class MoeCommand extends Command {
     run(message) {
         randomPuppy('awwnime')
             .then(url => {
+                console.log(url)
                 const embed = new Discord.MessageEmbed()
                     .setFooter(`awwnime`)
                     .setDescription(`[Image URL](${url})`)
@@ -29,5 +30,12 @@ module.exports = class MoeCommand extends Command {
                     .setColor('#A187E0')
                 return message.channel.send({ embed })
             })
+            .catch(function (error) {
+                // handle error
+                console.log(error)
+                // message.client.channels.cache.get(error_log).send({embed: errorMessage(error,ErrorEnum.API,message.command.name)});
+
+            });
+
     }
 }

@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log} = require('../../config');
 const { disgustP } = require('../../assets/json/actions.json');
+const {errorMessage} = require('../../functions/logHandler');
+const ErrorEnum = require('../../functions/errorTypes');
 
 module.exports = class NomCommand extends Command {
     constructor(client) {
@@ -50,9 +52,7 @@ module.exports = class NomCommand extends Command {
 
                 })
                 .catch(function (error) {
-                    // handle error
-                    //message.client.channels.cache.get(error_log).send(error);
-                    console.log(error);
+                    message.client.channels.cache.get(error_log).send({embed: errorMessage(error,ErrorEnum.API,message.command.name)});
                 });
 
 

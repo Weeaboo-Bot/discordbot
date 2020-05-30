@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log } = require('../../config');
-const {errorMessage} = require('../../functions/errorHandler');
+const {errorMessage} = require('../../functions/logHandler');
 const ErrorEnum = require('../../functions/errorTypes');
 
 module.exports = class BirdCommand extends Command {
@@ -33,10 +33,7 @@ module.exports = class BirdCommand extends Command {
                         .setColor('#71A3BE') });
             })
             .catch(function(err){
-
-
                 message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
-                console.log(err)
             })
 
 

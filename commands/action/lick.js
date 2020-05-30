@@ -2,6 +2,8 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log} = require('../../config');
+const {errorMessage} = require('../../functions/logHandler');
+const ErrorEnum = require('../../functions/errorTypes')
 const { disgustP } = require('../../assets/json/actions.json');
 
 module.exports = class LickCommand extends Command {
@@ -50,9 +52,9 @@ module.exports = class LickCommand extends Command {
                 })
                 .catch(function (error) {
                     // handle error
-                    var channel = message.client.channels.cache.get(error_log);
-                    channel.send(err);
-                    console.log(error);
+
+                    message.client.channels.cache.get(error_log).send({embed: errorMessage(error,ErrorEnum.API,message.command.name)});
+
                 });
 
 

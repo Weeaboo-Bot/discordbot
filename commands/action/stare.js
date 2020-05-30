@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log} = require('../../config');
 const { disgustP } = require('../../assets/json/actions.json');
+const {errorMessage} = require('../../functions/logHandler');
+const ErrorEnum = require('../../functions/errorTypes');
 
 module.exports = class StareCommand extends Command {
     constructor(client) {
@@ -48,9 +50,7 @@ module.exports = class StareCommand extends Command {
                     return message.channel.send(`Y-Yes? (๑´•ω • \`๑)`, { embed: embed });
                 })
                 .catch(function(err){
-                    var channel = client.channels.fetch(error_log);
-                    channel.send(err);
-                    console.log(err)
+                    message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
                 })
 
 
@@ -67,9 +67,7 @@ module.exports = class StareCommand extends Command {
                     return message.channel.send(`${message.author} stares at ${recipient}...`, { embed: embed });
                 })
                 .catch(function(err) {
-                    var channel = client.channels.fetch(error_log);
-                    channel.send(err);
-                    console.log(err);
+                    message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
                 })
 
 

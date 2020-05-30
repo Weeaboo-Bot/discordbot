@@ -1,6 +1,10 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios');
+const {error_log} = require('../../config');
+const {errorMessage} = require('../../functions/logHandler');
+const ErrorEnum = require('../../functions/errorTypes')
+
 
 
 //remember to return before every promise
@@ -39,8 +43,8 @@ module.exports = class PoutCommand extends Command {
                 }
 
             })
-            .catch(function(err){
-                console.log(err);
+            .catch(function(error){
+                message.client.channels.cache.get(error_log).send({embed: errorMessage(error,ErrorEnum.API,message.command.name)});
             })
 
 

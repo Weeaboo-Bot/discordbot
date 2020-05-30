@@ -1,7 +1,9 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios');
-const {error_log} = require('../../config');
+const {error_log } = require('../../config');
+const {errorMessage} = require('../../functions/logHandler');
+const ErrorEnum = require('../../functions/errorTypes');
 
 
 module.exports = class AdviceCommand extends Command {
@@ -33,13 +35,13 @@ module.exports = class AdviceCommand extends Command {
                     return message.channel.send({ embed });
 
                 } catch (err) {
-                    return message.channel.send(`<:NOTLIKETHIIIIIIIIIIIIIIIIIIIIIIS:371071292146843658> Sorry! My API isn't working!`)
+                    message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
                 }
             })
             .catch(function(err){
-                const channel = client.channels.fetch(error_log);
+                const channel =  message.client.channels.cache.get(error_log);
                 channel.send(err);
-                console.log(err)
+
             })
 
 
