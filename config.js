@@ -9,7 +9,7 @@ module.exports = {
   news_token: process.env.news_token,
   tenor_token: process.env.tenor_token,
   discord_owner_id: process.env.discord_owner_id,
-  prefix: '!',
+  prefix: process.env.prefix,
   guild_log: process.env.guild_log,
   status_log: process.env.status_log,
   dm_log: process.env.dm_log,

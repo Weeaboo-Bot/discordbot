@@ -2,7 +2,7 @@ const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { Structures } = require('discord.js');
 const moment = require('moment');
-const {token,prefix,discord_owner_id,guild_log,dm_log,status_log, g} = require('./config');
+const {token,prefix,discord_owner_id,guild_log,dm_log,status_log} = require('./config');
 
 
 //DEBUG
@@ -105,7 +105,7 @@ setInterval(function() {
 */
 
 client.once('ready', () => {
-    client.user.setActivity('with you | ~help')
+    client.user.setActivity('TESTING')
 
     var channel = client.channels.cache.get(status_log);
     const embed = new Discord.MessageEmbed()

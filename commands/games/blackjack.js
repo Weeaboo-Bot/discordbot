@@ -106,7 +106,7 @@ module.exports = class BlackJackCommand extends Command{
 
 
     }
-    run(message, {gameStatus, bet}){
+    async run(message, {gameStatus, bet}){
 
         if(gameStatus == "start") {
             //Start the game
@@ -121,6 +121,9 @@ module.exports = class BlackJackCommand extends Command{
                 });
 
             });
+
+
+
 
             const collector = new Discord.MessageCollector(message.channel, m => m.author.id == message.author.id, { time: 10000});
             collector.on('collect', message => {

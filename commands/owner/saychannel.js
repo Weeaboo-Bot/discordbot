@@ -18,7 +18,7 @@ module.exports = class SayChannelCommand extends Command {
     }
 
     async run(message) {
-        if (message.guild.id !== '198399488614727680') return message.channel.send(`This command can only be used in the owner's server.`);
+        if (message.guild.id !== '713913408881426472') return message.channel.send(`This command can only be used in the owner's server.`);
         if (!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('You cannot use this command!');
 
         try {

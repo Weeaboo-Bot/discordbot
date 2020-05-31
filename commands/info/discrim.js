@@ -24,7 +24,7 @@ module.exports = class DiscrimCommand extends Command {
 
     run(message, args) {
         const discrim = args.discrim || message.author.discriminator;
-        const users = this.client.users.filter(user => user.discriminator === discrim).map(user => user.tag);
+        const users = this.client.users.cache.filter(user => user.discriminator === discrim).map(user => user.tag);
         if (users.length < 1) return message.channel.send(`**${message.author.username}**, no users found with the discriminator **${discrim}**!`);
 
         const embed = new Discord.MessageEmbed()
