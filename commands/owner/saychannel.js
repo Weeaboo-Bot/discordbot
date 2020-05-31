@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando');
+const {server_id} = require('../../config');
 
 module.exports = class SayChannelCommand extends Command {
     constructor(client) {
@@ -18,14 +19,14 @@ module.exports = class SayChannelCommand extends Command {
     }
 
     async run(message) {
-        if (message.guild.id !== '713913408881426472') return message.channel.send(`This command can only be used in the owner's server.`);
+        if (message.guild.id !== server_id) return message.channel.send(`This command can only be used in the owner's server.`);
         if (!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('You cannot use this command!');
 
         try {
             let channelMessage = message.content.split(/\s+/g).slice(2).join(" ");
             if (!channelMessage) return message.channel.send('Provide something for me to send.');
             let channelid = message.content.split(/\s+/g)[1]
-            let channel = this.client.channels.get(channelid)
+            let channel = this.client.channels.cache.get(channelid)
             channel.send(channelMessage);
 
             await message.react("🇸").catch(console.error);
