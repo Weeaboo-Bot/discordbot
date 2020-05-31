@@ -1,6 +1,7 @@
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { Structures } = require('discord.js');
+const moment = require('moment');
 const {token,prefix,discord_owner_id,guild_log,dm_log,status_log, g} = require('./config');
 
 
@@ -70,7 +71,9 @@ client.registry
       ['utility', 'Utility'],
       ['owner', 'Hidden + Owner'],
       ['news', 'News'],
-      ['general', 'General']
+      ['general', 'General'],
+      ['games','Games'],
+      ['video','Video Commands']
   ])
   .registerDefaultGroups()
 
@@ -144,8 +147,8 @@ client.on('guildCreate', guild => {
         .setColor('#78AEE8')
         .setThumbnail(guild.iconURL())
         .addField('❯\u2000\Information', `•\u2000\**ID:** ${guild.id}\n\•\u2000\**${guild.owner ? 'Owner' : 'Owner ID'}:** ${guild.owner ? `${guild.owner.user.tag} (${guild.owner.id})` : guild.ownerID}\n\•\u2000\**Created:** ${moment(guild.createdAt).format('MMMM Do YYYY')} \`(${fromNow(guild.createdAt)})\`\n\•\u2000\**Region:** ${guild.region}\n\•\u2000\**Verification:** ${verificationLevels[guild.verificationLevel]}\n\•\u2000\**Content Filter:** ${explicitContentFilters[guild.explicitContentFilter]}`)
-        .addField('❯\u2000\Quantitative Statistics', `•\u2000\**Channels** [${guild.channels.size}]: ${textChannels.size} text - ${voiceChannels.size} voice\n\•\u2000\**Members** [${guild.memberCount}]: ${online} online - ${bots} bots\n\•\u2000\**Roles:** ${guild.roles.size}`, true)
-        .addField('❯\u2000\Miscellaneous', `•\u2000\**Emojis:** ${guild.emojis.size}`, true)
+        .addField('❯\u2000\Quantitative Statistics', `•\u2000\**Channels** [${guild.channels.cache.size}]: ${textChannels.size} text - ${voiceChannels.size} voice\n\•\u2000\**Members** [${guild.memberCount}]: ${online} online - ${bots} bots\n\•\u2000\**Roles:** ${guild.roles.cache.size}`, true)
+        .addField('❯\u2000\Miscellaneous', `•\u2000\**Emojis:** ${guild.emojis.cache.size}`, true)
         .setTimestamp()
         .setFooter(`(${client.guilds.cache.size})`);
     return channel.send({embed});

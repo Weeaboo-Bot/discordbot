@@ -1,4 +1,9 @@
 const { Command } = require('discord.js-commando');
+const {error_log } = require('../../config');
+const {errorMessage} = require('../../functions/logHandler');
+const ErrorEnum = require('../../functions/errorTypes');
+const log = require('../../functions/consoleLogging');
+const lodash = require('lodash');
 
 module.exports = class DeleteRoleCommand extends Command {
     constructor(client) {
@@ -29,7 +34,7 @@ module.exports = class DeleteRoleCommand extends Command {
     async run(message, {memberName,roleName}) {
 
         const role = message.guild.roles.cache.find(role => role.name === roleName);
-        if (!message.mentions.members.first().roles.cache.get(role.id)) return message.channel.send(`❎ | **${message.mentions.members.first().displayName}** does not have have the role **${role.name}**!`)
+       if(!message.mentions.members.first().roles.cache.get(role.id)) return message.channel.send(`❎ | **${message.mentions.members.first().displayName}** does not have have the role **${role.name}**!`)
 
 
         await message.mentions.members.first().roles.remove(role)

@@ -48,21 +48,27 @@ module.exports = class NSFWCommand extends Command{
 
 
         if(Object.keys(SubsToSearch).includes(subList)) {
+            var subIndex = getRndInteger(0, SubsToSearch[subList].length)
 
-
-            await axios.get(`https://www.reddit.com/r/${SubsToSearch[subList][getRndInteger(0, SubsToSearch[subList].length)]}.json`)
+            await axios.get(`https://www.reddit.com/r/${SubsToSearch[subList][subIndex]}.json`)
                 .then(function (res) {
 
-                    for (var value in res.data.data.children) {
-                        var index = getRndInteger(0, res.data.data.children.length);
-                        const embed = new Discord.MessageEmbed()
-                            .setFooter(`${subList}`)
-                            .setDescription(`[Image URL](${res.data.data.children[getRndInteger(0, res.data.data.children.length)].data.permalink})`)
-                            .setImage(res.data.data.children[getRndInteger(0, res.data.data.children.length)].data.url)
-                            .setColor('#A187E0');
-                        return message.channel.send({embed});
 
-                    }
+                        const index = getRndInteger(0, res.data.data.children.length);
+
+
+                            const embed = new Discord.MessageEmbed()
+                                .setFooter(`${subList}`)
+                                .setDescription(`[Image URL](${res.data.data.children[index].data.permalink})`)
+                                .setImage(res.data.data.children[index].data.url)
+                                .setColor('#A187E0');
+                            return message.channel.send({embed});
+
+
+
+
+
+
 
 
                 })

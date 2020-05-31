@@ -15,7 +15,7 @@ module.exports = class ServerCommand extends Command {
             memberName: 'server',
             guildOnly: true,
             description: 'Shows some in-depth description for your server!',
-            examples: ['~server'],
+            examples: ['!server'],
             throttling: {
                 usages: 1,
                 duration: 5
@@ -29,21 +29,23 @@ module.exports = class ServerCommand extends Command {
         });
     }
 
-    run(message, args) {
+    run(message, {id}) {
         let guild;
+
+
 
         if (!this.client.isOwner(message.author)) {
             guild = message.guild;
-        } else if (args.id == 'this') {
+        } else if (id == 'this') {
             guild = message.guild;
-        } else if (!/^[0-9]+$/.test(args.id)) {
+        } else if (!/^[0-9]+$/.test(id)) {
             guild = message.guild;
         } else {
             try {
-                guild = this.client.guilds.get(args.id);
+                guild = this.client.guilds.cache.get(id);
 
                 if (guild.channels) {
-                    guild = this.client.guilds.get(args.id);
+                    guild = this.client.guilds.cache.get(id);
                 } else {
                     guild = message.guild
                 }
@@ -53,13 +55,13 @@ module.exports = class ServerCommand extends Command {
             }
         }
 
-        const textChannels = guild.channels.filter(c => c.type === 'text');
-        const voiceChannels = guild.channels.filter(c => c.type === 'voice');
+        const textChannels = guild.channels.cache.filter(c => c.type === 'text');
+        const voiceChannels = guild.channels.cache.filter(c => c.type === 'voice');
 
-        var online = guild.members.filter(m => m.user.presence.status === "online").size
-        var bots = guild.members.filter(m => m.user.bot).size
+        var online = guild.members.cache.filter(m => m.user.presence.status === "online").size
+        var bots = guild.members.cache.filter(m => m.user.bot).size
 
-        var highestRole = guild.roles.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse()[0]
+        var highestRole = guild.roles.cache.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse()[0]
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(guild.name, guild.iconURL())

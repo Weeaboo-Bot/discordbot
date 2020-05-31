@@ -22,7 +22,9 @@ module.exports = {
   giphy_key: process.env.giphy_key,
   client_id: process.env.client_id,
   azure_translate_api: process.env.azure_translate_api,
-  azure_img_api: process.env.azure_img_api
+  azure_img_api: process.env.azure_img_api,
+  spotify_id: process.env.spotify_id,
+  spotify_secret: process.env.spotify_secret
 
 
 };

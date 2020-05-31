@@ -18,28 +18,32 @@ module.exports = class ListRolesCommand extends Command{
 
     }
     run(message){
+
         const rolesList = message.guild.roles.cache;
-        var memberList = []
-        rolesList.forEach(value => {
-            value.members.forEach(member => {
-                memberList.push(member.user.username)
-            })
-            memberList.filter((item,index) => memberList.indexOf(item) === index);
-                const msg = new Discord.MessageEmbed()
-                    .setTitle(value.name)
-                    .addField('Role ID' ,value.id)
-                    .addField('Role Color' ,value.color)
-                    .addField('Role Permissions' ,value.permissions.bitfield)
-
-                    .addField('Role Members', memberList)
-                    .setColor(value.color)
 
 
+        rolesList.forEach(role => {
+            var index = 0;
+            var memberList = []
+            while(index < role.members.size) {
+                memberList.push(role.members.toJSON()[index].displayName)
+                index++;
+            }
 
-                message.channel.send({embed: msg});
+                return message.channel.send({
+                    embed: new Discord.MessageEmbed()
+                        .setTitle(role.name)
+                        .addField('Role ID', role.id)
+                        .addField('Role Color', role.color)
+                        .setColor(role.color)
+                        .addField('Role Members', memberList)
+                })
 
 
-            });
+
+        })
+
+
 
 
 

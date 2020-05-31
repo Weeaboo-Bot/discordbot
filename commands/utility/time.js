@@ -36,11 +36,7 @@ module.exports = class TimeCommand extends Command {
 
 
 
-            await axios.get('https://time.is/', {
-                params: {
-                    'location': location.replace(/^in/,"")
-                }
-            })
+            await axios.get(`https://time.is/${location}`)
                 .then(function(res){
                     if (res.status !== 200) {
                         return message.channel.send('❎ | Could not connect to the server!')

@@ -12,20 +12,13 @@ module.exports = class LeaveCommand extends Command {
         });
     }
 
-    run(message){
-        var voiceChannel = message.member.voice.channel;
-        if (!voiceChannel) return message.reply('Join a channel and try again');
+   async run(message){
+       var voiceChannel = message.member.voice.channel;
+       if (!voiceChannel) return message.reply('User must Join a channel and try again');
 
-        if (
-          typeof message.guild.musicData.songDispatcher == 'undefined' ||
-          message.guild.musicData.songDispatcher == null
-        ) {
-          return message.reply('There is no song playing right now!');
-        }
-        if (!message.guild.musicData.queue)
-          return message.say('There are no songs in queue');
-        message.guild.musicData.songDispatcher.end();
-        message.guild.musicData.queuequeue.length = 0;
-        return;
+
+       if (message.member.voice.channel) {
+           await message.member.voice.channel.leave();
+       }
       }
     };

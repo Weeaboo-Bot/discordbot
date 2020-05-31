@@ -31,31 +31,27 @@ module.exports = class AddRoleCommand extends Command {
     }
 
 
+    hasPermission(message) {
+        return message.member.hasPermission('MANAGE_ROLES');
+    }
 
-
-    async run(message, {memberName, roleName}) {
-
-
+    async run(message, {memberName,roleName}) {
+        const member = message.mentions.members.first();
         const role = message.guild.roles.cache.find(role => role.name === roleName);
-        if (message.mentions.members.first().roles.cache.get(role.id)) return message.channel.send(`❎ | **${message.mentions.members.first().displayName}** already has the role **${role.name}**!`)
+       //if(member.roles.cache.get(role.id)) return message.channel.send(`❎ | **${member.displayName}** already has the role **${role.name}**!`)
 
-
-
-            await message.mentions.members.first().roles.add(role)
-                .then(function(res){
-                    return message.channel.send(`✅ | **${message.mentions.members.first().displayName}** has gained the role **${role.name}**!`)
+        try {
+            await member.roles.add(role)
+                .then(roleRes => {
+                    return message.channel.send(`✅ | **${member.displayName}** has been given the role **${role.name}**!`)
                 })
-                .catch(function(err){
-
+                .catch(error => {
                     message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.DISCORD_API,message.command.name)});
-                    return message.channel.send(`❎ | **${message.mentions.members.first().displayName}** does not have the ${role.name} role!`)
                 })
 
+        } catch (err) {
 
-
-
-
-
-
+            return message.channel.send(`❎ | **${member.displayName}** already has the role **${role.name}**!`)
+        }
     };
 };

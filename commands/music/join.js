@@ -12,10 +12,13 @@ module.exports = class JoinCommand extends Command {
         });
     }
 
-    run(message){
+    async run(message) {
         var voiceChannel = message.member.voice.channel;
         if (!voiceChannel) return message.reply('User must Join a channel and try again');
 
-        return message.guild.me.voice.channel.join();
-      }
-    };
+
+        if (message.member.voice.channel) {
+             await message.member.voice.channel.join();
+        }
+    }
+};

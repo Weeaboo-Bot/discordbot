@@ -18,29 +18,44 @@ module.exports = class ListMembersCommand extends Command{
 
     }
     run(message){
+
         const membersList = message.guild.members.cache;
-        var rolesList = []
-        membersList.forEach(value => {
-            value._roles.forEach(role => {
-                rolesList.push(message.guild.roles.cache.find(roleNew => roleNew.id === role).name)
+
+
+        membersList.forEach(member => {
+            var index = 0;
+            var roleList = []
+            while(index < member.roles.cache.size) {
+                roleList.push(member.roles.cache.toJSON()[index].name)
+                index++;
+            }
+
+
+
+            return message.channel.send({
+                embed: new Discord.MessageEmbed()
+                    .setTitle(member.displayName)
+                    .addField('Member Username',member.user.username)
+                    .addField('Member ID', member.id)
+                    .addField('Member Color', member.displayHexColor)
+                    .setColor(member.displayHexColor)
+                    .addField('Member Discriminator',member.user.discriminator)
+                    .addField('Member Tag',member.user.tag)
+                    .addField('Member Roles', roleList)
             })
 
-            rolesList.filter((item,index) => rolesList.indexOf(item) === index);
-            const msg = new Discord.MessageEmbed()
-                .setTitle(value.user.username)
-                .addField('Member ID' ,value.user.id)
-                .addField('Member Roles' ,rolesList)
-                .addField('Member Permissions' ,value.permissions.bitfield)
 
-                .addField('Member Color', value.displayColor)
+
+        })
 
 
 
 
-            message.channel.send({embed: msg});
 
 
-        });
+
+
+
     }
 
 

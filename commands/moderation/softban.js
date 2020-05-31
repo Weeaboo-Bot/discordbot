@@ -59,7 +59,7 @@ module.exports = class SoftbanCommand extends Command {
             reason: `${message.author.tag}: ${reason} (Softban) (7 Days)`
         });
 
-        await message.guild.unban(member.user, 'Softban');
+        await message.guild.members.unban(member.user, 'Softban');
         return message.channel.send(`Successfully sofbanned **${member.user.tag}**! 👋`);
     }
 };
