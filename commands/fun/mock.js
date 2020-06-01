@@ -58,6 +58,7 @@ module.exports = class MockCommand extends Command {
         })
 
 
+        message.delete();
         await hook.send(text)
 
         setTimeout(async function() {
