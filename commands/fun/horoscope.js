@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log } = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');
+const Color = require('color');
 const ErrorEnum = require('../../functions/errorTypes');
 const signs = [
     "capricorn",
@@ -49,16 +50,24 @@ module.exports = class HoroscopeCommand extends Command {
 
         if (!signs.includes(sign.toLowerCase())) return message.channel.send('That is not a valid sign!');
 
-        await axios.get(`http://sandipbgt.com/theastrologer/api/horoscope/${sign}/today`)
+        await axios.post(`https://aztro.sameerkumar.website?sign=${sign}&day=today`)
             .then(function(res){
-                return message.channel.send({embed: new Discord.MessageEmbed()
-                        .setColor('#5D7B9D')
-                        .setAuthor(`Horoscope for ${res.data.sunsign} on ${res.data.date}`, 'http://images.indianexpress.com/2017/01/zodiac-love-2017-main_820_thinkstockphotos-481896132.jpg?w=820')
-                        .setDescription(res.data.horoscope.replace('(c) Kelli Fox, The Astrologer, http://new.theastrologer.com', ''))
+
+
+                const msg =  new Discord.MessageEmbed()
+
+                        .setColor('#F1BE48')
+                        .setAuthor(`Horoscope for ${sign} on ${res.data.current_date}`, 'http://images.indianexpress.com/2017/01/zodiac-love-2017-main_820_thinkstockphotos-481896132.jpg?w=820')
+
                         .setTimestamp()
                         .setFooter(`${message.author.username}'s Horoscope`)
-                        .addField('Mood', res.data.meta.mood, true)
-                        .addField("Intensity", res.data.meta.intensity, true)})
+                        .addField('Mood', res.data.mood, true)
+                        .setDescription(res.data.description)
+                        .addField('Color',res.data.color,true)
+                        .addField('Lucky Number',res.data.lucky_number,true)
+                        .addField('Compatibility',res.data.compatibility,true)
+
+                message.channel.send({embed: msg})
             })
             .catch(function(err){
                 message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});

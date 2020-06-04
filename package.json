@@ -26,6 +26,7 @@
     "chalk": "^4.0.0",
     "cheerio": "^1.0.0-rc.3",
     "cleverbot-node": "^0.3.11",
+    "color": "^3.1.2",
     "common-tags": "^1.4.0",
     "discord.js": "^12.2.0",
     "discord.js-commando": "github:discordjs/Commando",

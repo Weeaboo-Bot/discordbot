@@ -38,8 +38,8 @@ module.exports = class MockCommand extends Command {
         });
     }
 
-    async run(message, args) {
-        var { member, text } = args;
+    async run(message, {member,text}) {
+
         let name;
 
         if (!member.nickname) {
