@@ -36,7 +36,6 @@
     "ffmpeg": "0.0.4",
     "firebase-admin": "^8.12.1",
     "fluent-ffmpeg": "^2.1.2",
-    "fs": "0.0.1-security",
     "gifencoder": "^1.1.0",
     "google-images": "^2.1.0",
     "google-translate-api": "^2.3.0",
