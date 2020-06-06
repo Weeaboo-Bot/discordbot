@@ -26,13 +26,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
-    - name: ssh deploy
-      uses: easingthemes/ssh-deploy@v2.1.2
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
-        ARGS: "-rltgoDzvO"
-        SOURCE: "dist/"
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        TARGET: ${{ secrets.REMOTE_TARGET }}
     
