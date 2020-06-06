@@ -25,7 +25,8 @@ module.exports = {
   azure_translate_api: process.env.azure_translate_api,
   azure_img_api: process.env.azure_img_api,
   spotify_id: process.env.spotify_id,
-  spotify_secret: process.env.spotify_secret
+  spotify_secret: process.env.spotify_secret,
+  role_channel_ud: process.env.role_channel_id
 
 
 };

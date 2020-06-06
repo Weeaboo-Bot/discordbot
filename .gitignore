@@ -119,3 +119,5 @@ dist
 #Config Directory
 #Includes Discord Config, Firebase Config, Twitch Config, Youtube Configs, SoundCloud Configs
 config/
+
+service-account-file.json

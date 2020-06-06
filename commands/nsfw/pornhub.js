@@ -1,7 +1,6 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const PornHub = require('pornhub.js')
-const pornhub = new PornHub()
+const PH = require('pornhub');
 const {error_log} = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');
 const ErrorEnum = require('../../functions/errorTypes')
@@ -40,18 +39,24 @@ module.exports = class PornHubCommand extends Command {
         }
 
         try {
-          await pornhub.search('Video',search).then(function(res){
-               res.data.slice(0,4).forEach(item => {
-                   const viewKey = item.url.slice(47);
-                  return message.channel.send({embed : new Discord.MessageEmbed()
-                          .setTitle(item.title)
-                          .setImage(item.preview)
-                          .addField('HD: ',item.hd)
-                          .addField('Video Length',item.duration)
-                          .addField('Video URL',` **${search}** (https://www.pornhub.com/view_video.php?viewkey=${viewKey})`)
-                          .setURL(item.url)})
+          await PH.search({
+              search: search,
+              thumbsize: 'medium',
 
-               })
+
+          }).then(function(res){
+              console.log(res)
+               // res.data.slice(0,4).forEach(item => {
+               //     const viewKey = item.url.slice(47);
+               //    return message.channel.send({embed : new Discord.MessageEmbed()
+               //            .setTitle(item.title)
+               //            .setImage(item.preview)
+               //            .addField('HD: ',item.hd)
+               //            .addField('Video Length',item.duration)
+               //            .addField('Video URL',` **${search}** (https://www.pornhub.com/view_video.php?viewkey=${viewKey})`)
+               //            .setURL(item.url)})
+               //
+               // })
            })
                .catch(function(error){
                    message.client.channels.cache.get(error_log).send({embed: errorMessage(error, ErrorEnum.API, message.command.name)});
@@ -60,7 +65,7 @@ module.exports = class PornHubCommand extends Command {
             return null;
 
         } catch (err) {
-            return message.channel.send(`No results found for **${s}**`)
+            return message.channel.send(`No results found for **${search}**`)
         }
     }
 }

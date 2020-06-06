@@ -2,7 +2,16 @@ const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { Structures } = require('discord.js');
 const moment = require('moment');
-const {token,prefix,discord_owner_id,guild_log,dm_log,status_log} = require('./config');
+const {error_log } = require('./config');
+const {errorMessage} = require('./functions/logHandler');
+const ErrorEnum = require('./functions/errorTypes');
+
+const {token,prefix,discord_owner_id,guild_log,dm_log,status_log,role_channel_ud} = require('./config');
+
+
+
+
+
 
 
 //DEBUG
@@ -105,7 +114,14 @@ setInterval(function() {
 */
 
 client.once('ready', () => {
-    client.user.setActivity('TESTING')
+
+
+
+
+
+    client.user.setActivity('TESTING').then(res => {
+        console.log(res)
+    })
 
     var channel = client.channels.cache.get(status_log);
     const embed = new Discord.MessageEmbed()
@@ -118,6 +134,11 @@ client.once('ready', () => {
 
     return console.log(`Weaboo is live and ready in ${client.guilds.cache.size} servers!`);
 });
+
+client.on('commandCancel', () => {
+    console.log('Command Cancelled!')
+});
+
 
 client.on('voiceStateUpdate', async (___, newState) => {
     if (
@@ -260,6 +281,8 @@ client.on("message", async message => {
 process.on('unhandledRejection', err => {
     console.error('Uncaught Promise Error! \n' + err.stack);
 });
+
+
 
 
 
