@@ -44,7 +44,11 @@ module.exports = class GitHubCommand extends Command{
   }
 }`
 
-        const graphlClient = new GraphQLClient(endpoint, { headers: {} })
+        const graphlClient = new GraphQLClient(endpoint, { headers: {
+                'Authorization': `Bearer ${auth}`,
+                'Content-Type' : content_type
+
+            } })
         graphlClient.request(query, variables).then((data) => console.log(data))
 
 
