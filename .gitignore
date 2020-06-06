@@ -121,3 +121,5 @@ dist
 config/
 
 service-account-file.json
+
+package-lock.json
