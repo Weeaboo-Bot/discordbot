@@ -14,7 +14,7 @@ module.exports = class PlayCommand extends Command {
       memberName: 'play',
       group: 'music',
       description: 'Play any song or playlist from youtube',
-      guildOnly: true,
+      guildOnly: false,
       clientPermissions: ['SPEAK', 'CONNECT'],
       throttling: {
         usages: 2,

@@ -25,7 +25,7 @@ module.exports = class UserCommand extends Command {
     }
 
     run(message, args) {
-        const member = args.member || message.member;
+        const member =  message.mentions.members.first();
 
         const status = member.user.presence.activity ? (member.user.presence.activity.type ? 'Playing' : 'Playing') + ` **${member.user.presence.activity.name}**` : `*${member.user === this.client.user ? 'I am' : 'This user is'} not playing/streaming anything!*`;
 
