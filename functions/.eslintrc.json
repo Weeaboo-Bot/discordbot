@@ -14,6 +14,7 @@
     // Removed rule "disallow multiple spaces in regular expressions" from recommended eslint rules
     "no-regex-spaces": "off",
 
+    "no-useless-escape": "off",
     // Removed rule "disallow the use of debugger" from recommended eslint rules
     "no-debugger": "off",
 

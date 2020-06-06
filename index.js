@@ -289,5 +289,4 @@ process.on('unhandledRejection', err => {
 
 client.login(token);
 
-
-//module.exports = {client}
+module.exports = client;
