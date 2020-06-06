@@ -12,7 +12,7 @@ module.exports = {
     // Webpack will bundle all JavaScript into this file
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'bundle-prod.js'
+        filename: 'app.js'
     },
 
     node: {

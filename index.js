@@ -5,7 +5,6 @@ const moment = require('moment');
 const {error_log } = require('./config');
 const {errorMessage} = require('./functions/logHandler');
 const ErrorEnum = require('./functions/errorTypes');
-const firebase = require('firebase-admin');
 
 const {token,prefix,discord_owner_id,guild_log,dm_log,status_log,role_channel_ud} = require('./config');
 

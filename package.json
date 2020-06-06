@@ -37,7 +37,6 @@
     "erlpack": "github:hammerandchisel/erlpack",
     "escape-string-regexp": "^1.0.5",
     "ffmpeg": "0.0.4",
-    "firebase-admin": "^8.12.1",
     "fluent-ffmpeg": "^2.1.2",
     "gifencoder": "^1.1.0",
     "google-images": "^2.1.0",
