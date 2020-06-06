@@ -6,6 +6,7 @@ const ErrorEnum = require('../../functions/errorTypes');
 const log = require('../../functions/consoleLogging');
 const lodash = require('lodash');
 const {fbApp} = require('../../index');
+const {request, GraphQLClient} = require('graphql-request')
 
 
 module.exports = class GitHubCommand extends Command{
@@ -32,7 +33,20 @@ module.exports = class GitHubCommand extends Command{
         });
 
     }
-    run(message, {username,repo_name}) {
+    async run(message, {username,repo_name}) {
+
+        const query = `{
+  Movie(title: "Inception") {
+    releaseDate
+    actors {
+      name
+    }
+  }
+}`
+
+        const graphlClient = new GraphQLClient(endpoint, { headers: {} })
+        graphlClient.request(query, variables).then((data) => console.log(data))
+
 
 
 
@@ -40,6 +54,7 @@ module.exports = class GitHubCommand extends Command{
 
 
     }
+
 
 
 }
