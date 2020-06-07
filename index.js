@@ -132,7 +132,11 @@ setInterval(function() {
 client.once('ready', () => {
 
 
-	client.user.setActivity('TESTING').then(res => {
+	client.user.setActivity('TESTING',{
+		name:'Watching for commands!',
+		url: 'https://seanwdoran.engineer/discord',
+		type: 'PLAYING'
+	}).then(res => {
 
 		return res;
 	})
