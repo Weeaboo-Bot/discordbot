@@ -11,3 +11,7 @@
     - Channel List
     - Command List
     - 
+    
+ Add in Google Assistant
+ Add in Game Stats (CSGO,COD,etc)
+ 

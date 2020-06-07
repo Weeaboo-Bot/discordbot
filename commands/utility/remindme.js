@@ -40,8 +40,8 @@ module.exports = class RemindMeCommand extends Command {
         });
     }
 
-    async run(message, args) {
-        const { remind, time } = args;
+    async run(message, {remind,time}) {
+        
 
         const timer = time.startDate.getTime() - Date.now();
         const preRemind = await message.channel.send(`Got it! I will remind you in **${moment().add(timer, 'ms').fromNow(true)}**! \`(${timer}ms)\``);

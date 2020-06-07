@@ -13,7 +13,7 @@ module.exports = class SpeakCommand extends Command{
             aliases: ['bottts'],
             group:'fun',
             description: 'Make the Bot TTS',
-            guildOnly: true,
+            guildOnly: false,
             args: [
                 {
                     key: 'query',
