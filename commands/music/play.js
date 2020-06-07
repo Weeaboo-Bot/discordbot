@@ -36,7 +36,7 @@ module.exports = class PlayCommand extends Command {
 	async run(message, { query, client }) {
 
 		if (!message.channel.id === '713913929981755493') {
-			message.send('This command is not valid here!');
+			message.say('This command is not valid here!');
 		}
 		const voiceChannel = message.member.voice.channel;
 		if (!voiceChannel) return message.say('Join a channel and try again');
