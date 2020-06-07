@@ -75,7 +75,6 @@
     "zalgolize": "^1.2.4"
   },
   "devDependencies": {
-    "cucumber": "^6.0.5",
     "jest": "^26.0.1"
   }
 }

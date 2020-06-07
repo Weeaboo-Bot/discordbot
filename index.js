@@ -4,30 +4,32 @@ const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { Structures } = require('discord.js');
 const moment = require('moment');
-const { token, prefix, discord_owner_id, guild_log, dm_log, status_log } = require('./config');
+const { token, prefix, discord_owner_id, guild_log, dm_log, status_log,audit_log } = require('./config');
 
-// // Firebase App (the core Firebase SDK) is always required and
-// // must be listed before other Firebase SDKs
-// const firebase = require("firebase/app");
-//
-// // Add the Firebase products that you want to use
-// require("firebase/auth");
-// require("firebase/firestore");
-//
-// // TODO: Replace the following with your app's Firebase project configuration
-// const firebaseConfig = {
-//     apiKey: "AIzaSyAZRhm4sxmNqlgNGxGiRGgT2Iy0u0y_dL0",
-//     authDomain: "weaboo-bot-b5f7a.firebaseapp.com",
-//     databaseURL: "https://weaboo-bot-b5f7a.firebaseio.com",
-//     projectId: "weaboo-bot-b5f7a",
-//     storageBucket: "weaboo-bot-b5f7a.appspot.com",
-//     messagingSenderId: "740571758465",
-//     appId: "1:740571758465:web:5a9aa0592de50622df3280",
-//     measurementId: "G-V3Y6073RZH"
-// };
-//
-// // Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+const firebase = require('firebase/app');
+
+// Add the Firebase products that you want to use
+require('firebase/auth');
+require('firebase/firestore');
+
+// TODO: Replace the following with your app's Firebase project configuration
+const firebaseConfig = {
+	apiKey: 'AIzaSyAZRhm4sxmNqlgNGxGiRGgT2Iy0u0y_dL0',
+	authDomain: 'weaboo-bot-b5f7a.firebaseapp.com',
+	databaseURL: 'https://weaboo-bot-b5f7a.firebaseio.com',
+	projectId: 'weaboo-bot-b5f7a',
+	storageBucket: 'weaboo-bot-b5f7a.appspot.com',
+	messagingSenderId: '740571758465',
+	appId: '1:740571758465:web:5a9aa0592de50622df3280',
+	measurementId: 'G-V3Y6073RZH',
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+module.exports = {firebase};
 
 // DEBUG
 // const token = process.env.token;
@@ -97,6 +99,7 @@ client.registry
 		['general', 'General'],
 		['games', 'Games'],
 		['video', 'Video Commands'],
+		['loyal', 'Loyalty Program Commands'],
 	])
 	.registerDefaultGroups()
 
@@ -252,6 +255,54 @@ client.on('messageReactionAdd', async (messageReaction, user) => {
 	}
 
 	return null;
+});
+
+client.on('messageDelete', async message => {
+	// ignore direct messages
+	if (!message.guild) return;
+	const fetchedLogs = await message.guild.fetchAuditLogs({
+		limit: 1,
+		type: 'MESSAGE_DELETE',
+	});
+	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
+	const deletionLog = fetchedLogs.entries.first();
+	
+	// Let's perform a sanity check here and make sure we got *something*
+	if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
+	
+	// We now grab the user object of the person who deleted the message
+	// Let us also grab the target of this action to double check things
+	const { executor, target } = deletionLog;
+	
+	
+	// And now we can update our output with a bit more information
+	// We will also run a check to make sure the log we got was for the same author's message
+	if (target.id === message.author.id) {
+		
+		const channel = client.channels.cache.get(audit_log);
+		const embed = new Discord.MessageEmbed()
+				.setTitle('Audit Event')
+				.setColor('#727293')
+				.addField('Audit Event Name', 'Message Deleted')
+				.addField('Member',message.author.tag)
+				.addField('Delete Event',executor.tag)
+				.setFooter(`v${version}`)
+				.setTimestamp();
+		channel.send({ embed });
+		console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
+	}	else {
+		const channel = client.channels.cache.get(audit_log);
+		const embed = new Discord.MessageEmbed()
+				.setTitle('Audit Event')
+				.setColor('#727293')
+				.addField('Audit Event Name', 'Message Deleted')
+				.addField('Member','Member is Unkown')
+				.addField('Delete Event','Member is Unkown')
+				.setFooter(`v${version}`)
+				.setTimestamp();
+		channel.send({ embed });
+		console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
+	}
 });
 
 

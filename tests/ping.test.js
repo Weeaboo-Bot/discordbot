@@ -1,5 +1,5 @@
 const ping = require('../commands/core/ping');
 
-test('Test Ping Command', () => {
- //   expect(ping(client,);
+test('adds 1 + 2 to equal 3', () => {
+	expect(sum(1, 2)).toBe(3);
 });
