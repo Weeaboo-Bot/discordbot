@@ -130,11 +130,11 @@ client.once('ready', () => {
 
 
 	client.user.setActivity('TESTING').then(res => {
-		console.log(res);
+
 		return res;
 	})
 		.catch(function(err) {
-			console.log(err);
+
 			return err;
 		});
 
