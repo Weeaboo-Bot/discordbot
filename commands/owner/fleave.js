@@ -33,8 +33,8 @@ module.exports = class FLeaveCommand extends Command {
 
     async run(message, {toLeave,reason}) {
 
-        let guild = this.client.guilds.cache.get(toLeave) || 'woopsies'
-        if (guild == 'woopsies') return message.channel.send('That guild was not found! Please try again!')
+        let guild = this.client.guilds.cache.get(toLeave) || 'woopsies';
+        if (guild == 'woopsies') return message.channel.send('That guild was not found! Please try again!');
 
 
         const defaultChannel = guild.channels.cache.find(c => c.permissionsFor(guild.me).has('SEND_MESSAGES'));
@@ -45,7 +45,7 @@ module.exports = class FLeaveCommand extends Command {
             } catch (err) {
 
             }
-            guild.leave()
+            guild.leave();
             return message.channel.send(`Successfully left the guild **${guild.name}**!`)
         } catch (err) {
             return message.channel.send(`There was an error leaving the specified guild! \`${err}\``)

@@ -26,8 +26,8 @@ module.exports = class TodayCommand extends Command {
 
                 await axios.get('http://history.muffinlabs.com/date')
                     .then(function(res){
-                        const source = res.data.data['Events']
-                        const event = source[Math.round(Math.random() * (source.length - 1))]
+                        const source = res.data.data['Events'];
+                        const event = source[Math.round(Math.random() * (source.length - 1))];
                         return message.channel.send({embed: new Discord.MessageEmbed()
                                 .setAuthor(`Historical Event from ${res.data.date}, ${event.year}`)
                                 .setColor('#B1AFFC')
@@ -44,4 +44,4 @@ module.exports = class TodayCommand extends Command {
 
 
 	}
-}
+};

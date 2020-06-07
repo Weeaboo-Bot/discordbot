@@ -11,7 +11,7 @@ var cards;
  */
 var Deck = function() {
     var self = this;
-    cards = new Array();
+    cards = [];
     Card.prototype.suites.forEach(function(suite) {
         Card.prototype.faces.forEach(function(face) {
             cards.push(new Card(face, suite));

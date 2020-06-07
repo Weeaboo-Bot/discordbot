@@ -38,4 +38,4 @@ module.exports = class PoutCommand extends Command {
 
         }
     }
-}
+};

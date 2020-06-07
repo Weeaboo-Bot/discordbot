@@ -30,4 +30,4 @@ module.exports = class SayCommand extends Command {
         message.delete();
         return message.say(sayMessage).catch(console.error);
     }
-}
+};

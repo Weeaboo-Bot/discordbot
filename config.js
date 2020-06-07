@@ -27,7 +27,13 @@ module.exports = {
   spotify_id: process.env.spotify_id,
   spotify_secret: process.env.spotify_secret,
   role_channel_ud: process.env.role_channel_id,
-  audit_log: process.env.audit_log
+  audit_log: process.env.audit_log,
+  auto_testing_link: process.env.auto_testing_link,
+  auto_testing_user: process.env.auto_testing_user,
+  auto_testing_password: process.env.auto_testing_password,
+  auto_testing: process.env.auto_testing,
+  webhook_id: process.env.webhook_id,
+  webhook_token: process.env.webhook_token
 
 
 };

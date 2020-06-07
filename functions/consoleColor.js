@@ -52,4 +52,4 @@ module.exports = {
     custom:function(input) {
         return(chalk.magenta(input));
     }
-}
+};

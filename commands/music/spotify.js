@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log} = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes')
+const ErrorEnum = require('../../functions/errorTypes');
 
 const {spotify_id,spotify_secret} = require('../../config');
 
@@ -33,4 +33,4 @@ module.exports = class SpotifyCommand extends Command{
 
     }
 
-}
+};

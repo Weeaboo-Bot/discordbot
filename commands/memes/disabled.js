@@ -20,9 +20,9 @@ module.exports = class DisabledCommand extends Command {
 
     async run(message) {
 
-        const args = message.content.split(" ").slice(1)
+        const args = message.content.split(" ").slice(1);
 
-        await message.channel.startTyping()
+        await message.channel.startTyping();
 
         let avatarurl = (message.mentions.users.size > 0 ? message.mentions.users.first().displayAvatarURL({ format: 'png' }) : message.author.displayAvatarURL({ format: 'png' })).replace('gif', 'png');
         if (['jpg', 'jpeg', 'gif', 'png', 'webp'].some(x => args.join(' ').includes(x))) {
@@ -41,10 +41,10 @@ module.exports = class DisabledCommand extends Command {
                     name: 'disabled.png',
                     attachment: buffer
                 }]
-            })
+            });
             await message.channel.stopTyping()
-        })
+        });
 
         return null;
     }
-}
+};

@@ -18,7 +18,7 @@ const signs = [
     "libra",
     "scorpio",
     "sagittarius"
-]
+];
 
 module.exports = class HoroscopeCommand extends Command {
     constructor(client) {
@@ -65,7 +65,7 @@ module.exports = class HoroscopeCommand extends Command {
                         .setDescription(res.data.description)
                         .addField('Color',res.data.color,true)
                         .addField('Lucky Number',res.data.lucky_number,true)
-                        .addField('Compatibility',res.data.compatibility,true)
+                        .addField('Compatibility',res.data.compatibility,true);
 
                 message.channel.send({embed: msg})
             })
@@ -78,4 +78,4 @@ module.exports = class HoroscopeCommand extends Command {
 
 
     }
-}
+};

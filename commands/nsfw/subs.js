@@ -157,4 +157,4 @@ const SubsToSearch = {
 
 module.exports = {
     SubsToSearch
-}
+};

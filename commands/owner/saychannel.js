@@ -35,10 +35,10 @@ module.exports = class SayChannelCommand extends Command {
         if (!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('You cannot use this command!');
 
         try {
-            let channelMessage = msg
+            let channelMessage = msg;
             if (!msg) return message.channel.send('Provide something for me to send.');
 
-            let channel = this.client.channels.cache.get(id)
+            let channel = this.client.channels.cache.get(id);
             message.channel.send(msg);
 
             await message.react("🇸").catch(console.error);
@@ -52,4 +52,4 @@ module.exports = class SayChannelCommand extends Command {
             return message.channel.send(`❎ | **An error occurred while running this command!** \`${err}\``);
         }
     }
-}
+};

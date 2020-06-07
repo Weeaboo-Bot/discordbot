@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-const stripIndents = require('common-tags')
+const stripIndents = require('common-tags');
 
 function disambiguation(items, label, property = 'name') {
     const itemList = items.map(item => `"${(property ? item[property] : item).replace(/ /g, '\xa0')}"`).join(',   ');

@@ -46,4 +46,4 @@ module.exports = class AdviceCommand extends Command {
 
 
     }
-}
+};

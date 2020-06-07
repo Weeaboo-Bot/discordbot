@@ -44,4 +44,4 @@ module.exports = class DadJokeCommand extends Command {
 
 
     }
-}
+};

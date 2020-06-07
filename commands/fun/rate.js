@@ -22,4 +22,4 @@ module.exports = class RateCommand extends Command {
         const rating = Math.floor(Math.random() * 10) + 0;
         return message.channel.send(`I'd give **${item}** a ${rating}/10!`);
     }
-}
+};

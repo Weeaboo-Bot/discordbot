@@ -39,7 +39,7 @@ module.exports = class UnMuteCommand extends Command {
             time: 30000
         });
         if (!msgs.size || !['y', 'yes'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!');
-        if (['n', 'no'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!')
+        if (['n', 'no'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!');
 
         try {
             await message.guild.channels.cache.get(message.channel.id).overwritePermissions([{
@@ -56,4 +56,4 @@ module.exports = class UnMuteCommand extends Command {
         return await message.channel.send(`**${message.author.username}**, successfully unmuted ${member.user.tag} in **${message.guild.channels.cache.find(channel => channel.id === message.channel.id).name}**! 🙊`);
 
     }
-}
+};

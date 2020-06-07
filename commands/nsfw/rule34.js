@@ -52,4 +52,4 @@ module.exports = class Rule34Command extends Command {
                 }
             })
     }
-}
+};

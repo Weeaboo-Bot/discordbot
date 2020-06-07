@@ -52,4 +52,4 @@ module.exports = class HypnoCommand extends Command {
                 }
             })
     }
-}
+};

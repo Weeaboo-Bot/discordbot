@@ -37,4 +37,4 @@ module.exports = class ColorCommand extends Command {
             return message.channel.send("Invalid Parameters!");
         }
     }
-}
+};

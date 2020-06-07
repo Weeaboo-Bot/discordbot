@@ -10,7 +10,7 @@ const subreddits = [
     "meirl",
     "me_irl",
     "funny"
-]
+];
 
 module.exports = class MemeCommand extends Command {
     constructor(client) {
@@ -42,4 +42,4 @@ module.exports = class MemeCommand extends Command {
                 return message.channel.send({ embed });
             })
     }
-}
+};

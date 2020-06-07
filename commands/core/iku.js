@@ -25,4 +25,4 @@ module.exports = class IkuCommand extends Command {
             .setImage(iku[Math.round(Math.random() * (iku.length - 1))]);
         return message.channel.send({ embed });
     }
-}
+};

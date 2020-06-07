@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const waifus = require('../../assets/json/waifus.json');
-const total = Object.keys(waifus).length
+const total = Object.keys(waifus).length;
 
 const weefi = [
     'https://gfycat.com/KindheartedContentIberianmidwifetoad',
@@ -17,7 +17,7 @@ const weefi = [
     'https://media1.tenor.com/images/0e6d6a8f61b84b1ea6cdb13522a39753/tenor.gif?itemid=5237833',
     'https://i.imgur.com/5XuI7W8.gif',
     'http://i.imgur.com/usJbYkw.gif'
-]
+];
 
 module.exports = class WaifuCommand extends Command {
     constructor(client) {
@@ -50,7 +50,7 @@ module.exports = class WaifuCommand extends Command {
 
     async run(message, args) {
         let somethingThere = message.content.split(/\s+/g).slice(1).join(" ");
-        const percentage = Math.random()
+        const percentage = Math.random();
         if (!somethingThere || args.number == 'none') {
             var random = Math.floor(Math.random() * total + 1);
             var waifu = waifus[random];
@@ -68,8 +68,8 @@ module.exports = class WaifuCommand extends Command {
             return null;
 
         } else if (somethingThere) {
-            const waifuNumber = args.number
-            var waifu = waifus[waifuNumber]
+            const waifuNumber = args.number;
+            var waifu = waifus[waifuNumber];
             const embed = new Discord.MessageEmbed()
                 .setAuthor(waifu.name, waifu.image)
                 .setDescription(waifu.origin)
@@ -86,4 +86,4 @@ module.exports = class WaifuCommand extends Command {
             return message.channel.send(weefi[Math.round(Math.random() * (weefi.length - 1))])
         }
     }
-}
+};

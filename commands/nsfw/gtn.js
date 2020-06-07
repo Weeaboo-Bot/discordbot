@@ -50,4 +50,4 @@ module.exports = class GTNCommand extends Command {
 
 
     }
-}
+};

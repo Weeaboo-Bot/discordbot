@@ -4,7 +4,7 @@ const axios = require('axios');
 const {error_log } = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');
 const ErrorEnum = require('../../functions/errorTypes');
-const {giphy_key} = require('../../config')
+const {giphy_key} = require('../../config');
 
 module.exports = class GiphyCommand extends Command {
     constructor(client) {

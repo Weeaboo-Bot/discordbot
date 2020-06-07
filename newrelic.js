@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 /**
  * New Relic agent configuration.
  *
@@ -50,4 +50,4 @@ exports.config = {
       'response.headers.x*'
     ]
   }
-}
+};

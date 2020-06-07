@@ -22,7 +22,7 @@ module.exports = class PoutCommand extends Command {
 
     run(message) {
         var recipient = message.content.split(/\s+/g).slice(1).join(" ");
-        var wink = winkP[Math.round(Math.random() * (winkP.length - 1))]
+        var wink = winkP[Math.round(Math.random() * (winkP.length - 1))];
 
         if (!recipient) {
             const embed = new Discord.MessageEmbed()
@@ -35,7 +35,7 @@ module.exports = class PoutCommand extends Command {
                 .setColor('#FBCFCF')
                 .setImage(wink);
             return message.channel.send(`You can't wink at.... yourself, but I'll wink at.. you, ${message.author}!`, { embed: embed });
-                
+            
         } else if (message.mentions.users.first() == this.client.user) {
             const embed = new Discord.MessageEmbed()
                 .setColor('#FBCFCF')
@@ -49,4 +49,4 @@ module.exports = class PoutCommand extends Command {
             return message.channel.send(`${message.author} winks ${recipient}!`, { embed: embed });
         }
     }
-}
+};

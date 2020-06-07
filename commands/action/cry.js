@@ -25,4 +25,4 @@ module.exports = class CryCommand extends Command {
             .setImage(cryP[Math.round(Math.random() * (cryP.length - 1))]);
         return message.channel.send(`${message.author} has started crying!`, { embed: embed });
     }
-}
+};

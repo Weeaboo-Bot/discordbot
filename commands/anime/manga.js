@@ -30,7 +30,7 @@ module.exports = class MangaCommand extends Command {
                 return message.channel.send(`No results found for **${search}**!`);
             }
 
-            var manga = result[0]
+            var manga = result[0];
 
             var embed = new Discord.MessageEmbed()
                 .setColor('#FF9D6E')
@@ -48,4 +48,4 @@ module.exports = class MangaCommand extends Command {
             return message.channel.send(`No results found for **${search}**!`)
         })
 	}
-}
+};

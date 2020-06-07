@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const moment = require('moment')
+const moment = require('moment');
 const { fromNow } = require('discord.js-commando');
 
 module.exports = class EditsCommand extends Command {
@@ -28,9 +28,9 @@ module.exports = class EditsCommand extends Command {
     };
 
     run (message, args) {
-        const m = args.message
+        const m = args.message;
 
-        const nestedFields = []
+        const nestedFields = [];
 
         for (let i = 0; i < m.edits.length; i++) {
             nestedFields.push(`❯\u2000\**${i === m.edits.length - 1 ? 'Original' : (i === 0 ? 'Latest' : `Edit #${m.edits.length - i - 1}`)}:**\n` +
@@ -57,7 +57,7 @@ function truncate (string, max, append = '') {
         return string
     }
 
-    string = string.slice(0, max - 1 - append.length)
+    string = string.slice(0, max - 1 - append.length);
     if (/\s/.test(string.charAt(string.length - 1))) {
         string = string.replace(/\s+?$/, '')
     }

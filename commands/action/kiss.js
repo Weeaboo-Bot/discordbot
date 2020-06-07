@@ -21,7 +21,7 @@ module.exports = class KissCommand extends Command {
 
     run(message) {
         const recipient = message.content.split(/\s+/g).slice(1).join(" ");
-        var kiss = kissP[Math.round(Math.random() * (kissP.length - 1))]
+        var kiss = kissP[Math.round(Math.random() * (kissP.length - 1))];
 
         if (!recipient) {
             const embed = new Discord.MessageEmbed()
@@ -48,4 +48,4 @@ module.exports = class KissCommand extends Command {
             return message.channel.send(`${message.author} kisses ${recipient}!`, { embed: embed });
         }
     }
-}
+};

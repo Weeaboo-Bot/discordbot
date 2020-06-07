@@ -47,4 +47,4 @@ module.exports = class RetardedCommand extends Command {
             })
         })
     }
-}
+};

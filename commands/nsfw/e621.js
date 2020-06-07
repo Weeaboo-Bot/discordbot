@@ -52,4 +52,4 @@ module.exports = class E621Command extends Command {
                 }
             })
     }
-}
+};

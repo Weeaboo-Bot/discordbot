@@ -35,7 +35,7 @@ module.exports = class ImgCommand extends Command {
                 });
                 if (!response) {
                     message.channel.send("Nothing Found!");
-                    return;
+                    
                 } else {
                     let image = response[0].url;
                     const embed = await new Discord.MessageEmbed()
@@ -53,4 +53,4 @@ module.exports = class ImgCommand extends Command {
             return message.channel.send("Invalid Parameters(???)");
         }
     }
-}
+};

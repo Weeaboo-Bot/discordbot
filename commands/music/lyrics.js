@@ -29,7 +29,7 @@ module.exports = class LyricsCommand extends Command {
   async run(message, { songName }) {
     if (
       songName == '' &&
-      message.guild.musicData.isPlaying 
+      message.guild.musicData.isPlaying
     ) {
       songName = message.guild.musicData.nowPlaying.title;
     } else if (songName == '' && !message.guild.musicData.isPlaying) {
@@ -79,7 +79,7 @@ module.exports = class LyricsCommand extends Command {
           .setDescription(lyrics.slice(2048, lyrics.length));
         sentMessage.edit('', firstLyricsEmbed);
         message.channel.send(secondLyricsEmbed);
-        return;
+        
       }
     } catch (e) {
       console.error(e);

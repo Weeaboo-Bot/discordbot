@@ -34,7 +34,7 @@ module.exports = class DeleteRoleCommand extends Command {
     async run(message, {memberName,roleName}) {
 
         const role = message.guild.roles.cache.find(role => role.name === roleName);
-       if(!message.mentions.members.first().roles.cache.get(role.id)) return message.channel.send(`❎ | **${message.mentions.members.first().displayName}** does not have have the role **${role.name}**!`)
+       if(!message.mentions.members.first().roles.cache.get(role.id)) return message.channel.send(`❎ | **${message.mentions.members.first().displayName}** does not have have the role **${role.name}**!`);
 
 
         await message.mentions.members.first().roles.remove(role)

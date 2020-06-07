@@ -46,7 +46,7 @@ module.exports = class JishoCommand extends Command {
                             //senses = senses.replace(/\"/g, '').replace(/,/g, '\n');
                             senses = senses.substring(1, senses.length - 1);
                             senses = senses.replace(/^/gm, '•\u2000');
-                            senses = senses.replace(/\\/g, "")
+                            senses = senses.replace(/\\/g, "");
 
                             const embed = new Discord.MessageEmbed()
                                 .setAuthor(`${content.japanese[0].word ? content.japanese[0].word : content.japanese[0].reading}`)
@@ -72,4 +72,4 @@ module.exports = class JishoCommand extends Command {
 
 
     }
-}
+};

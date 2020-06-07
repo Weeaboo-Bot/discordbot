@@ -29,13 +29,13 @@ module.exports = class NomCommand extends Command {
         if (args.length < 1) {
             var embed = new Discord.MessageEmbed()
                 .setColor('#FBCFCF')
-                .setImage(disgust)
+                .setImage(disgust);
             return message.channel.send(`${message.author} noms on... themselves..?`, { embed: embed })
 
         } else if (message.mentions.users.first() == message.author) {
             var embed = new Discord.MessageEmbed()
                 .setColor('#FBCFCF')
-                .setImage(disgust)
+                .setImage(disgust);
             return message.channel.send(`${message.author} noms on... themselves..?`, { embed: embed })
 
         } else if (message.mentions.users.first() == this.client.user) {
@@ -47,7 +47,7 @@ module.exports = class NomCommand extends Command {
                     // handle success
                     var embed = new Discord.MessageEmbed()
                         .setColor('#FBCFCF')
-                        .setImage(`https://rra.ram.moe${response.data.path}`)
+                        .setImage(`https://rra.ram.moe${response.data.path}`);
                     return message.channel.send(`Nyaa~ s-senpai... (´Å\`∗)... `, { embed: embed })
 
                 })
@@ -67,7 +67,7 @@ module.exports = class NomCommand extends Command {
                     // handle success
                     var embed = new Discord.MessageEmbed()
                         .setColor('#FBCFCF')
-                        .setImage(`https://rra.ram.moe${response.data.path}`)
+                        .setImage(`https://rra.ram.moe${response.data.path}`);
                     return message.channel.send(`${message.author} noms on ${recipient}!`, { embed: embed })
 
                 })
@@ -78,4 +78,4 @@ module.exports = class NomCommand extends Command {
 
         }
     }
-}
+};

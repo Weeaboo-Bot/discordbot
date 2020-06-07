@@ -30,4 +30,4 @@ module.exports = class NSFWCommandsCommand extends Command {
 
         return null;
     }
-}
+};

@@ -23,4 +23,4 @@ module.exports = class RightThereCommand extends Command {
         return message.channel.send(`${rightThere[Math.round(Math.random() * (rightThere.length - 1))]}`);
 
     }
-}
+};

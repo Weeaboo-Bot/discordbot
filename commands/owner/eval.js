@@ -74,7 +74,7 @@ module.exports = class EvalCommand extends Command {
                     return msg.edit(response);
                 }
             } else {
-                msg.delete()
+                msg.delete();
                 const embed = new discord.MessageEmbed()
                     .setColor('#CEA5B7')
                     .setDescription(response);

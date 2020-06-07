@@ -16,7 +16,7 @@ module.exports = class NowPlayingCommand extends Command {
   run(message) {
     if (
       (!message.guild.musicData.isPlaying &&
-        !message.guild.musicData.nowPlaying) 
+        !message.guild.musicData.nowPlaying)
     ) {
       return message.say('There is no song playing right now!');
     }
@@ -35,7 +35,7 @@ module.exports = class NowPlayingCommand extends Command {
       .setTitle(video.title)
       .setDescription(description);
     message.channel.send(videoEmbed);
-    return;
+    
   }
   static playbackBar(message, video) {
     const passedTimeInMS = message.guild.musicData.songDispatcher.streamTime;

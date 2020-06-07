@@ -25,27 +25,27 @@ module.exports = class EmojiCommand extends Command {
     }
 
     async run(message, args) {
-        let emoji = message.content.split(/\s+/g).slice(1).join(" ")
+        let emoji = message.content.split(/\s+/g).slice(1).join(" ");
 
         if (!emoji) {
-            const emojis = message.guild.emojis
+            const emojis = message.guild.emojis;
             if (!emojis.size) return message.channel.send('You have no custom emoji.');
 
 
             const embed = new Discord.MessageEmbed()
                 .setAuthor(`Emojis in ${message.guild.name}! [${emojis.size}]`, message.guild.iconURL())
 		        .setDescription(emojis.map(emoji => emoji.toString()).join(' '), { split: { char: ' ' } })
-                .setColor('#A5A3BB')
+                .setColor('#A5A3BB');
             return message.channel.send(`Here's all your custom emojis!`, { embed: embed });
 
         } else {
             const args = message.content.split(" ");
 
-            if (!args[1].startsWith('<:')) return message.channel.send('That\'s not a valid emoji!')
-            let id = args[1].substring(args[1].lastIndexOf(':') + 1, args[1].lastIndexOf('>'))
+            if (!args[1].startsWith('<:')) return message.channel.send('That\'s not a valid emoji!');
+            let id = args[1].substring(args[1].lastIndexOf(':') + 1, args[1].lastIndexOf('>'));
 
-            let emoteInfo = this.client.emojis.get(id)
-            if (!emoteInfo) return message.channel.send('That\'s not a valid custom emoji!')
+            let emoteInfo = this.client.emojis.get(id);
+            if (!emoteInfo) return message.channel.send('That\'s not a valid custom emoji!');
 
             const embed = new Discord.MessageEmbed()
                 .setAuthor(emoteInfo.name)
@@ -54,4 +54,4 @@ module.exports = class EmojiCommand extends Command {
             return message.channel.send({ embed });
         }
     }
-}
+};

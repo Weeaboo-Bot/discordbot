@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log} = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes')
+const ErrorEnum = require('../../functions/errorTypes');
 
 module.exports = class StreamCommand extends Command{
     constructor(client) {
@@ -19,4 +19,4 @@ module.exports = class StreamCommand extends Command{
     }
 
 
-}
+};

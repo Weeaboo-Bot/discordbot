@@ -28,4 +28,4 @@ module.exports = class CatCommand extends Command {
             .setColor('#71A3BE');
         return message.channel.send({ embed });
     }
-}
+};

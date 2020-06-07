@@ -48,4 +48,4 @@ module.exports = class PatCommand extends Command {
             return message.channel.send(`${message.author} pats ${recipient}!`, { embed: embed });
         }
     }
-}
+};

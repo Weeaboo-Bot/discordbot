@@ -1,12 +1,12 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const osu = require('node-osu');
-const {osu_key} = require('../../config')
+const {osu_key} = require('../../config');
 
 var osuApi = new osu.Api(osu_key, {
     notFoundAsError: false,
     completeScores: false
-})
+});
 
 module.exports = class OsuCommand extends Command {
     constructor(client) {
@@ -46,7 +46,7 @@ module.exports = class OsuCommand extends Command {
                     .setImage(`https://lemmmy.pw/osusig/sig.php?colour=bpink&uname=${query}&countryrank&darkheader&darktriangles&avatarrounding=10`);
                 return message.channel.send({ embed });
             }).catch(err => {
-                console.log(err)
+                console.log(err);
                 return message.channel.send(`The user **${query}** was not found!`);
             });
 
@@ -54,7 +54,7 @@ module.exports = class OsuCommand extends Command {
             return message.channel.send('<:NOTLIKETHIIIIIIIIIIIIIIIIIIIIIIS:371071292146843658> Something went wrong while executing that function!');
         }
     }
-}
+};
 
 /*
 

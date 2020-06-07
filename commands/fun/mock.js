@@ -4,7 +4,7 @@ const mock = [
     "I love Emilia!",
     "Astolfo is best girl!",
     "Traps are not gay!",
-]
+];
 
 //remember to return before every promise
 module.exports = class MockCommand extends Command {
@@ -55,15 +55,15 @@ module.exports = class MockCommand extends Command {
         var hook = await message.channel.createWebhook(name, {
             avatar: member.user.displayAvatarURL({ format: 'png', size: 128 }),
             reason: `${message.author.tag} is mocking ${member.user.tag}`
-        })
+        });
 
 
         message.delete();
-        await hook.send(text)
+        await hook.send(text);
 
         setTimeout(async function() {
             await hook.delete()
         }, 1000);
 
     }
-}
+};

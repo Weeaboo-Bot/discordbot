@@ -35,4 +35,4 @@ module.exports = class Reddit5050Command extends Command{
 
     }
 
-}
+};

@@ -34,4 +34,4 @@ module.exports = class SpeakCommand extends Command{
     }
 
 
-}
+};

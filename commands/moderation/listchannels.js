@@ -22,11 +22,11 @@ module.exports = class ListChannelsCommand extends Command{
 
         channelList.forEach(channel => {
             var index = 0;
-            var memberList = []
+            var memberList = [];
 
            if(channel.members.size > 0) {
                while (index < channel.members.size) {
-                   memberList.push(channel.members.toJSON()[index].displayName)
+                   memberList.push(channel.members.toJSON()[index].displayName);
                    index++;
                }
            } else {
@@ -43,4 +43,4 @@ module.exports = class ListChannelsCommand extends Command{
             })
         })
     }
-}
+};

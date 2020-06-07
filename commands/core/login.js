@@ -31,11 +31,11 @@ module.exports = class LoginCommand extends Command{
 
 
 
-        const signinURL = 'https://weaboo-bot-b5f7a.web.app/signIn'
+        const signinURL = 'https://weaboo-bot-b5f7a.web.app/signIn';
           message.say(`Please go to this URL to sign-in: ${signinURL}`)
 
 
     }
 
 
-}
+};

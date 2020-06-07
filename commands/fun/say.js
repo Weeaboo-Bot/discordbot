@@ -29,4 +29,4 @@ module.exports = class SayCommand extends Command {
 
         return message.say(sayMessage).catch(console.error);
     }
-}
+};

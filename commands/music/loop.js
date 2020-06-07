@@ -38,6 +38,6 @@ module.exports = class LoopCommand extends Command {
         (numOfTimesToLoop == 1) ? 'time' : 'times'
       }`
     );
-    return;
+    
   }
 };

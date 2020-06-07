@@ -38,4 +38,4 @@ module.exports = class OwoCommand extends Command {
 
 
     }
-}
+};

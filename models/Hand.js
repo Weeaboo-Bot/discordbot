@@ -4,8 +4,8 @@ var Card = require('./Card');
  * Hand constructor
  */
 function Hand() {
-    this.cards = new Array();
-};
+    this.cards = [];
+}
 
 Hand.prototype.limit = 21;
 

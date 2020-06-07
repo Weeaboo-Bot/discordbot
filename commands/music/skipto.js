@@ -39,6 +39,6 @@ module.exports = class SkipToCommand extends Command {
 
     message.guild.musicData.queue.splice(0, songNumber - 1);
     message.guild.musicData.songDispatcher.end();
-    return;
+    
   }
 };

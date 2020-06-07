@@ -52,4 +52,4 @@ module.exports = class XBooruCommand extends Command {
                 }
             })
     }
-}
+};

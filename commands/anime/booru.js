@@ -46,4 +46,4 @@ module.exports = class BooruCommand extends Command {
                 }
             })
     }
-}
+};

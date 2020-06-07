@@ -33,7 +33,7 @@ module.exports = class ExecCommand extends Command {
         let hrDiff;
         try {
             const hrStart = process.hrtime();
-            this.lastResult = exec(command)
+            this.lastResult = exec(command);
             hrDiff = process.hrtime(hrStart);
         } catch (err) {
             return msg.channel.send(`❎ | ** There was an error while executing!** \`${err}\``);
@@ -41,7 +41,7 @@ module.exports = class ExecCommand extends Command {
 
         this.hrStart = process.hrtime();
         const executed = await exec(command).catch((err) => err);
-        const input = `**📥 Input**\`\`\`bash\n${command}\n\`\`\``
+        const input = `**📥 Input**\`\`\`bash\n${command}\n\`\`\``;
         const output = executed.stdout ? `**📤 Output**\`\`\`bash\n${executed.stdout}\n\`\`\`` : "";
 
         const error = executed.stderr ? `**📤 Error**\`\`\`bash\n${executed.stderr}\n\`\`\`` : "";
@@ -53,11 +53,11 @@ module.exports = class ExecCommand extends Command {
         }
 
         await message.delete();
-        var time = hrDiff[0] > 0 ? `${(hrDiff[0]).toFixed(4)}s ` : '' + (hrDiff[1] / 1000000).toFixed(4)
+        var time = hrDiff[0] > 0 ? `${(hrDiff[0]).toFixed(4)}s ` : '' + (hrDiff[1] / 1000000).toFixed(4);
         const embed = new Discord.MessageEmbed()
             .setColor('#CEA5B7')
             .setDescription([input, output, error].join("\n"))
             .setFooter(`${time}s`);
         return message.channel.send({ embed })
     }
-}
+};

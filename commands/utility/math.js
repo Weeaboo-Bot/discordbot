@@ -39,4 +39,4 @@ module.exports = class MathCommand extends Command {
         return message.channel.send({ embed })
 
     }
-}
+};

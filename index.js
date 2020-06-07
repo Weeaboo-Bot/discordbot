@@ -2,10 +2,14 @@
 /* eslint-disable max-nested-callbacks */
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
+const fs = require('fs');
 const { Structures } = require('discord.js');
 const moment = require('moment');
-const { token, prefix, discord_owner_id, guild_log, dm_log, status_log,audit_log } = require('./config');
 
+const {errorMessage,auditMessage} = require('./functions/logHandler');
+const ErrorEnum = require('./functions/errorTypes');
+const { token, prefix, discord_owner_id, guild_log, dm_log, status_log, audit_log } = require('./config');
+const fetch = require('node-fetch');
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 const firebase = require('firebase/app');
@@ -29,7 +33,7 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-module.exports = {firebase};
+module.exports = { firebase };
 
 // DEBUG
 // const token = process.env.token;
@@ -123,27 +127,21 @@ client.on('reconnecting', () => {
 	console.log('Disconnected from the server... just thought I\'d let you know!');
 });
 
-/*
+
 setInterval(function() {
-	fetch("http://komugari.herokuapp.com");
-}, 500000); // prevents sleeping
-*/
-
-client.once('ready', () => {
+	fetch('https://desolate-lake-71979.herokuapp.com/');
+}, 500000);
 
 
+client.on('ready',  () => {
+	
+	
+	
+	
 	client.user.setActivity('TESTING',{
-		name:'Watching for commands!',
-		url: 'https://seanwdoran.engineer/discord',
-		type: 'PLAYING'
-	}).then(res => {
-
-		return res;
-	})
-		.catch(function(err) {
-
-			return err;
-		});
+		type: 'PLAYING',
+		name: 'MEMES',
+	}).then(res => {}).catch(err => {});
 
 	const channel = client.channels.cache.get(status_log);
 	const embed = new Discord.MessageEmbed()
@@ -261,7 +259,11 @@ client.on('messageReactionAdd', async (messageReaction, user) => {
 	return null;
 });
 
-client.on('messageDelete', async message => {
+
+
+
+//AUDIT SECTION
+client.on('messageDelete', async message=> {
 	// ignore direct messages
 	if (!message.guild) return;
 	const fetchedLogs = await message.guild.fetchAuditLogs({
@@ -283,36 +285,24 @@ client.on('messageDelete', async message => {
 	// We will also run a check to make sure the log we got was for the same author's message
 	if (target.id === message.author.id) {
 		
-		const channel = client.channels.cache.get(audit_log);
-		const embed = new Discord.MessageEmbed()
-				.setTitle('Audit Event')
-				.setColor('#727293')
-				.addField('Audit Event Name', 'Message Deleted')
-				.addField('Member',message.author.tag)
-				.addField('Delete Event',executor.tag)
-				.setFooter(`v${version}`)
-				.setTimestamp();
-		channel.send({ embed });
 		console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
+		return message.client.channels.cache.get(audit_log).send({embed: auditMessage(deletionLog)});
 	}	else {
-		const channel = client.channels.cache.get(audit_log);
-		const embed = new Discord.MessageEmbed()
-				.setTitle('Audit Event')
-				.setColor('#727293')
-				.addField('Audit Event Name', 'Message Deleted')
-				.addField('Member','Member is Unkown')
-				.addField('Delete Event','Member is Unkown')
-				.setFooter(`v${version}`)
-				.setTimestamp();
-		channel.send({ embed });
 		console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
+		return message.client.channels.cache.get(audit_log).send({embed: auditMessage(deletionLog)});
 	}
-});
+})
+
+
 
 
 // basic message replies
 client.on('message', async message => {
+
 	if(message.author.bot) return undefined;
+	
+	
+	
 
 	if(message.channel.type == 'dm') {
 		if(message.content.startsWith('~')) return;
@@ -353,4 +343,5 @@ process.on('unhandledRejection', err => {
 
 
 client.login(token);
+
 

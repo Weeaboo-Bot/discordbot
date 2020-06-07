@@ -51,7 +51,7 @@ module.exports = class BanCommand extends Command {
             });
 
             if (!msgs.size || !['y', 'yes'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!');
-            if (['n', 'no'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!')
+            if (['n', 'no'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!');
 
             await message.guild.members.ban(member, {
                 reason: `${message.author.tag}: ${reason}`
@@ -61,4 +61,4 @@ module.exports = class BanCommand extends Command {
 
 
     }
-}
+};

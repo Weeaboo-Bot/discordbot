@@ -24,14 +24,14 @@ module.exports = class UrbanCommand extends Command {
         const query = message.content.split(/\s+/g).slice(1).join(" ");
 
         const defs = await (query.length ? urban(query) : urban.random());
-        let def, total
+        let def, total;
 
         if (!defs) {
             return message.channel.send('No matches found!');
         }
 
         if (defs.constructor.name === 'Array') {
-            total = Object.keys(defs).length
+            total = Object.keys(defs).length;
 
             if (!defs || !total) {
                 return message.channel.send('No matches found!');
@@ -43,7 +43,7 @@ module.exports = class UrbanCommand extends Command {
         }
         const resultMessage = query.length > 0 ?
                 `First result for \`${query}\` on Urban Dictionary:` :
-                `Random definition on Urban Dictionary:`
+                `Random definition on Urban Dictionary:`;
                 
         try {
             const embed = new Discord.MessageEmbed()
@@ -68,4 +68,4 @@ module.exports = class UrbanCommand extends Command {
             return message.channel.send(resultMessage, { embed });
         }
     }
-}
+};

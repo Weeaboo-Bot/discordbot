@@ -5,7 +5,7 @@ const GIFEncoder = require('gifencoder');
 const options = {
     size: 256,
     frames: 8
-}
+};
 
 module.exports = class TriggeredCommand extends Command {
     constructor(client) {
@@ -33,9 +33,9 @@ module.exports = class TriggeredCommand extends Command {
             return message.channel.send('I can\'t attach messages!');
         }
 
-        await message.channel.startTyping()
+        await message.channel.startTyping();
 
-        const args = message.content.split(" ").slice(1)
+        const args = message.content.split(" ").slice(1);
 
         let avatarurl = (message.mentions.users.size > 0 ? message.mentions.users.first().displayAvatarURL({ format: 'png' }) : message.author.displayAvatarURL({ format: 'png' }));
         if (['jpg', 'jpeg', 'gif', 'png', 'webp'].some(x => args.join(' ').includes(x))) {
@@ -48,15 +48,15 @@ module.exports = class TriggeredCommand extends Command {
         const tint = await Jimp.read('assets/images/red.png');
 
         avatar.resize(320, 320);
-        tint.scaleToFit(base.bitmap.width, base.bitmap.height)
-        tint.opacity(0.2)
-        text.scaleToFit(280, 60)
+        tint.scaleToFit(base.bitmap.width, base.bitmap.height);
+        tint.opacity(0.2);
+        text.scaleToFit(280, 60);
 
         const frames = [];
         const buffers = [];
         const encoder = new GIFEncoder(options.size, options.size);
         const stream = encoder.createReadStream();
-        let temp
+        let temp;
 
         stream.on('data', async buffer => await buffers.push(buffer));
         stream.on('end', async() => {
@@ -65,14 +65,14 @@ module.exports = class TriggeredCommand extends Command {
                     name: 'triggered.gif',
                     attachment: Buffer.concat(buffers)
                 }]
-            })
+            });
             await message.channel.stopTyping();
 
             return null;
-        })
+        });
 
         for (let i = 0; i < options.frames; i++) {
-            temp = base.clone()
+            temp = base.clone();
 
             if (i === 0) {
                 temp.composite(avatar, -16, -16)
@@ -80,7 +80,7 @@ module.exports = class TriggeredCommand extends Command {
                 temp.composite(avatar, -32 + getRandomInt(-16, 16), -32 + getRandomInt(-16, 16))
             }
 
-            temp.composite(tint, 0, 0)
+            temp.composite(tint, 0, 0);
 
             if (i === 0) {
                 temp.composite(text, -10, 200)
@@ -91,13 +91,13 @@ module.exports = class TriggeredCommand extends Command {
             frames.push(temp.bitmap.data)
         }
 
-        encoder.start()
-        encoder.setRepeat(0)
-        encoder.setDelay(20)
+        encoder.start();
+        encoder.setRepeat(0);
+        encoder.setDelay(20);
         for (const frame of frames) {
             encoder.addFrame(frame)
         }
         encoder.finish()
 
     }
-}
+};

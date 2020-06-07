@@ -23,7 +23,7 @@ module.exports = class ShitCommand extends Command {
             return message.channel.send('I can\'t attach messages!');
         }
 
-        var args = message.content.split(/\s+/g).slice(1)
+        var args = message.content.split(/\s+/g).slice(1);
 
         if (message.mentions.users.size > 0) {
             args = message.mentions.users.first().username;
@@ -37,7 +37,7 @@ module.exports = class ShitCommand extends Command {
             }
         }
 
-        await message.channel.startTyping()
+        await message.channel.startTyping();
 
         const text = args;
         const shit = await Jimp.read('assets/images/shit.jpg');
@@ -56,11 +56,11 @@ module.exports = class ShitCommand extends Command {
                     name: 'shit.png',
                     attachment: buffer
                 }]
-            })
+            });
 
             await message.channel.stopTyping()
-        })
+        });
 
         return null;
     }
-}
+};

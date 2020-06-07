@@ -38,6 +38,6 @@ module.exports = class PokerCommand extends Command{
 
 
     }
-}
+};
 
 

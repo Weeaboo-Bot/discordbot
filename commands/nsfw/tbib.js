@@ -51,4 +51,4 @@ module.exports = class YandereCommand extends Command {
                 }
             })
     }
-}
+};

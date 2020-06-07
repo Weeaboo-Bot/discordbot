@@ -2,6 +2,28 @@ const { Command } = require('discord.js-commando');
 
 const responses = [
 	'Pong!',
+	'I-It\'s not like I wanted to say pong or anything...',
+	'Pong...',
+	'Testing, testing, 1, 2, 3!',
+	'Anyone there?',
+	'Does anyone even use this?',
+	'Woo! A secret command!',
+	'Ping! ...I mean **pong!**',
+	'Hi there!',
+	'At your service!',
+	'Yes?',
+	'Hello!',
+	"Konnichiwa~",
+	"Ohayoo~",
+	"I'm up and running!",
+	"Here I am!",
+	"Right here!",
+	"Hai!",
+	"Hey there!",
+	"You found me!",
+	"Nya!",
+	"N-Nya..?",
+	"Nyahaha you found me!"
 ];
 
 module.exports = class PingCommand extends Command {

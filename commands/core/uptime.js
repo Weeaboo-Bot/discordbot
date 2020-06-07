@@ -14,7 +14,7 @@ module.exports = class UptimeCommand extends Command {
 	}
 
 	run(message) {
-        var uptime = moment.duration(this.client.uptime).format('d[ days], h[ hours], m[ minutes, and ]s[ seconds]')
+        var uptime = moment.duration(this.client.uptime).format('d[ days], h[ hours], m[ minutes, and ]s[ seconds]');
 		return message.channel.send(`⌛ | I've been up and running for **${uptime}**!`);
 	}
 };

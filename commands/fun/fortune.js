@@ -27,4 +27,4 @@ module.exports = class FortuneCommand extends Command {
             .setColor('#FAC193');
         return message.channel.send({ embed });
     }
-}
+};

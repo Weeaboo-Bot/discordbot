@@ -37,4 +37,4 @@ module.exports = class NoBullyCommand extends Command {
             return message.channel.send(`${recipient}, pls no bulli!!`, { embed: embed });
         }
     }
-}
+};

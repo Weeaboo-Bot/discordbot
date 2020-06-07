@@ -34,7 +34,7 @@ module.exports = class ReactCommand extends Command {
         const { text } = args;
         const m = args.message;
 
-        const msg = await message.channel.send(`🔄 | Reacting to **${m.author.username}**'s message...`)
+        const msg = await message.channel.send(`🔄 | Reacting to **${m.author.username}**'s message...`);
 
         for (const c of text.toLowerCase()) {
             if (c in map) {
@@ -46,7 +46,7 @@ module.exports = class ReactCommand extends Command {
 
         return msg.edit(`✅ | Successfully reacted on **${m.author.username}**'s message with ${text}!`)
     }
-}
+};
 
 const map = {
     a: '🇦',
@@ -89,4 +89,4 @@ const map = {
     '*': '*⃣',
     '!': '❗',
     '?': '❓',
-}
+};

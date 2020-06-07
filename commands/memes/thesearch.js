@@ -29,7 +29,7 @@ module.exports = class TheSearchCommand extends Command {
             return message.channel.send('Please provide some text!');
         }
 
-        await message.channel.startTyping()
+        await message.channel.startTyping();
 
         const text = message.content.split(/\s+/g).slice(1).join(" ");
         const thesearch = await Jimp.read('assets/images/thesearch.png');
@@ -47,10 +47,10 @@ module.exports = class TheSearchCommand extends Command {
                     name: 'thesearch.png',
                     attachment: buffer
                 }]
-            })
+            });
             await message.channel.stopTyping()
-        })
+        });
 
         return null;
     }
-}
+};

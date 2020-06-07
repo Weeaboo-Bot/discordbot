@@ -35,4 +35,4 @@ module.exports = class DogCommand extends Command {
                 message.client.channels.cache.get(error_log).send({embed: errorMessage(err,ErrorEnum.API,message.command.name)});
             });
     }
-}
+};

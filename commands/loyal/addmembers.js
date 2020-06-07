@@ -33,7 +33,7 @@ module.exports = class AddMembersCommand extends Command{
 								discriminator: member.user.discriminator,
 								tag: member.user.tag,
 								id: member.user.id
-							}
+							};
 							db.collection('members').doc(memberData.id).set(memberData);
 							let pointsData = {
 								discriminator:member.user.discriminator,

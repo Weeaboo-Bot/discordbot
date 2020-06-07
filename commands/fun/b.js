@@ -37,4 +37,4 @@ module.exports = class BCommand extends Command {
         
         return message.channel.send(this.B(text));
 	}
-}
+};

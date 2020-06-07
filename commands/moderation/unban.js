@@ -25,7 +25,7 @@ module.exports = class UnBanCommand extends Command {
                     key: 'content',
                     prompt: 'Please provide me the reason for the unban!',
                     type: 'string',
-                    default: 'none',                    
+                    default: 'none',
                     validate: reason => {
                         if (reason.length < 140) return true;
                         return 'Reason must be under 140 characters.';
@@ -40,7 +40,7 @@ module.exports = class UnBanCommand extends Command {
 
 
         const bans = await message.guild.fetchBans();
-        if (!bans.has(memberID)) return message.channel.send('This user is not banned in this server!')
+        if (!bans.has(memberID)) return message.channel.send('This user is not banned in this server!');
         const member = bans.get(id).user;
 
         await message.channel.send(`Are you sure you want to unban **${member.tag}** \`(y/n)\`?`);
@@ -55,4 +55,4 @@ module.exports = class UnBanCommand extends Command {
 
         return await message.channel.send(`Successfully unbanned **${member.tag}**! 👋`);
     };
-}
+};

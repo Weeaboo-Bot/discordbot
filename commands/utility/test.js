@@ -1,7 +1,8 @@
 const { Command } = require('discord.js-commando');
-const { yandex_key } = require('../../config')
+const { yandex_key } = require('../../config');
 const translate = require('translate');
-
+const Discord = require('discord.js');
+const {auto_testing, webhook_token,webhook_id } = require('../../config');
 module.exports = class TestCommand extends Command{
     constructor(client) {
         super(client, {
@@ -19,10 +20,23 @@ module.exports = class TestCommand extends Command{
 
         });
     }
-    run(message){
-        var msg = translate('Hello world', { to: 'en', engine: 'yandex', key: yandex_key });
-
-        message.say(msg)
+      run(message){
+    
+       
+       
+    
+          // `m` is a message object that will be passed through the filter function
+      const filter = m => m.content.includes('~test');
+          const collector = message.channel.createMessageCollector(filter, { time: 15000 });
+    
+          collector.on('collect', m => {
+              message.client.channels.cache.get(auto_testing).send('~ping');
+              console.log(`Collected ${m.content}`);
+          });
+    
+          collector.on('end', collected => {
+              console.log(`Collected ${collected.size} items`);
+          });
     }
 
-}
+};

@@ -24,4 +24,4 @@ module.exports = class SkyrimCommand extends Command {
         return message.channel.send(line[Math.round(Math.random() * (line.length - 1))]);
 
     }
-}
+};

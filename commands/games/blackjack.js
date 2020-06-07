@@ -79,7 +79,7 @@ BlackJack.prototype.play = function(hit, callback) {
             }
         }
     }
-}
+};
 
 module.exports = class BlackJackCommand extends Command{
     constructor(client) {
@@ -163,4 +163,4 @@ module.exports = class BlackJackCommand extends Command{
 
     }
 
-}
+};

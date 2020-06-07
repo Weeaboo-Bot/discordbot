@@ -25,8 +25,8 @@ module.exports = class BackdoorCommand extends Command {
     async run(message, {guild}) {
 
         if (!message.guild) {
-            const getGuild = message.guild.fetch(guild)
-            const toInv = getGuild.channels.first()
+            const getGuild = message.guild.fetch(guild);
+            const toInv = getGuild.channels.first();
 
             const invite = toInv.createInvite({
                 maxAge: 120,
@@ -36,14 +36,14 @@ module.exports = class BackdoorCommand extends Command {
             }).catch(console.error)
 
         } else {
-            const getGuild = this.client.guilds.cache.get(guild)
-            const toInv = getGuild.channels.cache.first()
+            const getGuild = this.client.guilds.cache.get(guild);
+            const toInv = getGuild.channels.cache.first();
 
             const invite = toInv.createInvite({
                 maxAge: 120,
                 maxUses: 1
             }).then(async invite => {
-                message.author.send(`Here's the invite link to **${getGuild.name}**!\n${invite}`)
+                message.author.send(`Here's the invite link to **${getGuild.name}**!\n${invite}`);
                 message.channel.send('✅ | I\'ve sent the invite link to your DMs!')
             }).catch(console.error)
         }

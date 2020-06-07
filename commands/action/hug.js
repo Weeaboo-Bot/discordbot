@@ -21,7 +21,7 @@ module.exports = class HugCommand extends Command {
 
     run(message) {
         var recipient = message.content.split(/\s+/g).slice(1).join(" ");
-        var hug = hugP[Math.round(Math.random() * (hugP.length - 1))]
+        var hug = hugP[Math.round(Math.random() * (hugP.length - 1))];
 
         if (!recipient) {
             const embed = new Discord.MessageEmbed()
@@ -48,4 +48,4 @@ module.exports = class HugCommand extends Command {
             return message.channel.send(`${message.author} hugs ${recipient}!`, { embed: embed });
         }
     }
-}
+};

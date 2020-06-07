@@ -1,8 +1,8 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios');
-const {error_log } = require('../../config');
-const {errorMessage} = require('../../functions/logHandler');
+const { error_log} = require('../../config');
+const { errorMessage} = require('../../functions/logHandler');
 const ErrorEnum = require('../../functions/errorTypes');
 
 
@@ -53,4 +53,4 @@ module.exports = class NekoCommand extends Command {
                 })
         }
     }
-}
+};

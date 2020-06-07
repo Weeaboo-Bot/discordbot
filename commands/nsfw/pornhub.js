@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const PH = require('pornhub');
 const {error_log} = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes')
+const ErrorEnum = require('../../functions/errorTypes');
 const errors = require('../../assets/json/errors');
 
 
@@ -60,7 +60,7 @@ module.exports = class PornHubCommand extends Command {
            })
                .catch(function(error){
                    message.client.channels.cache.get(error_log).send({embed: errorMessage(error, ErrorEnum.API, message.command.name)});
-               })
+               });
 
             return null;
 
@@ -68,4 +68,4 @@ module.exports = class PornHubCommand extends Command {
             return message.channel.send(`No results found for **${search}**`)
         }
     }
-}
+};

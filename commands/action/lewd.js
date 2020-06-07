@@ -25,4 +25,4 @@ module.exports = class LewdCommand extends Command {
             .setImage(lewdP[Math.round(Math.random() * (lewdP.length - 1))]);
         return message.channel.send('L-Lewd!', { embed: embed });
     }
-}
+};

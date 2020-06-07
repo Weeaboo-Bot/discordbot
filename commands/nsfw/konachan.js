@@ -51,4 +51,4 @@ module.exports = class KonachanCommand extends Command {
                 }
             })
     }
-}
+};

@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-const moment = require('moment')
+const moment = require('moment');
 
 module.exports = class GarfieldCommand extends Command {
     constructor(client) {
@@ -30,11 +30,11 @@ module.exports = class GarfieldCommand extends Command {
             .setColor('#E16935')
             .setFooter(`Published in ${dateYear}`)
             .setDescription(`[Image URL](https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/${dateYear}/${dateFormat}.gif)`)
-            .setImage(`https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/${dateYear}/${dateFormat}.gif`)
+            .setImage(`https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/${dateYear}/${dateFormat}.gif`);
         message.channel.send({ embed })
 
     }
-}
+};
 
 function random(min, max) {
     return Math.floor(Math.random() * (max - min) + min);

@@ -45,4 +45,4 @@ module.exports = class WastedCommand extends Command {
             return message.channel.send(`${recipient} just got wasted!`, { embed: embed });
         }
     }
-}
+};

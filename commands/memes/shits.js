@@ -29,7 +29,7 @@ module.exports = class ShitsCommand extends Command {
             return message.channel.send('Please provide some text!');
         }
 
-        await message.channel.startTyping()
+        await message.channel.startTyping();
 
         const text = message.content.split(/\s+/g).slice(1).join(" ");
         const shits = await Jimp.read('assets/images/SHITS.png');
@@ -47,11 +47,11 @@ module.exports = class ShitsCommand extends Command {
                     name: 'shits.png',
                     attachment: buffer
                 }]
-            })
+            });
 
             await message.channel.stopTyping()
-        })
+        });
 
         return null;
     }
-}
+};

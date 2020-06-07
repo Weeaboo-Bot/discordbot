@@ -48,4 +48,4 @@ module.exports = class CommandTemplate extends Command{
     }
 
 
-}
+};

@@ -28,7 +28,7 @@ module.exports = class AnimeCommand extends Command {
 
             kitsu.searchAnime(aq().quoteanime).then(result => {
 
-                var anime = result[0]
+                var anime = result[0];
 
                 var embed = new Discord.MessageEmbed()
                     .setColor('#FF9D6E')
@@ -49,7 +49,7 @@ module.exports = class AnimeCommand extends Command {
                     return message.channel.send(`No results found for **${search}**!`);
                 }
 
-                var anime = result[0]
+                var anime = result[0];
 
                 var embed = new Discord.MessageEmbed()
                     .setColor('#FF9D6E')
@@ -61,9 +61,9 @@ module.exports = class AnimeCommand extends Command {
                     .setImage(anime.posterImage.original);
                 return message.channel.send({ embed });
             }).catch(err => {
-                console.log(err)
+                console.log(err);
                 return message.channel.send(`No results found for **${search}**!`);
             });
         }
     }
-}
+};

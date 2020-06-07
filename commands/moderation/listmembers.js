@@ -24,9 +24,9 @@ module.exports = class ListMembersCommand extends Command{
 
         membersList.forEach(member => {
             var index = 0;
-            var roleList = []
+            var roleList = [];
             while(index < member.roles.cache.size) {
-                roleList.push(member.roles.cache.toJSON()[index].name)
+                roleList.push(member.roles.cache.toJSON()[index].name);
                 index++;
             }
 
@@ -59,4 +59,4 @@ module.exports = class ListMembersCommand extends Command{
     }
 
 
-}
+};

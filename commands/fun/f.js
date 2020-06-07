@@ -46,4 +46,4 @@ module.exports = class FCommand extends Command {
             return null;
         }
     }
-}
+};

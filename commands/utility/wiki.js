@@ -57,4 +57,4 @@ module.exports = class WikiCommand extends Command {
              return message.channel.send(`First search result of \`${query}\` on Wikipedia:`, { embed });
         }
     }
-}
+};

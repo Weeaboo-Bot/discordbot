@@ -50,4 +50,4 @@ module.exports = class SlapCommand extends Command {
             return message.channel.send(`${message.author} slaps ${recipient}!`, { embed: embed });
         }
     }
-}
+};

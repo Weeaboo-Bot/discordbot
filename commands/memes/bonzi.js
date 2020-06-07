@@ -27,12 +27,12 @@ module.exports = class BonziCommand extends Command {
     }
 
     async run(message, args) {
-        var argu = args.argument
+        var argu = args.argument;
         if (argu = 'N////A') {
             return message.channel.send('Please provide something for Bonzi to say!');
         }
 
-        await message.channel.startTyping()
+        await message.channel.startTyping();
 
         var text = message.content.split(/\s+/g).slice(1).join(" ");
         var bonzi = await Jimp.read('assets/images/bonzi.png');
@@ -50,10 +50,10 @@ module.exports = class BonziCommand extends Command {
                     name: 'bonzi.png',
                     attachment: buffer
                 }]
-            })
+            });
             await message.channel.stopTyping()
-        })
+        });
 
         return null;
     }
-}
+};

@@ -25,4 +25,4 @@ module.exports = class DisgustCommand extends Command {
             .setImage(disgustP[Math.round(Math.random() * (disgustP.length - 1))]);
         return message.channel.send({ embed });
     }
-}
+};

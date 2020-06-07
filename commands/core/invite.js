@@ -28,7 +28,7 @@ module.exports = class InviteCommand extends Command {
             'B-Baka! u///u I-I\'s not like I wanted to be in your server...',
             'Kyaaa~~ A server? Of course!',
             'P-Please invite me.. to your server...'
-        ]
+        ];
 
         var phrase = phrases[Math.round(Math.random() * (phrases.length - 1))];
 
@@ -38,4 +38,4 @@ module.exports = class InviteCommand extends Command {
 
         return message.channel.send({ embed });
     }
-}
+};

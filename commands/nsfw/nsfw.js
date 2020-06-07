@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log} = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes')
+const ErrorEnum = require('../../functions/errorTypes');
 const { disgustP } = require('../../assets/json/actions.json');
 const {SubsToSearch} = require('./subs');
 
@@ -48,7 +48,7 @@ module.exports = class NSFWCommand extends Command{
 
 
         if(Object.keys(SubsToSearch).includes(subList)) {
-            var subIndex = getRndInteger(0, SubsToSearch[subList].length)
+            var subIndex = getRndInteger(0, SubsToSearch[subList].length);
 
             await axios.get(`https://www.reddit.com/r/${SubsToSearch[subList][subIndex]}.json`)
                 .then(function (res) {
@@ -86,4 +86,4 @@ module.exports = class NSFWCommand extends Command{
     }
 
 
-}
+};

@@ -26,4 +26,4 @@ module.exports = class PickUpCommand extends Command {
             .setColor('#C597B8');
         return message.channel.send({ embed });
     }
-}
+};

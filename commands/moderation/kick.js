@@ -25,7 +25,7 @@ module.exports = class KickCommand extends Command {
                     key: 'reason',
                     prompt: 'Please provide me a reason to kick this member!',
                     type: 'string',
-                    default: 'none',                    
+                    default: 'none',
                     validate: reason => {
                         if (reason.length < 140) return true;
                         return 'Reason must be under 140 characters!';
@@ -50,7 +50,7 @@ module.exports = class KickCommand extends Command {
         });
         
         if (!msgs.size || !['y', 'yes'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!');
-        if (['n', 'no'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!')
+        if (['n', 'no'].includes(msgs.first().content.toLowerCase())) return message.channel.send('Cancelled command!');
 
         try {
             await member.send(`You were kicked from **${message.guild.name}** by **${message.author.tag}**!\n\**Reason:** ${reason}`);
@@ -62,4 +62,4 @@ module.exports = class KickCommand extends Command {
         return message.channel.send(`**${message.author.username}**, successfully kicked **${member.user.tag}**! 👋`);
 
     }
-}
+};

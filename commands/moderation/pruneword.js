@@ -45,16 +45,16 @@ module.exports = class PruneWordCommand extends Command {
                     const messages = await message.channel.messages.fetch({
                         limit: Math.min(count, 100),
                         before: message.id
-                    })
-                    const flushable = messages.filter(m => m.content.toLowerCase().includes(inc))
+                    });
+                    const flushable = messages.filter(m => m.content.toLowerCase().includes(inc));
                     if (flushable.size == 0) return message.channel.send(`🍇 | **${message.author.username}**, there were no messages containing the word **${inc}** in the last ${count} messages!`);
-                    await message.channel.bulkDelete(flushable)
+                    await message.channel.bulkDelete(flushable);
 
                     const m = await message.channel.send(`🍇 | **${message.author.username}**, successfully pruned ${flushable.size} ${flushable.size == 1 ? `message containing the word **${inc}**!` : `messages containing the word **${inc}**!`}`);
 
             return null;
         } catch (err) {
-            console.log(err)
+            console.log(err);
             return message.channel.send('❎ | These messages are too old to be deleted! I can only delete messages within two weeks!');
 
         }

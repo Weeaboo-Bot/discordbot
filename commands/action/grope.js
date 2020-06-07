@@ -48,4 +48,4 @@ module.exports = class GropeCommand extends Command {
             return message.channel.send(`${message.author} has started... groping ${recipient}?`, { embed: embed });
         }
     }
-}
+};

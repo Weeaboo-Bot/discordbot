@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-const kaomojis = require('../../assets/json/kaomoji')
+const kaomojis = require('../../assets/json/kaomoji');
 
 module.exports = class KaomojiCommand extends Command {
     constructor(client) {
@@ -34,4 +34,4 @@ module.exports = class KaomojiCommand extends Command {
         var face = kaomojis[Math.round(Math.random() * (face.length - 1))];
         return message.channel.send(face);
     }
-}
+};

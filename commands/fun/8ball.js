@@ -21,7 +21,7 @@ const answer = [
     "Very doubtful",
     "B-Baka! No!",
     "Yes daddy..."
-]
+];
 
 
 module.exports = class EightBallCommand extends Command {
@@ -55,4 +55,4 @@ module.exports = class EightBallCommand extends Command {
         return message.channel.send({ embed });
 
     }
-}
+};

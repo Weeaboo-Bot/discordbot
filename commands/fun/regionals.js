@@ -26,7 +26,7 @@ module.exports = class RegionalsCommand extends Command {
     }
 
     async run(message, args) {
-        var output = ''
+        var output = '';
         for (let c of args.text) {
             if (c in map) {
                 c = map[c] + '\u200b'
@@ -36,7 +36,7 @@ module.exports = class RegionalsCommand extends Command {
 
         return message.channel.send('\u200b' + output)
     }
-}
+};
 
 const map = {
     a: '🇦',
@@ -79,4 +79,4 @@ const map = {
     '*': '*⃣',
     '!': '❗',
     '?': '❓',
-}
+};

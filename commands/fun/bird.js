@@ -47,4 +47,4 @@ module.exports = class BirdCommand extends Command {
 
 
     }
-}
+};
