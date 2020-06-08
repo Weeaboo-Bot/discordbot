@@ -64,6 +64,8 @@ module.exports = class GitHubCommand extends Command {
 		graphlClient.request(query, variables).then((data) => console.log(data));
 
 
+		
+
 	}
 
 

@@ -30,6 +30,7 @@ module.exports = {
   audit_log: process.env.audit_log,
   auto_testing_link: process.env.auto_testing_link,
   auto_testing_user: process.env.auto_testing_user,
+  auto_testing_link_login: process.env.auto_testing_link_login,
   auto_testing_password: process.env.auto_testing_password,
   auto_testing: process.env.auto_testing,
   webhook_id: process.env.webhook_id,
