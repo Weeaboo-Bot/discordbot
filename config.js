@@ -34,7 +34,8 @@ module.exports = {
   auto_testing_password: process.env.auto_testing_password,
   auto_testing: process.env.auto_testing,
   webhook_id: process.env.webhook_id,
-  webhook_token: process.env.webhook_token
+  webhook_token: process.env.webhook_token,
+  test_user_id: process.env.test_user_id
 
 
 };

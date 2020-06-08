@@ -6,7 +6,7 @@ const fs = require('fs');
 const { Structures } = require('discord.js');
 const moment = require('moment');
 
-const {errorMessage,auditMessage} = require('./functions/logHandler');
+const { errorMessage, auditMessage } = require('./functions/logHandler');
 const ErrorEnum = require('./functions/errorTypes');
 const { token, prefix, discord_owner_id, guild_log, dm_log, status_log, audit_log } = require('./config');
 const fetch = require('node-fetch');
@@ -133,12 +133,10 @@ setInterval(function() {
 }, 500000);
 
 
-client.on('ready',  () => {
-	
-	
-	
-	
-	client.user.setActivity('TESTING',{
+client.on('ready', () => {
+
+
+	client.user.setActivity('TESTING', {
 		type: 'PLAYING',
 		name: 'MEMES',
 	}).then(res => {}).catch(err => {});
@@ -260,49 +258,106 @@ client.on('messageReactionAdd', async (messageReaction, user) => {
 });
 
 
-
-
-//AUDIT SECTION
-client.on('messageDelete', async message=> {
-	// ignore direct messages
-	if (!message.guild) return;
-	const fetchedLogs = await message.guild.fetchAuditLogs({
-		limit: 1,
-		type: 'MESSAGE_DELETE',
-	});
-	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
-	const deletionLog = fetchedLogs.entries.first();
-	
-	// Let's perform a sanity check here and make sure we got *something*
-	if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
-	
-	// We now grab the user object of the person who deleted the message
-	// Let us also grab the target of this action to double check things
-	const { executor, target } = deletionLog;
-	
-	
-	// And now we can update our output with a bit more information
-	// We will also run a check to make sure the log we got was for the same author's message
-	if (target.id === message.author.id) {
-		
-		console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
-		return message.client.channels.cache.get(audit_log).send({embed: auditMessage(deletionLog)});
-	}	else {
-		console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
-		return message.client.channels.cache.get(audit_log).send({embed: auditMessage(deletionLog)});
-	}
-})
-
-
+// //AUDIT SECTION
+//
+// /**
+//  * Message Delete Audit Log
+//  */
+// client.on('messageDelete', async message=> {
+// 	// ignore direct messages
+// 	if (!message.guild) return;
+// 	const fetchedLogs = await message.guild.fetchAuditLogs({
+// 		limit: 1,
+// 		type: 'MESSAGE_DELETE',
+// 	});
+// 	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
+// 	const deletionLog = fetchedLogs.entries.first();
+//
+// 	// Let's perform a sanity check here and make sure we got *something*
+// 	if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
+//
+// 	// We now grab the user object of the person who deleted the message
+// 	// Let us also grab the target of this action to double check things
+// 	const { executor, target } = deletionLog;
+//
+//
+// 	// And now we can update our output with a bit more information
+// 	// We will also run a check to make sure the log we got was for the same author's message
+// 	if (target.id === message.author.id) {
+//
+// 		console.log(`A message by ${message.author.tag} was deleted by ${executor.tag}.`);
+// 		return message.client.channels.cache.get(audit_log).send({embed: auditMessage(deletionLog)});
+// 	}	else {
+// 		console.log(`A message by ${message.author.tag} was deleted, but we don't know by who.`);
+// 		return message.client.channels.cache.get(audit_log).send({embed: auditMessage(deletionLog)});
+// 	}
+// });
+//
+// /**
+//  * Kick User Audit Log
+//  */
+// client.on('guildMemberRemove', async member => {
+// 	const fetchedLogs = await member.guild.fetchAuditLogs({
+// 		limit: 1,
+// 		type: 'MEMBER_KICK',
+// 	});
+// 	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
+// 	const kickLog = fetchedLogs.entries.first();
+//
+// 	// Let's perform a sanity check here and make sure we got *something*
+// 	if (!kickLog) return console.log(`${member.user.tag} left the guild, most likely of their own will.`);
+//
+// 	// We now grab the user object of the person who kicked our member
+// 	// Let us also grab the target of this action to double check things
+// 	const { executor, target } = kickLog;
+//
+// 	// And now we can update our output with a bit more information
+// 	// We will also run a check to make sure the log we got was for the same kicked member
+// 	if (target.id === member.id) {
+// 		console.log(`${member.user.tag} left the guild; kicked by ${executor.tag}?`);
+// 		return client.channels.cache.get(audit_log).send({embed: auditMessage(kickLog)});
+// 	} else {
+// 		console.log(`${member.user.tag} left the guild, audit log fetch was inconclusive.`);
+// 		return client.channels.cache.get(audit_log).send({embed: auditMessage(kickLog)});
+// 	}
+// });
+//
+//
+// /**
+//  * User Ban Add Audit Long
+//  */
+// client.on('guildBanAdd', async (guild, user) => {
+// 	const fetchedLogs = await guild.fetchAuditLogs({
+// 		limit: 1,
+// 		type: 'MEMBER_BAN_ADD',
+// 	});
+// 	// Since we only have 1 audit log entry in this collection, we can simply grab the first one
+// 	const banLog = fetchedLogs.entries.first();
+//
+// 	// Let's perform a sanity check here and make sure we got *something*
+// 	if (!banLog) return console.log(`${user.tag} was banned from ${guild.name} but no audit log could be found.`);
+//
+// 	// We now grab the user object of the person who banned the user
+// 	// Let us also grab the target of this action to double check things
+// 	const { executor, target } = banLog;
+//
+// 	// And now we can update our output with a bit more information
+// 	// We will also run a check to make sure the log we got was for the same kicked member
+// 	if (target.id === user.id) {
+// 		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, wielded by the mighty ${executor.tag}`);
+// 		return client.channels.cache.get(audit_log).send({embed: auditMessage(banLog)});
+// 	} else {
+// 		console.log(`${user.tag} got hit with the swift hammer of justice in the guild ${guild.name}, audit log fetch was inconclusive.`);
+// 		return client.channels.cache.get(audit_log).send({embed: auditMessage(banLog)});
+// 	}
+// });
 
 
 // basic message replies
 client.on('message', async message => {
 
 	if(message.author.bot) return undefined;
-	
-	
-	
+
 
 	if(message.channel.type == 'dm') {
 		if(message.content.startsWith('~')) return;
@@ -343,5 +398,4 @@ process.on('unhandledRejection', err => {
 
 
 client.login(token);
-
 
