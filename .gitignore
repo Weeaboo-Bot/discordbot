@@ -126,3 +126,4 @@ package-lock.json
 .vercel
 
 test/
+/test/
