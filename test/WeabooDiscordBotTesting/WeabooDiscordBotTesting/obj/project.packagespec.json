@@ -1,0 +1,167 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "A:\\ProgrammingSideProjects\\discordbot\\test\\WeabooDiscordBotTesting\\WeabooDiscordBotTesting\\WeabooDiscordBotTesting.csproj",
+    "projectName": "WeabooDiscordBotTesting",
+    "projectPath": "A:\\ProgrammingSideProjects\\discordbot\\test\\WeabooDiscordBotTesting\\WeabooDiscordBotTesting\\WeabooDiscordBotTesting.csproj",
+    "outputPath": "A:\\ProgrammingSideProjects\\discordbot\\test\\WeabooDiscordBotTesting\\WeabooDiscordBotTesting\\obj\\",
+    "projectStyle": "PackageReference",
+    "crossTargeting": true,
+    "originalTargetFrameworks": [
+      "netcoreapp3.1",
+      "netcoreapp5.0"
+    ],
+    "sources": {
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "projectReferences": {}
+      },
+      "netcoreapp5.0": {
+        "projectReferences": {}
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp3.1": {
+      "dependencies": {
+        "DotNetEnv": {
+          "target": "Package",
+          "version": "[1.4.0, )"
+        },
+        "FluentAssertions": {
+          "target": "Package",
+          "version": "[5.10.3, )"
+        },
+        "Microsoft.NET.Test.Sdk": {
+          "target": "Package",
+          "version": "[16.6.1, )"
+        },
+        "NUnit": {
+          "target": "Package",
+          "version": "[3.12.0, )"
+        },
+        "NUnit3TestAdapter": {
+          "target": "Package",
+          "version": "[3.17.0-beta.1, )"
+        },
+        "Selenium.WebDriver": {
+          "target": "Package",
+          "version": "[4.0.0-alpha05, )"
+        },
+        "Selenium.WebDriver.ChromeDriver": {
+          "target": "Package",
+          "version": "[83.0.4103.3910-beta, )"
+        },
+        "Selenium.WebDriver.MSEdgeDriver": {
+          "target": "Package",
+          "version": "[83.0.478.37, )"
+        },
+        "SpecFlow": {
+          "target": "Package",
+          "version": "[3.3.22-beta, )"
+        },
+        "SpecFlow.NUnit": {
+          "target": "Package",
+          "version": "[3.3.22-beta, )"
+        },
+        "SpecFlow.Tools.MsBuild.Generation": {
+          "target": "Package",
+          "version": "[3.3.22-beta, )"
+        }
+      },
+      "imports": [
+        "net461",
+        "net462",
+        "net47",
+        "net471",
+        "net472",
+        "net48"
+      ],
+      "assetTargetFallback": true,
+      "warn": true,
+      "downloadDependencies": [
+        {
+          "name": "Microsoft.NETCore.App.Host.win-x64",
+          "version": "[3.1.2, 3.1.2]"
+        }
+      ],
+      "frameworkReferences": {
+        "Microsoft.NETCore.App": {
+          "privateAssets": "all"
+        }
+      },
+      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100-preview.4.20258.7\\RuntimeIdentifierGraph.json"
+    },
+    "netcoreapp5.0": {
+      "dependencies": {
+        "DotNetEnv": {
+          "target": "Package",
+          "version": "[1.4.0, )"
+        },
+        "FluentAssertions": {
+          "target": "Package",
+          "version": "[5.10.3, )"
+        },
+        "Microsoft.NET.Test.Sdk": {
+          "target": "Package",
+          "version": "[16.6.1, )"
+        },
+        "NUnit": {
+          "target": "Package",
+          "version": "[3.12.0, )"
+        },
+        "NUnit3TestAdapter": {
+          "target": "Package",
+          "version": "[3.17.0-beta.1, )"
+        },
+        "Selenium.WebDriver": {
+          "target": "Package",
+          "version": "[4.0.0-alpha05, )"
+        },
+        "Selenium.WebDriver.ChromeDriver": {
+          "target": "Package",
+          "version": "[83.0.4103.3910-beta, )"
+        },
+        "Selenium.WebDriver.MSEdgeDriver": {
+          "target": "Package",
+          "version": "[83.0.478.37, )"
+        },
+        "SpecFlow": {
+          "target": "Package",
+          "version": "[3.3.22-beta, )"
+        },
+        "SpecFlow.NUnit": {
+          "target": "Package",
+          "version": "[3.3.22-beta, )"
+        },
+        "SpecFlow.Tools.MsBuild.Generation": {
+          "target": "Package",
+          "version": "[3.3.22-beta, )"
+        }
+      },
+      "imports": [
+        "net461",
+        "net462",
+        "net47",
+        "net471",
+        "net472",
+        "net48"
+      ],
+      "assetTargetFallback": true,
+      "warn": true,
+      "frameworkReferences": {
+        "Microsoft.NETCore.App": {
+          "privateAssets": "all"
+        }
+      },
+      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100-preview.4.20258.7\\RuntimeIdentifierGraph.json"
+    }
+  }
+}

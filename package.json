@@ -32,7 +32,6 @@
     "discord.js": "^12.2.0",
     "discord.js-commando": "github:discordjs/Commando",
     "dotenv": "^8.2.0",
-    "electron": "^9.0.2",
     "erlpack": "github:hammerandchisel/erlpack",
     "escape-string-regexp": "^1.0.5",
     "eslint": "^7.2.0",
@@ -76,8 +75,10 @@
     "zalgolize": "^1.2.4"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
+    "@babel/register": "^7.10.1",
     "babel": "^6.23.0"
   }
 }
