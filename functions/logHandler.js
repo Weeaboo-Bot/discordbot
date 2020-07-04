@@ -35,9 +35,8 @@ function auditMessage(auditEntry){
 			.addField('AUDIT ACTION',auditEntry.action)
 			.addField('AUDIT TYPE', auditEntry.actionType)
 			.setColor('GREEN')
-			.setDescription(auditEntry)
 			.addField('AUDIT SENDER',auditEntry.executor)
-			.addField('AUDIT REASON', `${auditEntry.reason}`, true)
+			.addField('AUDIT REASON',auditEntry.reason, true)
 			.setTimestamp();
 }
 
