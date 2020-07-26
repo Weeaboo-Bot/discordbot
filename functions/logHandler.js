@@ -26,7 +26,7 @@ function botMessage() {
 
 }
 
-function auditMessage(auditEntry){
+function auditMessage(auditEntry) {
 	return new Discord.MessageEmbed()
 		.setTitle('AUDIT EVENT')
 		.setColor('Color')
@@ -43,5 +43,5 @@ module.exports = {
 	supportMessage,
 	dmMessage,
 	botMessage,
-	auditMessage
+	auditMessage,
 };
