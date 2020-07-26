@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const { error_log } = require('../config');
 
 function errorMessage(error, error_type, error_command) {
-
 	return new Discord.MessageEmbed()
 		.setTitle('❎ Command: ' + error_command + '\nError Type: ' + error_type)
 		.setColor('RED')
@@ -31,13 +30,13 @@ function botMessage() {
 
 function auditMessage(auditEntry){
 	return new Discord.MessageEmbed()
-			.setTitle('AUDIT EVENT')
-			.addField('AUDIT ACTION',auditEntry.action)
-			.addField('AUDIT TYPE', auditEntry.actionType)
-			.setColor('GREEN')
-			.addField('AUDIT SENDER',auditEntry.executor)
-			.addField('AUDIT REASON',auditEntry.reason, true)
-			.setTimestamp();
+		.setTitle('AUDIT EVENT')
+		.addField('AUDIT ACTION',auditEntry.action)
+		.addField('AUDIT TYPE', auditEntry.actionType)
+		.setColor('GREEN')
+		.addField('AUDIT SENDER',auditEntry.executor)
+		.addField('AUDIT REASON',auditEntry.reason, true)
+		.setTimestamp();
 }
 
 module.exports = {
@@ -49,4 +48,3 @@ module.exports = {
 	auditMessage
 
 };
-
