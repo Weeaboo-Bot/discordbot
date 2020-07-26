@@ -31,9 +31,9 @@ function botMessage() {
 function auditMessage(auditEntry){
 	return new Discord.MessageEmbed()
 		.setTitle('AUDIT EVENT')
+		.setColor('Color')
 		.addField('AUDIT ACTION',auditEntry.action)
-		.addField('AUDIT TYPE', auditEntry.actionType)
-		.setColor('GREEN')
+		.addField('AUDIT TYPE',auditEntry.actionType)
 		.addField('AUDIT SENDER',auditEntry.executor)
 		.addField('AUDIT REASON',auditEntry.reason, true)
 		.setTimestamp();
