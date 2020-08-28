@@ -397,5 +397,5 @@ process.on('unhandledRejection', err => {
 });
 
 
-client.login('NzE5MjcxMTM0MzQzODU2MjQ5.Xt0_cQ.trOsvpj8fJB2pers63mhtrb4rdA');
+client.login(token);
 
