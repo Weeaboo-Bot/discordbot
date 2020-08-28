@@ -136,12 +136,12 @@ setInterval(function() {
 client.on('ready', () => {
 
 
-	client.user.setActivity('TESTING', {
+	client.user.setActivity('MEMERS', {
 		type: 'PLAYING',
 		name: 'MEMES',
 	}).then(res => {}).catch(err => {});
 
-	const channel = client.channels.cache.get(status_log);
+	const channel = client.channels.cache.get('715785767149895703');
 	const embed = new Discord.MessageEmbed()
 		.setAuthor('Weaboo has (re)started!', client.user.displayAvatarURL({ format: 'png' }))
 		.setColor('#727293')
@@ -397,5 +397,5 @@ process.on('unhandledRejection', err => {
 });
 
 
-client.login(token);
+client.login('NzE5MjcxMTM0MzQzODU2MjQ5.Xt0_cQ.trOsvpj8fJB2pers63mhtrb4rdA');
 
