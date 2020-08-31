@@ -137,7 +137,7 @@ client.on('ready', () => {
 
 
 	client.user.setActivity('MEMERS', {
-		type: 'PLAYING',
+		type: 'UNKOWN',
 		name: 'MEMES',
 	}).then(res => {}).catch(err => {});
 
