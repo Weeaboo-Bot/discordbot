@@ -10,28 +10,7 @@ const { errorMessage, auditMessage } = require('./functions/logHandler');
 const ErrorEnum = require('./functions/errorTypes');
 const { token, prefix, discord_owner_id, guild_log, dm_log, status_log, audit_log } = require('./config');
 const fetch = require('node-fetch');
-// Firebase App (the core Firebase SDK) is always required and
-// must be listed before other Firebase SDKs
-const firebase = require('firebase/app');
 
-// Add the Firebase products that you want to use
-require('firebase/auth');
-require('firebase/firestore');
-
-// TODO: Replace the following with your app's Firebase project configuration
-const firebaseConfig = {
-	apiKey: 'AIzaSyAZRhm4sxmNqlgNGxGiRGgT2Iy0u0y_dL0',
-	authDomain: 'weaboo-bot-b5f7a.firebaseapp.com',
-	databaseURL: 'https://weaboo-bot-b5f7a.firebaseio.com',
-	projectId: 'weaboo-bot-b5f7a',
-	storageBucket: 'weaboo-bot-b5f7a.appspot.com',
-	messagingSenderId: '740571758465',
-	appId: '1:740571758465:web:5a9aa0592de50622df3280',
-	measurementId: 'G-V3Y6073RZH',
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
 module.exports = { firebase };
 

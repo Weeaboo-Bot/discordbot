@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/aa9c8f02-deaf-47cd-b01a-c8a62cae009a/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/weaboobot",
+    "appService.deploySubpath": "."
+}
