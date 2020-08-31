@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 const { google_token, discord_owner_id } = require('../../config');
-const youtube = new Youtube(google_token);
+const youtube = new Youtube('AIzaSyDF5HJMwgNaiXl7XYqHPs9KcqXtYQObJqs');
 
 
 module.exports = class PlayCommand extends Command {
@@ -25,7 +25,7 @@ module.exports = class PlayCommand extends Command {
 					key: 'query',
 					prompt: 'What song or playlist would you like to listen to?',
 					type: 'string',
-					validate: function(query) {
+					validate: function (query) {
 						return query.length > 0 && query.length < 200;
 					},
 				},
@@ -37,24 +37,24 @@ module.exports = class PlayCommand extends Command {
 
 		if (!message.channel.id === '713913929981755493') {
 			message.say('This command is not valid here!');
-			
-			
+
+
 		}
 		const voiceChannel = message.member.voice.channel;
 		if (!voiceChannel) return message.say('Join a channel and try again');
 
 
 		if (
-		// if the user entered a youtube playlist url
+			// if the user entered a youtube playlist url
 			query.match(
 				/^(?!.*\?.*\bv=)https:\/\/www\.youtube\.com\/.*\?.*\blist=.*$/,
 			)
 		) {
-			const playlist = await youtube.getPlaylist(query).catch(function() {
+			const playlist = await youtube.getPlaylist(query).catch(function () {
 				return message.say('Playlist is either private or it does not exist!');
 			});
 			// add 10 as an argument in getVideos() if you choose to limit the queue
-			const videosObj = await playlist.getVideos().catch(function() {
+			const videosObj = await playlist.getVideos().catch(function () {
 				return message.say(
 					'There was a problem getting one of the videos in the playlist!',
 				);
@@ -96,7 +96,7 @@ module.exports = class PlayCommand extends Command {
 				.replace(/(>|<)/gi, '')
 				.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
 			const id = query[2].split(/[^0-9a-z_\-]/i)[0];
-			const video = await youtube.getVideoByID(id).catch(function() {
+			const video = await youtube.getVideoByID(id).catch(function () {
 				return message.say(
 					'There was a problem getting the video you provided!',
 				);
@@ -120,7 +120,7 @@ module.exports = class PlayCommand extends Command {
 			);
 			if (
 				message.guild.musicData.isPlaying == false ||
-        typeof message.guild.musicData.isPlaying == 'undefined'
+				typeof message.guild.musicData.isPlaying == 'undefined'
 			) {
 				message.guild.musicData.isPlaying = true;
 				return PlayCommand.playSong(message.guild.musicData.queue, message);
@@ -131,7 +131,7 @@ module.exports = class PlayCommand extends Command {
 		}
 
 		// if user provided a song/video name
-		const videos = await youtube.searchVideos(query, 5).catch(function() {
+		const videos = await youtube.searchVideos(query, 5).catch(function () {
 			return message.say(
 				'There was a problem searching the video you requested :(',
 			);
@@ -158,7 +158,7 @@ module.exports = class PlayCommand extends Command {
 		const songEmbed = await message.channel.send({ embed });
 		message.channel
 			.awaitMessages(
-				function(msg) {
+				function (msg) {
 					return (msg.content > 0 && msg.content < 6) || msg.content === 'exit';
 				},
 				{
@@ -167,12 +167,12 @@ module.exports = class PlayCommand extends Command {
 					errors: ['time'],
 				},
 			)
-			.then(function(response) {
+			.then(function (response) {
 				const videoIndex = parseInt(response.first().content);
 				if (response.first().content === 'exit') return songEmbed.delete();
 				youtube
 					.getVideoByID(videos[videoIndex - 1].id)
-					.then(function(video) {
+					.then(function (video) {
 						// // can be uncommented if you don't want the bot to play live streams
 						// if (video.raw.snippet.liveBroadcastContent === 'live') {
 						//   songEmbed.delete();
@@ -209,7 +209,7 @@ module.exports = class PlayCommand extends Command {
 							return message.say(`${video.title} added to queue`);
 						}
 					})
-					.catch(function() {
+					.catch(function () {
 						if (songEmbed) {
 							songEmbed.delete();
 						}
@@ -218,7 +218,7 @@ module.exports = class PlayCommand extends Command {
 						);
 					});
 			})
-			.catch(function() {
+			.catch(function () {
 				if (songEmbed) {
 					songEmbed.delete();
 				}
@@ -232,7 +232,7 @@ module.exports = class PlayCommand extends Command {
 		const classThis = this; // use classThis instead of 'this' because of lexical scope below
 		queue[0].voiceChannel
 			.join()
-			.then(function(connection) {
+			.then(function (connection) {
 				const dispatcher = connection
 					.play(
 						ytdl(queue[0].url, {
@@ -240,7 +240,7 @@ module.exports = class PlayCommand extends Command {
 							highWaterMark: 1024 * 1024 * 10,
 						}),
 					)
-					.on('start', function() {
+					.on('start', function () {
 						message.guild.musicData.songDispatcher = dispatcher;
 						dispatcher.setVolume(message.guild.musicData.volume);
 						const videoEmbed = new MessageEmbed()
@@ -253,7 +253,7 @@ module.exports = class PlayCommand extends Command {
 						message.guild.musicData.nowPlaying = queue[0];
 						return queue.shift();
 					})
-					.on('finish', function() {
+					.on('finish', function () {
 						if (queue.length >= 1) {
 							return classThis.playSong(queue, message);
 						}
@@ -266,7 +266,7 @@ module.exports = class PlayCommand extends Command {
 							}
 						}
 					})
-					.on('error', function(e) {
+					.on('error', function (e) {
 						message.say('Cannot play song');
 						console.error(e);
 						message.guild.musicData.queue.length = 0;
@@ -276,7 +276,7 @@ module.exports = class PlayCommand extends Command {
 						return message.guild.me.voice.channel.leave();
 					});
 			})
-			.catch(function(e) {
+			.catch(function (e) {
 				console.error(e);
 				return message.guild.me.voice.channel.leave();
 			});
@@ -295,15 +295,13 @@ module.exports = class PlayCommand extends Command {
 	}
 	// prettier-ignore
 	static formatDuration(durationObj) {
-		const duration = `${durationObj.hours ? (durationObj.hours + ':') : ''}${
-			durationObj.minutes ? durationObj.minutes : '00'
-		}:${
-			(durationObj.seconds < 10)
+		const duration = `${durationObj.hours ? (durationObj.hours + ':') : ''}${durationObj.minutes ? durationObj.minutes : '00'
+			}:${(durationObj.seconds < 10)
 				? ('0' + durationObj.seconds)
 				: (durationObj.seconds
 					? durationObj.seconds
 					: '00')
-		}`;
+			}`;
 		return duration;
 	}
 };

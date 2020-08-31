@@ -12,7 +12,7 @@ const { token, prefix, discord_owner_id, guild_log, dm_log, status_log, audit_lo
 const fetch = require('node-fetch');
 
 
-module.exports = { firebase };
+
 
 // DEBUG
 // const token = process.env.token;
