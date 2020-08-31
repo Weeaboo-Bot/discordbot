@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 20000 ./test/specs/discord/",
     "start": "nodemon index.js"
   },
   "repository": {
