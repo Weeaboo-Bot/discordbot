@@ -36,4 +36,5 @@ module.exports = {
 	webhook_id: process.env.webhook_id,
 	webhook_token: process.env.webhook_token,
 	test_user_id: process.env.test_user_id,
+	test_id: process.env.FOO,
 };
