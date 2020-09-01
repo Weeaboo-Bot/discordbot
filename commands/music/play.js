@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 const { google_token, discord_owner_id } = require('../../config');
-const youtube = new Youtube(google_token);
+const youtube = new Youtube(process.env.google_token);
 
 
 module.exports = class PlayCommand extends Command {
