@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const GoogleImages = require("google-images");
-const {google_api_key,google_cse_key} = require('../../config');
+const {google_token,google_cse_key} = require('../../config');
 
 module.exports = class ImgCommand extends Command {
     constructor(client) {
@@ -22,7 +22,7 @@ module.exports = class ImgCommand extends Command {
     }
 
     async run(message) {
-        const gClient = new GoogleImages(google_cse_key, google_api_key);
+        const gClient = new GoogleImages(google_cse_key, google_token);
 
         let search = message.content.split(/\s+/g).slice(1).join(" ");
 
