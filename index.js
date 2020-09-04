@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable max-nested-callbacks */
-const WeabooClient = require('./models/Client');
+const WeabooClient = require('./Client');
 const path = require('path');
 const { Structures } = require('discord.js');
 const moment = require('moment');

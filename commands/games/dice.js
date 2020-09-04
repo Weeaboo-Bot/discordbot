@@ -1,4 +1,4 @@
-const Command = require('../../structures/Command');
+const Command = require('../../models/Command');
 const { randomRange, formatNumber } = require('../../functions/Util');
 
 module.exports = class DiceCommand extends Command {
