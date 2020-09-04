@@ -1,11 +1,11 @@
 const Command = require('../../models/Command');
 const { randomRange, formatNumber } = require('../../functions/Util');
 
-module.exports = class DiceCommand extends Command {
+module.exports = class RandomDiceCommand extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'roll',
-			aliases: ['dice'],
+			name: 'random-dice',
+			aliases: ['rand-dice'],
 			group: 'games',
 			memberName: 'roll',
 			description: 'Rolls a dice with a minimum/maximum value of your choice.',

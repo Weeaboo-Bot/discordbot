@@ -1,76 +1,49 @@
-const { Command } = require('discord.js-commando');
-const Discord = require('discord.js');
+const Command = require('../../models/Command');
 const moment = require('moment');
-const { fromNow } =  require('discord.js-commando');
-const verificationLevels = ['`None`', 'Low', 'Medium', '(╯°□°）╯︵ ┻━┻', '┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻'];
-const explicitContentFilters = ['`None`', 'Scan messages from those without a role', 'Scan all messages'];
-
+const { MessageEmbed } = require('discord.js');
+const filterLevels = {
+	DISABLED: 'Off',
+	MEMBERS_WITHOUT_ROLES: 'No Role',
+	ALL_MEMBERS: 'Everyone',
+};
+const verificationLevels = {
+	NONE: 'None',
+	LOW: 'Low',
+	MEDIUM: 'Medium',
+	HIGH: 'High',
+	VERY_HIGH: 'Highest',
+};
 
 module.exports = class ServerCommand extends Command {
-    constructor(client) {
-        super(client, {
-            name: 'server',
-            aliases: ['guild', 'serverinfo', 'servers', 'guilds'],
-            group: 'info',
-            memberName: 'server',
-            guildOnly: true,
-            description: 'Shows some in-depth description for your server!',
-            examples: ['!server'],
-            throttling: {
-                usages: 1,
-                duration: 5
-            },
-            args: [{
-                key: 'id',
-                prompt: 'Please provide me a server ID to get the information of!',
-                type: 'string',
-                default: 'this'
-            }]
-        });
-    }
+	constructor(client) {
+		super(client, {
+			name: 'server',
+			aliases: ['guild', 'server-info', 'guild-info'],
+			group: 'info',
+			memberName: 'server',
+			description: 'Responds with detailed information on the server.',
+			guildOnly: true,
+			clientPermissions: ['EMBED_LINKS'],
+		});
+	}
 
-    run(message, {id}) {
-        let guild;
-
-
-
-        if (!this.client.isOwner(message.author)) {
-            guild = message.guild;
-        } else if (id == 'this') {
-            guild = message.guild;
-        } else if (!/^[0-9]+$/.test(id)) {
-            guild = message.guild;
-        } else {
-            try {
-                guild = this.client.guilds.cache.get(id);
-
-                if (guild.channels) {
-                    guild = this.client.guilds.cache.get(id);
-                } else {
-                    guild = message.guild
-                }
-
-            } catch(err) {
-                guild = message.guild;
-            }
-        }
-
-        const textChannels = guild.channels.cache.filter(c => c.type === 'text');
-        const voiceChannels = guild.channels.cache.filter(c => c.type === 'voice');
-
-        var online = guild.members.cache.filter(m => m.user.presence.status === "online").size;
-        var bots = guild.members.cache.filter(m => m.user.bot).size;
-
-        var highestRole = guild.roles.cache.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse()[0];
-
-        const embed = new Discord.MessageEmbed()
-            .setAuthor(guild.name, guild.iconURL())
-            .setColor('#846B86')
-            .setThumbnail(guild.iconURL())
-            .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL())
-            .addField('❯\u2000\Information', `•\u2000\**ID:** \`${guild.id}\`\n\•\u2000\**${guild.owner ? 'Owner' : 'Owner ID'}:** ${guild.owner ? `${guild.owner.user.tag} \`(${guild.owner.id})\`` : guild.ownerID}\n\•\u2000\**Created:** ${moment(guild.createdAt).format('MMMM Do YYYY')} \`(${fromNow(guild.createdAt)})\`\n\•\u2000\**Region:** ${guild.region}\n\•\u2000\**Verification:** ${verificationLevels[guild.verificationLevel]}\n\•\u2000\**Content Filter:** ${explicitContentFilters[guild.explicitContentFilter]}`)
-            .addField('❯\u2000\Quantitative Statistics', `•\u2000\**Channels** [${guild.channels.size}]: ${textChannels.size} text - ${voiceChannels.size} voice\n\•\u2000\**Members** [${guild.memberCount}]: ${online} online - ${bots} bots\n\•\u2000\**Roles** [${guild.roles.size}]: say \`~roles\` to see all roles`, true)
-            .addField('❯\u2000\Miscellaneous', `•\u2000\**Highest Role:** ${highestRole}\n\•\u2000\**Emojis:** ${guild.emojis.size}\n\u2000\u2000\↳ Say *~emojis*!`, true);
-        return message.channel.send({embed});
+	async run(msg) {
+		if (!msg.guild.members.cache.has(msg.guild.ownerID)) await msg.guild.members.fetch(msg.guild.ownerID);
+		const embed = new MessageEmbed()
+			.setColor(0x00AE86)
+			.setThumbnail(msg.guild.iconURL({ format: 'png' }))
+			.addField('❯ Name', msg.guild.name, true)
+			.addField('❯ ID', msg.guild.id, true)
+			.addField('❯ Creation Date', moment.utc(msg.guild.createdAt).format('MM/DD/YYYY h:mm A'), true)
+			.addField('❯ Owner', msg.guild.owner.user.tag, true)
+			.addField('❯ Boost Count', msg.guild.premiumSubscriptionCount || 0, true)
+			.addField('❯ Boost Tier', msg.guild.premiumTier ? `Tier ${msg.guild.premiumTier}` : 'None', true)
+			.addField('❯ Region', msg.guild.region.toUpperCase(), true)
+			.addField('❯ Explicit Filter', filterLevels[msg.guild.explicitContentFilter], true)
+			.addField('❯ Verification Level', verificationLevels[msg.guild.verificationLevel], true)
+			.addField('❯ Members', msg.guild.memberCount, true)
+			.addField('❯ Roles', msg.guild.roles.cache.size, true)
+			.addField('❯ Channels', msg.guild.channels.cache.filter(channel => channel.type !== 'category').size, true);
+		return msg.embed(embed);
 	}
 };

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command')
 const Deck = require('../../models/games/Deck');
 const { stripIndents } = require('common-tags');
 const { verify } = require('../../functions/Util');
