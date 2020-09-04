@@ -6,15 +6,16 @@ const card = require('./Card');
 
 // init the deck of cards
 const init = () => {
-	const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'],
+	const suits = ['H', 'D', 'C', 'S'],
 		card_values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+		suits_names = ['Hearts', 'Diamonds', 'Clubs', 'Spades'],
 		deck = [];
 	let count = 0;
 
 	function initCards() {
 		for (let i = 0; i < suits.length; i++) {
 			for (let x = 0; x < card_values.length; x++) {
-				deck[count] = new card.card(card_values[x], suits[i], x + 1, '/assets/images/deck/' + card_values[x] + suits[i] + '.png');
+				deck[count] = new card.card(card_values[x], suits[i], x + 1, '/assets/images/deck/' + card_values[x] + suits[i] + '.png', suits_names[i], card_values[x] + suits[i]);
 				if(x > 9) {
 					deck[count].gameVal = 10;
 				}
