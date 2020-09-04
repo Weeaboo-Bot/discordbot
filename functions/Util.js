@@ -69,7 +69,7 @@ module.exports = class Util {
 	static formatNumber(number, minimumFractionDigits = 0) {
 		return Number.parseFloat(number).toLocaleString(undefined, {
 			minimumFractionDigits,
-			maximumFractionDigits: 2
+			maximumFractionDigits: 2,
 		});
 	}
 
@@ -132,7 +132,7 @@ module.exports = class Util {
 		const color = {
 			r: Math.floor((lower.color.r * pctLower) + (upper.color.r * pctUpper)).toString(16).padStart(2, '0'),
 			g: Math.floor((lower.color.g * pctLower) + (upper.color.g * pctUpper)).toString(16).padStart(2, '0'),
-			b: Math.floor((lower.color.b * pctLower) + (upper.color.b * pctUpper)).toString(16).padStart(2, '0')
+			b: Math.floor((lower.color.b * pctLower) + (upper.color.b * pctUpper)).toString(16).padStart(2, '0'),
 		};
 		return `#${color.r}${color.g}${color.b}`;
 	}
@@ -171,7 +171,7 @@ module.exports = class Util {
 		};
 		const verify = await channel.awaitMessages(filter, {
 			max: 1,
-			time
+			time,
 		});
 		if (!verify.size) return 0;
 		const choice = verify.first().content.toLowerCase();
@@ -184,7 +184,7 @@ module.exports = class Util {
 		if (max === 1) return [msg.author.id];
 		const addS = min - 1 === 1 ? '' : 's';
 		await msg.say(
-			`You will need at least ${min - 1} more player${addS} (at max ${max - 1}). To join, type \`join game\`.`
+			`You will need at least ${min - 1} more player${addS} (at max ${max - 1}). To join, type \`join game\`.`,
 		);
 		const joined = [];
 		joined.push(msg.author.id);

@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable max-nested-callbacks */
-const { CommandoClient } = require('discord.js-commando');
+const WeabooClient = require('./models/Client');
 const path = require('path');
 const { Structures } = require('discord.js');
 const moment = require('moment');
@@ -38,7 +38,7 @@ Structures.extend('Guild', function(Guild) {
 });
 
 
-const client = new CommandoClient({
+const client = new WeabooClient({
 	commandPrefix: prefix,
 	owner: discord_owner_id,
 	disableEveryone: true,

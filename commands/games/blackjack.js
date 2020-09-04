@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const { Command } = require('discord.js-commando');
-const Deal = require('../../models/Deal');
+const Deck = require('../../models/Deck');
 const { stripIndents } = require('common-tags');
 const { verify } = require('../../functions/Util');
 const hitWords = ['hit', 'hit me'];
@@ -10,24 +10,26 @@ module.exports = class BlackJackCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'blackjack',
+			aliases: ['twenty-one', '21', 'bj'],
 			group: 'games',
 			memberName: 'blackjack',
-			aliases: ['bj', '21'],
-			description: 'Play BlackJack with other server members, and the bot as dealer!',
+			description: 'Play a game of blackjack.',
 			args: [
 				{
-					key: 'currDeck',
-					type: 'string',
-					prompt: 'Would you like to view the current deck?',
-					oneOf: ['yes', 'no'],
+					key: 'deckCount',
+					label: 'amount of decks',
+					prompt: 'How many decks do you want to use?',
+					type: 'integer',
+					default: 1,
+					max: 8,
+					min: 1,
 				},
 			],
-
 		});
-
 	}
 
 	async run(msg, { deckCount }) {
+		console.log('Hello World');
 		const current = this.client.games.get(msg.channel.id);
 		if (current) return msg.reply(`Please wait until the current game of \`${current.name}\` is finished.`);
 		try {
@@ -138,45 +140,3 @@ module.exports = class BlackJackCommand extends Command {
 		}, 0);
 	}
 };
-
-
-// 	run(message, { currDeck }) {
-// 		const deal = new Deal(),
-// 			deck = deal.deck,
-// 			playerHand = deal.player,
-// 			dealerHand = deal.dealer;
-
-// 		if(currDeck == 'yes') {
-// 			return message.channel.send('Current Deck: ' + deck.map(deck_val => {
-// 				deck_val.code;
-// 			}));
-// 		}
-
-// 		playerHand.forEach(val => {
-// 			const playerEmbed = new Discord.MessageEmbed()
-// 				.setFooter('Current Player Hand')
-// 				.setDescription(val.code)
-// 				.attachFiles(val.imgSrc)
-// 				.setImage(`attachment://${val.imgSrc}`)
-// 				.setColor('#A187E0');
-
-
-// 			return message.channel.send({ embed: playerEmbed });
-// 		});
-
-// 		message.channel.send('Would you like to hit?');
-
-// 		const prefix = '~';
-// 		const args = message.content.slice(prefix.length).trim().split(' ');
-// 		const command = args.shift().toLowerCase();
-
-// 		if(command == 'yes') {
-// 			deal.playerHit();
-// 			deal.dealerHit();
-// 		}
-
-
-// 	}
-
-
-// };
