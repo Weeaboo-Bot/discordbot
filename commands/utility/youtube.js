@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 var youtube_node = require('youtube-node');
 const {youtube_token, discord_owner_id}= require('../../config');
 youtube = new youtube_node();

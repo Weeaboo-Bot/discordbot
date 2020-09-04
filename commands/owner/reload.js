@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const stripIndents = require('common-tags');
 
 function disambiguation(items, label, property = 'name') {

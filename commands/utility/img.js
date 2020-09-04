@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const Discord = require('discord.js');
 const GoogleImages = require("google-images");
 const {google_token,google_cse_key} = require('../../config');

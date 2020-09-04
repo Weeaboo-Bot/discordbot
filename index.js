@@ -76,6 +76,7 @@ client.registry
 		['games', 'Games'],
 		['video', 'Video Commands'],
 		['loyal', 'Loyalty Program Commands'],
+		['number', 'Number Commands'],
 	])
 	.registerDefaultGroups()
 

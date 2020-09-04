@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const { yandex_key } = require('../../config');
 const translate = require('translate');
 const Discord = require('discord.js');

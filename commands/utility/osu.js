@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const Discord = require('discord.js');
 const osu = require('node-osu');
 const {osu_key} = require('../../config');

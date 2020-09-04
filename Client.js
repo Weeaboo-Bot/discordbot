@@ -6,5 +6,6 @@ module.exports = class WeabooClient extends CommandoClient {
 		super(options);
 
 		this.games = new Collection();
+		this.memes = new Collection();
 	}
 };

@@ -1,0 +1,19 @@
+{
+	"mercury": 0.378,
+	"venus": 0.907,
+	"earth": 1,
+	"moon": 0.166,
+	"mars": 0.377,
+	"jupiter": 2.36,
+	"saturn": 0.916,
+	"uranus": 0.889,
+	"neptune": 1.12,
+	"pluto": 0.071,
+	"io": 0.183,
+	"europa": 0.134,
+	"ganymede": 0.146,
+	"callisto": 0.126,
+	"titan": 0.14,
+	"triton": 0.0794,
+	"sun": 28
+}

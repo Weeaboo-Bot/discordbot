@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const Jimp = require('jimp');
 
 //remember to return before every promise

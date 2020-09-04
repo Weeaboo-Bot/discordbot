@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const axios = require('axios');
 const {error_log } = require('../../config');
 const {errorMessage} = require('../../functions/logHandler');

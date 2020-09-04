@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const moment = require('moment');
 const sherlock = require('sherlockjs');
 

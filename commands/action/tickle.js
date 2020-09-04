@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');

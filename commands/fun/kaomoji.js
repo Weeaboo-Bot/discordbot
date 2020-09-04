@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../models/Command');
 const kaomojis = require('../../assets/json/kaomoji');
 
 module.exports = class KaomojiCommand extends Command {
