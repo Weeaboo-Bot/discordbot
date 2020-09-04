@@ -5,20 +5,15 @@ const ErrorEnum = require('../functions/errorTypes');
 
 module.exports = class Deal {
 	constructor() {
-		this.theDeck = new Deck();
+		this.deck = new Deck().cards;
 		this.dealer = [],
 		this.player = [];
+		this.status = '';
 
 		for(let i = 0; i < 2; i++) {
-			this.player[i] = this.theDeck.shift();
-			this.dealer[i] = this.theDeck.shift();
+			this.player[i] = this.deck.shift();
+			this.dealer[i] = this.deck.shift();
 		}
-
-		return {
-			deck: this.theDeck,
-			dealerHand: this.dealer,
-			playerHand: this.player,
-		};
 	}
 
 	tally(hand, message) {
@@ -38,7 +33,7 @@ module.exports = class Deal {
 				}
 			}
 			else {
-				message.client.channels.cache.get(error_log).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
+				message.client.channels.cache.get(error_log).send({ embed: errorMessage('Error', ErrorEnum.API, message.command.name) });
 				console.log('Something is wrong!');
 
 			}
@@ -46,34 +41,34 @@ module.exports = class Deal {
 		return score;
 	}
 
-	playerHit(state) {
-		state.playerHand.push(state.deck.shift());
-		const playerScore = this.tally(state.playerHand);
+	playerHit() {
+		this.player.push(this.deck.shift());
+		const playerScore = this.tally(this.player);
 		if (playerScore > 21) {
-			state.status = 'bust';
+			this.status = 'bust';
 		}
-		return state;
+		return this;
 	}
 
-	dealerHit(state) {
-		const playerScore = this.tally(state.playerHand);
-		let dealerScore = this.tally(state.dealerHand);
+	dealerHit() {
+		const playerScore = this.tally(this.player);
+		let dealerScore = this.tally(this.dealer);
 
 		while(dealerScore < 17) {
-			state.dealerHand.push(state.deck.shift());
-			dealerScore = this.tally(state.dealerHand);
+			this.dealer.push(this.deck.shift());
+			dealerScore = this.tally(this.dealer);
 			// += state.dealerHand[state.dealerHand.length - 1].gameVal;
 		}
 
 		if(dealerScore > 21 || playerScore > dealerScore) {
-			state.status = 'win';
+			this.status = 'win';
 
 		}
 		else if (dealerScore > playerScore) {
-			state.status = 'lose';
+			this.status = 'lose';
 		}
 		else if (dealerScore == playerScore) {
-			state.status = 'push';
+			this.status = 'push';
 		}
 	}
 
