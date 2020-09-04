@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const { Command } = require('discord.js-commando');
-const Deck = require('../../models/Deck');
+const Deck = require('../../models/games/Deck');
 const { stripIndents } = require('common-tags');
 const { verify } = require('../../functions/Util');
 const hitWords = ['hit', 'hit me'];
