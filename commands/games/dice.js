@@ -6,7 +6,7 @@ module.exports = class DiceCommand extends Command {
 		super(client, {
 			name: 'roll',
 			aliases: ['dice'],
-			group: 'random-res',
+			group: 'games',
 			memberName: 'roll',
 			description: 'Rolls a dice with a minimum/maximum value of your choice.',
 			args: [
