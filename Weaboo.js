@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable max-nested-callbacks */
 require("./helpers/extenders");
-const WeabooClient = require('./models/WeabooClient');
+const Client = require('./models/WeabooClient');
 const util = require("util"),
 		fs = require("fs"),
 		path = require('path'),
@@ -13,8 +13,8 @@ const { formatNumber } = require('./helpers/functions');
 const { Intents, MessageEmbed } = require('discord.js');
 
 
-const client = new WeabooClient({
-	commandPrefix: config.prefix ,
+const client = new Client({
+	commandPrefix: '%' ,
 	owner: config.owner.id,
 	disableEveryone: true,
 	unknownCommandResponse: false,
@@ -27,6 +27,7 @@ const client = new WeabooClient({
 
 client.registry
 			.registerDefaultTypes()
+		
 			.registerGroups([
 				['action', 'Action'],
 				['anime', 'Anime'],
@@ -62,35 +63,48 @@ client.registry
 
 
 
+
+const dbConnect = () => {
+	// connect to mongoose database
+	mongoose.connect(this.client.config.mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+		client.logger.log("Connected to the Mongodb database.", "log");
+	}).catch((err) => {
+		client.logger.log("Unable to connect to the Mongodb database. Error:"+err, "error");
+	});
+};
+
+
+
 const init = async () => {
+	
+	
+	
 	// Then we load events, which will include our message and ready event.
 	const evtFiles = await readdir("./events/");
 	
-	this.client.logger.log(`Loading a total of ${evtFiles.length} events.`, "log");
+	client.logger.log(`Loading a total of ${evtFiles.length} events.`, "log");
 	evtFiles.forEach((file) => {
 		const eventName = file.split(".")[0];
-		this.client.logger.log(`Loading Event: ${eventName}`);
-		const event = new (require(`./events/${file}`))(client);
+		client.logger.log(`Loading Event: ${eventName}`);
+		const event = require(`./events/${file}`);
 		client.on(eventName, (...args) => event.run(...args));
 		delete require.cache[require.resolve(`./events/${file}`)];
 	});
+	// const languages = require("./helpers/languages");
+	// client.translations = await languages();
 	
-	// connect to mongoose database
-	mongoose.connect(this.client.config.mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-		this.client.logger.log("Connected to the Mongodb database.", "log");
-	}).catch((err) => {
-		this.client.logger.log("Unable to connect to the Mongodb database. Error:"+err, "error");
-	});
 	
-	const languages = require("./helpers/languages");
-	client.translations = await languages();
+	client.logger.log(`[READY] Logged in as ${client.user.tag}! ID: ${client.user.id}`);
+	
+
 };
 
 client.on('ready', () => {
- // logger.log(`[READY] Logged in as ${client.user.tag}! ID: ${client.user.id}`);
-	console.log('Ready');
+ 
 	
 	
+	init();
+	//dbConnect();
 	
 });
 
