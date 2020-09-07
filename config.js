@@ -6,7 +6,7 @@ module.exports = {
 	prefix: process.env.prefix,
 	email: process.env.email,
 	password: process.env.password,
-	color: '#9f0db5'
+	color: '#9f0db5',
 	/* For the support server */
 	support: {
 		id: process.env.guild_id, // The ID of the support server

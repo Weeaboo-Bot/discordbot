@@ -1,5 +1,5 @@
 const Command = require('../../models/Command');
-const { list, firstUpperCase, formatNumber } = require('../../helpers/Util');
+const { list, firstUpperCase, formatNumber } = require('../../helpers/functions');
 const planets = require('../../assets/json/gravity');
 
 module.exports = class GravityCommand extends Command {

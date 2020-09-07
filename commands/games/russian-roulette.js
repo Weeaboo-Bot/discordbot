@@ -1,6 +1,6 @@
 const Command = require('../../models/Command');
 const { stripIndents } = require('common-tags');
-const { shuffle, verify } = require('../../helpers/Util');
+const { shuffle, verify } = require('../../helpers/functions');
 
 module.exports = class RussianRouletteCommand extends Command {
 	constructor(client) {

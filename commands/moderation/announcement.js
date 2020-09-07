@@ -1,12 +1,14 @@
-const Command = require("../../base/Command.js"),
+const Command = require("../../models/Command"),
 		Discord = require("discord.js");
 
 class Announcement extends Command {
 	
 	constructor (client) {
 		super(client, {
-			name: "announcement",
-			dirname: __dirname,
+			name: 'announcement',
+			memberName: 'announce',
+			group:'moderation',
+			description: 'Make a Server Announcement',
 			enabled: true,
 			guildOnly: true,
 			aliases: [],

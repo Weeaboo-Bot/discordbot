@@ -1,6 +1,6 @@
 const Command = require('../../models/Command');
 const math = require('mathjs');
-const { formatNumber } = require('../../helpers/Util');
+const { formatNumber } = require('../../helpers/functions');
 
 module.exports = class UnitsCommand extends Command {
 	constructor(client) {

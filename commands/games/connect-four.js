@@ -1,6 +1,6 @@
 const Command = require('../../models/Command');
 const { stripIndents } = require('common-tags');
-const { verify } = require('../../helpers/Util');
+const { verify } = require('../../helpers/functions');
 const blankEmoji = '⚪️';
 const playerOneEmoji = '🔴';
 const playerTwoEmoji = '🟡';

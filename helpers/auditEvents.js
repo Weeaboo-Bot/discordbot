@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const {audit_log } = require('../config');
 const {auditMessage} = require('.//logHandler');
 const ErrorEnum = require('.//errorTypes');
-const { client } = require('../index');
+const { client } = require('../Weaboo');
 
 
 

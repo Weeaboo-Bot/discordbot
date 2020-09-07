@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = class WeabooCommand extends Command {
 	constructor(client, info) {
 		super(client, info);
-
+		
 		this.shortDescription = info.shortDescription || null;
 		this.cooldown = info.cooldown || null;
 		this.dashboardsettings = info.dashboardsettings || null;

@@ -1,6 +1,6 @@
 const Command = require('../../models/Command');
 const { MessageEmbed } = require('discord.js');
-const { formatNumber } = require('../../helpers/Util');
+const { formatNumber } = require('../../helpers/functions');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').execFile);
 const path = require('path');

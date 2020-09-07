@@ -1,6 +1,6 @@
 const Command = require('../../models/Command');
 const { stripIndents } = require('common-tags');
-const { verify } = require('../../helpers/Util');
+const { verify } = require('../../helpers/functions');
 
 module.exports = class TicTacToeCommand extends Command {
 	constructor(client) {
