@@ -1,7 +1,7 @@
 const Command = require('../../models/Command');
 const Discord = require('discord.js');
 const { stripIndents } = require('common-tags');
-const { awaitPlayers } = require('../../functions/Util');
+const { awaitPlayers } = require('../../helpers/Util');
 const nums = require('../../assets/json/bingo');
 const { SUCCESS_EMOJI_ID } = process.env;
 const rows = Object.keys(nums);

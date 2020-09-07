@@ -1,7 +1,7 @@
 const Card = require('./Card');
 const suits = ['spades', 'hearts', 'diamonds', 'clubs'];
 const faces = ['Jack', 'Queen', 'King'];
-const { shuffle } = require('../../functions/Util');
+const { shuffle } = require('../../helpers/Util');
 
 module.exports = class Deck {
 	constructor(options = {}) {

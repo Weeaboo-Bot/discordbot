@@ -1,7 +1,7 @@
 const Command = require('../../models/Command');
 const moment = require('moment');
 const { MessageEmbed } = require('discord.js');
-const { trimArray } = require('../../functions/Util');
+const { trimArray } = require('../../helpers/Util');
 const flags = {
 	DISCORD_EMPLOYEE: 'Discord Employee',
 	DISCORD_PARTNER: 'Discord Partner',

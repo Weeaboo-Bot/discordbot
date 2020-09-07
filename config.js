@@ -23,4 +23,9 @@ module.exports = {
 	client_id: process.env.client_id,
 	role_channel_ud: process.env.role_channel_id,
 	audit_log: process.env.audit_log,
+	webhook_id: process.env.webhook_id,
+	webhook_token: process.env.webhook_token,
+	webhook_url: process.env.webhook_url,
+	email: process.env.email,
+	password: process.env.password,
 };

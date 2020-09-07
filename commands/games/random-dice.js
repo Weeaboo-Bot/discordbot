@@ -1,5 +1,5 @@
 const Command = require('../../models/Command');
-const { randomRange, formatNumber } = require('../../functions/Util');
+const { randomRange, formatNumber } = require('../../helpers/Util');
 
 module.exports = class RandomDiceCommand extends Command {
 	constructor(client) {

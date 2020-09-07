@@ -2,8 +2,8 @@ const Command = require('../../models/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { error_log} = require('../../config');
-const { errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const { errorMessage} = require('../../helpers/logHandler');
+const ErrorEnum = require('../../helpers/errorTypes');
 
 
 module.exports = class NekoCommand extends Command {
@@ -17,6 +17,7 @@ module.exports = class NekoCommand extends Command {
             description: 'Nekos!',
             details: 'This command is NSFW in NSFW channels and not NSFW in normal channels!',
             examples: ['~neko'],
+            nsfw: true,
             throttling: {
                 usages: 1,
                 duration: 3

@@ -1,6 +1,6 @@
 const Command = require('../../models/Command');
 const request = require('node-fetch');
-const { formatNumber } = require('../../functions/Util');
+const { formatNumber } = require('../../helpers/Util');
 
 module.exports = class CurrencyCommand extends Command {
 	constructor(client) {

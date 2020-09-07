@@ -1,5 +1,5 @@
 const Command = require('../../models/Command');
-const { formatNumber } = require('../../functions/Util');
+const { formatNumber } = require('../../helpers/Util');
 
 module.exports = class PrimeCommand extends Command {
 	constructor(client) {

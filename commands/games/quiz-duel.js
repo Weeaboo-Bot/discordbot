@@ -1,7 +1,7 @@
 const Command = require('../../models/Command');
 const { stripIndents, oneLine } = require('common-tags');
 const request = require('node-fetch');
-const { shuffle, verify } = require('../../functions/Util');
+const { shuffle, verify } = require('../../helpers/Util');
 const choices = ['A', 'B', 'C', 'D'];
 
 module.exports = class QuizDuelCommand extends Command {

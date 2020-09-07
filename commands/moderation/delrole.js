@@ -1,8 +1,8 @@
 const Command = require('../../models/Command');
 const {error_log } = require('../../config');
-const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
-const log = require('../../functions/consoleLogging');
+const {errorMessage} = require('../../helpers/logHandler');
+const ErrorEnum = require('../../helpers/errorTypes');
+const log = require('../../helpers/consoleLogging');
 const lodash = require('lodash');
 
 module.exports = class DeleteRoleCommand extends Command {

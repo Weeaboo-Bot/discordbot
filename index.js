@@ -86,6 +86,7 @@ client.registry
 		commandState: false,
 		ping: false,
 		commands: false,
+		webhook: false,
 
 
 	})

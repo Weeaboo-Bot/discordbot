@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
 const {error_log } = require('../../config');
-const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const {errorMessage} = require('../../helpers/logHandler');
+const ErrorEnum = require('../../helpers/errorTypes');
 
 module.exports = class TickleCommand extends Command {
     constructor(client) {
@@ -54,7 +54,7 @@ module.exports = class TickleCommand extends Command {
 
 
 
-            
+
 
         } else {
 
