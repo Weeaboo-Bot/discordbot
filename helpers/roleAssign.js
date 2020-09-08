@@ -1,4 +1,4 @@
 
 
-//Watch for new messages in #role-assign
-//Update user roles to match
+// Watch for new messages in #role-assign
+// Update user roles to match
