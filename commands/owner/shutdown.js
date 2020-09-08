@@ -1,5 +1,5 @@
 const Command = require('../../models/Command');
-const { verify } = require('../../functions/Util');
+const { verify } = require('../../helpers/functions');
 const texts = require('../../assets/json/shutdown');
 
 module.exports = class ShutdownCommand extends Command {

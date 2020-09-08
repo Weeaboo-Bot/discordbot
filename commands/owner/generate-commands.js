@@ -7,7 +7,7 @@ module.exports = class GenerateCommandsCommand extends Command {
 			aliases: ['gen-commands', 'generate-cmds', 'gen-cmds'],
 			group: 'owner',
 			memberName: 'generate-commands',
-			description: 'Generates the commands list for Xiao\'s README.',
+			description: 'Generates the commands list for Weaboo Bots\'s README.',
 			details: 'Only the bot owner(s) may use this command.',
 			ownerOnly: true,
 			guarded: true,

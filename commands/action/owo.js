@@ -1,8 +1,8 @@
 const Command = require('../../models/Command');
 const Discord = require('discord.js');
 const axios = require('axios').default;
-const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const {errorMessage} = require('../../helpers/logHandler');
+const ErrorEnum = require('../../helpers/errorTypes');
 
 module.exports = class OwoCommand extends Command {
     constructor(client) {

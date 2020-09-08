@@ -1,6 +1,6 @@
 const Command = require('../../models/Command');
 const { MessageEmbed } = require('discord.js');
-const { embedURL } = require('../../functions/Util');
+const { embedURL } = require('../../helpers/functions');
 const displayFmts = {
 	jpg: 'JPEG',
 	png: 'PNG',

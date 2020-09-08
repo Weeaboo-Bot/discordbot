@@ -30,7 +30,7 @@ module.exports = class NewsCommand extends Command {
     try {
       const response = await fetch(
        
-        `https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&pageSize=5&source=associated-press&apiKey=${news_token}`
+        `https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&pageSize=5&source=reddit-r-all&apiKey=${news_token}`
       );
       const json = await response.json();
       const articleArr = json.articles;

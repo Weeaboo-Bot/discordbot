@@ -2,8 +2,8 @@ const Command = require('../../models/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const {error_log,weather_token} = require('../../config');
-const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const {errorMessage} = require('../../helpers/logHandler');
+const ErrorEnum = require('../../helpers/errorTypes');
 function toTitleCase(str) {
     return str.replace(
         /\w\S*/g,

@@ -1,8 +1,8 @@
 const Command = require('../../models/Command');
 const axios = require('axios');
 const {error_log } = require('../../config');
-const {errorMessage} = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const {errorMessage} = require('../../helpers/logHandler');
+const ErrorEnum = require('../../helpers/errorTypes');
 const moment = require('moment');
 const clocks = ["🕛", "🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚"];
 

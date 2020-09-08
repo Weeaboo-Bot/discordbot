@@ -22,7 +22,7 @@ module.exports = class GlobalNewsCommand extends Command {
     // powered by NewsAPI.org
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?sources=reuters&pageSize=5&apiKey=${news_token}`
+        `https://newsapi.org/v2/top-headlines?sources=reddit-r-all&pageSize=5&apiKey=${news_token}`
       );
       const json = await response.json();
       const articleArr = json.articles;
