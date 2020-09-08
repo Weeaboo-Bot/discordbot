@@ -1,98 +1,126 @@
-const Discord = require('discord.js');
-module.exports = {
-	run: async member => {
-		if (!client.provider.isReady) return;
-		if (!client.provider.getGuild(member.guild.id, 'prefix')) return;
+const Canvas = require("canvas"),
+		Discord = require("discord.js");
+const { resolve } = require("path");
+// Register assets fonts
+Canvas.registerFont(resolve("./assets/fonts/theboldfont.ttf"), { family: "Bold" });
+Canvas.registerFont(resolve("./assets/fonts/SketchMatch.ttf"), { family: "SketchMatch" });
+
+const applyText = (canvas, text, defaultFontSize) => {
+	const ctx = canvas.getContext("2d");
+	do {
+		ctx.font = `${defaultFontSize -= 10}px Bold`;
+	} while (ctx.measureText(text).width > 600);
+	return ctx.font;
+};
+
+module.exports = class {
+	
+	constructor (client) {
+		this.client = client;
+	}
+	
+	async run (member) {
 		
-		const lang = require(`../languages/${client.provider.getGuild(member.guild.id, 'language')}.json`);
-		
-		let muteOfThisUser;
-		for (const i in client.provider.getBotsettings('botconfs', 'mutes')) {
-			if (client.provider.getBotsettings('botconfs', 'mutes')[i].discordserverid === member.guild.id && client.provider.getBotsettings('botconfs', 'mutes')[i].memberid === member.id) {
-				muteOfThisUser = client.provider.getBotsettings('botconfs', 'mutes')[i];
+		member.guild.fetch().then(async (guild) => {
+			
+			const guildData = await this.client.findOrCreateGuild({ id: guild.id });
+			member.guild.data = guildData;
+			
+			const memberData = await this.client.findOrCreateMember({ id: member.id, guildID: guild.id });
+			if(memberData.mute.muted && memberData.mute.endDate > Date.now()){
+				guild.channels.cache.forEach((channel) => {
+					channel.updateOverwrite(member.id, {
+						SEND_MESSAGES: false,
+						ADD_REACTIONS: false,
+						CONNECT: false
+					}).catch(() => {});
+				});
 			}
-		}
-		
-		if (muteOfThisUser) {
-			if ((muteOfThisUser.muteEndDate - Date.now()) > 0) {
-				if (member.guild.roles.get(muteOfThisUser.roleid)) {
-					const mutedRole = member.guild.roles.get(muteOfThisUser.roleid);
-					await member.roles.add(mutedRole);
-				}
-			} else {
-				const currentMutes = client.provider.getBotsettings('botconfs', 'mutes');
-				delete currentMutes[muteOfThisUser.mutescount];
-				await client.provider.setBotsettings('botconfs', 'mutes', currentMutes);
+			
+			// Check if the autorole is enabled
+			if(guildData.plugins.autorole.enabled){
+				member.roles.add(guildData.plugins.autorole.role).catch(() => {});
 			}
-		}
-		
-		// Joinroles that a guildMember will get when it joins the discord server
-		const rolesGiven = [];
-		const rolesNotGiven = [];
-		if (client.provider.getGuild(member.guild.id, 'joinroles') && client.provider.getGuild(member.guild.id, 'joinroles').length !== 0) {
-			for (let i = 0; i < client.provider.getGuild(member.guild.id, 'joinroles').length; i += 1) {
-				if (!member.guild.roles.get(client.provider.getGuild(member.guild.id, 'joinroles')[i])) {
-					const indexOfTheRole = client.provider.getGuild(member.guild.id, 'joinroles').indexOf(client.provider.getGuild(member.guild.id, 'joinroles')[i]);
-					const currentJoinroles = client.provider.getGuild(member.guild.id, 'joinroles');
-					currentJoinroles.splice(indexOfTheRole, 1);
-					await client.provider.setGuild(member.guild.id, 'joinroles', currentJoinroles);
-				}
-				
-				if (client.provider.getGuild(member.guild.id, 'joinroles').length !== 0) {
-					const roleToAssign = member.guild.roles.get(client.provider.getGuild(member.guild.id, 'joinroles')[i]);
-					try {
-						await member.roles.add(roleToAssign);
-						rolesGiven.push(roleToAssign.name);
-					} catch (error) {
-						rolesNotGiven.push(roleToAssign.name);
+			
+			// Check if welcome message is enabled
+			if(guildData.plugins.welcome.enabled){
+				const channel = member.guild.channels.cache.get(guildData.plugins.welcome.channel);
+				if(channel){
+					const message = guildData.plugins.welcome.message
+							.replace(/{user}/g, member)
+							.replace(/{server}/g, guild.name)
+							.replace(/{membercount}/g, guild.memberCount);
+					if(guildData.plugins.welcome.withImage){
+						const canvas = Canvas.createCanvas(1024, 450),
+								ctx = canvas.getContext("2d");
+						
+						// Background language
+						const background = await Canvas.loadImage("./assets/img/greetings_background.png");
+						// This uses the canvas dimensions to stretch the image onto the entire canvas
+						ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+						// Draw username
+						ctx.fillStyle = "#ffffff";
+						ctx.font = applyText(canvas, member.user.username, 48);
+						ctx.fillText(member.user.username, canvas.width - 660, canvas.height - 248);
+						// Draw server name
+						ctx.font = applyText(canvas, member.guild.translate("administration/welcome:IMG_WELCOME", {
+							server: member.guild.name
+						}), 53);
+						ctx.fillText(member.guild.translate("administration/welcome:IMG_WELCOME", {
+							server: member.guild.name
+						}), canvas.width - 690, canvas.height - 65);
+						// Draw discriminator
+						ctx.font = "40px Bold";
+						ctx.fillText(member.user.discriminator, canvas.width - 623, canvas.height - 178);
+						// Draw number
+						ctx.font = "22px Bold";
+						ctx.fillText(member.guild.translate("administration/welcome:IMG_NB", {
+							memberCount: member.guild.memberCount
+						}), 40, canvas.height - 50);
+						// Draw # for discriminator
+						ctx.fillStyle = "#44d14a";
+						ctx.font = "75px SketchMatch";
+						ctx.fillText("#", canvas.width - 690, canvas.height - 165);
+						// Draw Title with gradient
+						ctx.font = "90px Bold";
+						ctx.strokeStyle = "#1d2124";
+						ctx.lineWidth = 15;
+						ctx.strokeText(member.guild.translate("administration/welcome:TITLE"), canvas.width - 620, canvas.height - 330);
+						var gradient = ctx.createLinearGradient(canvas.width - 780, 0, canvas.width - 30, 0);
+						gradient.addColorStop(0, "#e15500");
+						gradient.addColorStop(1, "#e7b121");
+						ctx.fillStyle = gradient;
+						ctx.fillText(member.guild.translate("administration/welcome:TITLE"), canvas.width - 620, canvas.height - 330);
+						
+						// Pick up the pen
+						ctx.beginPath();
+						//Define Stroke Line
+						ctx.lineWidth = 10;
+						//Define Stroke Style
+						ctx.strokeStyle = "#03A9F4";
+						// Start the arc to form a circle
+						ctx.arc(180, 225, 135, 0, Math.PI * 2, true);
+						// Draw Stroke
+						ctx.stroke();
+						// Put the pen down
+						ctx.closePath();
+						// Clip off the region you drew on
+						ctx.clip();
+						
+						const options = { format: "png", size: 512 },
+								avatar = await Canvas.loadImage(member.user.displayAvatarURL(options));
+						// Move the image downwards vertically and constrain its height to 200, so it"s a square
+						ctx.drawImage(avatar, 45, 90, 270, 270);
+						
+						const attachment = new Discord.MessageAttachment(canvas.toBuffer(), "welcome-image.png");
+						channel.send(message, attachment);
+					} else {
+						channel.send(message);
 					}
 				}
 			}
-			if (rolesNotGiven.length !== 0) {
-				const joinrolesnotgiven = lang.guildmemberaddevent_joinrolesnotgiven.replace('%roles', rolesNotGiven.join(', '));
-				member.send(joinrolesnotgiven);
-			}
-		}
-		
-		// Logs:
-		if (client.provider.getGuild(member.guild.id, 'welcomelog') === 'true') {
-			const messagechannel = client.channels.get(client.provider.getGuild(member.guild.id, 'welcomelogchannel'));
-			const embed = new Discord.MessageEmbed()
-					.setFooter(lang.guildmemberaddevent_userjoined)
-					.setTimestamp()
-					.setColor('GREEN')
-					.setAuthor(`${member.user.tag} (${member.user.id})`, member.user.avatarURL());
-			messagechannel.send({
-				embed: embed
-			});
-		}
-		
-		let embed = false;
-		if (client.provider.getGuild(member.guild.id, 'welcome') === 'true') {
-			if (client.provider.getGuild(member.guild.id, 'welcomemsg').length < 1) return;
-			const messagechannel = client.channels.get(client.provider.getGuild(member.guild.id, 'welcomechannel'));
-			if (client.provider.getGuild(member.guild.id, 'welcomemsg').toLowerCase().includes('$embed$')) {
-				embed = true;
-			}
-			const newMessage = client.provider.getGuild(member.guild.id, 'welcomemsg').replace('$username$', member.user.username)
-					.replace('$usermention$', member.user)
-					.replace('$usertag$', member.user.tag)
-					.replace('$userid$', member.user.id)
-					.replace('$guildname$', member.guild.name)
-					.replace('$guildid$', member.guild.id)
-					.replace('$embed$', '');
 			
-			if (embed) {
-				const welcomeEmbed = new Discord.MessageEmbed()
-						.setTimestamp()
-						.setDescription(newMessage)
-						.setColor('GREEN');
-				messagechannel.send({
-					embed: welcomeEmbed
-				});
-			} else {
-				messagechannel.send(newMessage);
-			}
-		}
+		});
 	}
+	
 };

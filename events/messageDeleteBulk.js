@@ -1,7 +1,11 @@
 const Discord = require('discord.js');
-module.exports = {
-	run: (messages) => {
-		if (!client.provider.isReady) return;
+module.exports =  class {
+	
+	constructor(client) {
+		this.client = client;
+	}
+	async run (messages)  {
+		if (!this.client.provider.isReady) return;
 		if (messages.size === 0) return;
 		
 		/* eslint guard-for-in: 0 */

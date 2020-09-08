@@ -21,11 +21,10 @@ moment.relativeTimeThreshold("M", 12);
 module.exports = class Client extends CommandoClient {
 	constructor(options) {
 		super(options);
-
+		
 		this.meme = 'hello';
 		this.config = require("../config"); // Load the config file
 		this.customEmojis = require("../emojis.json"); // load the bot's emojis
-		this.logger = require("../helpers/logger"); // Load the logger file
 		this.wait = util.promisify(setTimeout); // client.wait(1000) - Wait 1 second
 		this.functions = require("../helpers/functions"); // Load the functions file
 		this.guildsData = require("../models/Guild"); // Guild mongoose model

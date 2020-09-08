@@ -1,50 +1,72 @@
-/*
-Logger class for easy and aesthetically pleasing console logging
-*/
-const { bgBlue, black, green } = require("chalk");
+// Modules to format timestamps in logging
+const moment = require('moment'),
+		m = require('./loggerColor');
 
-function dateTimePad(value, digits){
-	let number = value;
-	while (number.toString().length < digits) {
-		number = "0" + number;
+module.exports = class CustomLogger {
+	
+	
+	static log (content, type = 'log') {
+		
+		
+		
+		
+		/**
+		 * Adds a timestamp to the input string
+		 * @param {string} string Text to Log
+		 * @returns {string} The Formatted Text
+		 */
+		function log(string) {
+			return console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${string}`);
+		}
+		
+		
+		switch (type){
+		case 'output': {
+			return log('🗐 ' + m.log(content));
+		}
+		case 'success': {
+			return log('✔️  ' + m.successMsg(content));
+		}
+		case 'warning': {
+			return log('🔔  ' + m.warningMsg(content));
+		}
+		case 'error': {
+			return log('❌  ' + m.errorMsg(content));
+		}
+		case 'splitter': {
+			return log(m.splitter(content));
+		}
+		case 'cmd': {
+			return log('📂  ' + m.cmdLoad(content));
+		}
+		case 'acmd': {
+			return log('🚨  ' + m.cmdLoad(content));
+		}
+		case 'mcmd': {
+			return log('🎼  ' + m.cmdLoad(content));
+		}
+		case 'gcmd': {
+			return log('🎲  ' + m.cmdLoad(content));
+		}
+		case 'rpgcmd': {
+			return log('⚔️  ' + m.cmdLoad(content));
+		}
+		case 'twitch': {
+			return log('🎮  ' + m.custom(content));
+		}
+		case 'tweet': {
+			return log('🐦  ' + m.twitter(content));
+		}
+		
+		}
 	}
-	return number;
+	
+	
+	
+	
+	
 }
 
-function format(tDate){
-	return (tDate.getFullYear() + "-" +
-			dateTimePad((tDate.getMonth() + 1), 2) + "-" +
-			dateTimePad(tDate.getDate(), 2) + " " +
-			dateTimePad(tDate.getHours(), 2) + ":" +
-			dateTimePad(tDate.getMinutes(), 2) + ":" +
-			dateTimePad(tDate.getSeconds(), 2) + "." +
-			dateTimePad(tDate.getMilliseconds(), 3));
-}
 
-module.exports = class Logger {
-	static log (content, type = "log") {
-		const date = `[${format(new Date(Date.now()))}]:`;
-		switch (type) {
-				// Check the message type and then print him in the console
-		case "log": {
-			return console.log(`${date} ${bgBlue(type.toUpperCase())} ${content} `);
-		}
-		case "warn": {
-			return console.log(`${date} ${black.bgYellow(type.toUpperCase())} ${content} `);
-		}
-		case "error": {
-			return console.log(`${date} ${black.bgRed(type.toUpperCase())} ${content} `);
-		}
-		case "debug": {
-			return console.log(`${date} ${green(type.toUpperCase())} ${content} `);
-		}
-		case "cmd": {
-			return console.log(`${date} ${black.bgWhite(type.toUpperCase())} ${content}`);
-		}
-		case "ready": {
-			return console.log(`${date} ${black.bgGreen(type.toUpperCase())} ${content}`);
-		}
-		default: throw new TypeError("Logger type must be either warn, debug, log, ready, cmd or error.");
-		}
-	}
-};
+
+

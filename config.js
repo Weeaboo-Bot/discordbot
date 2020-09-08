@@ -21,7 +21,9 @@ module.exports = {
 		guild_log: process.env.guild_log,
 		logs: "XXXXXXXXXXX", // And the ID of the logs channel of your server (new servers for example)
 	},
-	mongoDB: "mongodb://localhost:27017/WeabooBot", // The URl of the mongodb database
+	db_pass: process.env.db_pass,
+	db_name: process.env.db_name,
+	mongoDB: `mongodb+srv://dbuser:qadAC5OMGUTlEcFz>@discordcluster.3zyjj.gcp.mongodb.net/discord-bots?retryWrites=true&w=majority`, // The URl of the mongodb database
 	prefix: "*", // The default prefix for the bot
 	/* For the embeds (embeded messages) */
 	embed: {

@@ -1,50 +1,109 @@
-const Discord = require('discord.js');
-module.exports = {
-	run: member => {
-		if (!client.provider.isReady) return;
-		if (client.user.id === member.id) return;
+const Canvas = require("canvas"),
+		Discord = require("discord.js");
+const { resolve } = require("path");
+// Register assets fonts
+Canvas.registerFont(resolve("./assets/fonts/theboldfont.ttf"), { family: "Bold" });
+Canvas.registerFont(resolve("./assets/fonts/SketchMatch.ttf"), { family: "SketchMatch" });
+
+const applyText = (canvas, text, defaultFontSize) => {
+	const ctx = canvas.getContext("2d");
+	do {
+		ctx.font = `${defaultFontSize -= 10}px Bold`;
+	} while (ctx.measureText(text).width > 600);
+	return ctx.font;
+};
+
+module.exports = class {
+	
+	constructor (client) {
+		this.client = client;
+	}
+	
+	async run (member) {
 		
-		if (!client.provider.getGuild(member.guild.id, 'prefix')) return;
-		
-		const lang = require(`../languages/${client.provider.getGuild(member.guild.id, 'language')}.json`);
-		
-		if (client.provider.getGuild(member.guild.id, 'byelog') === 'true') {
-			const messagechannel = client.channels.get(client.provider.getGuild(member.guild.id, 'byelogchannel'));
-			const embed = new Discord.MessageEmbed()
-					.setFooter(lang.guildmemberremoveevent_userleft)
-					.setTimestamp()
-					.setColor('RED')
-					.setAuthor(`${member.user.tag} (${member.user.id})`, member.user.avatarURL());
-			messagechannel.send({
-				embed: embed
-			});
-		}
-		
-		let embed = false;
-		if (client.provider.getGuild(member.guild.id, 'bye') === 'true') {
-			if (client.provider.getGuild(member.guild.id, 'byemsg').length < 1) return;
-			const messagechannel = client.channels.get(client.provider.getGuild(member.guild.id, 'byechannel'));
-			if (client.provider.getGuild(member.guild.id, 'byemsg').toLowerCase().includes('$embed$')) {
-				embed = true;
-			}
-			const newMessage = client.provider.getGuild(member.guild.id, 'byemsg').replace('$username$', member.user.username)
-					.replace('$usertag$', member.user.tag)
-					.replace('$userid$', member.user.id)
-					.replace('$guildname$', member.guild.name)
-					.replace('$guildid$', member.guild.id)
-					.replace('$embed$', '');
+		member.guild.fetch().then(async (guild) => {
 			
-			if (embed) {
-				const byeEmbed = new Discord.MessageEmbed()
-						.setTimestamp()
-						.setDescription(newMessage)
-						.setColor('RED');
-				messagechannel.send({
-					embed: byeEmbed
-				});
-			} else {
-				messagechannel.send(newMessage);
+			const guildData = await this.client.findOrCreateGuild({ id: guild.id });
+			member.guild.data = guildData;
+			
+			// Check if goodbye message is enabled
+			if(guildData.plugins.goodbye.enabled){
+				const channel = guild.channels.cache.get(guildData.plugins.goodbye.channel);
+				if(channel){
+					const message = guildData.plugins.goodbye.message
+							.replace(/{user}/g, member.user.tag)
+							.replace(/{server}/g, guild.name)
+							.replace(/{membercount}/g, guild.memberCount);
+					if(guildData.plugins.goodbye.withImage){
+						const canvas = Canvas.createCanvas(1024, 450),
+								ctx = canvas.getContext("2d");
+						
+						// Background language"
+						const background = await Canvas.loadImage("./assets/img/greetings_background.png");
+						// This uses the canvas dimensions to stretch the image onto the entire canvas
+						ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+						// Draw username
+						ctx.fillStyle = "#ffffff";
+						ctx.font = applyText(canvas, member.user.username, 48);
+						ctx.fillText(member.user.username, canvas.width - 660, canvas.height - 248);
+						// Draw server name
+						ctx.font = applyText(canvas, member.guild.translate("administration/goodbye:IMG_GOODBYE", {
+							server: member.guild.name
+						}), 53);
+						ctx.fillText(member.guild.translate("administration/goodbye:IMG_GOODBYE", {
+							server: member.guild.name
+						}), canvas.width - 690, canvas.height - 65);
+						// Draw discriminator
+						ctx.font = "40px Bold";
+						ctx.fillText(member.user.discriminator, canvas.width - 623, canvas.height - 178);
+						// Draw number
+						ctx.font = "22px Bold";
+						ctx.fillText(member.guild.translate("administration/goodbye:IMG_NB", {
+							memberCount: member.guild.memberCount
+						}), 40, canvas.height - 50);
+						// Draw # for discriminator
+						ctx.fillStyle = "#44d14a";
+						ctx.font = "75px SketchMatch";
+						ctx.fillText("#", canvas.width - 690, canvas.height - 165);
+						// Draw Title with gradient
+						ctx.font = "90px Bold";
+						ctx.strokeStyle = "#1d2124";
+						ctx.lineWidth = 15;
+						ctx.strokeText(member.guild.translate("administration/goodbye:TITLE"), canvas.width - 620, canvas.height - 330);
+						var gradient = ctx.createLinearGradient(canvas.width - 780, 0, canvas.width - 30, 0);
+						gradient.addColorStop(0, "#e15500");
+						gradient.addColorStop(1, "#e7b121");
+						ctx.fillStyle = gradient;
+						ctx.fillText(member.guild.translate("administration/goodbye:TITLE"), canvas.width - 620, canvas.height - 330);
+						
+						// Pick up the pen
+						ctx.beginPath();
+						//Define Stroke Line
+						ctx.lineWidth = 10;
+						//Define Stroke Style
+						ctx.strokeStyle = "#df0909";
+						// Start the arc to form a circle
+						ctx.arc(180, 225, 135, 0, Math.PI * 2, true);
+						// Draw Stroke
+						ctx.stroke();
+						// Put the pen down
+						ctx.closePath();
+						// Clip off the region you drew on
+						ctx.clip();
+						
+						const options = { format: "png", size: 512 },
+								avatar = await Canvas.loadImage(member.user.displayAvatarURL(options));
+						// Move the image downwards vertically and constrain its height to 200, so it"s a square
+						ctx.drawImage(avatar, 45, 90, 270, 270);
+						
+						const attachment = new Discord.MessageAttachment(canvas.toBuffer(), "goodbye-image.png");
+						channel.send(message, attachment);
+					} else {
+						channel.send(message);
+					}
+				}
 			}
-		}
+			
+		});
 	}
 };
