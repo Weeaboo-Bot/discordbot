@@ -1,5 +1,5 @@
-const {Command} = require('discord.js-commando');
-const path = require('path');
+const { Command } = require("discord.js-commando");
+const path = require("path");
 
 module.exports = class WeabooCommand extends Command {
   constructor(client, info) {
@@ -11,14 +11,15 @@ module.exports = class WeabooCommand extends Command {
     this.clientpermissions = info.clientpermissions || [];
     this.userpermissions = info.userpermissions || [];
     this.argsSingleQuotes = info.argsSingleQuotes || false;
-    this.throttling =
-        info.unknown ? null : info.throttling || {usages : 1, duration : 2};
+    this.throttling = info.unknown
+      ? null
+      : info.throttling || { usages: 1, duration: 2 };
     this.uses = 0;
     this.credit = info.credit || [];
     this.credit.push({
-      name : 'Techie3445',
-      url : 'https://github.com/sdoran35',
-      reason : 'Repo',
+      name: "Techie3445",
+      url: "https://github.com/sdoran35",
+      reason: "Repo",
     });
-  };
+  }
 };

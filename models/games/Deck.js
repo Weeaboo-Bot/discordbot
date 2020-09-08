@@ -1,7 +1,7 @@
-const Card = require('./Card');
-const suits = [ 'spades', 'hearts', 'diamonds', 'clubs' ];
-const faces = [ 'Jack', 'Queen', 'King' ];
-const {shuffle} = require('../../helpers/functions');
+const Card = require("./Card");
+const suits = ["spades", "hearts", "diamonds", "clubs"];
+const faces = ["Jack", "Queen", "King"];
+const { shuffle } = require("../../helpers/functions");
 
 module.exports = class Deck {
   constructor(options = {}) {
@@ -14,15 +14,13 @@ module.exports = class Deck {
   makeCards(deckCount) {
     for (let i = 0; i < deckCount; i++) {
       for (const suit of suits) {
-        this.deck.push(new Card('Ace', suit));
-        for (let j = 2; j <= 10; j++)
-          this.deck.push(new Card(j, suit));
-        for (const face of faces)
-          this.deck.push(new Card(face, suit));
+        this.deck.push(new Card("Ace", suit));
+        for (let j = 2; j <= 10; j++) this.deck.push(new Card(j, suit));
+        for (const face of faces) this.deck.push(new Card(face, suit));
       }
       if (this.includeJokers) {
-        this.deck.push(new Card('Joker', 'joker'));
-        this.deck.push(new Card('Joker', 'joker'));
+        this.deck.push(new Card("Joker", "joker"));
+        this.deck.push(new Card("Joker", "joker"));
       }
     }
     this.deck = shuffle(this.deck);

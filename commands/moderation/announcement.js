@@ -1,27 +1,25 @@
 const Command = require("../../models/Command"),
-      Discord = require("discord.js");
+  Discord = require("discord.js");
 
 class Announcement extends Command {
-
   constructor(client) {
     super(client, {
-      name : 'announcement',
-      memberName : 'announce',
-      group : 'moderation',
-      description : 'Make a Server Announcement',
-      enabled : true,
-      guildOnly : true,
-      aliases : [],
-      memberPermissions : [ "MENTION_EVERYONE" ],
-      botPermissions : [ "SEND_MESSAGES", "EMBED_LINKS" ],
-      nsfw : false,
-      ownerOnly : false,
-      cooldown : 3000
+      name: "announcement",
+      memberName: "announce",
+      group: "moderation",
+      description: "Make a Server Announcement",
+      enabled: true,
+      guildOnly: true,
+      aliases: [],
+      memberPermissions: ["MENTION_EVERYONE"],
+      botPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
+      nsfw: false,
+      ownerOnly: false,
+      cooldown: 3000,
     });
   }
 
   async run(message, args, data) {
-
     const text = args.join(" ");
     if (!text) {
       return message.error("moderation/announcement:MISSING_TEXT");
@@ -37,26 +35,35 @@ class Announcement extends Command {
     const msg = await message.sendT("moderation/announcement:MENTION_PROMPT");
 
     const collector = new Discord.MessageCollector(
-        message.channel, (m) => m.author.id === message.author.id,
-        {time : 240000});
+      message.channel,
+      (m) => m.author.id === message.author.id,
+      { time: 240000 }
+    );
 
     collector.on("collect", async (tmsg) => {
-      if (tmsg.content.toLowerCase() ===
-          message.translate("common:NO").toLowerCase()) {
+      if (
+        tmsg.content.toLowerCase() ===
+        message.translate("common:NO").toLowerCase()
+      ) {
         tmsg.delete();
         msg.delete();
         collector.stop(true);
       }
 
-      if (tmsg.content.toLowerCase() ===
-          message.translate("common:YES").toLowerCase()) {
+      if (
+        tmsg.content.toLowerCase() ===
+        message.translate("common:YES").toLowerCase()
+      ) {
         tmsg.delete();
         msg.delete();
-        const tmsg1 =
-            await message.sendT("moderation/announcement:MENTION_TYPE_PROMPT");
+        const tmsg1 = await message.sendT(
+          "moderation/announcement:MENTION_TYPE_PROMPT"
+        );
         const c = new Discord.MessageCollector(
-            message.channel, (m) => m.author.id === message.author.id,
-            {time : 60000});
+          message.channel,
+          (m) => m.author.id === message.author.id,
+          { time: 60000 }
+        );
         c.on("collect", (m) => {
           if (m.content.toLowerCase() === "here") {
             mention = "@here";
@@ -85,13 +92,12 @@ class Announcement extends Command {
         return message.error("misc:TIMES_UP");
       }
 
-      const embed =
-          new Discord.MessageEmbed()
-              .setAuthor(message.translate("moderation/announcement:TITLE"))
-              .setColor(data.config.embed.color)
-              .setFooter(message.author.tag)
-              .setTimestamp()
-              .setDescription(text);
+      const embed = new Discord.MessageEmbed()
+        .setAuthor(message.translate("moderation/announcement:TITLE"))
+        .setColor(data.config.embed.color)
+        .setFooter(message.author.tag)
+        .setTimestamp()
+        .setDescription(text);
 
       message.channel.send(mention, embed);
     });

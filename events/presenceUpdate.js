@@ -1,7 +1,7 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 // exports.run = (client, oldPresence, newPresence) => {
 module.exports = {
-  run : (oldPresence, newPresence) => {
+  run: (oldPresence, newPresence) => {
     /* try {
             if (!client.provider.isReady); // return
             if (!client.provider.getGuild(newPresence.guild.id, 'prefix'))
@@ -32,5 +32,5 @@ module.exports = {
     } catch (error) {
             console.error(error);
     }*/
-  }
+  },
 };

@@ -1,25 +1,24 @@
-const {Command} = require('discord.js-commando');
-const Discord = require('discord.js');
-const {error_log} = require('../../config');
-const {errorMessage} = require('../../helpers/logHandler');
-const ErrorEnum = require('../../helpers/errorTypes');
+const { Command } = require("discord.js-commando");
+const Discord = require("discord.js");
+const { error_log } = require("../../config");
+const { errorMessage } = require("../../helpers/logHandler");
+const ErrorEnum = require("../../helpers/errorTypes");
 
 module.exports = class ListChannelsCommand extends Command {
-
   constructor(client) {
     super(client, {
-      name : 'listchannels',
-      group : 'moderation',
-      memberName : 'listchannels',
-      aliases : [ 'channelslist' ],
-      description : 'List all the channels in this server.',
-      guildOnly : true
+      name: "listchannels",
+      group: "moderation",
+      memberName: "listchannels",
+      aliases: ["channelslist"],
+      description: "List all the channels in this server.",
+      guildOnly: true,
     });
   }
   run(message) {
     const channelList = message.guild.channels.cache;
 
-    channelList.forEach(channel => {
+    channelList.forEach((channel) => {
       var index = 0;
       var memberList = [];
 
@@ -29,17 +28,16 @@ module.exports = class ListChannelsCommand extends Command {
           index++;
         }
       } else {
-        memberList.push('No Members');
+        memberList.push("No Members");
       }
       return message.channel.send({
-        embed : new Discord.MessageEmbed()
-                    .setTitle(channel.name)
-                    .addField('Channel ID', channel.id)
-                    .addField('Channel Type', channel.type)
-                    .addField('Channel Members', memberList)
-                    .addField('Channel Category', channel.parent)
-
-      })
-    })
+        embed: new Discord.MessageEmbed()
+          .setTitle(channel.name)
+          .addField("Channel ID", channel.id)
+          .addField("Channel Type", channel.type)
+          .addField("Channel Members", memberList)
+          .addField("Channel Category", channel.parent),
+      });
+    });
   }
 };

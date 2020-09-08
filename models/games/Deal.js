@@ -1,13 +1,13 @@
-const Deck = require('./Deck');
-const {error_log} = require('../../config');
-const {errorMessage} = require('../../helpers/logHandler');
-const ErrorEnum = require('../../helpers/errorTypes');
+const Deck = require("./Deck");
+const { error_log } = require("../../config");
+const { errorMessage } = require("../../helpers/logHandler");
+const ErrorEnum = require("../../helpers/errorTypes");
 
 module.exports = class Deal {
   constructor() {
     this.deck = new Deck().cards;
-    this.dealer = [], this.player = [];
-    this.status = '';
+    (this.dealer = []), (this.player = []);
+    this.status = "";
 
     for (let i = 0; i < 2; i++) {
       this.player[i] = this.deck.shift();
@@ -32,9 +32,9 @@ module.exports = class Deal {
         }
       } else {
         message.client.channels.cache.get(error_log).send({
-          embed : errorMessage('Error', ErrorEnum.API, message.command.name)
+          embed: errorMessage("Error", ErrorEnum.API, message.command.name),
         });
-        console.log('Something is wrong!');
+        console.log("Something is wrong!");
       }
     }
     return score;
@@ -44,7 +44,7 @@ module.exports = class Deal {
     this.player.push(this.deck.shift());
     const playerScore = this.tally(this.player);
     if (playerScore > 21) {
-      this.status = 'bust';
+      this.status = "bust";
     }
     return this;
   }
@@ -60,12 +60,11 @@ module.exports = class Deal {
     }
 
     if (dealerScore > 21 || playerScore > dealerScore) {
-      this.status = 'win';
-
+      this.status = "win";
     } else if (dealerScore > playerScore) {
-      this.status = 'lose';
+      this.status = "lose";
     } else if (dealerScore == playerScore) {
-      this.status = 'push';
+      this.status = "push";
     }
   }
 };
