@@ -52,10 +52,10 @@ module.exports = {
 		osu_key: process.env.osu_key,
 		tenor_token: process.env.tenor_token,
 		weather_token: process.env.weather_token,
-		azure_comp_key1: process.env.azure_comp_key1,
-		azure_comp_key2: process.env.azure_comp_key2,
-		azure_comp_endpoint: process.env.azure_comp_endpoint,
-		azure_comp_location: process.env.azure_comp_location,
+		azure_key1: process.env.azure_key1,
+		azure_key2: process.env.azure_key2,
+		azure_translate_endpoint: process.env.azure_translate_endpoint,
+		azure_location: process.env.azure_location,
 	},
 	/* The others utils links */
 	others: {

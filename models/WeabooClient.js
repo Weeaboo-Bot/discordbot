@@ -21,7 +21,7 @@ moment.relativeTimeThreshold("M", 12);
 module.exports = class Client extends CommandoClient {
 	constructor(options) {
 		super(options);
-		
+		this.logger = require('../helpers/logger');
 		this.meme = 'hello';
 		this.config = require("../config"); // Load the config file
 		this.customEmojis = require("../emojis.json"); // load the bot's emojis

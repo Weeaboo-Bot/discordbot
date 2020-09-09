@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/sdoran35/discordbot#readme",
   "dependencies": {
-    "@azure/cognitiveservices-computervision": "^7.0.1",
     "@discordjs/opus": "^0.3.2",
     "animequote": "^1.1.1",
     "axios": "^0.19.2",
@@ -76,6 +75,7 @@
     "speak-tts": "^2.0.8",
     "translate": "^1.1.2",
     "util": "^0.10.4",
+    "uuid": "^8.3.0",
     "uws": "^8.14.1",
     "wanakana": "^2.3.1",
     "wikijs": "^3.1.4",
