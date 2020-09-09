@@ -51,7 +51,11 @@ module.exports = {
 		news_token: process.env.news_token,
 		osu_key: process.env.osu_key,
 		tenor_token: process.env.tenor_token,
-		weather_token: process.env.weather_token
+		weather_token: process.env.weather_token,
+		azure_comp_key1: process.env.azure_comp_key1,
+		azure_comp_key2: process.env.azure_comp_key2,
+		azure_comp_endpoint: process.env.azure_comp_endpoint,
+		azure_comp_location: process.env.azure_comp_location,
 	},
 	/* The others utils links */
 	others: {
