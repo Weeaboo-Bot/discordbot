@@ -29,6 +29,8 @@ const client = new Client({
 
 
 
+
+
 client.registry
 			.registerDefaultTypes()
 		
@@ -139,7 +141,7 @@ process.on("unhandledRejection", (err) => {
 	console.error(err);
 });
 
-logger.all(client);
+//logger.all(client);
 client.login(config.token);
 
 
