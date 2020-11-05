@@ -6,30 +6,30 @@
  * description of configuration variables and their potential values.
  */
 exports.config = {
-  /**
+	/**
    * Array of application names.
    */
-  app_name: ['Weaboo Discord Bot'],
-  /**
+	app_name: ['Weaboo Discord Bot'],
+	/**
    * Your New Relic license key.
    */
-  license_key: '082b2d391ec22143b9848fac0846866e77a3NRAL',
-  logging: {
-    /**
+	license_key: '082b2d391ec22143b9848fac0846866e77a3NRAL',
+	logging: {
+		/**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
      * issues with the agent, 'info' and higher will impose the least overhead on
      * production applications.
      */
-    level: 'info'
-  },
-  /**
+		level: 'info',
+	},
+	/**
    * When true, all request headers except for those listed in attributes.exclude
    * will be captured for all traces, unless otherwise specified in a destination's
    * attributes include/exclude lists.
    */
-  allow_all_headers: true,
-  attributes: {
-    /**
+	allow_all_headers: true,
+	attributes: {
+		/**
      * Prefix of attributes to exclude from all destinations. Allows * as wildcard
      * at end.
      *
@@ -37,17 +37,17 @@ exports.config = {
      *
      * @env NEW_RELIC_ATTRIBUTES_EXCLUDE
      */
-    exclude: [
-      'request.headers.cookie',
-      'request.headers.authorization',
-      'request.headers.proxyAuthorization',
-      'request.headers.setCookie*',
-      'request.headers.x*',
-      'response.headers.cookie',
-      'response.headers.authorization',
-      'response.headers.proxyAuthorization',
-      'response.headers.setCookie*',
-      'response.headers.x*'
-    ]
-  }
+		exclude: [
+			'request.headers.cookie',
+			'request.headers.authorization',
+			'request.headers.proxyAuthorization',
+			'request.headers.setCookie*',
+			'request.headers.x*',
+			'response.headers.cookie',
+			'response.headers.authorization',
+			'response.headers.proxyAuthorization',
+			'response.headers.setCookie*',
+			'response.headers.x*',
+		],
+	},
 };

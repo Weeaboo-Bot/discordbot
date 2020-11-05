@@ -9,12 +9,12 @@ module.exports = class UptimeCommand extends Command {
 			group: 'core',
 			memberName: 'uptime',
 			description: 'Tells you how long the I\'ve been running consistently!',
-			guarded: true
+			guarded: true,
 		});
 	}
 
 	run(message) {
-        var uptime = moment.duration(this.client.uptime).format('d[ days], h[ hours], m[ minutes, and ]s[ seconds]');
+		const uptime = moment.duration(this.client.uptime).format('d[ days], h[ hours], m[ minutes, and ]s[ seconds]');
 		return message.channel.send(`⌛ | I've been up and running for **${uptime}**!`);
 	}
 };

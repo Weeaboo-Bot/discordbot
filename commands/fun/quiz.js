@@ -18,26 +18,26 @@ module.exports = class QuizCommand extends Command {
 			examples: ['!quiz [category]'],
 			throttling: {
 				usages: 1,
-				duration: 3
+				duration: 3,
 			},
 			args: [
 				{
 					key: 'category',
 					type: 'string',
-					prompt: 'What Category would you like to take a quiz in?'
-				}
-			]
+					prompt: 'What Category would you like to take a quiz in?',
+				},
+			],
 		});
 	}
-	
-	run(message, {category}) {
+
+	run(message, { category }) {
 		message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
-				.then(collected => {
-					message.channel.send(`${collected.first().author} got the correct answer!`);
-				})
-				.catch(collected => {
-					message.channel.send('Looks like nobody got the answer this time.');
-				});
-		
+			.then(collected => {
+				message.channel.send(`${collected.first().author} got the correct answer!`);
+			})
+			.catch(collected => {
+				message.channel.send('Looks like nobody got the answer this time.');
+			});
+
 	}
 };

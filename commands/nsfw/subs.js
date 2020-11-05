@@ -1,160 +1,160 @@
 const SubsToSearch = {
-    '4knsfw':
+	'4knsfw':
         [
-            'nsfw_wallpapers',
-            'SexyWallpapers',
-            'HighResNSFW',
-            'nsfw_hd',
-            'UHDnsfw'
+        	'nsfw_wallpapers',
+        	'SexyWallpapers',
+        	'HighResNSFW',
+        	'nsfw_hd',
+        	'UHDnsfw',
         ],
-    "ahegao":
+	'ahegao':
         [
-         'ahegao'
+        	'ahegao',
         ],
-    'amateur':
+	'amateur':
         [
-            'RealGirls',
-            'amateur',
-            'gonewild'
+        	'RealGirls',
+        	'amateur',
+        	'gonewild',
 
         ],
 
-    'nsfw':
+	'nsfw':
         [
-            'nsfw',
-            'porn',
-            'BonerMaterial',
-            'adorableporn',
-            'nsfw2',
-            'Sexy',
-            'NSFW_nospam'
+        	'nsfw',
+        	'porn',
+        	'BonerMaterial',
+        	'adorableporn',
+        	'nsfw2',
+        	'Sexy',
+        	'NSFW_nospam',
         ],
-    'artsyporn':
+	'artsyporn':
         [
-            'SexyButNotPorn'
+        	'SexyButNotPorn',
         ],
-    'asian':
+	'asian':
         [
-            'AsianHotties',
-            'juicyasians',
-            'asianbabes'
+        	'AsianHotties',
+        	'juicyasians',
+        	'asianbabes',
         ],
-    'bara':
+	'bara':
         [
-            'baramanga'
+        	'baramanga',
         ],
-    'bdsm':
+	'bdsm':
         [
-            'bdsm',
-            'bondage'
+        	'bdsm',
+        	'bondage',
         ],
-    'bondage':
+	'bondage':
         [
-            'hentaibondage'
+        	'hentaibondage',
         ],
-    'cosplay':
+	'cosplay':
         [
-            'nsfwcosplay',
-            'cosplayonoff',
-            'cosporn',
-            'cosplayboobs'
+        	'nsfwcosplay',
+        	'cosplayonoff',
+        	'cosporn',
+        	'cosplayboobs',
         ],
-    'ecchi':
+	'ecchi':
         [
-            'ecchi'
+        	'ecchi',
         ],
-    'futa':
+	'futa':
         [
-            'futanari'
+        	'futanari',
         ],
-    'grool':
+	'grool':
         [
-            'grool'
+        	'grool',
         ],
-    'hentai':
+	'hentai':
         [
-            'hentai',
-            'rule34',
-            'HQHentai'
+        	'hentai',
+        	'rule34',
+        	'HQHentai',
         ],
-    'hentaigif':
+	'hentaigif':
         [
-            'HENTAI_GIF'
+        	'HENTAI_GIF',
         ],
-    'hentaiirl':
+	'hentaiirl':
         [
-            'hentai_irl'
+        	'hentai_irl',
         ],
-    'lingerie':
+	'lingerie':
         [
-            'lingerie',
-            'stockings',
-            'pantyfetish',
-            'panties'
+        	'lingerie',
+        	'stockings',
+        	'pantyfetish',
+        	'panties',
         ],
-    'monstergirl':
+	'monstergirl':
         [
-            'MonsterGirl'
+        	'MonsterGirl',
         ],
-    'nsfwgif':
+	'nsfwgif':
         [
-            'NSFW_GIF',
-            'nsfw_gifs',
-            'porninfifteenseconds',
-            '60FPSPorn',
-            'porn_gifs',
-            'nsfw_Best_Porn_Gif',
-            'LipsThatGrip',
-            'adultgifs'
+        	'NSFW_GIF',
+        	'nsfw_gifs',
+        	'porninfifteenseconds',
+        	'60FPSPorn',
+        	'porn_gifs',
+        	'nsfw_Best_Porn_Gif',
+        	'LipsThatGrip',
+        	'adultgifs',
         ],
-    'oppai':
+	'oppai':
         [
-            'OppaiLove'
+        	'OppaiLove',
         ],
-    'paizuri':
+	'paizuri':
         [
-            'Paizuri'
+        	'Paizuri',
         ],
-    'pantsu':
+	'pantsu':
         [
-            'pantsu'
+        	'pantsu',
         ],
-    'pussy':
+	'pussy':
         [
-            'pussy',
-            'rearpussy',
-            'simps',
-            'vagina',
-            'MoundofVenus',
-            'PerfectPussies',
-            'spreading'
+        	'pussy',
+        	'rearpussy',
+        	'simps',
+        	'vagina',
+        	'MoundofVenus',
+        	'PerfectPussies',
+        	'spreading',
         ],
-    'sukebei':
+	'sukebei':
         [
-            'Sukebei'
+        	'Sukebei',
         ],
-    'tentacle':
+	'tentacle':
         [
-            'tentai'
+        	'tentai',
         ],
-    'trap':
+	'trap':
         [
-            'traphentai'
+        	'traphentai',
         ],
-    'yaoi':
+	'yaoi':
         [
-            'yaoi'
+        	'yaoi',
         ],
-    'yuri':
+	'yuri':
         [
-            'yuri'
+        	'yuri',
         ],
-    'zr':
+	'zr':
         [
-            'ZettaiRyouiki'
+        	'ZettaiRyouiki',
         ],
 };
 
 module.exports = {
-    SubsToSearch
+	SubsToSearch,
 };

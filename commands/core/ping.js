@@ -13,17 +13,17 @@ const responses = [
 	'At your service!',
 	'Yes?',
 	'Hello!',
-	"Konnichiwa~",
-	"Ohayoo~",
-	"I'm up and running!",
-	"Here I am!",
-	"Right here!",
-	"Hai!",
-	"Hey there!",
-	"You found me!",
-	"Nya!",
-	"N-Nya..?",
-	"Nyahaha you found me!"
+	'Konnichiwa~',
+	'Ohayoo~',
+	'I\'m up and running!',
+	'Here I am!',
+	'Right here!',
+	'Hai!',
+	'Hey there!',
+	'You found me!',
+	'Nya!',
+	'N-Nya..?',
+	'Nyahaha you found me!',
 ];
 
 module.exports = class PingCommand extends Command {
