@@ -34,15 +34,19 @@ module.exports = class PlayCommand extends Command {
 	}
 
 	async run(message, { query, client }) {
+		
+		if (!message.channel.id === '713913929981755493') {
+			message.say('This command is not valid here!');
+		}
 		const voiceChannel = message.member.voice.channel;
 		if (!voiceChannel) return message.say('Join a channel and try again');
-
-
+		
+		
 		if (
-		// if the user entered a youtube playlist url
-			query.match(
-				/^(?!.*\?.*\bv=)https:\/\/www\.youtube\.com\/.*\?.*\blist=.*$/,
-			)
+				// if the user entered a youtube playlist url
+				query.match(
+						/^(?!.*\?.*\bv=)https:\/\/www\.youtube\.com\/.*\?.*\blist=.*$/,
+				)
 		) {
 			const playlist = await youtube.getPlaylist(query).catch(function() {
 				return message.say('Playlist is either private or it does not exist!');
