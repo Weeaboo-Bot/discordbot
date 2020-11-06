@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
-const ytdl = require('ytdl-core');
+const ytdl = require('ytdl-core-discord');
 const { google_token } = require('../../config');
 const youtube = new Youtube(google_token);
 
@@ -34,6 +34,10 @@ module.exports = class PlayCommand extends Command {
 	}
 
 	async run(message, { query, client }) {
+
+		if (!message.channel.id === '713913929981755493') {
+			message.say('This command is not valid here!');
+		}
 		const voiceChannel = message.member.voice.channel;
 		if (!voiceChannel) return message.say('Join a channel and try again');
 
@@ -58,16 +62,16 @@ module.exports = class PlayCommand extends Command {
 				try {
 					const video = await videosObj[i].fetch();
 					// this can be uncommented if you choose to limit the queue
-					// if (message.guild.musicData.queue.length < 10) {
-					//
-					message.guild.musicData.queue.push(
-						PlayCommand.constructSongObj(video, voiceChannel),
-					);
-					// } else {
-					//   return message.say(
-					//     `I can't play the full playlist because there will be more than 10 songs in queue`
-					//   );
-					// }
+					if (message.guild.musicData.queue.length < 10) {
+						message.guild.musicData.queue.push(
+							PlayCommand.constructSongObj(video, voiceChannel),
+						);
+					}
+					else {
+						return message.say(
+							'I can\'t play the full playlist because there will be more than 10 songs in queue',
+						);
+					}
 				}
 				catch (err) {
 					console.error(err);
@@ -97,23 +101,23 @@ module.exports = class PlayCommand extends Command {
 			});
 			// // can be uncommented if you don't want the bot to play live streams
 			// if (video.raw.snippet.liveBroadcastContent === 'live') {
-			//   return message.say("I don't support live streams!");
+			// 	return message.say('I don\'t support live streams!');
 			// }
 			// // can be uncommented if you don't want the bot to play videos longer than 1 hour
 			// if (video.duration.hours !== 0) {
 			//   return message.say('I cannot play videos longer than 1 hour');
 			// }
 			// // can be uncommented if you want to limit the queue
-			// if (message.guild.musicData.queue.length > 10) {
-			//   return message.say(
-			//     'There are too many songs in the queue already, skip or wait a bit'
-			//   );
-			// }
+			if (message.guild.musicData.queue.length > 10) {
+				return message.say(
+					'There are too many songs in the queue already, skip or wait a bit',
+				);
+			}
 			message.guild.musicData.queue.push(
 				PlayCommand.constructSongObj(video, voiceChannel),
 			);
 			if (
-					message.guild.musicData.isPlaying == false ||
+				message.guild.musicData.isPlaying == false ||
 					typeof message.guild.musicData.isPlaying == 'undefined'
 			) {
 				message.guild.musicData.isPlaying = true;
@@ -169,8 +173,8 @@ module.exports = class PlayCommand extends Command {
 					.then(function(video) {
 						// // can be uncommented if you don't want the bot to play live streams
 						// if (video.raw.snippet.liveBroadcastContent === 'live') {
-						//   songEmbed.delete();
-						//   return message.say("I don't support live streams!");
+						// 	songEmbed.delete();
+						// 	return message.say('I don\'t support live streams!');
 						// }
 
 						// // can be uncommented if you don't want the bot to play videos longer than 1 hour
@@ -180,12 +184,12 @@ module.exports = class PlayCommand extends Command {
 						// }
 
 						// // can be uncommented if you don't want to limit the queue
-						// if (message.guild.musicData.queue.length > 10) {
-						//   songEmbed.delete();
-						//   return message.say(
-						//     'There are too many songs in the queue already, skip or wait a bit'
-						//   );
-						// }
+						if (message.guild.musicData.queue.length > 10) {
+							songEmbed.delete();
+							return message.say(
+								'There are too many songs in the queue already, skip or wait a bit',
+							);
+						}
 						message.guild.musicData.queue.push(
 							PlayCommand.constructSongObj(video, voiceChannel),
 						);
@@ -222,16 +226,15 @@ module.exports = class PlayCommand extends Command {
 			});
 	}
 	static playSong(queue, message) {
-
-		const classThis = this; // use classThis instead of 'this' because of lexical scope below
+		// use classThis instead of 'this' because of lexical scope below
+		const classThis = this;
 		queue[0].voiceChannel
 			.join()
 			.then(function(connection) {
 				const dispatcher = connection
 					.play(
 						ytdl(queue[0].url, {
-							quality: 'highestaudio',
-							highWaterMark: 1024 * 1024 * 10,
+							type: 'opus',
 						}),
 					)
 					.on('start', function() {

@@ -10,22 +10,6 @@ function errorMessage(error, error_type, error_command) {
 		.setTimestamp();
 }
 
-function guildMessage(guild, guild_message) {
-
-}
-
-function dmMessage() {
-
-}
-
-function supportMessage() {
-
-}
-
-function botMessage() {
-
-}
-
 function auditMessage(auditEntry) {
 	return new Discord.MessageEmbed()
 		.setTitle('AUDIT EVENT')
@@ -39,9 +23,5 @@ function auditMessage(auditEntry) {
 
 module.exports = {
 	errorMessage,
-	guildMessage,
-	supportMessage,
-	dmMessage,
-	botMessage,
 	auditMessage,
 };
