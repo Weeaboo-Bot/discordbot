@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "debug:start": "nodemon index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix --ext .js,.jsx ."
   },
@@ -78,6 +78,7 @@
     "@babel/register": "^7.11.5",
     "eslint": "^7.12.1",
     "nodemon": "^2.0.6",
-    "prettier": "2.1.2"
+    "stylelint": "^13.7.2",
+    "stylelint-config-standard": "^20.0.0"
   }
 }

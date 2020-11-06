@@ -2,8 +2,8 @@ const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
-const { google_token, discord_owner_id } = require('../../config');
-const youtube = new Youtube(process.env.google_token);
+const { google_token } = require('../../config');
+const youtube = new Youtube(google_token);
 
 
 module.exports = class PlayCommand extends Command {
@@ -34,10 +34,6 @@ module.exports = class PlayCommand extends Command {
 	}
 
 	async run(message, { query, client }) {
-
-		if (!message.channel.id === '713913929981755493') {
-			message.say('This command is not valid here!');
-		}
 		const voiceChannel = message.member.voice.channel;
 		if (!voiceChannel) return message.say('Join a channel and try again');
 
@@ -117,8 +113,8 @@ module.exports = class PlayCommand extends Command {
 				PlayCommand.constructSongObj(video, voiceChannel),
 			);
 			if (
-				message.guild.musicData.isPlaying == false ||
-        typeof message.guild.musicData.isPlaying == 'undefined'
+					message.guild.musicData.isPlaying == false ||
+					typeof message.guild.musicData.isPlaying == 'undefined'
 			) {
 				message.guild.musicData.isPlaying = true;
 				return PlayCommand.playSong(message.guild.musicData.queue, message);
