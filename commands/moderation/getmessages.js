@@ -1,8 +1,8 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const { error_log } = require('../../config');
-const { errorMessage } = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const { errorMessage } = require('../../discord_functions/logHandler');
+const ErrorEnum = require('../../discord_functions/errorTypes');
 
 
 module.exports = class GetMessages extends Command {
@@ -10,7 +10,7 @@ module.exports = class GetMessages extends Command {
 		super(client, {
 			name: 'getmessages',
 			group: 'moderation',
-			aliases: ['getmsg' ],
+			aliases: ['getmsg'],
 			memberName: 'getmessages',
 			description: 'Get all messages in current channel',
 			examples: ['!getmessages'],

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { Command } = require('discord.js-commando');
 const Deck = require('../../models/Deck');
 const { stripIndents } = require('common-tags');
-const { verify } = require('../../functions/Util');
+const { verify } = require('../../discord_functions/Util');
 const hitWords = ['hit', 'hit me'];
 const standWords = ['stand'];
 

@@ -1,10 +1,22 @@
 const { Command } = require('discord.js-commando');
 const axios = require('axios');
 const { error_log } = require('../../config');
-const { errorMessage } = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const { errorMessage } = require('../../discord_functions/logHandler');
+const ErrorEnum = require('../../discord_functions/errorTypes');
 const moment = require('moment');
-const clocks = ['🕛', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'];
+const clocks = [
+	'🕛',
+	'🕐',
+	'🕑',
+	'🕒',
+	'🕓',
+	'🕔',
+	'🕕',
+	'🕖',
+	'🕗',
+	'🕘',
+	'🕙',
+	'🕚'];
 
 module.exports = class TimeCommand extends Command {
 	constructor(client) {

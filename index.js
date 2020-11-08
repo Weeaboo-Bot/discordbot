@@ -2,15 +2,16 @@
 /* eslint-disable max-nested-callbacks */
 const WeabooClient = require('./models/Client');
 const path = require('path');
+const admin = require('firebase-admin');
 const { Structures } = require('discord.js');
 const moment = require('moment');
 const { token, prefix, discord_owner_id, guild_log, dm_log, status_log, audit_log } = require('./config');
 
 
-// DEBUG
-// const token = process.env.token;
-// const prefix = process.env.prefix;
-// const discord_owner_id = process.env.discord_owner_id;
+admin.initializeApp({
+	credential: admin.credential.applicationDefault(),
+	databaseURL: 'https://<DATABASE_NAME>.firebaseio.com',
+});
 
 const { fromNow } = require('discord.js-commando');
 const { version } = require('./package');
@@ -43,7 +44,7 @@ const client = new WeabooClient({
 	owner: discord_owner_id,
 	disableEveryone: true,
 	unknownCommandResponse: false,
-	// messageCacheMaxSize	= 50,
+	messageCacheMaxSize: 50,
 	disabledEvents: [
 		'typingStart',
 		'messageDelete',

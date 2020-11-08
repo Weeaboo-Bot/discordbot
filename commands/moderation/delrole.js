@@ -1,8 +1,8 @@
 const { Command } = require('discord.js-commando');
 const { error_log } = require('../../config');
-const { errorMessage } = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
-const log = require('../../functions/consoleLogging');
+const { errorMessage } = require('../../discord_functions/logHandler');
+const ErrorEnum = require('../../discord_functions/errorTypes');
+const log = require('../../discord_functions/consoleLogging');
 const lodash = require('lodash');
 
 module.exports = class DeleteRoleCommand extends Command {

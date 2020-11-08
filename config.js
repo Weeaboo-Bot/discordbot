@@ -19,6 +19,7 @@ module.exports = {
 	osu_key: process.env.osu_key,
 	google_token: process.env.google_token,
 	google_cse_key: process.env.google_cse_key,
+	youtube_token: process.env.youtube_token,
 	giphy_key: process.env.giphy_key,
 	client_id: process.env.client_id,
 	role_channel_ud: process.env.role_channel_id,
