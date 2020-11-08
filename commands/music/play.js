@@ -2,8 +2,8 @@ const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const ytdl = require('ytdl-core-discord');
-const { google_token } = require('../../config');
-const youtube = new Youtube(google_token);
+const { youtube_token } = require('../../config');
+const youtube = new Youtube(youtube_token);
 
 
 module.exports = class PlayCommand extends Command {
@@ -90,31 +90,28 @@ module.exports = class PlayCommand extends Command {
 
 		// This if statement checks if the user entered a youtube url, it can be any kind of youtube url
 		if (query.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/)) {
-			query = query
-				.replace(/(>|<)/gi, '')
-				.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-			const id = query[2].split(/[^0-9a-z_\-]/i)[0];
-			const video = await youtube.getVideoByID(id).catch(function() {
+			
+			const video = await youtube.getVideo(query).catch(function() {
 				return message.say(
-					'There was a problem getting the video you provided!',
+						'There was a problem getting the video you provided!',
 				);
 			});
 			// // can be uncommented if you don't want the bot to play live streams
-			// if (video.raw.snippet.liveBroadcastContent === 'live') {
-			// 	return message.say('I don\'t support live streams!');
-			// }
+			if (video.raw.snippet.liveBroadcastContent === 'live') {
+				return message.say('I don\'t support live streams!');
+			}
 			// // can be uncommented if you don't want the bot to play videos longer than 1 hour
-			// if (video.duration.hours !== 0) {
-			//   return message.say('I cannot play videos longer than 1 hour');
-			// }
+			if (video.duration.hours !== 0) {
+				return message.say('I cannot play videos longer than 1 hour');
+			}
 			// // can be uncommented if you want to limit the queue
 			if (message.guild.musicData.queue.length > 10) {
 				return message.say(
-					'There are too many songs in the queue already, skip or wait a bit',
+						'There are too many songs in the queue already, skip or wait a bit',
 				);
 			}
 			message.guild.musicData.queue.push(
-				PlayCommand.constructSongObj(video, voiceChannel),
+					PlayCommand.constructSongObj(video, voiceChannel),
 			);
 			if (
 				message.guild.musicData.isPlaying == false ||
@@ -172,26 +169,26 @@ module.exports = class PlayCommand extends Command {
 					.getVideoByID(videos[videoIndex - 1].id)
 					.then(function(video) {
 						// // can be uncommented if you don't want the bot to play live streams
-						// if (video.raw.snippet.liveBroadcastContent === 'live') {
-						// 	songEmbed.delete();
-						// 	return message.say('I don\'t support live streams!');
-						// }
-
+						if (video.raw.snippet.liveBroadcastContent === 'live') {
+							songEmbed.delete();
+							return message.say('I don\'t support live streams!');
+						}
+						
 						// // can be uncommented if you don't want the bot to play videos longer than 1 hour
-						// if (video.duration.hours !== 0) {
-						//   songEmbed.delete();
-						//   return message.say('I cannot play videos longer than 1 hour');
-						// }
-
+						if (video.duration.hours !== 0) {
+							songEmbed.delete();
+							return message.say('I cannot play videos longer than 1 hour');
+						}
+						
 						// // can be uncommented if you don't want to limit the queue
 						if (message.guild.musicData.queue.length > 10) {
 							songEmbed.delete();
 							return message.say(
-								'There are too many songs in the queue already, skip or wait a bit',
+									'There are too many songs in the queue already, skip or wait a bit',
 							);
 						}
 						message.guild.musicData.queue.push(
-							PlayCommand.constructSongObj(video, voiceChannel),
+								PlayCommand.constructSongObj(video, voiceChannel),
 						);
 						if (message.guild.musicData.isPlaying == false) {
 							message.guild.musicData.isPlaying = true;
@@ -225,6 +222,8 @@ module.exports = class PlayCommand extends Command {
 				);
 			});
 	}
+	
+	
 	static playSong(queue, message) {
 		// use classThis instead of 'this' because of lexical scope below
 		const classThis = this;
@@ -278,6 +277,8 @@ module.exports = class PlayCommand extends Command {
 				return message.guild.me.voice.channel.leave();
 			});
 	}
+	
+	
 	static constructSongObj(video, voiceChannel) {
 		let duration = this.formatDuration(video.duration);
 		if (duration == '00:00') duration = 'Live Stream';
@@ -290,6 +291,8 @@ module.exports = class PlayCommand extends Command {
 			voiceChannel,
 		};
 	}
+	
+	
 	// prettier-ignore
 	static formatDuration(durationObj) {
 		const duration = `${durationObj.hours ? (durationObj.hours + ':') : ''}${
@@ -303,4 +306,6 @@ module.exports = class PlayCommand extends Command {
 		}`;
 		return duration;
 	}
+	
+	
 };
