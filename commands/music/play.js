@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 const { youtube_token } = require('../../config');
-const youtube = new Youtube(youtube_token);
+const youtube = new Youtube(process.env.youtube_token);
 require('fluent-ffmpeg');
 
 
