@@ -49,9 +49,9 @@ const client = new WeabooClient({
 		'typingStart',
 		'messageDelete',
 		'messageUpdate',
-		
+
 		'userUpdate',
-		
+
 		'voiceStateUpdate',
 		'guildMemberSpeaking',
 	],

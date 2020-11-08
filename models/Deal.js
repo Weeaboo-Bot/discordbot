@@ -1,7 +1,7 @@
 const Deck = require('./Deck');
 const { error_log } = require('../config');
-const { errorMessage } = require('../functions/logHandler');
-const ErrorEnum = require('../functions/errorTypes');
+const { errorMessage } = require('../discord_functions/logHandler');
+const ErrorEnum = require('../discord_functions/errorTypes');
 
 module.exports = class Deal {
 	constructor() {
@@ -10,7 +10,7 @@ module.exports = class Deal {
 		this.player = [];
 		this.status = '';
 
-		for(let i = 0; i < 2; i++) {
+		for (let i = 0; i < 2; i++) {
 			this.player[i] = this.deck.shift();
 			this.dealer[i] = this.deck.shift();
 		}

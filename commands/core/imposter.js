@@ -1,17 +1,17 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const { error_log } = require('../../config');
-const { errorMessage } = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const { errorMessage } = require('../../discord_functions/logHandler');
+const ErrorEnum = require('../../discord_functions/errorTypes');
 
 
 module.exports = class ImposterCommand extends Command {
 	constructor(client) {
 		super(client, {
-			name:'imposter',
-			memberName:'imposter',
+			name: 'imposter',
+			memberName: 'imposter',
 			aliases: ['otherusermsg'],
-			group:'fun',
+			group: 'fun',
 			guildOnly: true,
 			description: 'Send a message as a different user',
 			args: [

@@ -2,9 +2,9 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { error_log } = require('../../config');
-const { errorMessage } = require('../../functions/logHandler');
+const { errorMessage } = require('../../discord_functions/logHandler');
 const Color = require('color');
-const ErrorEnum = require('../../functions/errorTypes');
+const ErrorEnum = require('../../discord_functions/errorTypes');
 const signs = [
 	'capricorn',
 	'aquarius',

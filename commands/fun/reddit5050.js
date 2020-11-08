@@ -2,8 +2,8 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 
 const { error_log } = require('../../config');
-const { errorMessage } = require('../../functions/logHandler');
-const ErrorEnum = require('../../functions/errorTypes');
+const { errorMessage } = require('../../discord_functions/logHandler');
+const ErrorEnum = require('../../discord_functions/errorTypes');
 const axios = require('axios');
 
 function getRndInteger(min, max) {
