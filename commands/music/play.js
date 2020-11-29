@@ -98,7 +98,7 @@ module.exports = class PlayCommand extends Command {
 
 
 		if (
-			// if the user entered a youtube playlist url
+		// if the user entered a youtube playlist url
 			query.match(
 				/^(?!.*\?.*\bv=)https:\/\/www\.youtube\.com\/.*\?.*\blist=.*$/,
 			)
@@ -173,7 +173,7 @@ module.exports = class PlayCommand extends Command {
 			);
 			if (
 				message.guild.musicData.isPlaying == false ||
-				typeof message.guild.musicData.isPlaying == 'undefined'
+					typeof message.guild.musicData.isPlaying == 'undefined'
 			) {
 				message.guild.musicData.isPlaying = true;
 				return PlayCommand.playSong(message.guild.musicData.queue, message);
@@ -227,24 +227,24 @@ module.exports = class PlayCommand extends Command {
 					.getVideoByID(videos[videoIndex - 1].id)
 					.then(function(video) {
 						// // can be uncommented if you don't want the bot to play live streams
-						if (video.raw.snippet.liveBroadcastContent === 'live') {
-							songEmbed.delete();
-							return message.say('I don\'t support live streams!');
-						}
+						// if (video.raw.snippet.liveBroadcastContent === 'live') {
+						//   songEmbed.delete();
+						//   return message.say("I don't support live streams!");
+						// }
 
 						// // can be uncommented if you don't want the bot to play videos longer than 1 hour
-						if (video.duration.hours !== 0) {
-							songEmbed.delete();
-							return message.say('I cannot play videos longer than 1 hour');
-						}
+						// if (video.duration.hours !== 0) {
+						//   songEmbed.delete();
+						//   return message.say('I cannot play videos longer than 1 hour');
+						// }
 
 						// // can be uncommented if you don't want to limit the queue
-						if (message.guild.musicData.queue.length > 10) {
-							songEmbed.delete();
-							return message.say(
-								'There are too many songs in the queue already, skip or wait a bit',
-							);
-						}
+						// if (message.guild.musicData.queue.length > 10) {
+						//   songEmbed.delete();
+						//   return message.say(
+						//     'There are too many songs in the queue already, skip or wait a bit'
+						//   );
+						// }
 						message.guild.musicData.queue.push(
 							PlayCommand.constructSongObj(video, voiceChannel),
 						);
@@ -294,12 +294,14 @@ module.exports = class PlayCommand extends Command {
 	}
 	// prettier-ignore
 	static formatDuration(durationObj) {
-		const duration = `${durationObj.hours ? (durationObj.hours + ':') : ''}${durationObj.minutes ? durationObj.minutes : '00'
-		}:${(durationObj.seconds < 10)
-			? ('0' + durationObj.seconds)
-			: (durationObj.seconds
-				? durationObj.seconds
-				: '00')
+		const duration = `${durationObj.hours ? (durationObj.hours + ':') : ''}${
+			durationObj.minutes ? durationObj.minutes : '00'
+		}:${
+			(durationObj.seconds < 10)
+				? ('0' + durationObj.seconds)
+				: (durationObj.seconds
+					? durationObj.seconds
+					: '00')
 		}`;
 		return duration;
 	}

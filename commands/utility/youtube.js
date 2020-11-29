@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const youtube_node = require('youtube-node');
-const { youtube_token, discord_owner_id } = require('../../config');
-youtube = new youtube_node();
+const { youtube_token } = require('../../config');
+const youtube = new youtube_node();
 youtube.setKey(youtube_token);
 youtube.addParam('type', 'video');
 
