@@ -30,7 +30,7 @@ Structures.extend('Guild', function(Guild) {
 				isPlaying: false,
 				nowPlaying: null,
 				songDispatcher: null,
-				volume: 1,
+				volume: 0.10,
 			};
 
 		}

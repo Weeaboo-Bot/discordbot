@@ -5,5 +5,5 @@
   ],
   "appService.defaultWebAppToDeploy": "/subscriptions/aa9c8f02-deaf-47cd-b01a-c8a62cae009a/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/weaboobot",
   "appService.deploySubpath": ".",
-  "compile-hero.disable-compile-files-on-did-save-code": false
+  "compile-hero.disable-compile-files-on-did-save-code": true
 }
