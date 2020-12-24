@@ -33,7 +33,7 @@ module.exports = class PlayCommand extends Command {
 		});
 	}
 
-	static playSong(queue, message, startTime) {
+	static playSong(queue, message) {
 
 		const classThis = this; // use classThis instead of 'this' because of lexical scope below
 		queue[0].voiceChannel
@@ -44,7 +44,6 @@ module.exports = class PlayCommand extends Command {
 						ytdl(queue[0].url, {
 							quality: 'highestaudio',
 							highWaterMark: 1024 * 1024 * 10,
-							begin: startTime,
 						}),
 					)
 					.on('start', function() {
@@ -99,7 +98,7 @@ module.exports = class PlayCommand extends Command {
 
 
 		if (
-			// if the user entered a youtube playlist url
+		// if the user entered a youtube playlist url
 			query.match(
 				/^(?!.*\?.*\bv=)https:\/\/www\.youtube\.com\/.*\?.*\blist=.*$/,
 			)
@@ -118,17 +117,16 @@ module.exports = class PlayCommand extends Command {
 				try {
 					const video = await videosObj[i].fetch();
 					// this can be uncommented if you choose to limit the queue
-					if (message.guild.musicData.queue.length < 10) {
-
-						message.guild.musicData.queue.push(
-							PlayCommand.constructSongObj(video, voiceChannel, 0),
-						);
-					}
-					else {
-						return message.say(
-							'I can\'t play the full playlist because there will be more than 10 songs in queue',
-						);
-					}
+					// if (message.guild.musicData.queue.length < 10) {
+					//
+					message.guild.musicData.queue.push(
+						PlayCommand.constructSongObj(video, voiceChannel),
+					);
+					// } else {
+					//   return message.say(
+					//     `I can't play the full playlist because there will be more than 10 songs in queue`
+					//   );
+					// }
 				}
 				catch (err) {
 					console.error(err);
@@ -136,7 +134,7 @@ module.exports = class PlayCommand extends Command {
 			}
 			if (message.guild.musicData.isPlaying == false) {
 				message.guild.musicData.isPlaying = true;
-				return PlayCommand.playSong(message.guild.musicData.queue, message, 0);
+				return PlayCommand.playSong(message.guild.musicData.queue, message);
 			}
 			else if (message.guild.musicData.isPlaying == true) {
 				return message.say(
@@ -147,36 +145,38 @@ module.exports = class PlayCommand extends Command {
 
 		// This if statement checks if the user entered a youtube url, it can be any kind of youtube url
 		if (query.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/)) {
-			const id = query.split(/(?<=v=)(.*)(?=\?)/)[1];
-			const startTime = query.split(/([^t=]*$)/)[1];
+			query = query
+				.replace(/(>|<)/gi, '')
+				.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+			const id = query[2].split(/[^0-9a-z_\-]/i)[0];
 			const video = await youtube.getVideoByID(id).catch(function() {
 				return message.say(
 					'There was a problem getting the video you provided!',
 				);
 			});
-			// can be uncommented if you don't want the bot to play live streams
-			if (video.raw.snippet.liveBroadcastContent === 'live') {
-				return message.say('I don\'t support live streams!');
-			}
-			// can be uncommented if you don't want the bot to play videos longer than 1 hour
-			if (video.duration.hours !== 0) {
-				return message.say('I cannot play videos longer than 1 hour');
-			}
-			// can be uncommented if you want to limit the queue
-			if (message.guild.musicData.queue.length > 10) {
-				return message.say(
-					'There are too many songs in the queue already, skip or wait a bit',
-				);
-			}
+			// // can be uncommented if you don't want the bot to play live streams
+			// if (video.raw.snippet.liveBroadcastContent === 'live') {
+			//   return message.say("I don't support live streams!");
+			// }
+			// // can be uncommented if you don't want the bot to play videos longer than 1 hour
+			// if (video.duration.hours !== 0) {
+			//   return message.say('I cannot play videos longer than 1 hour');
+			// }
+			// // can be uncommented if you want to limit the queue
+			// if (message.guild.musicData.queue.length > 10) {
+			//   return message.say(
+			//     'There are too many songs in the queue already, skip or wait a bit'
+			//   );
+			// }
 			message.guild.musicData.queue.push(
-				PlayCommand.constructSongObj(video, voiceChannel, startTime),
+				PlayCommand.constructSongObj(video, voiceChannel),
 			);
 			if (
 				message.guild.musicData.isPlaying == false ||
-				typeof message.guild.musicData.isPlaying == 'undefined'
+					typeof message.guild.musicData.isPlaying == 'undefined'
 			) {
 				message.guild.musicData.isPlaying = true;
-				return PlayCommand.playSong(message.guild.musicData.queue, message, startTime);
+				return PlayCommand.playSong(message.guild.musicData.queue, message);
 			}
 			else if (message.guild.musicData.isPlaying == true) {
 				return message.say(`${video.title} added to queue`);
@@ -226,34 +226,34 @@ module.exports = class PlayCommand extends Command {
 				youtube
 					.getVideoByID(videos[videoIndex - 1].id)
 					.then(function(video) {
-						// can be uncommented if you don't want the bot to play live streams
-						if (video.raw.snippet.liveBroadcastContent === 'live') {
-							songEmbed.delete();
-							return message.say('I don\'t support live streams!');
-						}
+						// // can be uncommented if you don't want the bot to play live streams
+						// if (video.raw.snippet.liveBroadcastContent === 'live') {
+						//   songEmbed.delete();
+						//   return message.say("I don't support live streams!");
+						// }
 
-						// can be uncommented if you don't want the bot to play videos longer than 1 hour
-						if (video.duration.hours !== 0) {
-							songEmbed.delete();
-							return message.say('I cannot play videos longer than 1 hour');
-						}
+						// // can be uncommented if you don't want the bot to play videos longer than 1 hour
+						// if (video.duration.hours !== 0) {
+						//   songEmbed.delete();
+						//   return message.say('I cannot play videos longer than 1 hour');
+						// }
 
-						// can be uncommented if you don't want to limit the queue
-						if (message.guild.musicData.queue.length > 10) {
-							songEmbed.delete();
-							return message.say(
-								'There are too many songs in the queue already, skip or wait a bit',
-							);
-						}
+						// // can be uncommented if you don't want to limit the queue
+						// if (message.guild.musicData.queue.length > 10) {
+						//   songEmbed.delete();
+						//   return message.say(
+						//     'There are too many songs in the queue already, skip or wait a bit'
+						//   );
+						// }
 						message.guild.musicData.queue.push(
-							PlayCommand.constructSongObj(video, voiceChannel, 0),
+							PlayCommand.constructSongObj(video, voiceChannel),
 						);
 						if (message.guild.musicData.isPlaying == false) {
 							message.guild.musicData.isPlaying = true;
 							if (songEmbed) {
 								songEmbed.delete();
 							}
-							PlayCommand.playSong(message.guild.musicData.queue, message, 0);
+							PlayCommand.playSong(message.guild.musicData.queue, message);
 						}
 						else if (message.guild.musicData.isPlaying == true) {
 							if (songEmbed) {
@@ -280,7 +280,7 @@ module.exports = class PlayCommand extends Command {
 				);
 			});
 	}
-	static constructSongObj(video, voiceChannel, start) {
+	static constructSongObj(video, voiceChannel) {
 		let duration = this.formatDuration(video.duration);
 		if (duration == '00:00') duration = 'Live Stream';
 		return {
@@ -288,19 +288,20 @@ module.exports = class PlayCommand extends Command {
 			title: video.title,
 			rawDuration: video.duration,
 			duration,
-			startTime: start,
 			thumbnail: video.thumbnails.high.url,
 			voiceChannel,
 		};
 	}
 	// prettier-ignore
 	static formatDuration(durationObj) {
-		const duration = `${durationObj.hours ? (durationObj.hours + ':') : ''}${durationObj.minutes ? durationObj.minutes : '00'
-		}:${(durationObj.seconds < 10)
-			? ('0' + durationObj.seconds)
-			: (durationObj.seconds
-				? durationObj.seconds
-				: '00')
+		const duration = `${durationObj.hours ? (durationObj.hours + ':') : ''}${
+			durationObj.minutes ? durationObj.minutes : '00'
+		}:${
+			(durationObj.seconds < 10)
+				? ('0' + durationObj.seconds)
+				: (durationObj.seconds
+					? durationObj.seconds
+					: '00')
 		}`;
 		return duration;
 	}
