@@ -1,7 +1,7 @@
 const Deck = require('./Deck');
-const { error_log } = require('../config');
-const { errorMessage } = require('../discord_functions/logHandler');
-const ErrorEnum = require('../discord_functions/errorTypes');
+const { error_log } = require('../../config');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes');
 
 module.exports = class Deal {
 	constructor() {

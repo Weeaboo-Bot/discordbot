@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const { error_log } = require('../../config');
 const { disgustP } = require('../../assets/json/actions.json');
-const { errorMessage } = require('../../discord_functions/logHandler');
-const ErrorEnum = require('../../discord_functions/errorTypes');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes');
 
 module.exports = class NomCommand extends Command {
 	constructor(client) {
