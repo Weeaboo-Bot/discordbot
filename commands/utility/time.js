@@ -1,8 +1,8 @@
 const { Command } = require('discord.js-commando');
 const axios = require('axios');
 const { error_log } = require('../../config');
-const { errorMessage } = require('../../discord_functions/logHandler');
-const ErrorEnum = require('../../discord_functions/errorTypes');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes');
 const moment = require('moment');
 const clocks = [
 	'🕛',

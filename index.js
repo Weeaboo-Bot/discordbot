@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable max-nested-callbacks */
-const WeabooClient = require('./models/Client');
+const WeabooClient = require('./database/models/Client');
 const path = require('path');
 const admin = require('firebase-admin');
 const { Structures } = require('discord.js');
@@ -8,10 +8,10 @@ const moment = require('moment');
 const { token, prefix, discord_owner_id, guild_log, dm_log, status_log, audit_log } = require('./config');
 
 
-admin.initializeApp({
-	credential: admin.credential.applicationDefault(),
-	databaseURL: 'https://<DATABASE_NAME>.firebaseio.com',
-});
+admin.initializeApp();
+
+const db = admin.firestore();
+
 
 const { fromNow } = require('discord.js-commando');
 const { version } = require('./package');

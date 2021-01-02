@@ -1,4 +1,4 @@
-const { firstUpperCase } = require('../discord_functions/Util');
+const { firstUpperCase } = require('../../util/Util');
 const displaySuits = {
 	spades: '♠',
 	diamonds: '♦',

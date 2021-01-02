@@ -2,8 +2,8 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const PH = require('pornhub');
 const { error_log } = require('../../config');
-const { errorMessage } = require('../../discord_functions/logHandler');
-const ErrorEnum = require('../../discord_functions/errorTypes');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes');
 const errors = require('../../assets/json/errors');
 
 
