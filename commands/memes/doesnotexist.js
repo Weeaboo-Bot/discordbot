@@ -3,7 +3,7 @@ const axios = require('axios');
 const { Command } = require('discord.js-commando');
 const { error_log } = require('../../config');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 
 function getRndInteger(min, max) {

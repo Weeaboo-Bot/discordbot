@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const { error_log } = require('../../config');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 
 module.exports = class ListMembersCommand extends Command {

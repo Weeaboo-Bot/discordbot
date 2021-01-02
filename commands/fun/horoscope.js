@@ -4,7 +4,7 @@ const axios = require('axios');
 const { error_log } = require('../../config');
 const { errorMessage } = require('../../util/logHandler');
 const Color = require('color');
-const ErrorEnum = require('../../util/errorTypes');
+const ErrorEnum = require('../../util/errorTypes.json');
 const signs = [
 	'capricorn',
 	'aquarius',

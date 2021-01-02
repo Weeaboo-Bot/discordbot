@@ -21,6 +21,10 @@ module.exports = class Util {
 		return arr;
 	}
 
+	static rollDice() {
+		return Math.floor(Math.random() * 6) + 1;
+	}
+
 	static list(arr, conj = 'and') {
 		const len = arr.length;
 		if (len === 0) return '';

@@ -1,0 +1,97 @@
+{
+	"names": [
+		{
+			"language": {
+				"name": "en"
+			},
+			"name": "MissingNo."
+		},
+		{
+			"language": {
+				"name": "ja"
+			},
+			"name": "けつばん"
+		}
+	],
+	"name": "missingno",
+	"flavor_text_entries": [
+		{
+			"language": {
+				"name": "en"
+			},
+			"flavor_text": "Comment to be written."
+		}
+	],
+	"id": 0,
+	"genera": [
+		{
+			"language": {
+				"name": "en"
+			},
+			"genus": "??? Pokémon"
+		}
+	],
+	"held_items": [],
+	"varieties": [
+		{
+			"is_default": true,
+			"pokemon": {
+				"name": "missingno"
+			},
+			"types": [
+				"Bird",
+				"Normal"
+			],
+			"abilities": ["N/A"]
+		},
+		{
+			"is_default": false,
+			"pokemon": {
+				"name": "missingno-yellow"
+			},
+			"types": [
+				"Normal",
+				"999"
+			],
+			"abilities": ["N/A"]
+		}
+	],
+	"evolution_chain": {
+		"url": null
+	},
+	"is_legendary": false,
+	"is_mythical": false,
+	"is_baby": false,
+	"gender_rate": -1,
+	"stats": {
+		"hp": 33,
+		"atk": 136,
+		"def": 0,
+		"sAtk": 6,
+		"sDef": 6,
+		"spd": 29
+	},
+	"height": 120,
+	"weight": 3507.2,
+	"moveSet": [
+		{
+			"name": "Water Gun",
+			"level": 1
+		},
+		{
+			"name": "Water Gun",
+			"level": 1
+		},
+		{
+			"name": "Sky Attack",
+			"level": 1
+		}
+	],
+	"moveSetVersion": "red-blue",
+	"encounters": [],
+	"chain": [0],
+	"missingno": true,
+	"sprite": "https://cdn.bulbagarden.net/upload/9/98/Missingno_RB.png",
+	"box": "https://cdn.bulbagarden.net/upload/1/1f/AniMS_Missingno_I.png",
+	"url": "https://bulbapedia.bulbagarden.net/wiki/MissingNo."
+}

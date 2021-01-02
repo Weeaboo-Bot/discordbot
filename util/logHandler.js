@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const { error_log } = require('../config');
 
 function errorMessage(error, error_type, error_command) {
 	return new Discord.MessageEmbed()

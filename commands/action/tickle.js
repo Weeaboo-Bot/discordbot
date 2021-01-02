@@ -4,7 +4,7 @@ const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
 const { error_log } = require('../../config');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class TickleCommand extends Command {
 	constructor(client) {

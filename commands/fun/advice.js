@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const { error_log } = require('../../config');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 
 module.exports = class AdviceCommand extends Command {

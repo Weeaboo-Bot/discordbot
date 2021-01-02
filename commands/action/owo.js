@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const axios = require('axios').default;
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class OwoCommand extends Command {
 	constructor(client) {

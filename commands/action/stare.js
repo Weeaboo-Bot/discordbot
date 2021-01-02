@@ -4,7 +4,7 @@ const axios = require('axios');
 const { error_log } = require('../../config');
 const { disgustP } = require('../../assets/json/actions.json');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class StareCommand extends Command {
 	constructor(client) {
