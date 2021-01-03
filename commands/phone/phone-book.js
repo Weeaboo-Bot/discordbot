@@ -23,8 +23,8 @@ module.exports = class PhoneBookCommand extends Command {
 			const search = query.toLowerCase();
 			return channel.guild
 				&& channel.topic
-				&& channel.topic.includes('<xiao:phone>')
-				&& !channel.topic.includes('<xiao:phone-book:hide>')
+				&& channel.topic.includes('<weaboo:phone>')
+				&& !channel.topic.includes('<weaboo:phone-book:hide>')
 				&& (channel.guild.name.toLowerCase().includes(search) || channel.name.includes(search));
 		});
 		if (!channels.size) return msg.reply('Could not find any results.');

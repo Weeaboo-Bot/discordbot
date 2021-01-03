@@ -37,16 +37,16 @@ module.exports = class PhoneCommand extends Command {
 	}
 
 	async run(msg, { channelID }) {
-		if (channelID !== 'count' && (msg.guild && (!msg.channel.topic || !msg.channel.topic.includes('<xiao:phone>')))) {
-			return msg.say('You can only start a call in a channel with `<xiao:phone>` in the topic.');
+		if (channelID !== 'count' && (msg.guild && (!msg.channel.topic || !msg.channel.topic.includes('<weaboo:phone>')))) {
+			return msg.say('You can only start a call in a channel with `<weaboo:phone>` in the topic.');
 		}
 		if (channelID !== 'count' && this.client.inPhoneCall(msg.channel)) {
 			return msg.say('This channel is already in a phone call.');
 		}
 		const channels = this.client.channels.cache.filter(channel => channel.guild
 			&& channel.topic
-			&& channel.topic.includes('<xiao:phone>')
-			&& !channel.topic.includes('<xiao:phone:no-random>')
+			&& channel.topic.includes('<weaboo:phone>')
+			&& !channel.topic.includes('<weaboo:phone:no-random>')
 			&& !this.client.isBlockedFromPhone(msg.channel, channel, msg.author)
 			&& (msg.guild ? !msg.guild.channels.cache.has(channel.id) : true)
 			&& (channelID ? true : !this.client.inPhoneCall(channel)));
@@ -58,7 +58,7 @@ module.exports = class PhoneCommand extends Command {
 			const user = this.client.users.cache.get(channelID);
 			if (user) return msg.reply('You cannot call DM channels.');
 			if (!channel || !channel.guild) return msg.reply('That channel does not exist.');
-			if (!channel.topic || !channel.topic.includes('<xiao:phone>')) {
+			if (!channel.topic || !channel.topic.includes('<weaboo:phone>')) {
 				return msg.reply('That channel does not allow phone calls.');
 			}
 			if (this.client.inPhoneCall(channel)) return msg.reply('That channel is already in a call.');
