@@ -1,9 +1,9 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { error_log } = require('../../config');
-const { errorMessage } = require('../../discord_functions/logHandler');
-const ErrorEnum = require('../../discord_functions/errorTypes');
+const { ERROR_LOG } = require('../../config').logs;
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 
 module.exports = class NekoCommand extends Command {
@@ -36,7 +36,7 @@ module.exports = class NekoCommand extends Command {
 						.setFooter('http://nekos.life', 'https://a.safe.moe/3XYZ6.gif') });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
 
 
@@ -50,7 +50,7 @@ module.exports = class NekoCommand extends Command {
 						.setFooter('http://nekos.life', 'https://a.safe.moe/3XYZ6.gif') });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
 		}
 	}

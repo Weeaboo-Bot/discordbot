@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const axios = require('axios');
-const { Command } = require('discord.js-commando');
-const { error_log } = require('../../config');
-const { errorMessage } = require('../../discord_functions/logHandler');
-const ErrorEnum = require('../../discord_functions/errorTypes');
+const Command = require('../../structures/Command');
+const { ERROR_LOG } = require('../../config').logs;
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 
 function getRndInteger(min, max) {
@@ -43,7 +43,7 @@ module.exports = class DoesNotExistCommand extends Command {
 			.catch(function(error) {
 				// handle error
 
-				message.client.channels.cache.get(error_log).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
+				message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
 
 			});
 

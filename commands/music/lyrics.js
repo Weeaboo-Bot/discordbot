@@ -1,8 +1,8 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const { MessageEmbed } = require('discord.js');
-const fetch = require('node-fetch');
+const fetch = require('node-superfetch');
 const cheerio = require('cheerio');
-const { genius_token } = require('../../config');
+const { GENIUS_KEY } = require('../../config').api;
 
 module.exports = class LyricsCommand extends Command {
 	constructor(client) {
@@ -46,7 +46,7 @@ module.exports = class LyricsCommand extends Command {
 		let url = `https://api.genius.com/search?q=${encodeURI(songName)}`;
 
 		const headers = {
-			Authorization: `Bearer ${genius_token}`,
+			Authorization: `Bearer ${GENIUS_KEY}`,
 		};
 		try {
 			let body = await fetch(url, { headers });

@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 
 const mock = [
 	'I love Emilia!',
@@ -12,7 +12,7 @@ module.exports = class MockCommand extends Command {
 		super(client, {
 			name: 'mock',
 			guildOnly: true,
-			aliases: ['sayas', 'webhook'],
+			aliases: ['sayas'],
 			group: 'fun',
 			memberName: 'mock',
 			clientPermissions: ['MANAGE_WEBHOOKS'],

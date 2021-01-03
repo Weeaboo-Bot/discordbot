@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const tsun = [
 	'N-No, it\'s not like I did it for you! I did it because I had freetime, that\'s all! ┐(￣ヘ￣;)┌',
 	'I like you, you idiot! 💢',

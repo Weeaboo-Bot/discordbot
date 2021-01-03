@@ -1,10 +1,10 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 
 module.exports = class SayCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'say',
-			aliases: ['copycat', 'repeat', 'echo', 'parrot'],
+			aliases: ['copycat', 'echo', 'parrot'],
 			group: 'fun',
 			memberName: 'say',
 			guildOnly: true,
