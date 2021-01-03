@@ -1,8 +1,8 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const { error_log } = require('../../config');
-const { errorMessage } = require('../../discord_functions/logHandler');
-const ErrorEnum = require('../../discord_functions/errorTypes');
+const { ERROR_LOG } = require('../../config').logs;
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class AddRoleCommand extends Command {
 	constructor(client) {
@@ -45,8 +45,8 @@ module.exports = class AddRoleCommand extends Command {
 				.then(roleRes => {
 					return message.channel.send(`✅ | **${member.displayName}** has been given the role **${role.name}**!`);
 				})
-				.catch(error => {
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.DISCORD_API, message.command.name) });
+				.catch(err => {
+					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.DISCORD_API, message.command.name) });
 				});
 
 		}

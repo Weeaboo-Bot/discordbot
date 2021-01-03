@@ -1,9 +1,9 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 
-const { error_log } = require('../../config');
-const { errorMessage } = require('../../discord_functions/logHandler');
-const ErrorEnum = require('../../discord_functions/errorTypes');
+const { ERROR_LOG } = require('../../config').logs;
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 const axios = require('axios');
 
 function getRndInteger(min, max) {
@@ -29,8 +29,8 @@ module.exports = class Reddit5050Command extends Command {
 					.setURL('https://www.reddit.com' + res.data.data.children[index].data.permalink)
 					.setImage(res.data.data.children[index].data.url) });
 			})
-			.catch(function(error) {
-				message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+			.catch(function(err) {
+				message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 			});
 
 	}

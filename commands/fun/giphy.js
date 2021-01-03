@@ -1,10 +1,10 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { error_log } = require('../../config');
-const { errorMessage } = require('../../discord_functions/logHandler');
-const ErrorEnum = require('../../discord_functions/errorTypes');
-const { giphy_key } = require('../../config');
+const { GiphyFetch } = require('@giphy/js-fetch-api');
+const { api, logs } = require('../../config');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
+const gf = new GiphyFetch(api.GIPHY_KEY);
 
 module.exports = class GiphyCommand extends Command {
 	constructor(client) {
@@ -26,14 +26,13 @@ module.exports = class GiphyCommand extends Command {
 
 	async run(message, { query }) {
 
-		await axios.get('http://api.giphy.com/v1/gifs/search', {
-			params: {
-				q: query,
-				api_key: giphy_key,
-				rating: message.channel.nsfw ? 'r' : 'pg',
-				limit: 5,
-			},
-		})
+		await gf.search(query,
+			{
+				sort: 'relevant',
+				lang: 'en',
+				limit: 10,
+				type: 'gifs',
+			})
 			.then(function(res) {
 				if (!res.data.length) return message.channel.send(`No results found for **${query}**!`);
 				const random = Math.floor(Math.random() * res.data.length);
@@ -43,7 +42,7 @@ module.exports = class GiphyCommand extends Command {
 
 			})
 			.catch(function(err) {
-				message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+				message.client.channels.cache.get(logs.ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 			});
 
 

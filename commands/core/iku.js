@@ -1,5 +1,4 @@
-const { Command } = require('discord.js-commando');
-const Discord = require('discord.js');
+const Command = require('../../structures/Command');
 const iku = require('../../assets/json/iku.json');
 
 module.exports = class IkuCommand extends Command {
