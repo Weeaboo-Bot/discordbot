@@ -7,7 +7,7 @@ module.exports = class TemmieCommand extends Command {
 		super(client, {
 			name: 'temmie',
 			aliases: ['temmie-speak'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'temmie',
 			description: 'Converts text to Temmie speak.',
 			credit: [

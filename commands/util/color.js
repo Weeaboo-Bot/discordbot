@@ -5,7 +5,7 @@ module.exports = class ColorCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'color',
-			aliases: ['colour', 'hex'],
+			aliases: ['color'],
 			group: 'util',
 			memberName: 'color',
 			guildOnly: true,

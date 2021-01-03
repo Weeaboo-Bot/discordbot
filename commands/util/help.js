@@ -8,7 +8,7 @@ module.exports = class HelpCommand extends Command {
 		super(client, {
 			name: 'help',
 			aliases: ['commands', 'command-list'],
-			group: 'util-public',
+			group: 'util',
 			memberName: 'help',
 			description: 'Displays a list of available commands, or detailed information for a specific command.',
 			guarded: true,

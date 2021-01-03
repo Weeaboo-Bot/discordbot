@@ -7,7 +7,7 @@ module.exports = class MorseCommand extends Command {
 		super(client, {
 			name: 'morse',
 			aliases: ['morse-code'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'morse',
 			description: 'Converts text to morse code.',
 			args: [

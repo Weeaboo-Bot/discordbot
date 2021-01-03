@@ -5,7 +5,7 @@ module.exports = class GradeCommand extends Command {
 		super(client, {
 			name: 'grade',
 			aliases: ['grade-calculator', 'grade-calc'],
-			group: 'edit-number',
+			group: 'numbers',
 			memberName: 'grade',
 			description: 'Determines your grade on an assignment on an 100-point scale.',
 			args: [

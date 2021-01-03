@@ -4,7 +4,7 @@ module.exports = class LatlmesCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'latlmes',
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'latlmes',
 			description: 'Creates a Latlmes fake link that redirects to a rickroll.',
 			credit: [

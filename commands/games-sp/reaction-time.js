@@ -7,7 +7,7 @@ module.exports = class ReactionTimeCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'reaction-time',
-			aliases: ['reaction', 'react', 'gunfight-sp', 'sp-gunfight'],
+			aliases: ['gunfight-sp', 'sp-gunfight'],
 			group: 'games-sp',
 			memberName: 'reaction-time',
 			description: 'Test your reaction time.',

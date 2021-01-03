@@ -5,8 +5,8 @@ module.exports = class MockingCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'mocking',
-			aliases: ['mock'],
-			group: 'edit-text',
+			aliases: ['mock-cmd'],
+			group: 'text',
 			memberName: 'mocking',
 			description: 'SenDs TexT lIkE ThiS.',
 			args: [

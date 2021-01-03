@@ -8,7 +8,7 @@ module.exports = class UnitsCommand extends Command {
 		super(client, {
 			name: 'units',
 			aliases: ['convert'],
-			group: 'edit-number',
+			group: 'numbers',
 			memberName: 'units',
 			description: 'Converts units to/from other units.',
 			details: '**Units:** <https://mathjs.org/docs/datatypes/units.html#reference>',

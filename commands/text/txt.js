@@ -4,7 +4,7 @@ module.exports = class TxtCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'txt',
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'txt',
 			description: 'Generates a TXT file from the text you provide.',
 			args: [

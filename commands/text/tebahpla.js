@@ -7,7 +7,7 @@ module.exports = class TebahplaCommand extends Command {
 		super(client, {
 			name: 'tebahpla',
 			aliases: ['reverse-alphabet', 'alphabet-reverse'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'tebahpla',
 			description: 'Reverses the alphabet of text.',
 			args: [

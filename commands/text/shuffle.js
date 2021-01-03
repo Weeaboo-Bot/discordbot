@@ -4,9 +4,9 @@ const { shuffle } = require('../../util/Util');
 module.exports = class ShuffleCommand extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'shuffle',
-			group: 'edit-text',
-			memberName: 'shuffle',
+			name: 'shuffletext',
+			group: 'text',
+			memberName: 'shuffletext',
 			description: 'Shuffles text.',
 			args: [
 				{

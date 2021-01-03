@@ -5,7 +5,7 @@ module.exports = class SpoilerLetterCommand extends Command {
 		super(client, {
 			name: 'spoiler-letter',
 			aliases: ['spoiler'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'spoiler-letter',
 			description: 'Sends text with each and every character as an individual spoiler.',
 			args: [

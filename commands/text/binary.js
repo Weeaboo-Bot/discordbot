@@ -4,7 +4,7 @@ module.exports = class BinaryCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'binary',
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'binary',
 			description: 'Converts text to binary.',
 			args: [

@@ -7,7 +7,7 @@ module.exports = class PirateCommand extends Command {
 		super(client, {
 			name: 'pirate',
 			aliases: ['pirate-speak'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'pirate',
 			description: 'Converts text to pirate.',
 			credit: [

@@ -6,7 +6,7 @@ module.exports = class DvorakCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'dvorak',
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'dvorak',
 			description: 'Converts text to Dvorak encoding.',
 			args: [

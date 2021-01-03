@@ -6,7 +6,7 @@ module.exports = class RomanCommand extends Command {
 		super(client, {
 			name: 'roman',
 			aliases: ['roman-numeral'],
-			group: 'edit-number',
+			group: 'numbers',
 			memberName: 'roman',
 			description: 'Converts a number to roman numerals.',
 			args: [

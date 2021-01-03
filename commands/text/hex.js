@@ -5,7 +5,7 @@ module.exports = class HexCommand extends Command {
 		super(client, {
 			name: 'hex',
 			aliases: ['hexidecimal'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'hex',
 			description: 'Converts text to hex.',
 			args: [

@@ -6,7 +6,7 @@ module.exports = class FinalGradeCommand extends Command {
 		super(client, {
 			name: 'final-grade',
 			aliases: ['final-grade-calculator', 'final-grade-calc'],
-			group: 'edit-number',
+			group: 'numbers',
 			memberName: 'final-grade',
 			description: 'Determines the grade you need to make on your final to get your desired course grade.',
 			credit: [

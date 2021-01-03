@@ -5,7 +5,7 @@ module.exports = class ClapCommand extends Command {
 		super(client, {
 			name: 'clap',
 			aliases: ['clapping'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'clap',
 			description: 'Sends 👏 text 👏 like 👏 this.',
 			args: [

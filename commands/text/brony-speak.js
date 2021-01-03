@@ -7,7 +7,7 @@ module.exports = class BronySpeakCommand extends Command {
 		super(client, {
 			name: 'brony-speak',
 			aliases: ['pony-speak'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'brony-speak',
 			description: 'Converts text to brony speak.',
 			credit: [

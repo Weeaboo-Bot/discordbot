@@ -7,7 +7,7 @@ module.exports = class PingCommand extends Command {
 		super(client, {
 			name: 'ping',
 			aliases: ['pong', 'ping-pong'],
-			group: 'util-public',
+			group: 'util',
 			memberName: 'ping',
 			description: 'Checks the bot\'s ping to the Discord server.',
 			guarded: true,

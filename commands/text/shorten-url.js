@@ -7,7 +7,7 @@ module.exports = class ShortenUrlCommand extends Command {
 		super(client, {
 			name: 'shorten-url',
 			aliases: ['short-url', 'bit-ly', 'bit.ly', 'url-shorten', 'url-short'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'shorten-url',
 			description: 'Shortens a URL using bit.ly.',
 			credit: [

@@ -7,7 +7,7 @@ module.exports = class EmojifyCommand extends Command {
 		super(client, {
 			name: 'emojify',
 			aliases: ['regional-indicator'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'emojify',
 			description: 'Converts text to emoji form.',
 			args: [

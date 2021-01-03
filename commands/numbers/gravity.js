@@ -6,7 +6,7 @@ module.exports = class GravityCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'gravity',
-			group: 'edit-number',
+			group: 'numbers',
 			memberName: 'gravity',
 			description: 'Determines weight on another celestial object.',
 			details: `**Celestial Objects:** ${Object.keys(planets).join(', ')}`,

@@ -7,7 +7,7 @@ module.exports = class SuperscriptCommand extends Command {
 		super(client, {
 			name: 'superscript',
 			aliases: ['tiny-text', 'small-text'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'superscript',
 			description: 'Converts text to tiny text.',
 			args: [

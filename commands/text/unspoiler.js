@@ -5,7 +5,7 @@ module.exports = class UnspoilerCommand extends Command {
 		super(client, {
 			name: 'unspoiler',
 			aliases: ['unspoil'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'unspoiler',
 			description: 'Removes all spoilers from a message.',
 			args: [

@@ -5,7 +5,7 @@ module.exports = class LowercaseCommand extends Command {
 		super(client, {
 			name: 'lowercase',
 			aliases: ['to-lowercase'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'lowercase',
 			description: 'Converts text to lowercase.',
 			args: [

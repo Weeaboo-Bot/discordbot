@@ -5,7 +5,7 @@ module.exports = class UppercaseCommand extends Command {
 		super(client, {
 			name: 'uppercase',
 			aliases: ['to-uppercase', 'all-caps', 'caps'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'uppercase',
 			description: 'Converts text to uppercase.',
 			args: [

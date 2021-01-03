@@ -7,7 +7,7 @@ module.exports = class UpsideDownCommand extends Command {
 		super(client, {
 			name: 'upside-down',
 			aliases: ['u-down'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'upside-down',
 			description: 'Flips text upside-down.',
 			args: [

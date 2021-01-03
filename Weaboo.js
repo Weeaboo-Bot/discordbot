@@ -21,25 +21,23 @@ client.registry
 	.registerGroups([
 		['action', 'Action'],
 		['anime', 'Anime'],
-		['music', 'Music'],
-		['fun', 'Fun'],
 		['core', 'Core'],
+		['fun', 'Fun'],
+		['games-mp', 'Multi-Player Games'],
+		['games-sp', 'Single-Player Games'],
 		['info', 'Info'],
 		['memes', 'Memes'],
 		['moderation', 'Moderation'],
-		['nsfw', 'NSFW'],
-		['util', 'Utility'],
-		['owner', 'Hidden + Owner'],
+		['music', 'Music Commands'],
 		['news', 'News'],
+		['nsfw', 'NSFW'],
+		['numbers', 'Number Commands'],
+		['owner', 'Hidden + Owner'],
+		['phone', 'Phone Commands'],
+		['text', 'Text Commands'],
+		['util', 'Utility'],
 		['general', 'General'],
-		['games', 'Games'],
-		['video', 'Video Commands'],
 		['loyal', 'Loyalty Program Commands'],
-		['games-sp', 'Single-Player Games'],
-		['games-mp', 'Multi-Player Games'],
-		['text', 'Text Manipulation'],
-		['numbers', 'Number Manipulation'],
-		['phone', 'Phone'],
 		['other', 'Other'],
 	])
 	.registerDefaultCommands({
@@ -53,7 +51,7 @@ client.registry
 
 client.on('ready', async () => {
 	client.logger.info(`[READY] Logged in as ${client.user.tag}! ID: ${client.user.id}`);
-	
+
 	// Push client-related activities
 	client.activities.push(
 		{ text: () => `${formatNumber(client.guilds.cache.size)} servers`, type: 'WATCHING' },

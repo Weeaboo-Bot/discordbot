@@ -6,7 +6,7 @@ module.exports = class BrailleCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'braille',
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'braille',
 			description: 'Converts text to braille.',
 			args: [

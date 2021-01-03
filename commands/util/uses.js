@@ -6,7 +6,7 @@ module.exports = class UsesCommand extends Command {
 		super(client, {
 			name: 'uses',
 			aliases: ['command-uses', 'cmd-uses'],
-			group: 'util-public',
+			group: 'util',
 			memberName: 'uses',
 			description: 'Responds with a command\'s usage stats.',
 			guarded: true,

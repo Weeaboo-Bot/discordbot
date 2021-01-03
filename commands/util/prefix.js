@@ -5,7 +5,7 @@ module.exports = class PrefixCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'prefix',
-			group: 'util-public',
+			group: 'util',
 			memberName: 'prefix',
 			description: 'Responds with the bot\'s command prefix.',
 			guarded: true,

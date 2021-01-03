@@ -1,6 +1,6 @@
 const Command = require('../../structures/Command');
 const { MessageEmbed } = require('discord.js');
-const translate = require('@vitalets/google-translagte-api');
+const translate = require('@vitalets/google-translate-api');
 const { list } = require('../../util/Util');
 const codes = Object.keys(translate.languages).filter(code => typeof translate.languages[code] !== 'function');
 
@@ -9,7 +9,7 @@ module.exports = class TranslateCommand extends Command {
 		super(client, {
 			name: 'translate',
 			aliases: ['google-translate'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'translate',
 			description: 'Translates text to a specific language.',
 			details: `**Codes:** ${codes.join(', ')}`,

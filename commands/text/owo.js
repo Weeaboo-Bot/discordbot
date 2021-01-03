@@ -4,10 +4,10 @@ const faces = ['(・`ω´・)', ';;w;;', 'owo', 'UwU', '>w<', '^w^'];
 module.exports = class OwOCommand extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'owo',
+			name: 'owo2',
 			aliases: ['furry-speak', 'fur-speak'],
-			group: 'edit-text',
-			memberName: 'owo',
+			group: 'text',
+			memberName: 'owo2',
 			description: 'OwO.',
 			credit: [
 				{

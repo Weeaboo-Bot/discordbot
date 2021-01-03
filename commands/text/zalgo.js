@@ -5,7 +5,7 @@ module.exports = class ZalgoCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'zalgo',
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'zalgo',
 			description: 'Converts text to zalgo.',
 			credit: [

@@ -5,7 +5,7 @@ module.exports = class SnakeSpeakCommand extends Command {
 		super(client, {
 			name: 'snake-speak',
 			aliases: ['snek-speak'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'snake-speak',
 			description: 'Convertsssss text to sssssnake ssssspeak.',
 			args: [

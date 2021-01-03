@@ -7,7 +7,7 @@ module.exports = class NobodyNameCommand extends Command {
 		super(client, {
 			name: 'nobody-name',
 			aliases: ['organization-name', 'org-name', 'organization-xiii-name'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'nobody-name',
 			description: 'Converts a name into the Organization XIII style.',
 			credit: [

@@ -5,7 +5,7 @@ module.exports = class URLEncodeCommand extends Command {
 		super(client, {
 			name: 'url-encode',
 			aliases: ['encode-url', 'encode-uri', 'uri-encode', 'encode-uri-component'],
-			group: 'edit-text',
+			group: 'text',
 			memberName: 'url-encode',
 			description: 'Encodes text to URL-friendly characters.',
 			args: [
