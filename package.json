@@ -91,7 +91,6 @@
     "eslint": "^7.12.1",
     "nodemon": "^2.0.6",
     "stylelint": "^13.7.2",
-    "stylelint-config-standard": "^20.0.0",
-    "winston": "^3.3.3"
+    "stylelint-config-standard": "^20.0.0"
   }
 }
