@@ -1,10 +1,10 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const { GiphyFetch } = require('@giphy/js-fetch-api');
-const { ERROR_LOG, GIPHY_KEY } = require('../../config');
+const { api, logs } = require('../../config');
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
-const gf = new GiphyFetch(GIPHY_KEY);
+const gf = new GiphyFetch(api.GIPHY_KEY);
 
 module.exports = class GiphyCommand extends Command {
 	constructor(client) {
@@ -42,7 +42,7 @@ module.exports = class GiphyCommand extends Command {
 
 			})
 			.catch(function(err) {
-				message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+				message.client.channels.cache.get(logs.ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 			});
 
 

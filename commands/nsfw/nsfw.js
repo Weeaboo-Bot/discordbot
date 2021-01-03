@@ -1,7 +1,7 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { error_log } = require('../../config');
+const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 const { disgustP } = require('../../assets/json/actions.json');
@@ -66,7 +66,7 @@ module.exports = class NSFWCommand extends Command {
 				.catch(function(error) {
 					// handle error
 
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
+					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
 
 				});
 

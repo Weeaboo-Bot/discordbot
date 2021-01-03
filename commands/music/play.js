@@ -1,8 +1,9 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
-const youtube = new Youtube(process.env.youtube_token);
+const { GOOGLE_KEY } = require('../../config').api;
+const youtube = new Youtube(GOOGLE_KEY);
 require('fluent-ffmpeg');
 
 

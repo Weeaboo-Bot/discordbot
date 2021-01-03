@@ -1,7 +1,7 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { error_log } = require('../../config');
+const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 const errors = require('../../assets/json/errors');
@@ -30,10 +30,7 @@ module.exports = class GTNCommand extends Command {
 			message.react('💢');
 			return message.channel.send(errMessage);
 		}
-
-		const text = await snekfetch.get('https://rra.ram.moe/i/r?nsfw=true');
-		const body = JSON.parse(text.text);
-
+		
 		await axios.get('https://rra.ram.moe/i/r', {
 			params: {
 				'nsfw': true,
@@ -45,7 +42,7 @@ module.exports = class GTNCommand extends Command {
 					.setImage(`https://rra.ram.moe${res.data.path}`) });
 			})
 			.catch(function(err) {
-				message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+				message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 			});
 
 

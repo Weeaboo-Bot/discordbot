@@ -1,6 +1,6 @@
 // powered by smugs.safe.moe!!
 
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 
 

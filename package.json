@@ -81,7 +81,6 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
     "eslint": "^7.12.1",
-    "ioredis": "^4.19.4",
     "nodemon": "^2.0.6",
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",

@@ -1,6 +1,6 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const axios = require('axios');
-const { error_log } = require('../../config');
+const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 const moment = require('moment');
@@ -66,7 +66,7 @@ module.exports = class TimeCommand extends Command {
 			})
 			.catch(function(err) {
 				message.channel.send(`❎ | Location **${location}** was not found!`);
-				return message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+				return message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 			});
 
 

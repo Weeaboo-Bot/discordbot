@@ -1,7 +1,7 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { error_log } = require('../../config');
+const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 
@@ -33,7 +33,7 @@ module.exports = class LizardCommand extends Command {
 					.setColor('#71A3BE') });
 			})
 			.catch(function(err) {
-				message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+				message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 			});
 
 

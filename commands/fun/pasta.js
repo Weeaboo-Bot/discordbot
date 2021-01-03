@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const pasta = require('../../assets/json/pasta.json');
 
 module.exports = class EasterEggCommand extends Command {

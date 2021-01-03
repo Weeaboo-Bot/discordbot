@@ -1,5 +1,5 @@
-const { Command } = require('discord.js-commando');
-const { error_log } = require('../../config');
+const Command = require('../../structures/Command');
+const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 
@@ -41,7 +41,7 @@ module.exports = class DeleteRoleCommand extends Command {
 			})
 			.catch(function(err) {
 
-				message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.DISCORD_API, message.command.name) });
+				message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.DISCORD_API, message.command.name) });
 				return message.channel.send(`❎ | **${message.mentions.members.first().displayName}** does not have the ${role.name} role!`);
 			});
 	}

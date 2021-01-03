@@ -1,4 +1,4 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const { server_id } = require('../../config');
 
 module.exports = class SayChannelCommand extends Command {

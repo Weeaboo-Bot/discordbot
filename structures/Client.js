@@ -1,8 +1,6 @@
 const { CommandoClient } = require('discord.js-commando');
 const { WebhookClient, Collection, Structures } = require('discord.js');
 const winston = require('winston');
-const Redis = require('./Redis');
-const TimerManager = require('./remind/TimerManager');
 const activities = require('../assets/json/activity');
 const leaveMsgs = require('../assets/json/leave-messages');
 const {
@@ -40,9 +38,7 @@ module.exports = class WeabooClient extends CommandoClient {
 				winston.format.printf(log => `[${log.timestamp}] [${log.level.toUpperCase()}]: ${log.message}`),
 			),
 		});
-		this.redis = Redis ? Redis.db : null;
 		this.webhook = new WebhookClient(DISCORD_WEBHOOK_ID, DISCORD_WEBHOOK_TOKEN, { disableMentions: 'everyone' });
-		this.timers = new TimerManager(this);
 		this.games = new Collection();
 		this.phone = new Collection();
 		this.activities = activities;

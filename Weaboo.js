@@ -1,9 +1,9 @@
-const { DISCORD_TOKEN, DISCORD_OWNER_ID, DISCORD_PREFIX, DISCORD_INVITE } = require('./config');
+const { DISCORD_TOKEN, DISCORD_OWNER_ID, DISCORD_PREFIX, DISCORD_INVITE } = require('./config').discord;
 const path = require('path');
 const { Intents, MessageEmbed } = require('discord.js');
 const Client = require('./structures/Client');
 const { formatNumber } = require('./util/Util');
-const admin = require('firebase-admin');
+
 
 const client = new Client({
 	commandPrefix: DISCORD_PREFIX,
@@ -59,10 +59,7 @@ client.registry
 
 client.on('ready', async () => {
 	client.logger.info(`[READY] Logged in as ${client.user.tag}! ID: ${client.user.id}`);
-
-	// Set up existing timers
-	await client.timers.fetchAll();
-
+	
 	// Push client-related activities
 	client.activities.push(
 		{ text: () => `${formatNumber(client.guilds.cache.size)} servers`, type: 'WATCHING' },

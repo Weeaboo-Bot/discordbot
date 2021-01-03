@@ -1,8 +1,8 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const youtube_node = require('youtube-node');
-const { youtube_token } = require('../../config');
+const { YOUTUBE_KEY } = require('../../config').api;
 const youtube = new youtube_node();
-youtube.setKey(youtube_token);
+youtube.setKey(YOUTUBE_KEY);
 youtube.addParam('type', 'video');
 
 module.exports = class YouTubeCommand extends Command {

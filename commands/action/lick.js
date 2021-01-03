@@ -1,7 +1,7 @@
-const { Command } = require('discord.js-commando');
+const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { error_log } = require('../../config');
+const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 const { disgustP } = require('../../assets/json/actions.json');
