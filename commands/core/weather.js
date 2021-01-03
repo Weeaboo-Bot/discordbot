@@ -22,7 +22,7 @@ module.exports = class WeatherCommand extends Command {
 			examples: ['!weather 50010', '!weather Ames,IA'],
 			memberName: 'weather',
 			aliases: ['weatherinfo'],
-			group: 'util',
+			group: 'core',
 			description: 'Return Weather for a ZIP or City',
 			args: [
 				{

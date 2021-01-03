@@ -5,7 +5,7 @@ module.exports = class TemperatureCommand extends Command {
 		super(client, {
 			name: 'temperature',
 			aliases: ['temp', 'degrees'],
-			group: 'util',
+			group: 'core',
 			memberName: 'temperature',
 			description: 'Converts temperatures to/from Celsius, Fahrenheit, or Kelvin.',
 			examples: ['~temp [base] [to] [amount]'],
