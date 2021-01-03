@@ -1,65 +1,72 @@
 const Command = require('../../structures/Command');
-const Discord = require('discord.js');
 const moment = require('moment');
-const perms = require('../../assets/json/permissions');
-const { fromNow } = require('discord.js-commando');
-
+const { MessageEmbed } = require('discord.js');
+const { trimArray } = require('../../util/Util');
+const flags = {
+	DISCORD_EMPLOYEE: 'Discord Employee',
+	PARTNERED_SERVER_OWNER: 'Discord Partner',
+	BUGHUNTER_LEVEL_1: 'Bug Hunter (Level 1)',
+	BUGHUNTER_LEVEL_2: 'Bug Hunter (Level 2)',
+	HYPESQUAD_EVENTS: 'HypeSquad Events',
+	HOUSE_BRAVERY: 'House of Bravery',
+	HOUSE_BRILLIANCE: 'House of Brilliance',
+	HOUSE_BALANCE: 'House of Balance',
+	EARLY_SUPPORTER: 'Early Supporter',
+	TEAM_USER: 'Team User',
+	SYSTEM: 'System',
+	VERIFIED_BOT: 'Verified Bot',
+	EARLY_VERIFIED_DEVELOPER: 'Early Verified Bot Developer',
+};
+const deprecated = ['DISCORD_PARTNER', 'VERIFIED_DEVELOPER'];
 
 module.exports = class UserCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'user',
-			aliases: ['info', 'userinfo', 'member', 'whois', 'profile'],
+			aliases: ['user-info', 'member', 'member-info', 'profile'],
 			group: 'info',
 			memberName: 'user',
-			guildOnly: true,
-			description: 'Shows details about a user!',
-			examples: ['~user <mention>'],
-			args: [{
-				key: 'member',
-				prompt: 'Which user would you like to get info on?',
-				type: 'member',
-				default: '',
-			}],
+			description: 'Responds with detailed information on a user.',
+			clientPermissions: ['EMBED_LINKS'],
+			args: [
+				{
+					key: 'user',
+					prompt: 'Which user would you like to get information on?',
+					type: 'user',
+					default: msg => msg.author,
+				},
+			],
 		});
 	}
 
-	run(message, args) {
-		const member = message.mentions.members.first();
-
-		const status = member.user.presence.activity ? ('Playing') + ` **${member.user.presence.activity.name}**` : `*${member.user === this.client.user ? 'I am' : 'This user is'} not playing/streaming anything!*`;
-
-		if (member.user.bot) {
-			var author = member.user.tag + ' [BOT]';
+	async run(msg, { user }) {
+		const userFlags = user.flags ? user.flags.toArray().filter(flag => !deprecated.includes(flag)) : [];
+		const embed = new MessageEmbed()
+			.setThumbnail(user.displayAvatarURL({ format: 'png', dynamic: true }))
+			.setAuthor(user.tag)
+			.addField('❯ Discord Join Date', moment.utc(user.createdAt).format('MM/DD/YYYY h:mm A'), true)
+			.addField('❯ ID', user.id, true)
+			.addField('❯ Bot?', user.bot ? 'Yes' : 'No', true)
+			.addField('❯ Flags', userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None');
+		if (msg.guild) {
+			try {
+				const member = await msg.guild.members.fetch(user.id);
+				const defaultRole = msg.guild.roles.cache.get(msg.guild.id);
+				const roles = member.roles.cache
+					.filter(role => role.id !== defaultRole.id)
+					.sort((a, b) => b.position - a.position)
+					.map(role => role.name);
+				embed
+					.addField('❯ Server Join Date', moment.utc(member.joinedAt).format('MM/DD/YYYY h:mm A'), true)
+					.addField('❯ Highest Role',
+						member.roles.highest.id === defaultRole.id ? 'None' : member.roles.highest.name, true)
+					.addField('❯ Hoist Role', member.roles.hoist ? member.roles.hoist.name : 'None', true)
+					.addField(`❯ Roles (${roles.length})`, roles.length ? trimArray(roles, 6).join(', ') : 'None')
+					.setColor(member.displayHexColor);
+			} catch {
+				embed.setFooter('Failed to resolve member, showing basic user information instead.');
+			}
 		}
-		else {
-			var author = member.user.tag;
-		}
-
-		if (!member.nickname) {
-			var nickname = '`N/A`';
-		}
-		else {
-			var nickname = member.nickname;
-		}
-
-		const allowed = Object.entries(member.permissions.serialize()).filter(([perm, allowed]) => allowed).map(([perm]) => '`' + perms[perm] + '`').join(',   ');
-
-		const roles = member.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => {
-			return role.name;
-		});
-
-		const embed = new Discord.MessageEmbed()
-			.setAuthor(author, member.user.displayAvatarURL({ format: 'png' }))
-			.setDescription(status)
-			.setColor(member.displayHexColor)
-			.setThumbnail(member.user.displayAvatarURL())
-			.setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL())
-			.addField('❯\u2000\Information', `•\u2000\**ID:** ${member.user.id}\n\•\u2000\**Status:** ${member.user.presence.status ? member.user.presence.status : '`N/A`'}\n\•\u2000\**Created:** ${moment(member.user.createdAt).format('MMMM Do YYYY')} \`(${fromNow(member.user.createdAt)})\``)
-			.addField('❯\u2000\Server Membership', `•\u2000\**Nickname:** ${nickname}\n\•\u2000\**Joined:** ${moment(member.joinedAt).format('MMMM Do YYYY')} \`(${fromNow(member.joinedAt)})\``, true)
-			.addField('❯\u2000\**Role Infomation**', `•\u2000\**Highest Role:** ${member.highestRole.name !== '@everyone' ? member.highestRole.name : 'None'}\n\•\u2000\**Hoist Role:** ${member.hoistRole ? member.hoistRole.name : 'None'}`, true)
-			.addField(`❯\u2000\**Roles** [${roles.length}]`, roles.length ? '•\u2000' + roles.join(', ') : '•\u2000\None', true)
-			.addField('❯\u2000\**Permissions**', allowed ? `•\u2000${allowed}` : '•\u2000\None');
-		return message.channel.send(`User information for **${member.user.username}**#${member.user.discriminator}`, { embed: embed });
+		return msg.embed(embed);
 	}
 };

@@ -1,6 +1,6 @@
 const { ArgumentType } = require('discord.js-commando');
 const fileTypeRe = /\.(jpe?g|png|gif|jfif|bmp)$/i;
-const request = require('node-fetch');
+const request = require('node-superfetch');
 
 module.exports = class ImageArgumentType extends ArgumentType {
 	constructor(client) {

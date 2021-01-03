@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const fetch = require('node-fetch');
+const fetch = require('node-superfetch');
 const { news_token } = require('../../config');
 const Command = require('../../structures/Command');
 

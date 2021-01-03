@@ -1,6 +1,6 @@
 const Command = require('../../structures/Command');
 const { MessageEmbed } = require('discord.js');
-const fetch = require('node-fetch');
+const fetch = require('node-superfetch');
 const cheerio = require('cheerio');
 const { GENIUS_KEY } = require('../../config').api;
 
