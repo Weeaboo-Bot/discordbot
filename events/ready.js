@@ -83,4 +83,6 @@ module.exports = async (client) => {
 
 	client.logger.info(`[READY] Logged in as ${client.user.tag}! ID: ${client.user.id}`);
 	client.logger.info(`Weaboo is running on ${client.guilds.cache.size} server(s)`);
+	
+	
 };

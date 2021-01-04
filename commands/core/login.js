@@ -1,4 +1,5 @@
 const Command = require('../../structures/Command');
+const URL = require('../../config').api.LOGIN_URL;
 
 module.exports = class LoginCommand extends Command {
 	constructor(client) {
@@ -19,6 +20,6 @@ module.exports = class LoginCommand extends Command {
 	}
 
 	async run(message) {
-		return await message.channel.send(`✅ | **${message.author.username}**, here is the link for login: ${client.config.api.LOGIN_URL}`);
+		return await message.channel.send(`✅ | **${message.author.username}**, here is the link for login: ${URL}`);
 	}
 };
