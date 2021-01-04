@@ -38,7 +38,9 @@ module.exports = class AddRoleCommand extends Command {
 	async run(message, { memberName, roleName }) {
 		const member = message.mentions.members.first();
 		const role = message.guild.roles.cache.find(role => role.name === roleName);
-		// if(member.roles.cache.get(role.id)) return message.channel.send(`❎ | **${member.displayName}** already has the role **${role.name}**!`)
+		if (member.roles.cache.get(role.id)) {
+			return message.channel.send(`❎ | **${member.displayName}** already has the role **${role.name}**!`);
+		}
 
 		try {
 			await member.roles.add(role)

@@ -51,7 +51,8 @@ module.exports = class ShutdownCommand extends Command {
 			await msg.say(text);
 			process.exit(code);
 			return null;
-		} catch {
+		}
+		catch {
 			process.exit(code);
 			return null;
 		}

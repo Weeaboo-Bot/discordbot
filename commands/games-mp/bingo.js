@@ -3,7 +3,7 @@ const { Collection } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const { awaitPlayers, reactIfAble } = require('../../util/Util');
 const nums = require('../../assets/json/bingo');
-const SUCCESS_EMOJI_ID  = require('../../config').api.SUCCESS_EMOJI_ID;
+const SUCCESS_EMOJI_ID = require('../../config').api.SUCCESS_EMOJI_ID;
 const rows = Object.keys(nums);
 const callNums = Array.from({ length: 75 }, (v, i) => i + 1);
 

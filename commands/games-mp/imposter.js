@@ -3,7 +3,7 @@ const { stripIndents, oneLine } = require('common-tags');
 const { Collection } = require('@discordjs/collection');
 const { delay, awaitPlayers, list, reactIfAble } = require('../../util/Util');
 const words = require('../../assets/json/imposter');
-const SUCCESS_EMOJI_ID  = require('../../config').api.SUCCESS_EMOJI_ID;
+const SUCCESS_EMOJI_ID = require('../../config').api.SUCCESS_EMOJI_ID;
 
 module.exports = class ImposterCommand extends Command {
 	constructor(client) {

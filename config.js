@@ -5,17 +5,14 @@ dotenv.config();
 exports.logs = {
 	GENERAL_CHAT: process.env.GENERAL_CHAT,
 	BOT_COMMANDS_CHAT: process.env.BOT_COMMAND_CHAT,
-	REPORT_LOG: process.env.REPORT_LOG,
 	JOIN_LEAVE_LOG: process.env.JOIN_LEAVE_LOG,
 	AUDIT_LOG: process.env.AUDIT_LOG,
-	BOT_LOG: process.env.BOT_LOG,
 	DM_LOG: process.env.DM_LOG,
-	EVENT_LOG: process.env.EVENT_LOG,
 	ERROR_LOG: process.env.ERROR_LOG,
-	GUILD_LOG: process.env.GUILD_LOG,
 	STATUS_LOG: process.env.STATUS_LOG,
 	SUPPORT_LOG: process.env.SUPPORT_LOG,
 	WEBHOOK_LOG: process.env.WEBHOOK_LOG,
+	MOD_LOG: process.env.MOD_LOG,
 };
 
 exports.discord = {
@@ -28,6 +25,7 @@ exports.discord = {
 };
 
 exports.api = {
+	LOGIN_URL: 'https://us-central1-weaboo-bot-73b07.cloudfunctions.net/api/login',
 	FIREBASE_KEY: process.env.FIREBASE_WEB_API_KEY,
 	GOOGLE_KEY: process.env.GOOGLE_API_KEY,
 	GOOGLE_CSE_KEY: process.env.GOOGLE_CSE_KEY,
@@ -46,4 +44,27 @@ exports.api = {
 	EMAIL_USER: process.env.EMAIL_USER,
 	EMAIL_PASS: process.env.EMAIL_PASS,
 	SUCCESS_EMOJI_ID: process.env.SUCCESS_EMOJI_ID,
+};
+
+exports.fbConfig = {
+	apiKey: 'AIzaSyCCoHgCZCkSx-ufrARV6Wb0QGNRPEO2Fug',
+	authDomain: 'weaboo-bot-73b07.firebaseapp.com',
+	projectId: 'weaboo-bot-73b07',
+	storageBucket: 'weaboo-bot-73b07.appspot.com',
+	messagingSenderId: '512545282964',
+	appId: '1:512545282964:web:b1d300c44da318cbb68d81',
+	measurementId: 'G-QBSB8CBTL6',
+};
+
+exports.fbAdminConfig = {
+	'type': process.env.ADMIN_TYPE,
+	'project_id': process.env.ADMIN_PROJECT_ID,
+	'private_key_id': process.env.ADMIN_PRIVATE_KEY_ID,
+	'private_key': process.env.ADMIN_PRIVATE_KEY,
+	'client_email': process.env.ADMIN_CLIENT_EMAIL,
+	'client_id': process.env.ADMIN_CLIENT_ID,
+	'auth_uri': process.env.ADMIN_AUTH_URI,
+	'token_uri': process.env.ADMIN_TOKEN_URI,
+	'auth_provider_x509_cert_url': process.env.ADMIN_AUTH_PROVIDER_CERT_URL,
+	'client_x509_cert_url': process.env.ADMIN_CLIENT_CERT_URL,
 };

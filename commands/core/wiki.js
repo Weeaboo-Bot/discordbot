@@ -7,7 +7,7 @@ module.exports = class WikiCommand extends Command {
 		super(client, {
 			name: 'wiki',
 			aliases: ['encyclopedia', 'wikipedia'],
-			group: 'util',
+			group: 'core',
 			memberName: 'wiki',
 			guildOnly: true,
 			description: 'Searches for your query on Wikipedia!',

@@ -11,7 +11,7 @@ module.exports = class GenerateCreditCommand extends Command {
 			description: 'Generates the credit list for Weaboo\'s README.',
 			details: 'Only the bot owner(s) may use this command.',
 			ownerOnly: true,
-			guarded: true
+			guarded: true,
 		});
 	}
 

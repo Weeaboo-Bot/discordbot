@@ -2,7 +2,7 @@ const Command = require('../../structures/Command');
 const { stripIndents } = require('common-tags');
 const { Collection } = require('discord.js');
 const { delay, awaitPlayers, reactIfAble } = require('../../util/Util');
-const SUCCESS_EMOJI_ID  = require('../../config').api.SUCCESS_EMOJI_ID;
+const SUCCESS_EMOJI_ID = require('../../config').api.SUCCESS_EMOJI_ID;
 
 module.exports = class IslandCommand extends Command {
 	constructor(client) {
