@@ -2,7 +2,37 @@ const config = require('./config');
 const { Intents } = require('discord.js');
 const Client = require('./structures/Client');
 
+const Sentry = require('@sentry/node');
+const Tracing = require('@sentry/tracing');
+
+
 global.__basedir = __dirname;
+
+
+Sentry.init({
+	dsn: 'https://c7c6cdcfb19041ddb0a0946b360ddb97@o499509.ingest.sentry.io/5578077',
+
+	// We recommend adjusting this value in production, or using tracesSampler
+	// for finer control
+	tracesSampleRate: 1.0,
+});
+
+const transaction = Sentry.startTransaction({
+	op: 'test',
+	name: 'My First Test Transaction',
+});
+
+setTimeout(() => {
+	try {
+		foo();
+	}
+	catch (e) {
+		Sentry.captureException(e);
+	}
+	finally {
+		transaction.finish();
+	}
+}, 99);
 
 // Client setup
 const intents = new Intents();

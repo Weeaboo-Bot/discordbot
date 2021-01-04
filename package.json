@@ -22,6 +22,8 @@
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
     "@giphy/js-fetch-api": "^2.0.1",
+    "@sentry/node": "^5.29.2",
+    "@sentry/tracing": "^5.29.2",
     "@vitalets/google-translate-api": "^4.0.0",
     "aki-api": "^5.2.0",
     "animequote": "^1.1.1",
