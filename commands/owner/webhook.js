@@ -26,7 +26,8 @@ module.exports = class WebhookCommand extends Command {
 			if (msg.guild && msg.deletable) await msg.delete();
 			await this.client.webhook.send(content);
 			return null;
-		} catch (err) {
+		}
+		catch (err) {
 			return msg.reply(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
 		}
 	}

@@ -49,7 +49,8 @@ module.exports = class ReportRespondCommand extends Command {
 		try {
 			await user.send('Your report has been evaluated with the following message:', { embed });
 			return msg.say(`${displaytypes[type]} sent to ${user.tag}.`);
-		} catch {
+		}
+		catch {
 			return msg.say(`Could not send ${displaytypes[type]} to ${user.tag}. Probably blocked me.`);
 		}
 	}

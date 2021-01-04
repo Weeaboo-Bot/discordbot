@@ -47,7 +47,7 @@ module.exports = class Battler {
 		};
 		const turn = await msg.channel.awaitMessages(filter, {
 			max: 1,
-			time: 30000
+			time: 30000,
 		});
 		if (!turn.size) return 'failed:time';
 		return turn.first().content.toLowerCase();

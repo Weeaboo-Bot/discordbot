@@ -1,1 +1,1 @@
-worker: node WeabooOLD.js
+worker: node Weaboo.js

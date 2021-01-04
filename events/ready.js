@@ -1,125 +1,86 @@
+const Database = require('../util/db');
+const db = new Database();
+const { formatNumber } = require('../util/Util');
 module.exports = async (client) => {
 
-	const activities = [
-		{ name: 'your commands', type: 'LISTENING' },
-		{ name: '@Calypso', type: 'LISTENING' },
-	];
 
-	// Update presence
-	client.user.setPresence({ status: 'online', activity: activities[0] });
+	// Push client-related activities
+	client.activities.push(
+		{ text: () => `${formatNumber(client.guilds.cache.size)} servers`, type: 'WATCHING' },
+		{ text: () => `with ${formatNumber(client.registry.commands.size)} commands`, type: 'PLAYING' },
+		{ text: () => `${formatNumber(client.channels.cache.size)} channels`, type: 'WATCHING' },
+	);
 
-	let activity = 1;
+	// Interval to change activity every minute
+	client.setInterval(() => {
+		const activity = client.activities[Math.floor(Math.random() * client.activities.length)];
+		const text = typeof activity.text === 'function' ? activity.text() : activity.text;
+		client.user.setActivity(text, { type: activity.type });
+	}, 60000);
 
-	// Update activity every 30 seconds
-	setInterval(() => {
-		activities[2] = { name: `${client.guilds.cache.size} servers`, type: 'WATCHING' }; // Update server count
-		activities[3] = { name: `${client.users.cache.size} users`, type: 'WATCHING' }; // Update user count
-		if (activity > 3) activity = 0;
-		client.user.setActivity(activities[activity]);
-		activity++;
-	}, 30000);
 
 	client.logger.info('Updating database and scheduling jobs...');
 	for (const guild of client.guilds.cache.values()) {
 
-		/** ------------------------------------------------------------------------------------------------
-     * FIND SETTINGS
-     * ------------------------------------------------------------------------------------------------ */
-		// Find mod log
-		const modLog = guild.channels.cache.find(c => c.name.replace('-', '').replace('s', '') === 'modlog' ||
-      c.name.replace('-', '').replace('s', '') === 'moderatorlog');
-
-		// Find admin and mod roles
-		const adminRole =
-      guild.roles.cache.find(r => r.name.toLowerCase() === 'admin' || r.name.toLowerCase() === 'administrator');
-		const modRole = guild.roles.cache.find(r => r.name.toLowerCase() === 'mod' || r.name.toLowerCase() === 'moderator');
-		const muteRole = guild.roles.cache.find(r => r.name.toLowerCase() === 'muted');
-		const crownRole = guild.roles.cache.find(r => r.name === 'The Crown');
-
-		/** ------------------------------------------------------------------------------------------------
-     * UPDATE TABLES
-     * ------------------------------------------------------------------------------------------------ */
-		// Update settings table
-		client.db.settings.insertRow.run(
-			guild.id,
-			guild.name,
-			guild.systemChannelID, // Default channel
-			guild.systemChannelID, // Welcome channel
-			guild.systemChannelID, // Farewell channel
-			guild.systemChannelID, // Crown Channel
-			modLog ? modLog.id : null,
-			adminRole ? adminRole.id : null,
-			modRole ? modRole.id : null,
-			muteRole ? muteRole.id : null,
-			crownRole ? crownRole.id : null,
-		);
 
 		// Update users table
 		guild.members.cache.forEach(member => {
-			client.db.users.insertRow.run(
-				member.id,
-				member.user.username,
-				member.user.discriminator,
-				guild.id,
-				guild.name,
-				member.joinedAt.toString(),
-				member.user.bot ? 1 : 0,
-			);
+
+			db.createDocument('users',
+				{
+					id: member.id,
+					username: member.user.username,
+					disc: member.user.discriminator,
+					guild: guild.id,
+					guild_name: guild.name,
+					joined: member.joinedAt,
+					isBot: member.bot ? 1 : 0,
+				}, false);
+
 		});
 
-		/** ------------------------------------------------------------------------------------------------
-     * CHECK DATABASE
-     * ------------------------------------------------------------------------------------------------ */
-		// If member left
-		const currentMemberIds = client.db.users.selectCurrentMembers.all(guild.id).map(row => row.user_id);
-		for (const id of currentMemberIds) {
-			if (!guild.members.cache.has(id)) {
-				client.db.users.updateCurrentMember.run(0, id, guild.id);
-				client.db.users.wipeTotalPoints.run(id, guild.id);
-			}
-		}
+		// Update channels table
+		guild.channels.cache.forEach(channel => {
+			db.createDocument('channels', {
+				id: channel.id,
+				group: channel.parent ? channel.parent.name : 'N/A',
+				type: channel.type,
+				members: channel.members ? channel.members.toJSON() : 'N/A',
+				created: channel.createdAt,
+				position: channel.position,
+				guild: channel.guild ? channel.guild.name : 'N/A',
+			}, false);
+		});
 
-		// If member joined
-		const missingMemberIds = client.db.users.selectMissingMembers.all(guild.id).map(row => row.user_id);
-		for (const id of missingMemberIds) {
-			if (guild.members.cache.has(id)) client.db.users.updateCurrentMember.run(1, id, guild.id);
-		}
+		// Update commands table
+		client.registry.commands.forEach(command => {
+			db.createDocument('commands', {
+				name: command.name,
+				aliases: command.aliases,
+				examples: command.examples,
+				group: command.group.name,
+				desc: command.description,
+				client_permissions: command.clientPermissions,
+				user_permissions: command.userPermissions,
+				nsfw: command.nsfw,
+				guild_only: command.guildOnly,
+			}, true);
+		});
 
-		/** ------------------------------------------------------------------------------------------------
-     * VERIFICATION
-     * ------------------------------------------------------------------------------------------------ */
-		// Fetch verification message
-		const { verification_channel_id: verificationChannelId, verification_message_id: verificationMessageId } =
-      client.db.settings.selectVerification.get(guild.id);
-		const verificationChannel = guild.channels.cache.get(verificationChannelId);
-		if (verificationChannel && verificationChannel.viewable) {
-			try {
-				await verificationChannel.messages.fetch(verificationMessageId);
-			}
-			catch (err) { // Message was deleted
-				client.logger.error(err);
-			}
-		}
 
-		/** ------------------------------------------------------------------------------------------------
-     * CROWN ROLE
-     * ------------------------------------------------------------------------------------------------ */
-		// Schedule crown role rotation
-		client.utils.scheduleCrown(client, guild);
-
+		// Update roles table
+		guild.roles.cache.forEach(role => {
+			db.createDocument('roles', {
+				id: role.id,
+				name: role.name,
+				color: role.hexColor,
+				members: role.members.toJSON(),
+				perms: role.permissions.toJSON(),
+				created: role.createdAt,
+			}, false);
+		});
 	}
 
-	// Remove left guilds
-	const dbGuilds = client.db.settings.selectGuilds.all();
-	const guilds = client.guilds.cache.array();
-	const leftGuilds = dbGuilds.filter(g1 => !guilds.some(g2 => g1.guild_id === g2.id));
-	for (const guild of leftGuilds) {
-		client.db.settings.deleteGuild.run(guild.guild_id);
-		client.db.users.deleteGuild.run(guild.guild_id);
-
-		client.logger.info(`Calypso has left ${guild.guild_name}`);
-	}
-
-	client.logger.info('Calypso is now online');
-	client.logger.info(`Calypso is running on ${client.guilds.cache.size} server(s)`);
+	client.logger.info(`[READY] Logged in as ${client.user.tag}! ID: ${client.user.id}`);
+	client.logger.info(`Weaboo is running on ${client.guilds.cache.size} server(s)`);
 };

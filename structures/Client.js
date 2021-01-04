@@ -1,12 +1,33 @@
 const { CommandoClient } = require('discord.js-commando');
 const Discord = require('discord.js');
-const Command = require('../structures/Command');
 const activities = require('../assets/json/activity');
 const leaveMsgs = require('../assets/json/leave-messages');
-const { readdir, readdirSync } = require('fs');
+const { readdir } = require('fs');
 const { join, resolve } = require('path');
-const AsciiTable = require('ascii-table');
 const { fail } = require('../util/emojis.json');
+
+const GROUPS = [
+	['action', 'Action'],
+	['anime', 'Anime'],
+	['core', 'Core'],
+	['fun', 'Fun'],
+	['games-mp', 'Multi-Player Games'],
+	['games-sp', 'Single-Player Games'],
+	['info', 'Info'],
+	['memes', 'Memes'],
+	['moderation', 'Moderation'],
+	['music', 'Music Commands'],
+	['news', 'News'],
+	['nsfw', 'NSFW'],
+	['numbers', 'Number Commands'],
+	['owner', 'Hidden + Owner'],
+	['phone', 'Phone Commands'],
+	['text', 'Text Commands'],
+	['util', 'Utility'],
+	['general', 'General'],
+	['loyal', 'Loyalty Program Commands'],
+	['other', 'Other'],
+];
 
 
 Discord.Structures.extend('Guild', function(Guild) {
@@ -32,29 +53,8 @@ module.exports = class WeabooClient extends CommandoClient {
 
 		this.registry
 			.registerDefaultTypes()
-			.registerTypesIn(join(__dirname, 'types'))
-			.registerGroups([
-				['action', 'Action'],
-				['anime', 'Anime'],
-				['core', 'Core'],
-				['fun', 'Fun'],
-				['games-mp', 'Multi-Player Games'],
-				['games-sp', 'Single-Player Games'],
-				['info', 'Info'],
-				['memes', 'Memes'],
-				['moderation', 'Moderation'],
-				['music', 'Music Commands'],
-				['news', 'News'],
-				['nsfw', 'NSFW'],
-				['numbers', 'Number Commands'],
-				['owner', 'Hidden + Owner'],
-				['phone', 'Phone Commands'],
-				['text', 'Text Commands'],
-				['util', 'Utility'],
-				['general', 'General'],
-				['loyal', 'Loyalty Program Commands'],
-				['other', 'Other'],
-			])
+			.registerTypesIn(join(__dirname, '../types'))
+			.registerGroups(GROUPS)
 			.registerDefaultCommands({
 				help: false,
 				ping: false,
@@ -63,7 +63,7 @@ module.exports = class WeabooClient extends CommandoClient {
 				commandState: false,
 				unknownCommand: false,
 			})
-			.registerCommandsIn(join(__dirname, 'commands'));
+			.registerCommandsIn(join(__dirname, '../commands'));
 
 		/**
 		 * Create logger
@@ -85,21 +85,6 @@ module.exports = class WeabooClient extends CommandoClient {
 		});
 
 		/**
-		 * All possible command types
-		 * @type {Object}
-		 */
-		this.types = {
-			INFO: 'info',
-			FUN: 'fun',
-			COLOR: 'color',
-			POINTS: 'points',
-			MISC: 'misc',
-			MOD: 'mod',
-			ADMIN: 'admin',
-			OWNER: 'owner',
-		};
-		
-		/**
 		 * Login token
 		 * @type {string}
 		 */
@@ -118,26 +103,25 @@ module.exports = class WeabooClient extends CommandoClient {
 		this.ownerId = config.discord.DISCORD_OWNER_ID;
 
 		/**
-		 * Weaboo's Support Channel ID
-		 * @type {string}
-		 */
-		this.supportChannelId = config.logs.SUPPORT_LOG;
-
-		/**
 		 * Weaboo's Log IDs
 		 */
-		this.joinLeaveLog = config.logs.JOIN_LEAVE_LOG;
+		this.auditLog = config.logs.AUDIT_LOG;
+		this.dmLog = config.logs.DM_LOG;
 		this.errorLog = config.logs.ERROR_LOG;
 		this.statusLog = config.logs.STATUS_LOG;
+		this.supportLog = config.logs.SUPPORT_LOG;
+		this.joinLeaveLog = config.logs.JOIN_LEAVE_LOG;
 		this.webhookLog = config.logs.WEBHOOK_LOG;
-		this.dmLog = config.logs.DM_LOG;
-		this.auditLog = config.logs.AUDIT_LOG;
+		this.modLog = config.logs.MOD_LOG;
+
 
 		/**
 		 * Utility functions
 		 * @type {Object}
 		 */
 		this.utils = require('../util/Util');
+
+		this.database = require('../util/db');
 
 		this.logger.info('Initializing...');
 
@@ -196,21 +180,25 @@ module.exports = class WeabooClient extends CommandoClient {
 
 	/**
 	 * Loads all available commands
-	 * @param {string} path
+	 */
+	loadGroups() {
+		this.logger.info('Loading groups...');
+		this.logger.info(`${this.registry.groups.size} groups(s) found...`);
+		this.registry.groups.forEach(group => {
+			this.logger.info(`Loading group: ${group.name}`);
+		});
+		return this;
+	}
+
+	/**
+	 * Loads all available commands
 	 */
 	loadCommands() {
 		this.logger.info('Loading commands...');
-		const table = new AsciiTable('Commands');
-		table.setHeading('Name', 'Aliases', 'Group', 'Status');
-		let cmdList = this.registry.commands;
-		console.log(cmdList);
-		cmdList.forEach( (command) => {
-			this.logger.warn(command.name);
+		this.logger.info(`${this.registry.commands.size} commands(s) found...`);
+		this.registry.commands.forEach(command => {
+			this.logger.info(`Loading command: ${command.name}`);
 		});
-		// cmdList.map(command => {
-		// 	table.addRow(command.name, command.aliases, command.group.name, 'pass');
-		// });
-		// this.logger.info(`\n${table.toString()}`);
 		return this;
 	}
 
@@ -230,10 +218,7 @@ module.exports = class WeabooClient extends CommandoClient {
 	 * @param {string} errorMessage
 	 */
 	sendSystemErrorMessage(guild, error, errorMessage) {
-
-		// Get system channel
-		const systemChannelId = this.db.settings.selectSystemChannelId.pluck().get(guild.id);
-		const systemChannel = guild.channels.cache.get(systemChannelId);
+		const systemChannel = guild.channels.cache.get(this.errorLog);
 
 		if ( // Check channel and permissions
 			!systemChannel ||

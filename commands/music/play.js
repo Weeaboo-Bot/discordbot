@@ -150,12 +150,13 @@ module.exports = class PlayCommand extends Command {
 		if (query.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/)) {
 			const id = query.split(/(?<=v=)(.*)(?=\?)/)[1];
 			const startTime = null;
-			if(query.split(/([^t=]*$)/)[1] != null){
+			if(query.split(/([^t=]*$)/)[1] != null) {
 				startTime = query.split(/([^t=]*$)/)[1];
-			} else {
+			}
+			else {
 				startTime = 0;
 			}
-		
+
 			const video = await youtube.getVideoByID(id).catch(function() {
 				return message.say(
 					'There was a problem getting the video you provided!',

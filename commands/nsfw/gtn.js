@@ -30,7 +30,7 @@ module.exports = class GTNCommand extends Command {
 			message.react('💢');
 			return message.channel.send(errMessage);
 		}
-		
+
 		await axios.get('https://rra.ram.moe/i/r', {
 			params: {
 				'nsfw': true,

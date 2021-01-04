@@ -28,7 +28,8 @@ const client = new Client(config, {
 // Initialize client
 function init() {
 	client.loadEvents('./events');
-  client.loadCommands();
+	client.loadGroups();
+	client.loadCommands();
 	client.login(client.token);
 }
 

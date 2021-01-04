@@ -63,7 +63,8 @@ module.exports = class UserCommand extends Command {
 					.addField('❯ Hoist Role', member.roles.hoist ? member.roles.hoist.name : 'None', true)
 					.addField(`❯ Roles (${roles.length})`, roles.length ? trimArray(roles, 6).join(', ') : 'None')
 					.setColor(member.displayHexColor);
-			} catch {
+			}
+			catch {
 				embed.setFooter('Failed to resolve member, showing basic user information instead.');
 			}
 		}
