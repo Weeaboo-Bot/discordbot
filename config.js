@@ -25,6 +25,7 @@ exports.discord = {
 };
 
 exports.api = {
+	LOGIN_URL: 'https://us-central1-weaboo-bot-73b07.cloudfunctions.net/api/login',
 	FIREBASE_KEY: process.env.FIREBASE_WEB_API_KEY,
 	GOOGLE_KEY: process.env.GOOGLE_API_KEY,
 	GOOGLE_CSE_KEY: process.env.GOOGLE_CSE_KEY,

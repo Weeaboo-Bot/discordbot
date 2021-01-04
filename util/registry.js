@@ -14,7 +14,7 @@ async function registerCommands(client, dir) {
 	for(const file of files) {
 		const stat = await fs.lstat(path.join(__dirname, dir, file));
 		if(stat.isDirectory()) // If file is a directory, recursive call recurDir
-		{registerCommands(client, path.join(dir, file));}
+		{await registerCommands(client, path.join(dir, file));}
 		else {
 			// Check if file is a .js file.
 			if(file.endsWith('.js')) {
