@@ -86,7 +86,7 @@ module.exports = async (client) => {
 	client.logger.info(`[READY] Logged in as ${client.user.tag}! ID: ${client.user.id}`);
 	client.logger.info(`Weaboo is running on ${client.guilds.cache.size} server(s)`);
 
-	const channel = client.channels.cache.get(client.config.logs.STATUS_LOG);
+	const channel = client.channels.cache.get(client.statusLog);
 	const embed = new MessageEmbed()
 		.setAuthor('Weaboo has (re)started!', client.user.displayAvatarURL({ format: 'png' }))
 		.setColor('#727293')

@@ -122,6 +122,8 @@ module.exports = class WeabooClient extends CommandoClient {
 		this.utils = require('../util/Util');
 
 		this.database = require('../util/db');
+		this.errorTypes = require('../util/errorTypes.json');
+		this.errorMessage = require('../util/logHandler').errorMessage();
 
 		this.logger.info('Initializing...');
 

@@ -1,6 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const { SUPPORT_LOG } = require('../../config').logs;
 
 module.exports = class SupportCommand extends Command {
 	constructor(client) {
@@ -29,7 +28,7 @@ module.exports = class SupportCommand extends Command {
 	async run(message, args) {
 		const { support } = args;
 		console.log(support);
-		const channel = this.client.channels.cache.get(SUPPORT_LOG);
+		const channel = this.client.channels.cache.get(message.client.supportLog);
 
 		if (support == 'N////A') {
 			message.react('💢');
