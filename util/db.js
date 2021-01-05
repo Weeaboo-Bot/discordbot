@@ -31,7 +31,7 @@ module.exports = class WeabooDatabase {
 		logger.info(`Status: ${result.success}`);
 	}
 
-	 async findAll(collectionName) {
+	async findAll(collectionName) {
 		let result;
 		try {
 			const documents = [];
@@ -48,7 +48,7 @@ module.exports = class WeabooDatabase {
 			logger.error(`A Firebase Error: ${error}`);
 			result = { success: false, error: error.message };
 		}
-		 logger.info(`Status: ${result.success}`);
+		logger.info(`Status: ${result.success}`);
 	}
 
 	async createDocument(collectionName, documentData, autoID) {

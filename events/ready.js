@@ -1,5 +1,7 @@
 const Database = require('../util/db');
 const db = new Database();
+const { MessageEmbed } = require('discord.js');
+const { version } = require('../package.json');
 const { formatNumber } = require('../util/Util');
 module.exports = async (client) => {
 
@@ -83,6 +85,15 @@ module.exports = async (client) => {
 
 	client.logger.info(`[READY] Logged in as ${client.user.tag}! ID: ${client.user.id}`);
 	client.logger.info(`Weaboo is running on ${client.guilds.cache.size} server(s)`);
-	
-	
+
+	const channel = client.channels.cache.get(client.config.logs.STATUS_LOG);
+	const embed = new MessageEmbed()
+		.setAuthor('Weaboo has (re)started!', client.user.displayAvatarURL({ format: 'png' }))
+		.setColor('#727293')
+		.setDescription(`•\u2000\Serving ${client.users.cache.size} users in ${client.guilds.cache.size} servers and ${client.channels.cache.size} channels!\n\u2000**Commands:** ${client.registry.commands.size}`)
+		.setFooter(`v${version}`)
+		.setTimestamp();
+	channel.send({ embed });
+
+
 };

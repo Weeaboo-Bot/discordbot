@@ -1,7 +1,6 @@
 const config = require('./config');
 const { Intents } = require('discord.js');
 const Client = require('./structures/Client');
-
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 
@@ -17,22 +16,6 @@ Sentry.init({
 	tracesSampleRate: 1.0,
 });
 
-const transaction = Sentry.startTransaction({
-	op: 'test',
-	name: 'My First Test Transaction',
-});
-
-setTimeout(() => {
-	try {
-		foo();
-	}
-	catch (e) {
-		Sentry.captureException(e);
-	}
-	finally {
-		transaction.finish();
-	}
-}, 99);
 
 // Client setup
 const intents = new Intents();
@@ -61,6 +44,23 @@ function init() {
 	client.loadGroups();
 	client.loadCommands();
 	client.login(client.token);
+	const transaction = Sentry.startTransaction({
+		op: 'test',
+		name: 'My First Test Transaction',
+	});
+
+	setTimeout(() => {
+		try {
+			foo();
+		}
+		catch (e) {
+			Sentry.captureException(e);
+		}
+		finally {
+			transaction.finish();
+		}
+	}, 99);
+
 }
 
 init();
