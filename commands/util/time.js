@@ -66,7 +66,7 @@ module.exports = class TimeCommand extends Command {
 			})
 			.catch(function(err) {
 				message.channel.send(`❎ | Location **${location}** was not found!`);
-				return message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+				return message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 			});
 
 

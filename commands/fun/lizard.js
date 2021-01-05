@@ -33,7 +33,7 @@ module.exports = class LizardCommand extends Command {
 					.setColor('#71A3BE') });
 			})
 			.catch(function(err) {
-				message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+				message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 			});
 
 

@@ -1,7 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 
@@ -27,7 +26,7 @@ module.exports = class NekoBombCommand extends Command {
 						.setFooter('http://nekos.life', 'https://a.safe.moe/3XYZ6.gif') });
 				})
 				.catch(function(err) {
-					message.client.channel.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
 
 

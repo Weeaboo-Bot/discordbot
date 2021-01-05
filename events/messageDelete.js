@@ -9,7 +9,7 @@ module.exports = async (client, message) => {
 		type: 'MESSAGE_DELETE',
 	}).then(res => {
 		deletionLog = res.entries.first();
-	})
+	});
 
 	// Let's perform a sanity check here and make sure we got *something*
 	if (!deletionLog) return console.log(`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);

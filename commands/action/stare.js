@@ -52,7 +52,7 @@ module.exports = class StareCommand extends Command {
 					return message.channel.send('Y-Yes? (๑´•ω • `๑)', { embed: embed });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
 
 
@@ -68,7 +68,7 @@ module.exports = class StareCommand extends Command {
 					return message.channel.send(`${message.author} stares at ${recipient}...`, { embed: embed });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
 
 

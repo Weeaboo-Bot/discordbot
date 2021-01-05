@@ -36,7 +36,7 @@ module.exports = class AdviceCommand extends Command {
 
 				}
 				catch (err) {
-					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				}
 			})
 			.catch(function(err) {

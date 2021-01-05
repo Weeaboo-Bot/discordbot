@@ -50,7 +50,7 @@ module.exports = class TickleCommand extends Command {
 					return message.channel.send('NyaAhaha! ⊂(( ^ ▽ ^ ))⊃', { embed: embed });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 
 				});
 
@@ -64,7 +64,7 @@ module.exports = class TickleCommand extends Command {
 					return message.channel.send(`${message.author} tickles ${recipient}!`, { embed: new Discord.MessageEmbed().setColor('#FBCFCF').setImage(`https://rra.ram.moe${res.data.path}`) });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
 
 		}

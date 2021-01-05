@@ -49,7 +49,7 @@ module.exports = class BoobsCommand extends Command {
 						.setColor('#CEA0A6') });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
 
 

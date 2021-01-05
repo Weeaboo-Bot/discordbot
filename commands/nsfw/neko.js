@@ -36,9 +36,8 @@ module.exports = class NekoCommand extends Command {
 						.setFooter('http://nekos.life', 'https://a.safe.moe/3XYZ6.gif') });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
-
 
 		}
 		else {
@@ -50,7 +49,7 @@ module.exports = class NekoCommand extends Command {
 						.setFooter('http://nekos.life', 'https://a.safe.moe/3XYZ6.gif') });
 				})
 				.catch(function(err) {
-					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
+					message.client.channel.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.API, message.command.name) });
 				});
 		}
 	}
