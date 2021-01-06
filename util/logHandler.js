@@ -2,9 +2,9 @@ const Discord = require('discord.js');
 
 function errorMessage(error, error_type, error_command) {
 	return new Discord.MessageEmbed()
-		.setTitle(`❎ Command: ${error_command}\nError Type: ${error_type}`)
-		.setColor('RED')
-		.addField('Error Message', error.message, true)
+			.setTitle(`❎ Command: ${error_command}\nError Type: ${error_type}`)
+			.setColor('RED')
+			.addField('Error Message', error.message || error, true)
 		.addField('Error URL', (error.url || error.path), true)
 		.setTimestamp();
 }
