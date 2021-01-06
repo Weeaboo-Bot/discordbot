@@ -1,5 +1,5 @@
 const Command = require('../../structures/Command');
-const request = require('node-superfetch');
+const request = require('axios');
 const { stripIndents } = require('common-tags');
 const { Collection } = require('discord.js');
 const { delay, awaitPlayers, shuffle, reactIfAble } = require('../../util/Util');
@@ -36,7 +36,9 @@ module.exports = class QuizDuelCommand extends Command {
 
 	async run(msg, { players }) {
 		const current = this.client.games.get(msg.channel.id);
-		if (current) return msg.reply(`Please wait until the current game of \`${current.name}\` is finished.`);
+		if (current) {
+			return msg.reply(`Please wait until the current game of \`${current.name}\` is finished.`);
+		}
 		this.client.games.set(msg.channel.id, { name: this.name });
 		try {
 			const awaitedPlayers = await awaitPlayers(msg, players);
@@ -61,7 +63,9 @@ module.exports = class QuizDuelCommand extends Command {
 					${question.answers.map((answer, i) => `**${choices[i]}.** ${answer}`).join('\n')}
 				`);
 				const filter = res => {
-					if (!awaitedPlayers.includes(res.author.id)) return false;
+					if (!awaitedPlayers.includes(res.author.id)) {
+						return false;
+					}
 					const answer = res.content.toUpperCase();
 					if (choices.includes(answer)) {
 						reactIfAble(res, res.author, SUCCESS_EMOJI_ID, '✅');
@@ -123,13 +127,16 @@ module.exports = class QuizDuelCommand extends Command {
 
 	async fetchQuestions() {
 		const { body } = await request
-			.get('https://opentdb.com/api.php')
-			.query({
-				amount: 7,
-				type: 'multiple',
-				encode: 'url3986',
+			.get('https://opentdb.com/api.php', {
+				params: {
+					amount: 7,
+					type: 'multiple',
+					encode: 'url3986',
+				},
 			});
-		if (!body.results) return this.fetchQuestions();
+		if (!body.results) {
+			return this.fetchQuestions();
+		}
 		const questions = body.results;
 		return questions.map(question => {
 			const answers = question.incorrect_answers.map(answer => decodeURIComponent(answer.toLowerCase()));

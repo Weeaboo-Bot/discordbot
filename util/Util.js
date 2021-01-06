@@ -1,5 +1,6 @@
 const crypto = require('crypto');
-const { SUCCESS_EMOJI_ID } = process.env;
+const { stripIdents } = require('common-tags');
+const { SUCCESS_EMOJI_ID } = require('../config').api;
 const yes = ['yes', 'y', 'ye', 'yeah', 'yup', 'yea', 'ya', 'hai', 'si', 'sí', 'oui', 'はい', 'correct'];
 const no = ['no', 'n', 'nah', 'nope', 'nop', 'iie', 'いいえ', 'non', 'fuck off'];
 const inviteRegex = /(https?:\/\/)?(www\.|canary\.|ptb\.)?discord(\.gg|(app)?\.com\/invite|\.me)\/([^ ]+)\/?/gi;
@@ -182,6 +183,46 @@ module.exports = class Util {
 		if (yes.includes(choice) || extraYes.includes(choice)) return true;
 		if (no.includes(choice) || extraNo.includes(choice)) return false;
 		return false;
+	}
+
+	static async reactIfAble(msg, user, emoji, fallbackEmoji) {
+		const dm = !msg.guild;
+		if (fallbackEmoji && (!dm && !msg.channel.permissionsFor(user).has('USE_EXTERNAL_EMOJIS'))) {
+			emoji = fallbackEmoji;
+		}
+		if (dm || msg.channel.permissionsFor(user).has(['ADD_REACTIONS', 'READ_MESSAGE_HISTORY'])) {
+			try {
+				await msg.react(emoji);
+			}
+			catch {
+				return null;
+			}
+		}
+		return null;
+	}
+
+
+	static async pickWhenMany(msg, arr, defaultValue, arrListFunction, { time = 30000 } = {}) {
+		const resList = arr.map(arrListFunction);
+		await msg.reply(stripIdents`
+		__**Found ${arr.length} results, which would you like to view?**__
+		${resList.join('\n')}
+		`);
+		const filter = res => {
+			if (res.author.id !== msg.author.id) {
+				return false;
+			}
+			const num = Number.parseInt(res.content, 10);
+			if (!num) {
+				return false;
+			}
+			return num > 0 && num <= arr.length;
+		};
+		const messages = await msg.channel.awaitMessages(filter, { max: 1, time });
+		if (!messages.size) {
+			return defaultValue;
+		}
+		return arr[Number.parseInt(messages.first().content, 10) - 1];
 	}
 
 	static async awaitPlayers(msg, max, min = 1) {
