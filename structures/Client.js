@@ -114,19 +114,14 @@ module.exports = class WeabooClient extends CommandoClient {
 		this.webhookLog = config.logs.WEBHOOK_LOG;
 		this.modLog = config.logs.MOD_LOG;
 
-
 		/**
 		 * Utility functions
 		 * @type {Object}
 		 */
 		this.utils = require('../util/Util');
-
 		this.database = require('../util/db');
 		this.errorTypes = require('../util/errorTypes.json');
-		this.errorMessage = require('../util/logHandler').errorMessage();
-
 		this.logger.info('Initializing...');
-
 		this.webhook = new Discord.WebhookClient(config.discord.DISCORD_WEBHOOK_ID, config.discord.DISCORD_WEBHOOK_TOKEN, { disableMentions: 'everyone' });
 		this.games = new Discord.Collection();
 		this.phone = new Discord.Collection();
@@ -221,19 +216,24 @@ module.exports = class WeabooClient extends CommandoClient {
 	 */
 	sendSystemErrorMessage(guild, error, errorMessage) {
 		const systemChannel = guild.channels.cache.get(this.errorLog);
-
-		if ( // Check channel and permissions
-			!systemChannel ||
+		
+		// Check channel and permissions
+		if (
+				!systemChannel ||
 				!systemChannel.viewable ||
-				!systemChannel.permissionsFor(guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
-		) return;
-
+				!systemChannel.permissionsFor(guild.me)
+						.has(['SEND_MESSAGES', 'EMBED_LINKS'])
+		) {
+			return;
+		}
+		
 		const embed = new Discord.MessageEmbed()
-			.setAuthor(`${this.user.tag}`, this.user.displayAvatarURL({ dynamic: true }))
-			.setTitle(`${fail} System Error: \`${error}\``)
-			.setDescription(`\`\`\`diff\n- System Failure\n+ ${errorMessage}\`\`\``)
-			.setTimestamp()
-			.setColor(guild.me.displayHexColor);
+				.setAuthor(`${this.user.tag}`,
+						this.user.displayAvatarURL({ dynamic: true }))
+				.setTitle(`${fail} System Error: \`${error}\``)
+				.setDescription(`\`\`\`diff\n- System Failure\n+ ${errorMessage}\`\`\``)
+				.setTimestamp()
+				.setColor(guild.me.displayHexColor);
 		systemChannel.send(embed);
 	}
 };
