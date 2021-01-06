@@ -1,6 +1,4 @@
 const Command = require('../../structures/Command');
-const Discord = require('discord.js');
-const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 
@@ -48,7 +46,7 @@ module.exports = class AddRoleCommand extends Command {
 					return message.channel.send(`✅ | **${member.displayName}** has been given the role **${role.name}**!`);
 				})
 				.catch(err => {
-					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(err, ErrorEnum.DISCORD_API, message.command.name) });
+					message.client.channels.cache.get(message.client.errorLog).send({ embed: errorMessage(err, ErrorEnum.DISCORD_API, message.command.name) });
 				});
 
 		}

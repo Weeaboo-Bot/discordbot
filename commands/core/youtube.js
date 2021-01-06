@@ -1,9 +1,6 @@
 const Command = require('../../structures/Command');
 const youtube_node = require('youtube-node');
-const { YOUTUBE_KEY } = require('../../config').api;
 const youtube = new youtube_node();
-youtube.setKey(YOUTUBE_KEY);
-youtube.addParam('type', 'video');
 
 module.exports = class YouTubeCommand extends Command {
 	constructor(client) {
@@ -23,6 +20,9 @@ module.exports = class YouTubeCommand extends Command {
 	}
 
 	run(message) {
+		youtube.setKey(message.client.apiKeys.YOUTUBE_KEY);
+		youtube.addParam('type', 'video');
+
 		const query = message.content.split(/\s+/g).slice(1).join(' ');
 		try {
 			youtube.search(query, 1, function(error, result) {

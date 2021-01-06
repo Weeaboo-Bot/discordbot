@@ -1,9 +1,6 @@
 const Command = require('../../structures/Command');
-const Discord = require('discord.js');
 const PH = require('pornhub');
-const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 const errors = require('../../assets/json/errors');
 
 
@@ -59,7 +56,7 @@ module.exports = class PornHubCommand extends Command {
 				// })
 			})
 				.catch(function(error) {
-					message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
+					message.client.channels.cache.get(message.client.errorLog).send({ embed: errorMessage(error, message.client.errorTypes.API, message.command.name) });
 				});
 
 			return null;

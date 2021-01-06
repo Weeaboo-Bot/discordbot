@@ -1,7 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 const { disgustP } = require('../../assets/json/actions.json');
@@ -54,7 +53,7 @@ module.exports = class LickCommand extends Command {
 				.catch(function(error) {
 					// handle error
 
-					message.client.channels.cache.get(error_log).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
+					message.client.channels.cache.get(message.client.errorLog).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
 
 				});
 
@@ -65,10 +64,10 @@ module.exports = class LickCommand extends Command {
 
 			await axios.get('https://rra.ram.moe/i/r?type=lick')
 				.then(function(res) {
-					const embed = new Discord.MessageEmbed()
+					const embed2 = new Discord.MessageEmbed()
 						.setColor('#FBCFCF')
-						.setImage(`https://rra.ram.moe${body.path}`);
-					return message.channel.send(`${message.author} licks ${recipient}!`, { embed: embed });
+						.setImage(`https://rra.ram.moe${res.body.path}`);
+					return message.channel.send(`${message.author} licks ${recipient}!`, { embed: embed2 });
 				})
 				.catch(function(error) {
 					// handle error

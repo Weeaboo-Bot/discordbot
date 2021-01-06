@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const axios = require('axios');
 const Command = require('../../structures/Command');
-const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 
@@ -43,7 +42,7 @@ module.exports = class DoesNotExistCommand extends Command {
 			.catch(function(error) {
 				// handle error
 
-				message.client.channels.cache.get(ERROR_LOG).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
+				message.client.channels.cache.get(message.client.errorLog).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
 
 			});
 

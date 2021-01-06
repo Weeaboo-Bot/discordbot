@@ -1,7 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 
@@ -29,22 +28,22 @@ module.exports = class PoutCommand extends Command {
 		await axios.get('https://rra.ram.moe/i/r?type=pout')
 			.then(function(res) {
 				if (!recipient) {
-					var embed = new Discord.MessageEmbed()
+					const embed = new Discord.MessageEmbed()
 						.setColor('#FBCFCF')
 						.setImage(`https://rra.ram.moe${res.data.path}`);
 					return message.channel.send(`${message.author} has started pouting!`, { embed: embed });
 
 				}
 				else {
-					var embed = new Discord.MessageEmbed()
+					const embed2 = new Discord.MessageEmbed()
 						.setColor('#FBCFCF')
 						.setImage(`https://rra.ram.moe${res.data.path}`);
-					return message.channel.send(`${message.author} pouts at ${recipient}!`, { embed: embed });
+					return message.channel.send(`${message.author} pouts at ${recipient}!`, { embed: embed2 });
 				}
 
 			})
 			.catch(function(error) {
-				message.client.channels.cache.get(error_log).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
+				message.client.channels.cache.get(message.client.errorLog).send({ embed: errorMessage(error, ErrorEnum.API, message.command.name) });
 			});
 
 

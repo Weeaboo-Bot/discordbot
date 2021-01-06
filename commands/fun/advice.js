@@ -1,7 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../util/errorTypes.json');
 
@@ -40,7 +39,7 @@ module.exports = class AdviceCommand extends Command {
 				}
 			})
 			.catch(function(err) {
-				const channel = message.client.channels.cache.get(ERROR_LOG);
+				const channel = message.client.channels.cache.get(message.client.errorLog);
 				channel.send(err);
 
 			});

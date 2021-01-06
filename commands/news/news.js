@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const fetch = require('node-superfetch');
-const { news_token } = require('../../config');
 const Command = require('../../structures/Command');
 
 module.exports = class NewsCommand extends Command {
@@ -30,7 +29,7 @@ module.exports = class NewsCommand extends Command {
 		try {
 			const response = await fetch(
 
-				`https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&pageSize=5&source=associated-press&apiKey=${news_token}`,
+				`https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&pageSize=5&source=associated-press&apiKey=${message.client.apiKeys.NEWS_KEY}`,
 			);
 			const json = await response.json();
 			const articleArr = json.articles;
