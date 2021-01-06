@@ -76,7 +76,7 @@ function updateDB(shouldUpdate, client) {
 
 module.exports = async (client) => {
 	// Figure out how to make this dynamic, based on heroku deploy status
-	updateDB(false);
+	updateDB(false, client);
 
 	// Push client-related activities
 	client.activities.push(
