@@ -1,4 +1,5 @@
 const Command = require('../../structures/Command');
+const { MessageEmbed } = require('discord.js');
 const iku = require('../../assets/json/iku.json');
 
 module.exports = class IkuCommand extends Command {
@@ -19,9 +20,10 @@ module.exports = class IkuCommand extends Command {
 	}
 
 	run(message) {
-		const embed = new Discord.MessageEmbed()
-			.setColor('#FBCFCF')
-			.setImage(iku[Math.round(Math.random() * (iku.length - 1))]);
+		
+		const embed = new MessageEmbed()
+				.setColor('#FBCFCF')
+				.setImage(iku[Math.round(Math.random() * (iku.length - 1))]);
 		return message.channel.send({ embed });
 	}
 };

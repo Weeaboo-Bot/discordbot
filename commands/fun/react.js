@@ -17,35 +17,35 @@ module.exports = class ReactCommand extends Command {
 				duration: 3,
 			},
 			args: [{
-				key: 'message',
+				key: 'inputMsg',
 				prompt: 'Please provide me a message to react on!',
 				type: 'message',
 			},
-			{
-				key: 'text',
-				prompt: 'Please provide me some text to render!',
-				type: 'string',
-			},
+				{
+					key: 'text',
+					prompt: 'Please provide me some text to render!',
+					type: 'string',
+				},
 			],
 		});
 	}
-
-	async run(message, args) {
-		const { text } = args;
-		const m = args.message;
-
-		const msg = await message.channel.send(`🔄 | Reacting to **${m.author.username}**'s message...`);
-
+	
+	async run(message, { inputMsg, text }) {
+		const msg = await message.channel.send(
+				`🔄 | Reacting to **${inputMsg.author.username}**'s message...`);
+		
 		for (const c of text.toLowerCase()) {
 			if (c in map) {
 				try {
-					await m.react(map[c]);
+					await inputMsg.react(map[c]);
+				} catch (err) {
+					message.client.logger.error(err);
 				}
-				catch (err) {}
 			}
 		}
-
-		return msg.edit(`✅ | Successfully reacted on **${m.author.username}**'s message with ${text}!`);
+		
+		return msg.edit(
+				`✅ | Successfully reacted on **${inputMsg.author.username}**'s message with ${text}!`);
 	}
 };
 

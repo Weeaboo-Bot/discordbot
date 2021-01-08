@@ -89,19 +89,21 @@ module.exports = class WeabooClient extends CommandoClient {
 		 * @type {string}
 		 */
 		this.token = config.discord.DISCORD_TOKEN;
-
+		
 		/**
 		 * API keys
 		 * @type {Object}
 		 */
+		this.prefix = config.discord.DISCORD_PREFIX;
 		this.apiKeys = config.api;
-
+		this.successEmoji = this.apiKeys.SUCCESS_EMOJI_ID;
+		
 		/**
 		 * Weaboo's owner ID
 		 * @type {string}
 		 */
 		this.ownerId = config.discord.DISCORD_OWNER_ID;
-
+		
 		/**
 		 * Weaboo's Log IDs
 		 */
