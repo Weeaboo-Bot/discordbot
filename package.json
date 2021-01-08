@@ -50,6 +50,7 @@
     "graphql-request": "^2.0.0",
     "html-entities": "^2.0.2",
     "jimp": "^0.16.1",
+    "kitsu.js": "^2.0.0",
     "libsodium-wrappers": "^0.7.8",
     "lodash": "^4.17.20",
     "mathjs": "^3.16.5",
