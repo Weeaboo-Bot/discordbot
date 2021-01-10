@@ -103,7 +103,7 @@ module.exports = class WeabooClient extends CommandoClient {
 		 * @type {string}
 		 */
 		this.ownerId = config.discord.DISCORD_OWNER_ID;
-		
+
 		/**
 		 * Weaboo's Log IDs
 		 */
@@ -218,7 +218,7 @@ module.exports = class WeabooClient extends CommandoClient {
 	 */
 	sendSystemErrorMessage(guild, error, errorMessage) {
 		const systemChannel = guild.channels.cache.get(this.errorLog);
-		
+
 		// Check channel and permissions
 		if (
 				!systemChannel ||
