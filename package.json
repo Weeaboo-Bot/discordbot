@@ -27,7 +27,7 @@
     "aki-api": "^5.2.0",
     "animequote": "^1.1.1",
     "ansi-colors": "^4.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "booru": "^0.3.6",
     "canvas": "^2.6.1",
     "cheerio": "^1.0.0-rc.3",
