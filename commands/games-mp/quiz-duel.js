@@ -150,7 +150,7 @@ module.exports = class QuizDuelCommand extends Command {
 			throw err;
 		}
 	}
-	
+
 	// https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986
 	async fetchQuestions(msg) {
 		await request

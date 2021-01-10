@@ -16,11 +16,12 @@ module.exports = class ReactCommand extends Command {
 				usages: 1,
 				duration: 3,
 			},
-			args: [{
-				key: 'inputMsg',
-				prompt: 'Please provide me a message to react on!',
-				type: 'message',
-			},
+			args: [
+				{
+					key: 'inputMsg',
+					prompt: 'Please provide me a message to react on!',
+					type: 'message',
+				},
 				{
 					key: 'text',
 					prompt: 'Please provide me some text to render!',
@@ -29,7 +30,7 @@ module.exports = class ReactCommand extends Command {
 			],
 		});
 	}
-	
+
 	async run(message, { inputMsg, text }) {
 		const msg = await message.channel.send(
 				`🔄 | Reacting to **${inputMsg.author.username}**'s message...`);

@@ -20,7 +20,7 @@ module.exports = class GetMessages extends Command {
 	}
 
 	run(message) {
-		
+
 		message.channel.fetch().then(async messages => {
 			console.log(`${messages.size} Messages.`);
 			
