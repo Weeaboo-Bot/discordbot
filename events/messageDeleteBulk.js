@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports = (client, messages) => {
-	
+
 	const message = messages.first();
 	
 	const messageDeleteLog = client.fetchAuditChannel();

@@ -26,11 +26,11 @@ module.exports = class PokeCommand extends Command {
 			],
 		});
 	}
-	
+
 	run(message, { user }) {
 		const recipient = user;
 		const poke = pokeP[Math.round(Math.random() * (pokeP.length - 1))];
-		
+
 		if (!recipient) {
 			const embed = new Discord.MessageEmbed()
 					.setColor('#FBCFCF')

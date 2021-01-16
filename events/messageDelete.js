@@ -10,13 +10,13 @@ module.exports = async (client, message) => {
 	}).then(res => {
 		deletionLog = res.entries.first();
 	});
-	
+
 	// Let's perform a sanity check here and make sure we got *something*
 	if (!deletionLog) {
 		return client.logger.info(
 				`A message by ${message.author.tag} was deleted, but no relevant audit logs were found.`);
 	}
-	
+
 	// We now grab the user object of the person who deleted the message
 	// Let us also grab the target of this action to double check things
 	const { executor, target } = deletionLog;
