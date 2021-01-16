@@ -35,6 +35,7 @@ module.exports = class PokeCommand extends Command {
 			const embed = new Discord.MessageEmbed()
 					.setColor('#FBCFCF')
 					.setImage(poke);
+			message.delete();
 			return message.channel.send(
 					`${message.author}, you can't poke yourself, but I'll poke you! (´꒳\`)`,
 					{ embed: embed });
@@ -44,6 +45,7 @@ module.exports = class PokeCommand extends Command {
 			const embed = new Discord.MessageEmbed()
 					.setColor('#FBCFCF')
 					.setImage(poke);
+			message.delete();
 			return message.channel.send(
 					`${message.author}, you can't poke yourself, but I'll poke you! (´꒳\`)`,
 					{ embed: embed });
@@ -53,6 +55,7 @@ module.exports = class PokeCommand extends Command {
 			const embed = new Discord.MessageEmbed()
 					.setColor('#FBCFCF')
 					.setImage(poke);
+			message.delete();
 			return message.channel.send('H-Haa.. (✿´ ꒳ ` ) please don\'t stop...',
 					{ embed: embed });
 			
@@ -61,6 +64,7 @@ module.exports = class PokeCommand extends Command {
 			const embed = new Discord.MessageEmbed()
 					.setColor('#FBCFCF')
 					.setImage(poke);
+			message.delete();
 			return message.channel.send(`${message.author} pokes ${recipient}!`,
 					{ embed: embed });
 		}
