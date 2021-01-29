@@ -1,5 +1,6 @@
 const Database = require('../util/db');
 const { MessageEmbed } = require('discord.js');
+const { formatNumber } = require('../util/Util');
 const db = new Database();
 module.exports = async (client, guild) => {
 	if (guild.systemChannel && guild.systemChannel.permissionsFor(client.user).has('SEND_MESSAGES')) {

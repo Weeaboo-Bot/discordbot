@@ -156,7 +156,7 @@ module.exports = class PlayCommand extends Command {
 			else {
 				startTime = 0;
 			}
-			
+
 			const video = await youtube.getVideoByID(id).catch(function() {
 				return message.say(
 						'There was a problem getting the video you provided!',

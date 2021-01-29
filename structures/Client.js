@@ -143,18 +143,28 @@ module.exports = class WeabooClient extends CommandoClient {
 				|| (origin.guild && recipient.guild && origin.topic.includes(`<weaboo:phone:block:${recipient.guild.id}>`))
 				|| (origin.guild && origin.topic.includes(`<weaboo:phone:block:${caller.id}>`));
 	}
-
-
+	
+	
 	fetchReportChannel() {
-		if (!this.supportChannelId) return null;
-		return this.channels.fetch(this.supportChannelId);
+		if (!this.supportLog) return null;
+		return this.channels.fetch(this.supportLog);
 	}
-
+	
 	fetchJoinLeaveChannel() {
-		if (this.joinLeaveLog) return null;
+		if (!this.joinLeaveLog) return null;
 		return this.channels.fetch(this.joinLeaveLog);
 	}
-
+	
+	fetchModChannel() {
+		if (!this.modLog) return null;
+		return this.channels.fetch(this.modLog);
+	}
+	
+	fetchAuditChannel() {
+		if (!this.auditLog) return null;
+		return this.channels.fetch(this.auditLog);
+	}
+	
 	/**
 	 * Loads all available events
 	 * @param {string} path
