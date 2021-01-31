@@ -29,35 +29,42 @@ module.exports = class StockCommand extends Command {
 			],
 		});
 	}
-	
+
 	run(message, { stock }) {
-		let result = null;
+		const theDate = new Date();
+		const currDate = theDate.toISOString().split('T')[0];
 		try {
-			alpha.data.intraday(stock).then((data) => {
+			alpha.data.daily(stock).then((data) => {
 				if (data != null) {
-					result = alpha.util.polish(data);
 					const embed = new Discord.MessageEmbed()
-							.setTitle('Current Stock Price:')
-							.setColor('#FBCFCF')
-							.addField('Stock Symbol: ', result.meta.symbol.toUpperCase())
-							.addField('Stock Price: ', result.data.open);
+						.setTitle(data['Meta Data']['1. Information'])
+						.setColor('#FBCFCF')
+						.addField('Stock Symbol: ', data['Meta Data']['2. Symbol'])
+						.addField('Last Updated: ', data['Meta Data']['3. Last Refreshed'])
+						.addField('Stock Open: ', data['Time Series (Daily)'][currDate]['1. open'])
+						.addField('Stock High: ', data['Time Series (Daily)'][currDate]['2. high'])
+						.addField('Stock Low: ', data['Time Series (Daily)'][currDate]['3. low'])
+						.addField('Stock Close: ', data['Time Series (Daily)'][currDate]['4. close'])
+						.addField('Stock Volume: ', data['Time Series (Daily)'][currDate]['5. volume']);
+
 					message.delete();
 					return message.channel.send({ embed: embed });
 				}
 				else {
-					
+
 					return message.channel.send('Sorry, could not process request.');
 				}
-				
+
 			});
-		} catch (error) {
-			
-			message.client.channels.cache.get(message.client.errorLog)
-					.send({
-						embed: errorMessage(error, ErrorEnum.API, message.command.name),
-					});
 		}
-		
-		
+		catch (error) {
+
+			message.client.channels.cache.get(message.client.errorLog)
+				.send({
+					embed: errorMessage(error, ErrorEnum.API, message.command.name),
+				});
+		}
+
+
 	}
 };

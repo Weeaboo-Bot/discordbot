@@ -29,35 +29,44 @@ module.exports = class CryptoCommand extends Command {
 			],
 		});
 	}
-	
+
 	run(message, { crypto }) {
-		let result = null;
+		const currDate = new Date().toISOString().split('T')[0];
 		try {
-			alpha.crypto.daily(crypto).then((data) => {
+			alpha.crypto.daily(crypto, 'USD').then((data) => {
 				if (data != null) {
-					result = alpha.util.polish(data);
 					const embed = new Discord.MessageEmbed()
-							.setTitle('Current Stock Price:')
-							.setColor('#FBCFCF')
-							.addField('Stock Symbol: ', result.meta.symbol.toUpperCase())
-							.addField('Stock Price: ', result.data.open);
+						.setTitle(data['Meta Data']['1. Information'])
+						.setColor('#FBCFCF')
+						.addField('Stock Symbol: ', data['Meta Data']['2. Digital Currency Code'])
+						.addField('Last Updated: ', data['Meta Data']['6. Last Refreshed'])
+
+						.addField('Stock Open: ', data['Time Series (Digital Currency Daily)'][currDate]['1a. open (USD)'])
+						.addField('Stock High: ', data['Time Series (Digital Currency Daily)'][currDate]['2a. high (USD)'])
+						.addField('Stock Low: ', data['Time Series (Digital Currency Daily)'][currDate]['3a. low (USD)'])
+						.addField('Stock Close: ', data['Time Series (Digital Currency Daily)'][currDate]['4a. close (USD)'])
+						.addField('Stock Volume: ', data['Time Series (Digital Currency Daily)'][currDate]['5. volume'])
+						.addField('Stock Market Cap: ', data['Time Series (Digital Currency Daily)'][currDate]['6. market cap (USD)']);
+
 					message.delete();
 					return message.channel.send({ embed: embed });
-					
 				}
 				else {
-					
+
 					return message.channel.send('Sorry, could not process request.');
 				}
-				
+
 			});
-		} catch (error) {
-			
-			message.client.channels.cache.get(message.client.errorLog)
-					.send({
-						embed: errorMessage(error, ErrorEnum.API, message.command.name),
-					});
 		}
-		
+		catch (error) {
+
+			message.client.channels.cache.get(message.client.errorLog)
+				.send({
+					embed: errorMessage(error, ErrorEnum.API, message.command.name),
+				});
+		}
+
+
 	}
 };
+
