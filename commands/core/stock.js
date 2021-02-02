@@ -31,21 +31,20 @@ module.exports = class StockCommand extends Command {
 	}
 
 	run(message, { stock }) {
-		const theDate = new Date();
-		const currDate = theDate.toISOString().split('T')[0];
 		try {
-			alpha.data.daily(stock).then((data) => {
+			alpha.data.intraday(stock, 'compact', 'json', '5min').then((data) => {
 				if (data != null) {
+					const result = this.toArray(data['Time Series (5min)']);
 					const embed = new Discord.MessageEmbed()
 						.setTitle(data['Meta Data']['1. Information'])
 						.setColor('#FBCFCF')
 						.addField('Stock Symbol: ', data['Meta Data']['2. Symbol'])
 						.addField('Last Updated: ', data['Meta Data']['3. Last Refreshed'])
-						.addField('Stock Open: ', data['Time Series (Daily)'][currDate]['1. open'])
-						.addField('Stock High: ', data['Time Series (Daily)'][currDate]['2. high'])
-						.addField('Stock Low: ', data['Time Series (Daily)'][currDate]['3. low'])
-						.addField('Stock Close: ', data['Time Series (Daily)'][currDate]['4. close'])
-						.addField('Stock Volume: ', data['Time Series (Daily)'][currDate]['5. volume']);
+						.addField('Stock Open: ', result[0][0])
+						.addField('Stock High: ', result[0][1])
+						.addField('Stock Low: ', result[0][2])
+						.addField('Stock Close: ', result[0][3])
+						.addField('Stock Volume: ', result[0][4]);
 
 					message.delete();
 					return message.channel.send({ embed: embed });
@@ -66,5 +65,18 @@ module.exports = class StockCommand extends Command {
 		}
 
 
+	}
+	toArray(obj) {
+		const result = [];
+		for (const prop in obj) {
+			const value = obj[prop];
+			if (typeof value === 'object') {
+				result.push(this.toArray(value));
+			}
+			else {
+				result.push(value);
+			}
+		}
+		return result;
 	}
 };
