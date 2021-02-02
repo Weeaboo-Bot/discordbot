@@ -63,6 +63,10 @@ function init() {
 
 }
 
+function foo() {
+	console.log('foo');
+}
+
 init();
 
 process.on('unhandledRejection', err => client.logger.error(err));
