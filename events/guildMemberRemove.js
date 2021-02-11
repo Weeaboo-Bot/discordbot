@@ -1,7 +1,7 @@
 module.exports = async (client, member) => {
-	
+
 	client.logger.info(
-			`${member.guild.name}: ${member.user.tag} has left the server`);
+		`${member.guild.name}: ${member.user.tag} has left the server`);
 	if (member.id === client.user.id) return null;
 	if (member.partial) await member.fetch();
 	const channel = client.fetchJoinLeaveChannel();
@@ -15,11 +15,12 @@ module.exports = async (client, member) => {
 	}
 	try {
 		const leaveMessage = client.leaveMessages[Math.floor(
-				Math.random() * client.leaveMessages.length)];
+			Math.random() * client.leaveMessages.length)];
 		await channel.send(
-				leaveMessage.replaceAll('{{user}}', `**${member.user.tag}**`));
+			leaveMessage.replaceAll('{{user}}', `**${member.user.tag}**`));
 		return null;
-	} catch {
+	}
+	catch {
 		return null;
 	}
 };

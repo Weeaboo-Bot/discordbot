@@ -143,28 +143,28 @@ module.exports = class WeabooClient extends CommandoClient {
 				|| (origin.guild && recipient.guild && origin.topic.includes(`<weaboo:phone:block:${recipient.guild.id}>`))
 				|| (origin.guild && origin.topic.includes(`<weaboo:phone:block:${caller.id}>`));
 	}
-	
-	
+
+
 	fetchReportChannel() {
 		if (!this.supportLog) return null;
 		return this.channels.fetch(this.supportLog);
 	}
-	
+
 	fetchJoinLeaveChannel() {
 		if (!this.joinLeaveLog) return null;
 		return this.channels.fetch(this.joinLeaveLog);
 	}
-	
+
 	fetchModChannel() {
 		if (!this.modLog) return null;
 		return this.channels.fetch(this.modLog);
 	}
-	
+
 	fetchAuditChannel() {
 		if (!this.auditLog) return null;
 		return this.channels.fetch(this.auditLog);
 	}
-	
+
 	/**
 	 * Loads all available events
 	 * @param {string} path
@@ -231,21 +231,21 @@ module.exports = class WeabooClient extends CommandoClient {
 
 		// Check channel and permissions
 		if (
-				!systemChannel ||
+			!systemChannel ||
 				!systemChannel.viewable ||
 				!systemChannel.permissionsFor(guild.me)
-						.has(['SEND_MESSAGES', 'EMBED_LINKS'])
+					.has(['SEND_MESSAGES', 'EMBED_LINKS'])
 		) {
 			return;
 		}
-		
+
 		const embed = new Discord.MessageEmbed()
-				.setAuthor(`${this.user.tag}`,
-						this.user.displayAvatarURL({ dynamic: true }))
-				.setTitle(`${fail} System Error: \`${error}\``)
-				.setDescription(`\`\`\`diff\n- System Failure\n+ ${errorMessage}\`\`\``)
-				.setTimestamp()
-				.setColor(guild.me.displayHexColor);
+			.setAuthor(`${this.user.tag}`,
+				this.user.displayAvatarURL({ dynamic: true }))
+			.setTitle(`${fail} System Error: \`${error}\``)
+			.setDescription(`\`\`\`diff\n- System Failure\n+ ${errorMessage}\`\`\``)
+			.setTimestamp()
+			.setColor(guild.me.displayHexColor);
 		systemChannel.send(embed);
 	}
 };

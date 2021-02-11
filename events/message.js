@@ -5,12 +5,12 @@ module.exports = async (client, message) => {
 	if(message.channel.type == 'dm') {
 		if (message.content.startsWith(message.client.prefix)) return;
 		const channel = client.channels.cache.get(client.dmLog);
-		
+
 		const embed = new MessageEmbed()
-				.setAuthor(message.author.tag, message.author.displayAvatarURL())
-				.setDescription(message.content)
-				.setColor('#D48AD8')
-				.setTimestamp();
+			.setAuthor(message.author.tag, message.author.displayAvatarURL())
+			.setDescription(message.content)
+			.setColor('#D48AD8')
+			.setTimestamp();
 		return channel.send({ embed });
 	}
 
