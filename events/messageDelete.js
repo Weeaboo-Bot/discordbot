@@ -1,5 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { version } = require('../package.json');
+
+// Export message delete events
 module.exports = async (client, message) => {
 	// ignore direct messages
 	let deletionLog;

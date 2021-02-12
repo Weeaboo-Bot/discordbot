@@ -1,4 +1,6 @@
 const { MessageEmbed } = require('discord.js');
+
+// Export message events
 module.exports = async (client, message) => {
 	if(message.author.bot) return undefined;
 
@@ -36,19 +38,5 @@ module.exports = async (client, message) => {
 	const hasImage = message.attachments.size !== 0;
 	const hasEmbed = message.embeds.length !== 0;
 	if (message.author.bot || (!hasText && !hasImage && !hasEmbed)) return;
-	const origin = client.phone.find(call => call.origin.id === message.channel.id);
-	const recipient = client.phone.find(call => call.recipient.id === message.channel.id);
-	if (!origin && !recipient) return;
-	const call = origin || recipient;
-	if (call.originDM && call.startUser.id !== message.author.id) return;
-	if (!call.adminCall && (message.guild && (!message.channel.topic || !message.channel.topic.includes('<weaboo:phone>')))) return;
-	if (!call.active) return;
-	if (call.adminCall && message.guild.id === call.origin.guild.id && !client.isOwner(message.author)) return;
-	try {
-		await call.send(origin ? call.recipient : call.origin, message, hasText, hasImage, hasEmbed);
-	}
-	catch {
-		return; // eslint-disable-line no-useless-return
-	}
 	return null;
 };

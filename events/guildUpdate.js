@@ -1,3 +1,4 @@
+// Export guild update events
 module.exports = async (client, oldGuild, newGuild) => {
 
 	if (oldGuild.name == newGuild.name) return;

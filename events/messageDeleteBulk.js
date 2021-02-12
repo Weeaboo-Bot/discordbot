@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 
+// Export message delete bulk events
 module.exports = (client, messages) => {
 
 	const message = messages.first();

@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
 
+// Export guild member add events
 module.exports = async (client, member) => {
 
 	client.logger.info(

@@ -73,7 +73,7 @@ function updateDB(shouldUpdate, client) {
 	}
 }
 
-
+// Export ready events
 module.exports = async (client) => {
 	// Figure out how to make this dynamic, based on heroku deploy status
 	updateDB(false, client);

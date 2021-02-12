@@ -21,7 +21,6 @@ const GROUPS = [
 	['nsfw', 'NSFW'],
 	['numbers', 'Number Commands'],
 	['owner', 'Hidden + Owner'],
-	['phone', 'Phone Commands'],
 	['text', 'Text Commands'],
 	['util', 'Utility'],
 	['general', 'General'],
@@ -126,25 +125,10 @@ module.exports = class WeabooClient extends CommandoClient {
 		this.logger.info('Initializing...');
 		this.webhook = new Discord.WebhookClient(config.discord.DISCORD_WEBHOOK_ID, config.discord.DISCORD_WEBHOOK_TOKEN, { disableMentions: 'everyone' });
 		this.games = new Discord.Collection();
-		this.phone = new Discord.Collection();
 		this.activities = activities;
 		this.leaveMessages = leaveMsgs;
 	}
-
-	inPhoneCall(channel) {
-		return this.phone.some(call => call.origin.id === channel.id || call.recipient.id === channel.id);
-	}
-
-	isBlockedFromPhone(origin, recipient, caller) {
-		return (recipient.guild && recipient.topic.includes(`<weaboo:phone:block:${origin.id}>`))
-				|| (recipient.guild && recipient.topic.includes(`<weaboo:phone:block:${caller.id}>`))
-				|| (origin.guild && recipient.guild && recipient.topic.includes(`<weaboo:phone:block:${origin.guild.id}>`))
-				|| (origin.guild && origin.topic.includes(`<weaboo:phone:block:${recipient.id}>`))
-				|| (origin.guild && recipient.guild && origin.topic.includes(`<weaboo:phone:block:${recipient.guild.id}>`))
-				|| (origin.guild && origin.topic.includes(`<weaboo:phone:block:${caller.id}>`));
-	}
-
-
+	
 	fetchReportChannel() {
 		if (!this.supportLog) return null;
 		return this.channels.fetch(this.supportLog);

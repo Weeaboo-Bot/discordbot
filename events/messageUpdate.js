@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 
+// Export message update events
 module.exports = (client, oldMessage, newMessage) => {
 
 	if (newMessage.webhookID) return; // Check for webhook

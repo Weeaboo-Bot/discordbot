@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 
+// Export guild member update events
 module.exports = (client, oldMember, newMember) => {
 
 	const embed = new MessageEmbed()

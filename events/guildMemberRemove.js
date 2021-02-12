@@ -1,3 +1,4 @@
+// Export guild member remove events
 module.exports = async (client, member) => {
 
 	client.logger.info(
