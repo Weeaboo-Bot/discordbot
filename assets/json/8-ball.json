@@ -9,9 +9,8 @@
 		"Most likely",
 		"Outlook good",
 		"Yes",
-		"Signs point to yes"		
+		"Signs point to yes"
 	],
-
 	"laterQuotes": [
 		"Reply hazy try again",
 		"Ask again later",
@@ -19,7 +18,6 @@
 		"Cannot predict now",
 		"Concentrate and ask again"
 	],
-
 	"noQuotes": [
 		"Don't count on it",
 		"My reply is no",
@@ -27,7 +25,6 @@
 		"Outlook not so good",
 		"Very doubtful"
 	],
-
 	"yesP": [
 		"https://media.giphy.com/media/1202FEj8qyNg3K/giphy.gif",
 		"https://media.giphy.com/media/5USTijryafZEQ/giphy.gif",
@@ -36,8 +33,7 @@
 		"https://media.giphy.com/media/ErZ8hv5eO92JW/giphy.gif",
 		"https://media.giphy.com/media/f9pe0CZ8AYmQS1EpFM/giphy.gif"
 	],
-
-	"noP":[
+	"noP": [
 		"https://media.giphy.com/media/uWPGqy4rkgllS/giphy.gif",
 		"https://media.giphy.com/media/GAoJy8Ti2pj3y/giphy.gif",
 		"https://i.gifer.com/Ojk.gif",

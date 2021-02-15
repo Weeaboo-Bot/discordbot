@@ -33,7 +33,7 @@ module.exports = class EightBallCommand extends Command {
 			return message.channel.send('You must provide a question!');
 		}
 
-		function randomNumber(min, max){
+		function randomNumber(min, max) {
 			min = Math.ceil(min);
 			max = Math.floor(max);
 			return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -43,7 +43,7 @@ module.exports = class EightBallCommand extends Command {
 		var choice = randomNumber(1, 3);
 
 		//yes messsages and gifs
-		if(choice == 1){
+		if (choice == 1) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
 				.setDesciption(yes)
@@ -51,7 +51,7 @@ module.exports = class EightBallCommand extends Command {
 				.setColor('#646770')
 		}
 		//no messages and gifs
-		else if(choice == 2){
+		else if (choice == 2) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
 				.setDesciption(no)
@@ -59,13 +59,13 @@ module.exports = class EightBallCommand extends Command {
 				.setColor('#646770')
 		}
 		//later messages
-		else{
+		else {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
 				.setDesciption(later)
 				.setColor('#646770')
 		}
-			
+
 		//const embed = new Discord.MessageEmbed()
 		//	.setAuthor(question, 'https://a.safe.moe/aKDHV.png')
 		//	.setDescription(answer[Math.round(Math.random() * (answer.length - 1))] + '.')
