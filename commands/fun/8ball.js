@@ -46,7 +46,7 @@ module.exports = class EightBallCommand extends Command {
 		if (choice == 1) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
-				.setDesciption(yes)
+				.setDescription(yes)
 				.setImage(yesgif)
 				.setColor('#646770')
 		}
@@ -54,7 +54,7 @@ module.exports = class EightBallCommand extends Command {
 		else if (choice == 2) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
-				.setDesciption(no)
+				.setDescription(no)
 				.setImage(nogif)
 				.setColor('#646770')
 		}
@@ -62,7 +62,7 @@ module.exports = class EightBallCommand extends Command {
 		else {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
-				.setDesciption(later)
+				.setDescription(later)
 				.setColor('#646770')
 		}
 
