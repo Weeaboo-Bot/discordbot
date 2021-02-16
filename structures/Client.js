@@ -84,18 +84,18 @@ module.exports = class WeabooClient extends CommandoClient {
 		});
 
 		/**
-		 * Login token
+		 * Discord API Stuff
 		 * @type {string}
 		 */
 		this.token = config.discord.DISCORD_TOKEN;
+		this.successEmoji = config.api.SUCCESS_EMOJI_ID;
+		this.commandPrefix = config.discord.DISCORD_PREFIX;
 
 		/**
 		 * API keys
 		 * @type {Object}
 		 */
-		this.commandPrefix = config.discord.DISCORD_PREFIX;
 		this.apiKeys = config.api;
-		this.successEmoji = this.apiKeys.SUCCESS_EMOJI_ID;
 
 		/**
 		 * Weaboo's owner ID
@@ -128,7 +128,7 @@ module.exports = class WeabooClient extends CommandoClient {
 		this.activities = activities;
 		this.leaveMessages = leaveMsgs;
 	}
-	
+
 	fetchReportChannel() {
 		if (!this.supportLog) return null;
 		return this.channels.fetch(this.supportLog);
