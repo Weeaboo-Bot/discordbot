@@ -12,7 +12,7 @@ module.exports = class EightBallCommand extends Command {
 			memberName: '8ball',
 			guildOnly: true,
 			description: 'Ask the magic 8ball a question!',
-			examples: ['~8ball [question]'],
+			examples: ['!8ball [question]'],
 			throttling: {
 				usages: 1,
 				duration: 3,
@@ -21,6 +21,7 @@ module.exports = class EightBallCommand extends Command {
 	}
 
 	run(message) {
+
 		const question = message.content.split(/\s+/g).slice(1).join(' ');
 		const yes = yesQuotes[Math.round(Math.random() * (yesQuotes.length - 1))] + '.';
 		const later = laterQuotes[Math.round(Math.random() * (laterQuotes.length - 1))] + '.';
@@ -39,38 +40,34 @@ module.exports = class EightBallCommand extends Command {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 
-		//chooses a random number to determine which type of message + corresponding gif will be sent
-		var choice = randomNumber(1, 3);
+		// chooses a random number to determine which type of message + corresponding gif will be sent
+		const choice = randomNumber(1, 3);
 
-		//yes messsages and gifs
+		// yes messsages and gifs
 		if (choice == 1) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
 				.setDescription(yes)
 				.setImage(yesgif)
-				.setColor('#646770')
+				.setColor('#646770');
+			return message.channel.send({ embed });
 		}
-		//no messages and gifs
+		// no messages and gifs
 		else if (choice == 2) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
 				.setDescription(no)
 				.setImage(nogif)
-				.setColor('#646770')
+				.setColor('#646770');
+			return message.channel.send({ embed });
 		}
-		//later messages
+		// later messages
 		else {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor(question)
 				.setDescription(later)
-				.setColor('#646770')
+				.setColor('#646770');
+			return message.channel.send({ embed });
 		}
-
-		//const embed = new Discord.MessageEmbed()
-		//	.setAuthor(question, 'https://a.safe.moe/aKDHV.png')
-		//	.setDescription(answer[Math.round(Math.random() * (answer.length - 1))] + '.')
-		//	.setColor('#646770');
-		return message.channel.send({ embed });
-
 	}
 };
