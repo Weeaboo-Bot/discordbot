@@ -1,13 +1,7 @@
 const admin = require('firebase-admin');
 const logger = require('../util/logger');
-const fbConfig = require('../config').fbAdminConfig;
-admin.initializeApp({
-	credential: admin.credential.cert(fbConfig),
-	storageBucket: 'gs://weaboo-bot-73b07.appspot.com/',
-});
 
 const storage = admin.storage().bucket();
-const jsonBucket = admin.storage().bucket('json-bucket');
 
 module.exports = class WeabooStorage {
 

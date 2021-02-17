@@ -17,7 +17,7 @@ module.exports = class GenerateProcessEnvCommand extends Command {
 	}
 
 	async run(msg) {
-		const data = fs.readFileSync(path.join(__dirname, '..', '..', '.env.example'), { encoding: 'utf8' });
+		const data = fs.readFileSync(path.join(__dirname, '..', '..', '.env'), { encoding: 'utf8' });
 		const list = data.split('\n').map(line => {
 			if (!line) return '';
 			if (line.startsWith('#')) return line;
