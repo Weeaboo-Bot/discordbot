@@ -3,6 +3,14 @@ const { Intents } = require('discord.js');
 const Client = require('./structures/Client');
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
+const admin = require('firebase-admin');
+const fbConfig = require('./config').fbAdminConfig;
+
+admin.initializeApp({
+	credential: admin.credential.cert(fbConfig),
+	storageBucket: 'gs://weaboo-bot-73b07.appspot.com/',
+});
+
 
 
 global.__basedir = __dirname;

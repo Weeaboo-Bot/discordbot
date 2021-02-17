@@ -1,3 +1,4 @@
+// Export voice state update events
 module.exports = (client, oldState, newState) => {
 
 	if (

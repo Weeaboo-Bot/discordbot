@@ -6,7 +6,7 @@ const { errorMessage } = require('../../util/logHandler');
 const errors = require('../../assets/json/api-errors');
 const ErrorEnum = require('../../util/errorTypes');
 const { delay, awaitPlayers, shuffle, reactIfAble } = require(
-		'../../util/Util');
+	'../../util/Util');
 const choices = ['A', 'B', 'C', 'D'];
 
 module.exports = class QuizDuelCommand extends Command {
@@ -65,7 +65,7 @@ module.exports = class QuizDuelCommand extends Command {
 					**${turn}. ${question.category}**
 					${question.question}
 					${question.answers.map((answer, i) => `**${choices[i]}.** ${answer}`)
-							.join('\n')}
+		.join('\n')}
 				`);
 					const filter = res => {
 						if (!awaitedPlayers.includes(res.author.id)) {
@@ -100,7 +100,7 @@ module.exports = class QuizDuelCommand extends Command {
 						};
 					});
 					const correct = answers.filter(
-							answer => answer.answer === question.correct);
+						answer => answer.answer === question.correct);
 					for (const answer of correct) {
 						const player = pts.get(answer.id);
 						if (correct[0].id === answer.id) {
@@ -114,8 +114,8 @@ module.exports = class QuizDuelCommand extends Command {
 					It was... **${question.correct}**!
 
 					_Fastest Guess: ${correct.length ?
-							`${pts.get(correct[0].id).user.tag} (+75 pts)` :
-							'No One...'}_
+		`${pts.get(correct[0].id).user.tag} (+75 pts)` :
+		'No One...'}_
 
 					${questions.length ? '_Next round starting in 5 seconds..._' : ''}
 				`);
@@ -139,13 +139,14 @@ module.exports = class QuizDuelCommand extends Command {
 				// null questions, log it out
 				this.client.logger.error('questions DB was null');
 				this.client.channels.cache.get(msg.client.errorLog)
-						.send({
-							embed: errorMessage('question DB was null', ErrorEnum.API,
-									msg.command.name),
-						});
+					.send({
+						embed: errorMessage('question DB was null', ErrorEnum.API,
+							msg.command.name),
+					});
 			}
-			
-		} catch (err) {
+
+		}
+		catch (err) {
 			this.client.games.delete(msg.channel.id);
 			throw err;
 		}
@@ -154,39 +155,39 @@ module.exports = class QuizDuelCommand extends Command {
 	// https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986
 	async fetchQuestions(msg) {
 		await request
-				.get('https://opentdb.com/api.php', {
-					params: {
-						amount: 10,
-						type: 'multiple',
-					},
-				})
-				.then(res => {
-					if (!res.data.results) {
-						return this.fetchQuestions(msg);
-					}
-					
-					const z = res.data.results.map(question => {
-						const answers = question.incorrect_answers.map(
-								answer => answer.toLowerCase());
-						const correct = question.correct_answer.toLowerCase();
-						answers.push(correct);
-						return {
-							question: question.question,
-							category: question.category,
-							answers: shuffle(answers),
-							correct,
-						};
-					});
-					return z;
-				})
-				.catch(function(err) {
-					msg.reply(errors[Math.round(Math.random() * (errors.length - 1))]);
-					msg.client.channels.cache.get(msg.client.errorLog)
-							.send({
-								embed: errorMessage(err, ErrorEnum.API, msg.command.name),
-							});
-					return null;
+			.get('https://opentdb.com/api.php', {
+				params: {
+					amount: 10,
+					type: 'multiple',
+				},
+			})
+			.then(res => {
+				if (!res.data.results) {
+					return this.fetchQuestions(msg);
+				}
+
+				const z = res.data.results.map(question => {
+					const answers = question.incorrect_answers.map(
+						answer => answer.toLowerCase());
+					const correct = question.correct_answer.toLowerCase();
+					answers.push(correct);
+					return {
+						question: question.question,
+						category: question.category,
+						answers: shuffle(answers),
+						correct,
+					};
 				});
+				return z;
+			})
+			.catch(function(err) {
+				msg.reply(errors[Math.round(Math.random() * (errors.length - 1))]);
+				msg.client.channels.cache.get(msg.client.errorLog)
+					.send({
+						embed: errorMessage(err, ErrorEnum.API, msg.command.name),
+					});
+				return null;
+			});
 	}
 
 	makeLeaderboard(pts) {

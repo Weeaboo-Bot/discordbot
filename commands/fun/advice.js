@@ -28,24 +28,24 @@ module.exports = class AdviceCommand extends Command {
 			.then(function(res) {
 				try {
 					const embed = new Discord.MessageEmbed()
-							.setAuthor('Here\'s some advice!', 'https://a.safe.moe/BVBr9.png')
-							.setDescription(res.data.slip.advice)
+						.setAuthor('Here\'s some advice!', 'https://a.safe.moe/BVBr9.png')
+						.setDescription(res.data.slip.advice)
 						.setColor('#727684');
 					return message.channel.send({ embed });
 
 				}
 				catch (err) {
 					message.client.channels.cache.get(message.client.errorLog)
-							.send({
-								embed: errorMessage(err, ErrorEnum.JS, message.command.name),
-							});
+						.send({
+							embed: errorMessage(err, ErrorEnum.JS, message.command.name),
+						});
 				}
 			})
 			.catch(function(err) {
 				message.client.channels.cache.get(message.client.errorLog)
-						.send({
-							embed: errorMessage(err, ErrorEnum.API, message.command.name),
-						});
+					.send({
+						embed: errorMessage(err, ErrorEnum.API, message.command.name),
+					});
 			});
 
 

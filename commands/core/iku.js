@@ -20,10 +20,10 @@ module.exports = class IkuCommand extends Command {
 	}
 
 	run(message) {
-		
+
 		const embed = new MessageEmbed()
-				.setColor('#FBCFCF')
-				.setImage(iku[Math.round(Math.random() * (iku.length - 1))]);
+			.setColor('#FBCFCF')
+			.setImage(iku[Math.round(Math.random() * (iku.length - 1))]);
 		return message.channel.send({ embed });
 	}
 };
