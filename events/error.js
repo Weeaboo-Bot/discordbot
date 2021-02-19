@@ -1,4 +1,2 @@
 // Export error events
-module.exports = (client, error) => {
-    client.logger.error(error);
-};
+module.exports = (client, error) => { client.logger.error(error); };

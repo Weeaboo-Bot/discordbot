@@ -1,20 +1,20 @@
 const Command = require('../../structures/Command');
-const { stripIndents } = require('common-tags');
+const {stripIndents} = require('common-tags');
 
 module.exports = class OptionsCommand extends Command {
-    constructor(client) {
-        super(client, {
-            name: 'options',
-            aliases: ['options-list'],
-            group: 'util',
-            memberName: 'options',
-            description: 'Responds with a list of server options.',
-            guarded: true,
-        });
-    }
+  constructor(client) {
+    super(client, {
+      name : 'options',
+      aliases : [ 'options-list' ],
+      group : 'util',
+      memberName : 'options',
+      description : 'Responds with a list of server options.',
+      guarded : true,
+    });
+  }
 
-    run(msg) {
-        return msg.say(stripIndents`
+  run(msg) {
+    return msg.say(stripIndents`
 			__**Server Options**__
 			Place the option in the appropriate channel's topic to use.
 
@@ -32,5 +32,5 @@ module.exports = class OptionsCommand extends Command {
 			\`<weaboo:portal>\` Marks the channel as a portal channel for \`portal-send\`.
 			\`<weaboo:portal:hide-name>\` Hides the channel's name when the channel is chosen to recieve a portal message.
 		`);
-    }
+  }
 };
