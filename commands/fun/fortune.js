@@ -22,7 +22,7 @@ module.exports = class FortuneCommand extends Command {
 
 	run(message) {
 		const embed = new Discord.MessageEmbed()
-			.setAuthor(`${message.author.username}'s fortune`, 'https://a.safe.moe/KBMis.png')
+			.setAuthor(`${message.author.username}'s fortune`, 'https://files.catbox.moe/3cvymb.gif')
 			.setDescription(fortune[Math.round(Math.random() * (fortune.length - 1))])
 			.setColor('#FAC193');
 		return message.channel.send({ embed });

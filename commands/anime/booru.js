@@ -31,7 +31,7 @@ module.exports = class BooruCommand extends Command {
 			.then(images => {
 				for (const image of images) {
 					const embed = new Discord.MessageEmbed()
-						.setAuthor(`Safebooru ${query}`, 'https://b.catgirlsare.sexy/NrAI.png')
+						.setAuthor(`Safebooru ${query}`, 'https://i.imgur.com/xIH9snO.gif')
 						.setImage(image.common.file_url)
 						.setDescription(`[Image URL](${image.common.file_url})`)
 						.setColor('#C597B8');
