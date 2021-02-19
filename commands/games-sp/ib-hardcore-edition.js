@@ -1,18 +1,20 @@
 const Command = require('../../structures/Command');
 
 module.exports = class IbHardcoreEditionCommand extends Command {
-  constructor(client) {
-    super(client, {
-      name : 'ib-hardcore-edition',
-      aliases : [ 'ib-hardcore', 'ib' ],
-      group : 'games-sp',
-      memberName : 'ib-hardcore-edition',
-      description : 'Responds with the download link for Ib: Hardcore Edition.',
-    });
-  }
+    constructor(client) {
+        super(client, {
+            name: 'ib-hardcore-edition',
+            aliases: ['ib-hardcore', 'ib'],
+            group: 'games-sp',
+            memberName: 'ib-hardcore-edition',
+            description:
+                'Responds with the download link for Ib: Hardcore Edition.',
+        });
+    }
 
-  run(msg) {
-    return msg.say(
-        'https://drive.google.com/file/d/1RHDvI8RthElngagvwu-GXUN69-oHsUBO/view?usp=sharing');
-  }
+    run(msg) {
+        return msg.say(
+            'https://drive.google.com/file/d/1RHDvI8RthElngagvwu-GXUN69-oHsUBO/view?usp=sharing'
+        );
+    }
 };
