@@ -15,10 +15,6 @@ module.exports = class XBooruCommand extends Command {
 			description: 'Searches for images on xbooru!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~xbooru <search>'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 
