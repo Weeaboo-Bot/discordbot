@@ -11,11 +11,7 @@ module.exports = class HandCommand extends Command {
             memberName: 'hand',
             guildOnly: true,
             description: 'Holds hands with the user you mentioned!',
-            examples: ['~hand <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!hand <user>'],
         });
     }
 

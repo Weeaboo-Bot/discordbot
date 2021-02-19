@@ -15,10 +15,6 @@ module.exports = class CryptoCommand extends Command {
             guildOnly: true,
             description: 'crypto prices!',
             examples: ['!crypto <symbol>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
             args: [
                 {
                     key: 'crypto',

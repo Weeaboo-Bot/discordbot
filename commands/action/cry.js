@@ -11,11 +11,7 @@ module.exports = class CryCommand extends Command {
             memberName: 'cry',
             guildOnly: true,
             description: 'UWAA~',
-            examples: ['~cry'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!cry'],
         });
     }
 

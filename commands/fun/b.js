@@ -9,11 +9,7 @@ module.exports = class BCommand extends Command {
             group: 'fun',
             memberName: 'b',
             description: 'Converts your text to 🅱 text!',
-            examples: ['~b [text]'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!b [text]'],
             args: [
                 {
                     key: 'text',

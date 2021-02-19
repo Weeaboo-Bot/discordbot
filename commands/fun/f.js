@@ -10,11 +10,7 @@ module.exports = class FCommand extends Command {
             memberName: 'f',
             guildOnly: true,
             description: 'Press F to pay respects',
-            examples: ['~f <something you want to respect>'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!f <something you want to respect>'],
             args: [
                 {
                     key: 'respect',

@@ -11,11 +11,7 @@ module.exports = class NoMoreCommand extends Command {
             clientPermissions: ['MANAGE_CHANNELS'],
             description: 'No more NSFW!',
             details: 'Optionally have me set it for you!',
-            examples: ['~nomore'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!nomore'],
         });
     }
 

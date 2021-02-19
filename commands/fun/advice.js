@@ -12,11 +12,7 @@ module.exports = class AdviceCommand extends Command {
             memberName: 'advice',
             guildOnly: true,
             description: 'Get some advice!',
-            examples: ['~advice'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!advice'],
         });
     }
 

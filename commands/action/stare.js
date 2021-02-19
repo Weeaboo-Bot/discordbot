@@ -14,11 +14,7 @@ module.exports = class StareCommand extends Command {
             memberName: 'stare',
             guildOnly: true,
             description: 'Stares at the user you mentioned!',
-            examples: ['~stare <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!stare <user>'],
         });
     }
 

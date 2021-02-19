@@ -12,11 +12,7 @@ module.exports = class CatCommand extends Command {
             memberName: 'cat',
             guildOnly: true,
             description: 'Sends a random picture of a cat!',
-            examples: ['~cat'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!cat'],
         });
     }
 

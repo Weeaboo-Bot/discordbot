@@ -11,11 +11,7 @@ module.exports = class HowToCommand extends Command {
             clientPermissions: ['MANAGE_CHANNELS'],
             description: 'Tells you how to set a channel into an NSFW one!',
             details: 'Optionally have me set it for you!',
-            examples: ['~howto'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!howto'],
         });
     }
 

@@ -26,12 +26,8 @@ module.exports = class HoroscopeCommand extends Command {
             memberName: 'horoscope',
             guildOnly: true,
             description: 'Gets your daily horoscope!',
-            examples: ['~horoscope [sign]'],
+            examples: ['!horoscope [sign]'],
             aliases: ['horo', 'sign'],
-            throttling: {
-                usages: 1,
-                duration: 8,
-            },
             args: [
                 {
                     key: 'sign',

@@ -13,11 +13,7 @@ module.exports = class LizardCommand extends Command {
             memberName: 'lizard',
             guildOnly: true,
             description: 'Sends a random picture of a lizard!',
-            examples: ['~lizard'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!lizard'],
         });
     }
 

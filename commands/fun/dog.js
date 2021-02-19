@@ -13,11 +13,7 @@ module.exports = class DogCommand extends Command {
             memberName: 'dog',
             guildOnly: true,
             description: 'Sends a random picture of a dog!',
-            examples: ['~dog'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!dog'],
         });
     }
 

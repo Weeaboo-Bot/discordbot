@@ -11,11 +11,7 @@ module.exports = class IkuCommand extends Command {
             group: 'core',
             memberName: 'iku',
             description: "Iku is best girl and there's no denying it!!",
-            examples: ['~iku'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!iku'],
         });
     }
 

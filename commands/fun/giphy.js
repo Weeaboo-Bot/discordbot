@@ -12,7 +12,7 @@ module.exports = class GiphyCommand extends Command {
             aliases: ['gif'],
             memberName: 'giphy',
             description: 'Searches Giphy for gifs!',
-            examples: ['~giphy [tags]'],
+            examples: ['!giphy [tags]'],
             args: [
                 {
                     key: 'query',
