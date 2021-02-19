@@ -28,7 +28,6 @@ module.exports = class KissCommand extends Command {
 				.setColor('#FBCFCF')
 				.setImage(kiss);
 			return message.channel.send(`You can't kiss yourself, but I'll kiss you, ${message.author}!`, { embed: embed });
-
 		}
 		else if (message.mentions.users.first() == message.author) {
 			const embed = new Discord.MessageEmbed()
