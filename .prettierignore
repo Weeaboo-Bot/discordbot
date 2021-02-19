@@ -1,0 +1,10 @@
+# Ignore all .yaml files:
+*.yaml
+
+#ignores specific folders?:
+\.github
+\.idea
+\.vscode
+\public
+\assets\fonts
+\assets\images
