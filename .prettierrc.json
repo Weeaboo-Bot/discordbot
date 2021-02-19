@@ -1,4 +1,6 @@
-
-# Ignore artifacts:
-build
-coverage
+{
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true
+  }
