@@ -15,10 +15,6 @@ module.exports = class KonachanCommand extends Command {
 			description: 'Searches for images on Konachan!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~konachan <search>'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

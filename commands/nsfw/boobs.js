@@ -17,10 +17,6 @@ module.exports = class BoobsCommand extends Command {
 			description: 'Show a picture of boobs!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['!boobs'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

@@ -15,10 +15,6 @@ module.exports = class Rule34Command extends Command {
 			description: 'Searches for images on rule34!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~rule34 <search>'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

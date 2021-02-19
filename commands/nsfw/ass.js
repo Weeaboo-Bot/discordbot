@@ -17,10 +17,6 @@ module.exports = class AssCommand extends Command {
 			description: 'A random picture of...ASS!!',
 			examples: ['!ass'],
 			details: 'This command can only be used in NSFW channels!',
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

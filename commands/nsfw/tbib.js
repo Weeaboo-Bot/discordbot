@@ -14,10 +14,6 @@ module.exports = class YandereCommand extends Command {
 			description: 'Searches for images on TBIB!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~tbib <search>'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

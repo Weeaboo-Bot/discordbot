@@ -16,10 +16,6 @@ module.exports = class NekoCommand extends Command {
 			description: 'Nekos!',
 			details: 'This command is NSFW in NSFW channels and not NSFW in normal channels!',
 			examples: ['~neko'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

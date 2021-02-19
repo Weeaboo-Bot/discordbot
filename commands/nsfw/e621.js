@@ -15,10 +15,6 @@ module.exports = class E621Command extends Command {
 			description: 'Searches for images on e621!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~e621 <search>'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 
