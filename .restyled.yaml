@@ -36,4 +36,5 @@ ignore_labels:
 restylers_version: stable
 
 restylers:
-    - '*'
+    - name: prettier
+        arguments: ["--tab-width 4", "--single-quote"]
