@@ -49,32 +49,28 @@ module.exports = class EightBallCommand extends Command {
 
         // chooses a random number to determine which type of message + corresponding gif will be sent
         const choice = randomNumber(1, 3);
+        const embed = new Discord.MessageEmbed().setTitle('Magic 8-ball');
 
         // yes messsages and gifs
         if (choice == 1) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(question, 'https://files.catbox.moe/3cvymb.gif')
-                .setDescription(yes)
-                .setImage(yesgif)
-                .setColor('#646770');
-            return message.channel.send({ embed });
+            embed.setAuthor(question, 'https://files.catbox.moe/3cvymb.gif');
+            embed.setDescription(yes);
+            embed.setImage(yesgif);
+            embed.setColor('#646770');
         }
         // no messages and gifs
         else if (choice == 2) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(question)
-                .setDescription(no)
-                .setImage(nogif)
-                .setColor('#646770');
-            return message.channel.send({ embed });
+            embed.setAuthor(question, 'https://files.catbox.moe/3cvymb.gif');
+            embed.setDescription(no);
+            embed.setImage(nogif);
+            embed.setColor('#646770');
         }
         // later messages
         else {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(question)
-                .setDescription(later)
-                .setColor('#646770');
-            return message.channel.send({ embed });
+            embed.setAuthor(question, 'https://files.catbox.moe/3cvymb.gif');
+            embed.setDescription(later);
+            embed.setColor('#646770');
         }
+        return message.channel.send({ embed });
     }
 };
