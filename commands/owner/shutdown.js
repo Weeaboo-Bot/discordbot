@@ -26,21 +26,20 @@ module.exports = class ShutdownCommand extends Command {
 
     async run(msg, { code }) {
         const games = this.client.games.size;
-        const calls = this.client.phone.size;
         let areIs = 'are';
-        if (games > 0 || calls > 0) {
+        if (games > 0) {
             let currentString = '';
             if (games > 0) {
                 currentString += `${games} game${games > 1 ? 's' : ''}`;
-                if (calls > 0) currentString += ' and ';
-                if (games === 1 && (calls > 0 ? calls === 1 : true))
+                if (games === 1)
                     areIs = 'is';
+                if(client.voice.channel)
+                    currentString += ' and zero calls ';
+                if(client.voice.channel)
+                    currentString += ' and I am in a call ';
+                
             }
-            if (calls > 0) {
-                currentString += `${calls} phone call${calls > 1 ? 's' : ''}`;
-                if (calls === 1 && (games > 0 ? games === 1 : true))
-                    areIs = 'is';
-            }
+           
             await msg.reply(
                 `There ${areIs} currently **${currentString}**. Are you sure?`
             );
