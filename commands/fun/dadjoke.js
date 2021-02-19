@@ -29,7 +29,7 @@ module.exports = class DadJokeCommand extends Command {
 		})
 			.then(function(res) {
 				const msg = new Discord.MessageEmbed()
-					.setAuthor('Here\'s a joke!', 'https://a.safe.moe/X1gKJ.png')
+					.setAuthor('Here\'s a joke!', 'https://files.catbox.moe/3cvymb.gif')
 					.setDescription(res.data.joke)
 					.setColor('#727684');
 

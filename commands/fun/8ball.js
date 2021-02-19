@@ -46,7 +46,7 @@ module.exports = class EightBallCommand extends Command {
 		// yes messsages and gifs
 		if (choice == 1) {
 			const embed = new Discord.MessageEmbed()
-				.setAuthor(question)
+				.setAuthor(question, 'https://files.catbox.moe/3cvymb.gif')
 				.setDescription(yes)
 				.setImage(yesgif)
 				.setColor('#646770');
