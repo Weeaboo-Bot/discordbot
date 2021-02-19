@@ -1,5 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { formatNumber } = require('../util/Util');
+
+// Export guild delete events
 module.exports = async (client, guild) => {
 	const channel = client.channels.cache.get(client.joinLeaveLog);
 

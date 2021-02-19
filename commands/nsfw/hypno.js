@@ -17,7 +17,7 @@ module.exports = class HypnoCommand extends Command {
 			examples: ['~hypno <search>'],
 			throttling: {
 				usages: 1,
-				duration: 3,
+				duration: 5,
 			},
 		});
 	}
@@ -42,7 +42,6 @@ module.exports = class HypnoCommand extends Command {
 						.setImage(image.common.file_url)
 						.setColor('#E89F3E');
 					message.channel.send({ embed });
-					message.channel.send(image.common.file_url);
 				}
 			}).catch(err => {
 				if (err.name === 'booruError') {

@@ -36,16 +36,16 @@ module.exports = class AdviceCommand extends Command {
 				}
 				catch (err) {
 					message.client.channels.cache.get(message.client.errorLog)
-							.send({
-								embed: errorMessage(err, ErrorEnum.JS, message.command.name),
-							});
+						.send({
+							embed: errorMessage(err, ErrorEnum.JS, message.command.name),
+						});
 				}
 			})
 			.catch(function(err) {
 				message.client.channels.cache.get(message.client.errorLog)
-						.send({
-							embed: errorMessage(err, ErrorEnum.API, message.command.name),
-						});
+					.send({
+						embed: errorMessage(err, ErrorEnum.API, message.command.name),
+					});
 			});
 
 

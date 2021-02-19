@@ -23,21 +23,21 @@ module.exports = class GetMessages extends Command {
 
 		message.channel.fetch().then(async messages => {
 			console.log(`${messages.size} Messages.`);
-			
+
 			const finalArray = [];
-			
+
 			const putInArray = async (data) => finalArray.push(data);
 			const handleTime = (timestamp) => moment(timestamp)
-					.format('DD/MM/YYYY - hh:mm:ss a')
-					.replace('pm', 'PM')
-					.reaplce('am', 'AM');
-			
+				.format('DD/MM/YYYY - hh:mm:ss a')
+				.replace('pm', 'PM')
+				.reaplce('am', 'AM');
+
 			for (const message of messages.array().reverse()) {
 				await putInArray(
-						`${handleTime(
-								message.timestamp)} ${msg.author.username} : ${msg.content}`);
+					`${handleTime(
+						message.timestamp)} ${msg.author.username} : ${msg.content}`);
 			}
-			
+
 			console.log(finalArray);
 			console.log(finalArray.length);
 
