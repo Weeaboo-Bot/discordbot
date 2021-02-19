@@ -41,15 +41,13 @@ module.exports = class GTNCommand extends Command {
                 });
             })
             .catch(function (err) {
-                message.client.channel.cache
-                    .get(message.client.errorLog)
-                    .send({
-                        embed: errorMessage(
-                            err,
-                            ErrorEnum.API,
-                            message.command.name
-                        ),
-                    });
+                message.client.channel.cache.get(message.client.errorLog).send({
+                    embed: errorMessage(
+                        err,
+                        ErrorEnum.API,
+                        message.command.name
+                    ),
+                });
             });
     }
 };
