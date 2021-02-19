@@ -31,15 +31,12 @@ module.exports = class ShutdownCommand extends Command {
             let currentString = '';
             if (games > 0) {
                 currentString += `${games} game${games > 1 ? 's' : ''}`;
-                if (games === 1)
-                    areIs = 'is';
-                if(client.voice.channel)
-                    currentString += ' and zero calls ';
-                if(client.voice.channel)
+                if (games === 1) areIs = 'is';
+                if (client.voice.channel) currentString += ' and zero calls ';
+                if (client.voice.channel)
                     currentString += ' and I am in a call ';
-                
             }
-           
+
             await msg.reply(
                 `There ${areIs} currently **${currentString}**. Are you sure?`
             );
