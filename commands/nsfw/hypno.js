@@ -17,7 +17,7 @@ module.exports = class HypnoCommand extends Command {
 			examples: ['~hypno <search>'],
 			throttling: {
 				usages: 1,
-				duration: 3,
+				duration: 5,
 			},
 		});
 	}
