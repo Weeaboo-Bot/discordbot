@@ -15,10 +15,6 @@ module.exports = class PahealCommand extends Command {
 			description: 'Searches for images on Paheal!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~paheal <search>'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

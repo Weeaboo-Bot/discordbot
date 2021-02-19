@@ -15,10 +15,6 @@ module.exports = class YandereCommand extends Command {
 			description: 'Searches for images on Yandere!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~yandere <search>'],
-			throttling: {
-				usages: 1,
-				duration: 5,
-			},
 		});
 	}
 

@@ -16,10 +16,6 @@ module.exports = class GTNCommand extends Command {
 			description: 'Finds a GreenTeaNeko comic!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~gtn'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

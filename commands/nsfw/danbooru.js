@@ -15,10 +15,6 @@ module.exports = class DanbooruCommand extends Command {
 			description: 'Searches for images on Danbooru!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~danbooru <query>'],
-			throttling: {
-				usages: 1,
-				duration: 3,
-			},
 		});
 	}
 

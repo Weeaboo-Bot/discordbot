@@ -15,10 +15,6 @@ module.exports = class HypnoCommand extends Command {
 			description: 'Searches for images on Hypnohub!',
 			details: 'This command can only be used in NSFW channels!',
 			examples: ['~hypno <search>'],
-			throttling: {
-				usages: 1,
-				duration: 5,
-			},
 		});
 	}
 
