@@ -28,8 +28,8 @@ module.exports = class AdviceCommand extends Command {
 			.then(function(res) {
 				try {
 					const embed = new Discord.MessageEmbed()
-							.setAuthor('Here\'s some advice!', 'https://files.catbox.moe/3cvymb.gif')
-							.setDescription(res.data.slip.advice)
+						.setAuthor('Here\'s some advice!', 'https://files.catbox.moe/3cvymb.gif')
+						.setDescription(res.data.slip.advice)
 						.setColor('#727684');
 					return message.channel.send({ embed });
 
