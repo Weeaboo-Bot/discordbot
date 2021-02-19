@@ -1,9 +1,6 @@
 const admin = require('firebase-admin');
 const logger = require('../util/logger');
-const fbConfig = require('../config').fbAdminConfig;
-admin.initializeApp({
-	credential: admin.credential.cert(fbConfig),
-});
+
 
 const db = admin.firestore();
 

@@ -9,7 +9,7 @@ module.exports = class GenerateProcessEnvCommand extends Command {
 			aliases: ['gen-process-env', 'generate-env', 'gen-env'],
 			group: 'util',
 			memberName: 'generate-process-env',
-			description: 'Generates a backup list of Xiao\'s `process.env`.',
+			description: 'Generates a backup list of Weaboos\'s `process.env`.',
 			details: 'Only the bot owner(s) may use this command.',
 			ownerOnly: true,
 			guarded: true,
@@ -17,7 +17,7 @@ module.exports = class GenerateProcessEnvCommand extends Command {
 	}
 
 	async run(msg) {
-		const data = fs.readFileSync(path.join(__dirname, '..', '..', '.env.example'), { encoding: 'utf8' });
+		const data = fs.readFileSync(path.join(__dirname, '..', '..', '.env'), { encoding: 'utf8' });
 		const list = data.split('\n').map(line => {
 			if (!line) return '';
 			if (line.startsWith('#')) return line;

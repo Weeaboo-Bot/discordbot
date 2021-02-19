@@ -26,17 +26,17 @@ module.exports = class BonziCommand extends Command {
 				}],
 		});
 	}
-	
+
 	async run(message, { text }) {
 		if (text == '') {
 			return message.channel.send('Please provide something for Bonzi to say!');
 		}
-		
+
 		await message.channel.startTyping();
-		
+
 		const bonzi = await Jimp.read('assets/images/bonzi.png');
 		const blank = await Jimp.read('assets/images/blank.png');
-		
+
 		const font = await Jimp.loadFont(Jimp.FONT_SANS_16_BLACK);
 
 		blank.resize(175, 120);

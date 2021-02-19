@@ -159,7 +159,7 @@ module.exports = class PlayCommand extends Command {
 
 			const video = await youtube.getVideoByID(id).catch(function() {
 				return message.say(
-						'There was a problem getting the video you provided!',
+					'There was a problem getting the video you provided!',
 				);
 			});
 			// can be uncommented if you don't want the bot to play live streams

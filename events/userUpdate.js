@@ -1,3 +1,5 @@
+// Export user update events
+
 module.exports = (client, oldUser, newUser) => {
 
 	// Update user in db
