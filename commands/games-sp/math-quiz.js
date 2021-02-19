@@ -89,10 +89,12 @@ module.exports = class MathQuizCommand extends Command {
                 time: 10000,
             }
         );
-        if (!msgs.size)
+        if (!msgs.size) {
             return msg.reply(`Sorry, time is up! It was ${answer}.`);
-        if (msgs.first().content !== answer.toString())
+        }
+        if (msgs.first().content !== answer.toString()) {
             return msg.reply(`Nope, sorry, it's ${answer}.`);
+        }
         return msg.reply('Nice job! 10/10! You deserve some cake!');
     }
 };

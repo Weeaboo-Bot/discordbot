@@ -84,8 +84,9 @@ module.exports = async (client, guild) => {
     }
     const joinLeaveChannel = await client.fetchJoinLeaveChannel();
     if (joinLeaveChannel) {
-        if (!guild.members.cache.has(guild.ownerID))
+        if (!guild.members.cache.has(guild.ownerID)) {
             await guild.members.fetch(guild.ownerID);
+        }
         const embed = new MessageEmbed()
             .setColor(0x7cfc00)
             .setThumbnail(guild.iconURL({ format: 'png' }))

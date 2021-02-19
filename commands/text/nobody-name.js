@@ -35,8 +35,9 @@ module.exports = class NobodyNameCommand extends Command {
     }
 
     run(msg, { text }) {
-        if (forced[text.toLowerCase()])
+        if (forced[text.toLowerCase()]) {
             return msg.say(forced[text.toLowerCase()]);
+        }
         const letters = text.split('');
         letters.push('x');
         const shuffled = shuffle(letters);

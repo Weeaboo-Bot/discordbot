@@ -55,8 +55,9 @@ module.exports = class PlayCommand extends Command {
                             .setColor('#e9f931')
                             .addField('Now Playing:', queue[0].title)
                             .addField('Duration:', queue[0].duration);
-                        if (queue[1])
+                        if (queue[1]) {
                             videoEmbed.addField('Next Song:', queue[1].title);
+                        }
                         message.say(videoEmbed);
                         message.guild.musicData.nowPlaying = queue[0];
                         return queue.shift();
@@ -116,8 +117,9 @@ module.exports = class PlayCommand extends Command {
                 );
             });
             for (let i = 0; i < videosObj.length; i++) {
-                if (videosObj[i].raw.status.privacyStatus == 'private')
+                if (videosObj[i].raw.status.privacyStatus == 'private') {
                     continue;
+                }
                 try {
                     const video = await videosObj[i].fetch();
                     // this can be uncommented if you choose to limit the queue
@@ -239,8 +241,9 @@ module.exports = class PlayCommand extends Command {
             )
             .then(function (response) {
                 const videoIndex = parseInt(response.first().content);
-                if (response.first().content === 'exit')
+                if (response.first().content === 'exit') {
                     return songEmbed.delete();
+                }
                 youtube
                     .getVideoByID(videos[videoIndex - 1].id)
                     .then(function (video) {

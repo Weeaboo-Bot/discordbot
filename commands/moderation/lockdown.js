@@ -21,8 +21,9 @@ module.exports = class LockdownCommand extends Command {
                     type: 'string',
                     default: 'start',
                     validate: (type) => {
-                        if (['start', 'stop'].includes(type.toLowerCase()))
+                        if (['start', 'stop'].includes(type.toLowerCase())) {
                             return true;
+                        }
                         return 'Please enter either start or stop.';
                     },
                     parse: (type) => type.toLowerCase(),

@@ -15,8 +15,11 @@ module.exports = class SpoilerLetterCommand extends Command {
                     prompt: 'What text would you like to convert?',
                     type: 'string',
                     validate: (text) => {
-                        if (`||${text.split('').join('||||')}||`.length < 2000)
+                        if (
+                            `||${text.split('').join('||||')}||`.length < 2000
+                        ) {
                             return true;
+                        }
                         return 'Invalid text, your text is too long.';
                     },
                 },

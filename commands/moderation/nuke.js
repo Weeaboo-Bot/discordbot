@@ -77,10 +77,12 @@ module.exports = class NukeCommand extends Command {
             if (
                 !msgs.size ||
                 !['y', 'yes'].includes(msgs.first().content.toLowerCase())
-            )
+            ) {
                 return message.channel.send('Cancelled command!');
-            if (['n', 'no'].includes(msgs.first().content.toLowerCase()))
+            }
+            if (['n', 'no'].includes(msgs.first().content.toLowerCase())) {
                 return message.channel.send('Cancelled command!');
+            }
 
             statusMsg2 = await message.channel.send(
                 '🚀 | Launching cybernuke...!'

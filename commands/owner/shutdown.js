@@ -33,8 +33,9 @@ module.exports = class ShutdownCommand extends Command {
                 currentString += `${games} game${games > 1 ? 's' : ''}`;
                 if (games === 1) areIs = 'is';
                 if (client.voice.channel) currentString += ' and zero calls ';
-                if (client.voice.channel)
+                if (client.voice.channel) {
                     currentString += ' and I am in a call ';
+                }
             }
 
             await msg.reply(

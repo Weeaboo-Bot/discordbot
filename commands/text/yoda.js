@@ -34,10 +34,11 @@ module.exports = class YodaCommand extends Command {
             const { body } = await request
                 .get('https://yoda-api.appspot.com/api/v1/yodish')
                 .query({ text: sentence });
-            if (!body.yodish)
+            if (!body.yodish) {
                 return msg.reply(
                     'Empty, this message is. Try again later, you must.'
                 );
+            }
             return msg.say(body.yodish);
         } catch (err) {
             return msg.reply(

@@ -43,10 +43,11 @@ module.exports = class TimeCommand extends Command {
     }
 
     async run(message, { location }) {
-        if (!location)
+        if (!location) {
             return message.channel.send(
                 'Please specify a location for me to gather information from!'
             );
+        }
 
         await axios
             .get(`https://time.is/${location}`)

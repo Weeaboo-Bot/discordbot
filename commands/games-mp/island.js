@@ -28,10 +28,11 @@ module.exports = class IslandCommand extends Command {
 
     async run(msg, { playersCount }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const awaitedPlayers = await awaitPlayers(msg, playersCount, 3);

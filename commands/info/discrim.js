@@ -16,8 +16,9 @@ module.exports = class DiscrimCommand extends Command {
                     type: 'string',
                     default: '',
                     validate: (discrim) => {
-                        if (/[0-9]+$/g.test(discrim) && discrim.length === 4)
+                        if (/[0-9]+$/g.test(discrim) && discrim.length === 4) {
                             return true;
+                        }
                         return 'Invalid Discriminator.';
                     },
                 },
@@ -30,10 +31,11 @@ module.exports = class DiscrimCommand extends Command {
         const users = this.client.users.cache
             .filter((user) => user.discriminator === discrim)
             .map((user) => user.tag);
-        if (users.length < 1)
+        if (users.length < 1) {
             return message.channel.send(
                 `**${message.author.username}**, no users found with the discriminator **${discrim}**!`
             );
+        }
 
         const embed = new Discord.MessageEmbed()
             .setTitle(

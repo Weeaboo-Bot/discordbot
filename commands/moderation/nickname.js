@@ -32,21 +32,25 @@ module.exports = class NickCommand extends Command {
 
     async run(message, { memberName, nickname }) {
         const member = message.mentions.members.first();
-        if (member.id === this.client.user.id)
+        if (member.id === this.client.user.id) {
             return message.channel.send("Please don't nickname me...!");
-        if (member.id === message.author.id)
+        }
+        if (member.id === message.author.id) {
             return message.channel.send("I wouldn't dare nickname you...!");
+        }
         if (
             member.roles.highest.position >
             message.member.roles.highest.position - 1
-        )
+        ) {
             return message.channel.send(
                 `❎ | You can't nickname **${member.user.username}**! Their position is higher than you!`
             );
-        if (!member.bannable)
+        }
+        if (!member.bannable) {
             return message.channel.send(
                 `❎ | I can't nickname **${member.user.username}**! Their role is higher than mine!`
             );
+        }
 
         return (await nickname) !== 'clear'
             ? member

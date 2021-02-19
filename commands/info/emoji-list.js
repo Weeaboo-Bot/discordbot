@@ -31,8 +31,9 @@ module.exports = class EmojiListCommand extends Command {
         const emojis = msg.guild.emojis.cache.filter((emoji) =>
             type === 'animated' ? emoji.animated : !emoji.animated
         );
-        if (!emojis.size)
+        if (!emojis.size) {
             return msg.say(`This server has no ${type} custom emoji.`);
+        }
         return msg.say(
             emojis
                 .map((emoji) => emoji.toString())

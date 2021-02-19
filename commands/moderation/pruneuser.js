@@ -44,10 +44,11 @@ module.exports = class PruneUserCommand extends Command {
                 before: message.id,
             });
             const flushable = messages.filter((m) => m.author.id == user.id);
-            if (flushable.size == 0)
+            if (flushable.size == 0) {
                 return message.channel.send(
                     `🍇 | **${message.author.username}**, **${user.username}** did not send any messages in the last ${count} messages!`
                 );
+            }
 
             await message.channel.bulkDelete(flushable);
             const m = await message.channel.send(

@@ -35,10 +35,11 @@ module.exports = class GiphyCommand extends Command {
                 type: 'gifs',
             })
             .then(function (res) {
-                if (!res.data.length)
+                if (!res.data.length) {
                     return message.channel.send(
                         `No results found for **${query}**!`
                     );
+                }
                 const random = Math.floor(Math.random() * res.data.length);
 
                 return message.channel.send({

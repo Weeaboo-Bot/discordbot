@@ -15,13 +15,15 @@ module.exports = class RateCommand extends Command {
 
     run(message) {
         const item = message.content.split(/\s+/g).slice(1).join(' ');
-        if (!item)
+        if (!item) {
             return message.channel.send(
                 'Please specify something for me to rate!'
             );
+        }
 
-        if (item.toUpperCase().startsWith('KOMUGARI'))
+        if (item.toUpperCase().startsWith('KOMUGARI')) {
             return message.channel.send("I'd give myself a 10/10!");
+        }
 
         const rating = Math.floor(Math.random() * 10) + 0;
         return message.channel.send(`I'd give **${item}** a ${rating}/10!`);

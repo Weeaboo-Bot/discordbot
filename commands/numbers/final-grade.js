@@ -57,15 +57,17 @@ module.exports = class FinalGradeCommand extends Command {
         );
         const diff = desired - current;
         let text;
-        if (required > 100)
+        if (required > 100) {
             text = above100[Math.floor(Math.random() * above100.length)];
-        else if (required > 92 || diff > weight * 0.3)
+        } else if (required > 92 || diff > weight * 0.3) {
             text = above92[Math.floor(Math.random() * above92.length)];
-        else if (required > 88 || diff > 0)
+        } else if (required > 88 || diff > 0) {
             text = above88[Math.floor(Math.random() * above88.length)];
-        else if (required > 80 || diff > weight * -0.3)
+        } else if (required > 80 || diff > weight * -0.3) {
             text = above80[Math.floor(Math.random() * above80.length)];
-        else text = below80[Math.floor(Math.random() * below80.length)];
+        } else {
+            text = below80[Math.floor(Math.random() * below80.length)];
+        }
         return msg.say(
             `You will need to score at least ${required}% on your final to get a ${desired}% overall. ${text}`
         );

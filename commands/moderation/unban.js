@@ -18,8 +18,9 @@ module.exports = class UnBanCommand extends Command {
                     prompt: 'Please provide me a user ID to unban!',
                     type: 'string',
                     validate: (member) => {
-                        if (/[0-9]+$/g.test(member) && member.length === 18)
+                        if (/[0-9]+$/g.test(member) && member.length === 18) {
                             return true;
+                        }
                         return 'Invalid user ID!';
                     },
                 },
@@ -39,10 +40,11 @@ module.exports = class UnBanCommand extends Command {
 
     async run(message, { memberID, content }) {
         const bans = await message.guild.fetchBans();
-        if (!bans.has(memberID))
+        if (!bans.has(memberID)) {
             return message.channel.send(
                 'This user is not banned in this server!'
             );
+        }
         const member = bans.get(id).user;
 
         await message.channel.send(
@@ -59,8 +61,9 @@ module.exports = class UnBanCommand extends Command {
         if (
             !msgs.size ||
             !['y', 'yes'].includes(msgs.first().content.toLowerCase())
-        )
+        ) {
             return msg.say('Aborting.');
+        }
 
         await message.guild.members.unban(
             member,

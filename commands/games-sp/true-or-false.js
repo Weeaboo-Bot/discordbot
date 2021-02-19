@@ -49,10 +49,11 @@ module.exports = class TrueOrFalseCommand extends Command {
                     encode: 'url3986',
                     difficulty,
                 });
-            if (!body.results)
+            if (!body.results) {
                 return msg.reply(
                     'Oh no, a question could not be fetched. Try again later!'
                 );
+            }
             const correct = decodeURIComponent(
                 body.results[0].correct_answer.toLowerCase()
             );
@@ -73,12 +74,14 @@ module.exports = class TrueOrFalseCommand extends Command {
                 max: 1,
                 time: 15000,
             });
-            if (!msgs.size)
+            if (!msgs.size) {
                 return msg.reply(`Sorry, time is up! It was ${correctBool}.`);
+            }
             const ans = msgs.first().content.toLowerCase();
             const ansBool = trueAns.includes(ans);
-            if (correctBool !== ansBool)
+            if (correctBool !== ansBool) {
                 return msg.reply(`Nope, sorry, it's ${correctBool}.`);
+            }
             return msg.reply('Nice job! 10/10! You deserve some cake!');
         } catch (err) {
             return msg.reply(

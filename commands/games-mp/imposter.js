@@ -30,10 +30,11 @@ module.exports = class ImposterCommand extends Command {
 
     async run(msg, { playersCount }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const awaitedPlayers = await awaitPlayers(msg, playersCount, 3);
@@ -63,14 +64,15 @@ module.exports = class ImposterCommand extends Command {
                     imposter: imposter === player,
                 });
                 const newPlayer = players.get(player);
-                if (imposter === player)
+                if (imposter === player) {
                     newPlayer.user.send(
                         `You are the imposter. The kill word is ${word}.`
                     );
-                else
+                } else {
                     newPlayer.user.send(
                         'You are not the imposter. Be careful what you say!'
                     );
+                }
             }
             let lastTurnTimeout = false;
             const winners = [];
@@ -82,8 +84,9 @@ module.exports = class ImposterCommand extends Command {
                 );
                 const filter = (res) => {
                     const player = players.get(res.author.id);
-                    if (!player || player.killed || player.imposter)
+                    if (!player || player.killed || player.imposter) {
                         return false;
+                    }
                     if (res.content && wordRegex.test(res.content)) return true;
                     return false;
                 };

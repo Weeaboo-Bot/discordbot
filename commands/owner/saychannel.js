@@ -31,19 +31,22 @@ module.exports = class SayChannelCommand extends Command {
     }
 
     async run(message, { id, msg }) {
-        if (message.guild.id !== server_id)
+        if (message.guild.id !== server_id) {
             return message.channel.send(
                 "This command can only be used in the owner's server."
             );
-        if (!message.member.hasPermission('MANAGE_GUILD'))
+        }
+        if (!message.member.hasPermission('MANAGE_GUILD')) {
             return message.channel.send('You cannot use this command!');
+        }
 
         try {
             const channelMessage = msg;
-            if (!msg)
+            if (!msg) {
                 return message.channel.send(
                     'Provide something for me to send.'
                 );
+            }
 
             const channel = this.client.channels.cache.get(id);
             message.channel.send(msg);

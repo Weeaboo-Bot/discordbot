@@ -68,10 +68,11 @@ module.exports = class HearingTestCommand extends Command {
                 previousAge = dataAge;
                 previousRange = khz;
             }
-            if (age === 'all')
+            if (age === 'all') {
                 return msg.reply(
                     'Everyone should be able to hear that. You cannot hear.'
                 );
+            }
             if (age === 'max') {
                 return msg.reply(stripIndents`
 					You can hear any frequency of which a human is capable.

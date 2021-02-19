@@ -28,8 +28,9 @@ module.exports = class ServerCommand extends Command {
     }
 
     async run(msg) {
-        if (!msg.guild.members.cache.has(msg.guild.ownerID))
+        if (!msg.guild.members.cache.has(msg.guild.ownerID)) {
             await msg.guild.members.fetch(msg.guild.ownerID);
+        }
         const embed = new MessageEmbed()
             .setColor(0x00ae86)
             .setThumbnail(msg.guild.iconURL({ format: 'png' }))

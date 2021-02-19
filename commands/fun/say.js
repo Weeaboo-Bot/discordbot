@@ -27,8 +27,9 @@ module.exports = class SayCommand extends Command {
 
     run(message, args) {
         let { sayMessage } = args;
-        if ((sayMessage = 'N////A'))
+        if ((sayMessage = 'N////A')) {
             return message.say('Please specify something for me to say!');
+        }
 
         return message.say(sayMessage).catch(console.error);
     }

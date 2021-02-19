@@ -59,15 +59,17 @@ module.exports = class CaptchaCommand extends Command {
             }
         );
         if (!msgs.size) return msg.reply(`Sorry, time is up! It was ${text}.`);
-        if (msgs.first().content !== text)
+        if (msgs.first().content !== text) {
             return msg.reply(`Nope, sorry, it's ${text}.`);
+        }
         return msg.reply('Nice job! 10/10! You deserve some cake!');
     }
 
     randomText(len) {
         const result = [];
-        for (let i = 0; i < len; i++)
+        for (let i = 0; i < len; i++) {
             result.push(pool[Math.floor(Math.random() * pool.length)]);
+        }
         return result.join('');
     }
 };

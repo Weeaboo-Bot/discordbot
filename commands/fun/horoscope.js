@@ -43,13 +43,15 @@ module.exports = class HoroscopeCommand extends Command {
     }
 
     async run(message, { sign }) {
-        if (!sign)
+        if (!sign) {
             return message.channel.send(
                 'Please give me a sign to get the horoscope of!'
             );
+        }
 
-        if (!signs.includes(sign.toLowerCase()))
+        if (!signs.includes(sign.toLowerCase())) {
             return message.channel.send('That is not a valid sign!');
+        }
 
         await axios
             .post(`https://aztro.sameerkumar.website?sign=${sign}&day=today`)

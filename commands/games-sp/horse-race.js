@@ -79,8 +79,9 @@ module.exports = class HorseRaceCommand extends Command {
             max: 1,
             time: 30000,
         });
-        if (!msgs.size)
+        if (!msgs.size) {
             return msg.reply("Sorry, can't have a race with no bets!");
+        }
         const pick =
             chosenHorses[Number.parseInt(msgs.first().content, 10) - 1];
         let results = [];
@@ -136,7 +137,7 @@ module.exports = class HorseRaceCommand extends Command {
         for (let i = 0; i < results.length; i++) {
             const result = results[i];
             const horse = chosenHorses.find((hor) => hor.name === result.name);
-            if (colors[i])
+            if (colors[i]) {
                 drawImageWithTint(
                     ctx,
                     horseImg,
@@ -146,6 +147,7 @@ module.exports = class HorseRaceCommand extends Command {
                     49,
                     49
                 );
+            }
             ctx.font = '34px Paladins';
             ctx.fillText(formatTime(result.time), 755, 138 + 49 * i);
             ctx.font = '15px Paladins';

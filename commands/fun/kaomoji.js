@@ -23,8 +23,9 @@ module.exports = class KaomojiCommand extends Command {
                     type: 'string',
                     default: 'random',
                     validate: (emotion) => {
-                        if (kaomojis.includes(emotion.toLowerCase()))
+                        if (kaomojis.includes(emotion.toLowerCase())) {
                             return true;
+                        }
                         return 'Invalid kaomoji category! Use `~help kaomoji` for a list of valid kaomojis!';
                     },
                     parse: (sign) => sign.toLowerCase(),

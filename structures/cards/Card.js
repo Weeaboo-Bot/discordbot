@@ -19,8 +19,9 @@ module.exports = class Card {
             this.value === 'King' ||
             this.value === 'Queen' ||
             this.value === 'Jack'
-        )
+        ) {
             return 10;
+        }
         if (this.value === 'Ace') return 11;
         return this.value;
     }

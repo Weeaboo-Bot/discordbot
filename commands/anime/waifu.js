@@ -44,8 +44,9 @@ module.exports = class WaifuCommand extends Command {
                     type: 'integer',
                     default: 'none',
                     validate: (waifuNumber) => {
-                        if (waifuNumber <= total && waifuNumber > 0)
+                        if (waifuNumber <= total && waifuNumber > 0) {
                             return true;
+                        }
                         return `That's not a valid waifu number! There are only **${total}** waifus right now, *choose a number between 1 and ${total}*!`;
                     },
                 },

@@ -34,8 +34,9 @@ module.exports = class ZalgoCommand extends Command {
             result += text[i];
             for (const chars of Object.values(zalgo)) {
                 let count = Math.floor(Math.random() * 5);
-                while (count--)
+                while (count--) {
                     result += chars[Math.floor(Math.random() * chars.length)];
+                }
             }
         }
         return msg.say(result);

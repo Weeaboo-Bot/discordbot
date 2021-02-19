@@ -57,8 +57,9 @@ module.exports = class AntidepressantOrTolkienCommand extends Command {
             if (
                 drugResponses.includes(choice) ||
                 tolkienResponses.includes(choice)
-            )
+            ) {
                 return true;
+            }
             return false;
         };
         const msgs = await msg.channel.awaitMessages(filter, {

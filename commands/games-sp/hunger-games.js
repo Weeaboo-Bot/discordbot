@@ -34,20 +34,23 @@ module.exports = class HungerGamesCommand extends Command {
     }
 
     async run(msg, { tributes }) {
-        if (tributes.length < 2)
+        if (tributes.length < 2) {
             return msg.say(
                 `...${tributes[0]} wins, as they were the only tribute.`
             );
-        if (tributes.length > 24)
+        }
+        if (tributes.length > 24) {
             return msg.reply('Please do not enter more than 24 tributes.');
+        }
         if (removeDuplicates(tributes).length !== tributes.length) {
             return msg.reply('Please do not enter the same tribute twice.');
         }
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             let sun = true;
@@ -130,8 +133,9 @@ module.exports = class HungerGamesCommand extends Command {
                 results.push(this.parseEvent(event.text, [tribute]));
             } else {
                 const current = [tribute];
-                if (event.killers.includes(1))
+                if (event.killers.includes(1)) {
                     kills[tribute] += event.deaths.length;
+                }
                 if (event.deaths.includes(1)) {
                     deaths.push(tribute);
                     tributes.delete(tribute);
@@ -140,8 +144,9 @@ module.exports = class HungerGamesCommand extends Command {
                     const turnArr = Array.from(turn);
                     const tribu =
                         turnArr[Math.floor(Math.random() * turnArr.length)];
-                    if (event.killers.includes(i))
+                    if (event.killers.includes(i)) {
                         kills[tribu] += event.deaths.length;
+                    }
                     if (event.deaths.includes(i)) {
                         deaths.push(tribu);
                         tributes.delete(tribu);

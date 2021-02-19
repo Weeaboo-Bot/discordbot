@@ -54,10 +54,11 @@ module.exports = class GuesspionageCommand extends Command {
 
     async run(msg, { players }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const awaitedPlayers = await awaitPlayers(msg, players, min);
@@ -124,8 +125,9 @@ module.exports = class GuesspionageCommand extends Command {
                     if (res.author.id === mainUser.id) return false;
                     if (guessed.includes(res.author.id)) return false;
                     if (!awaitedPlayers.includes(res.author.id)) return false;
-                    if (!guesses.includes(res.content.toLowerCase()))
+                    if (!guesses.includes(res.content.toLowerCase())) {
                         return false;
+                    }
                     guessed.push(res.author.id);
                     reactIfAble(res, res.author, SUCCESS_EMOJI_ID, '✅');
                     return true;
@@ -172,8 +174,9 @@ module.exports = class GuesspionageCommand extends Command {
                     }
                 }
                 const diff = Math.abs(question.answer - guess);
-                if (diff <= 30)
+                if (diff <= 30) {
                     pts.get(mainUser.id).points += 3000 - diff * 100;
+                }
                 await msg.say(stripIndents`
 					The actual answer was... **${question.answer}%**!
 

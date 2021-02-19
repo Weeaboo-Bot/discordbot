@@ -52,10 +52,11 @@ module.exports = class SortingHatCommand extends Command {
 
     async run(msg) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const points = {
@@ -111,8 +112,9 @@ module.exports = class SortingHatCommand extends Command {
                     answers[
                         choices.indexOf(choice.first().content.toUpperCase())
                     ];
-                for (const [house, amount] of Object.entries(answer.points))
+                for (const [house, amount] of Object.entries(answer.points)) {
                     points[house] += amount;
+                }
                 ++turn;
             }
             const houseResult = Object.keys(points)

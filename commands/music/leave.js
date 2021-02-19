@@ -14,8 +14,9 @@ module.exports = class LeaveCommand extends Command {
 
     async run(message) {
         const voiceChannel = message.member.voice.channel;
-        if (!voiceChannel)
+        if (!voiceChannel) {
             return message.reply('User must Join a channel and try again');
+        }
 
         if (message.member.voice.channel) {
             await message.member.voice.channel.leave();

@@ -28,13 +28,15 @@ module.exports = class PickANumberCommand extends Command {
     }
 
     async run(msg, { opponent }) {
-        if (opponent.id === msg.author.id)
+        if (opponent.id === msg.author.id) {
             return msg.reply('You may not play against yourself.');
+        }
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const clientOpp = opponent.id === this.client.user.id;
@@ -50,8 +52,11 @@ module.exports = class PickANumberCommand extends Command {
             let userTurn = true;
             let player1Pick = null;
             const filter = (res) => {
-                if (res.author.id !== (userTurn ? msg.author.id : opponent.id))
+                if (
+                    res.author.id !== (userTurn ? msg.author.id : opponent.id)
+                ) {
                     return false;
+                }
                 const num = Number.parseInt(res.content, 10);
                 if (!userTurn && num === player1Pick) return false;
                 return num && nums.includes(num);

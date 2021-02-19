@@ -88,8 +88,9 @@ module.exports = class Util {
 
     static sortByName(arr, prop) {
         return arr.sort((a, b) => {
-            if (prop)
+            if (prop) {
                 return a[prop].toLowerCase() > b[prop].toLowerCase() ? 1 : -1;
+            }
             return a.toLowerCase() > b.toLowerCase() ? 1 : -1;
         });
     }
@@ -118,8 +119,9 @@ module.exports = class Util {
 
     static base64(text, mode = 'encode') {
         if (mode === 'encode') return Buffer.from(text).toString('base64');
-        if (mode === 'decode')
+        if (mode === 'decode') {
             return Buffer.from(text, 'base64').toString('utf8') || null;
+        }
         throw new TypeError(`${mode} is not a supported base64 mode.`);
     }
 

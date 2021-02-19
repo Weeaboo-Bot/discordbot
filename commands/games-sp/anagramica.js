@@ -39,10 +39,11 @@ module.exports = class AnagramicaCommand extends Command {
 
     async run(msg, { time }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         try {
             this.client.games.set(msg.channel.id, { name: this.name });
             const { valid, letters } = await this.fetchList();
@@ -75,8 +76,9 @@ module.exports = class AnagramicaCommand extends Command {
             const highScore = highScoreGet
                 ? Number.parseInt(highScoreGet, 10)
                 : null;
-            if (!highScore || highScore < points)
+            if (!highScore || highScore < points) {
                 await this.client.redis.set('anagramica', points);
+            }
             this.client.games.delete(msg.channel.id);
             if (!msgs.size) {
                 return msg.reply(stripIndents`
@@ -116,8 +118,9 @@ module.exports = class AnagramicaCommand extends Command {
 
     async fetchList() {
         const letters = [];
-        for (let i = 0; i < 10; i++)
+        for (let i = 0; i < 10; i++) {
             letters.push(pool[Math.floor(Math.random() * pool.length)]);
+        }
         const { body } = await request.get(
             `http://www.anagramica.com/all/${letters.join('')}`
         );

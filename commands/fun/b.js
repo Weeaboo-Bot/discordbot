@@ -22,8 +22,9 @@ module.exports = class BCommand extends Command {
                     default: 'traps are not gay',
                     parse: (text) => text.toLowerCase(),
                     validate: (value) => {
-                        if (this.B(value.toLowerCase()).length < 2000)
+                        if (this.B(value.toLowerCase()).length < 2000) {
                             return true;
+                        }
                         return 'The output is over 2000 characters! Please try again!';
                     },
                 },

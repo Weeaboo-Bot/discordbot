@@ -22,13 +22,15 @@ module.exports = class RussianRouletteCommand extends Command {
     }
 
     async run(msg, { opponent }) {
-        if (opponent.id === msg.author.id)
+        if (opponent.id === msg.author.id) {
             return msg.reply('You may not challenge yourself.');
+        }
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             if (!opponent.bot) {
@@ -82,10 +84,11 @@ module.exports = class RussianRouletteCommand extends Command {
                 }
             }
             this.client.games.delete(msg.channel.id);
-            if (quit)
+            if (quit) {
                 return msg.say(
                     `${winner} wins, because their opponent was a coward.`
                 );
+            }
             return msg.say(`The winner is ${winner}!`);
         } catch (err) {
             this.client.games.delete(msg.channel.id);

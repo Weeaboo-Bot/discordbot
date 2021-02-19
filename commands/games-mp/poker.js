@@ -39,10 +39,11 @@ module.exports = class PokerCommand extends Command {
 
     async run(msg, { playersCount }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, {
             name: this.name,
             data: {
@@ -259,8 +260,9 @@ module.exports = class PokerCommand extends Command {
         if (
             turnPlayer.money >= currentBet &&
             turnPlayer.currentBet !== currentBet
-        )
+        ) {
             actions.push('call');
+        }
         if (currentBet === turnPlayer.currentBet) actions.push('check');
         return actions;
     }
@@ -291,7 +293,7 @@ module.exports = class PokerCommand extends Command {
             bigBlind,
             smallBlind
         );
-        while (!turnOver)
+        while (!turnOver) {
             turnOver = await this.bettingRound(
                 msg,
                 players,
@@ -299,6 +301,7 @@ module.exports = class PokerCommand extends Command {
                 folded,
                 turnData
             );
+        }
         this.resetHasGoneOnce(players);
         if (turnRotation.length === 1) {
             const remainer = players.get(turnRotation[0]);
@@ -334,8 +337,9 @@ module.exports = class PokerCommand extends Command {
         const filter = (res) => {
             if (res.author.id !== turnPlayer.id) return false;
             let choice = res.content.toLowerCase();
-            if (actions.includes(choice) && !choice.startsWith('raise'))
+            if (actions.includes(choice) && !choice.startsWith('raise')) {
                 return true;
+            }
             if (choice.startsWith('raise')) {
                 if (!raiseRegex.test(choice)) return false;
                 choice = choice.replace(/[$,]/g, '');

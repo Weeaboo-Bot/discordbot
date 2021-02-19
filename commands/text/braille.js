@@ -15,8 +15,9 @@ module.exports = class BrailleCommand extends Command {
                     prompt: 'What text would you like to convert to braille?',
                     type: 'string',
                     validate: (text) => {
-                        if (letterTrans(text, dictionary).length < 2000)
+                        if (letterTrans(text, dictionary).length < 2000) {
                             return true;
+                        }
                         return 'Invalid text, your text is too long.';
                     },
                 },

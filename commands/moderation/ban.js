@@ -39,21 +39,25 @@ module.exports = class BanCommand extends Command {
     async run(message, { memberName, reason }) {
         const member = message.mentions.members.first();
 
-        if (member.id === this.client.user.id)
+        if (member.id === this.client.user.id) {
             return message.channel.send("Please don't ban me...!");
-        if (member.id === message.author.id)
+        }
+        if (member.id === message.author.id) {
             return message.channel.send("I wouldn't dare ban you...!");
+        }
         if (
             member.roles.highest.position >
             message.member.roles.highest.position - 1
-        )
+        ) {
             return message.channel.send(
                 `❎ | You can't ban **${member.user.username}**! Their position is higher than you!`
             );
-        if (!member.bannable)
+        }
+        if (!member.bannable) {
             return message.channel.send(
                 `❎ | I can't ban **${member.user.username}**! Their role is higher than mine!`
             );
+        }
 
         await message.channel.send(
             `Are you sure you want to ban **${member.user.tag}**? \`\`(y/n)\`\``
@@ -69,10 +73,12 @@ module.exports = class BanCommand extends Command {
         if (
             !msgs.size ||
             !['y', 'yes'].includes(msgs.first().content.toLowerCase())
-        )
+        ) {
             return message.channel.send('Cancelled command!');
-        if (['n', 'no'].includes(msgs.first().content.toLowerCase()))
+        }
+        if (['n', 'no'].includes(msgs.first().content.toLowerCase())) {
             return message.channel.send('Cancelled command!');
+        }
 
         try {
             await member.send(

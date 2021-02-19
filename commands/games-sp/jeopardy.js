@@ -51,10 +51,11 @@ module.exports = class JeopardyCommand extends Command {
 
     async run(msg) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         try {
             this.client.games.set(msg.channel.id, { name: this.name });
             const question = await this.fetchQuestion();
@@ -90,12 +91,14 @@ module.exports = class JeopardyCommand extends Command {
                     time: 30000,
                 }
             );
-            if (connection && connection.dispatcher)
+            if (connection && connection.dispatcher) {
                 connection.dispatcher.end();
+            }
             const answer = question.answer.replace(/<\/?i>/gi, '*');
             this.client.games.delete(msg.channel.id);
-            if (!msgs.size)
+            if (!msgs.size) {
                 return msg.reply(`Time's up, the answer was **${answer}**.`);
+            }
             const win =
                 msgs.first().content.toLowerCase() === answer.toLowerCase();
             if (!win) return msg.reply(`The answer was **${answer}**.`);

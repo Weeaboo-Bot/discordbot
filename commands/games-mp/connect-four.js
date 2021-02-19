@@ -34,13 +34,15 @@ module.exports = class ConnectFourCommand extends Command {
 
     async run(msg, { opponent }) {
         if (opponent.bot) return msg.reply('Bots may not be played against.');
-        if (opponent.id === msg.author.id)
+        if (opponent.id === msg.author.id) {
             return msg.reply('You may not play against yourself.');
+        }
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             await msg.say(`${opponent}, do you accept this challenge?`);
@@ -96,14 +98,16 @@ module.exports = class ConnectFourCommand extends Command {
                 const i = Number.parseInt(choice, 10) - 1;
                 board[colLevels[i]][i] = sign;
                 colLevels[i]--;
-                if (this.verifyWin(board))
+                if (this.verifyWin(board)) {
                     winner = userTurn ? msg.author : opponent;
+                }
                 if (lastTurnTimeout) lastTurnTimeout = false;
                 userTurn = !userTurn;
             }
             this.client.games.delete(msg.channel.id);
-            if (winner === 'time')
+            if (winner === 'time') {
                 return msg.say('Game ended due to inactivity.');
+            }
             return msg.say(
                 winner ? `Congrats, ${winner}!` : "Looks like it's a draw..."
             );
@@ -127,8 +131,9 @@ module.exports = class ConnectFourCommand extends Command {
                         bd[r + 2][c],
                         bd[r + 3][c]
                     )
-                )
+                ) {
                     return bd[r][c];
+                }
             }
         }
         for (let r = 0; r < 6; r++) {
@@ -140,8 +145,9 @@ module.exports = class ConnectFourCommand extends Command {
                         bd[r][c + 2],
                         bd[r][c + 3]
                     )
-                )
+                ) {
                     return bd[r][c];
+                }
             }
         }
         for (let r = 0; r < 3; r++) {
@@ -153,8 +159,9 @@ module.exports = class ConnectFourCommand extends Command {
                         bd[r + 2][c + 2],
                         bd[r + 3][c + 3]
                     )
-                )
+                ) {
                     return bd[r][c];
+                }
             }
         }
         for (let r = 3; r < 6; r++) {
@@ -166,8 +173,9 @@ module.exports = class ConnectFourCommand extends Command {
                         bd[r - 2][c + 2],
                         bd[r - 3][c + 3]
                     )
-                )
+                ) {
                     return bd[r][c];
+                }
             }
         }
         return null;

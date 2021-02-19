@@ -39,8 +39,9 @@ module.exports = class TranslateCommand extends Command {
                     )}.`,
                     type: 'string',
                     validate: (target) => {
-                        if (translate.languages.isSupported(target))
+                        if (translate.languages.isSupported(target)) {
                             return true;
+                        }
                         return `Invalid target, please enter either ${list(
                             codes,
                             'or'

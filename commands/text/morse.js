@@ -19,8 +19,9 @@ module.exports = class MorseCommand extends Command {
                         if (
                             letterTrans(text.toLowerCase(), dictionary, ' ')
                                 .length < 2000
-                        )
+                        ) {
                             return true;
+                        }
                         return 'Invalid text, your text is too long.';
                     },
                     parse: (text) => text.toLowerCase(),

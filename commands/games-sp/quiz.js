@@ -48,10 +48,11 @@ module.exports = class QuizCommand extends Command {
                     encode: 'url3986',
                     difficulty,
                 });
-            if (!body.results)
+            if (!body.results) {
                 return msg.reply(
                     'Oh no, a question could not be fetched. Try again later!'
                 );
+            }
             const answers = body.results[0].incorrect_answers.map((answer) =>
                 decodeURIComponent(answer.toLowerCase())
             );
@@ -74,8 +75,9 @@ module.exports = class QuizCommand extends Command {
                 max: 1,
                 time: 15000,
             });
-            if (!msgs.size)
+            if (!msgs.size) {
                 return msg.reply(`Sorry, time is up! It was ${correct}.`);
+            }
             const win =
                 shuffled[
                     choices.indexOf(msgs.first().content.toUpperCase())

@@ -29,10 +29,11 @@ module.exports = class BingoCommand extends Command {
 
     async run(msg, { playersCount }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const awaitedPlayers = await awaitPlayers(msg, playersCount);
@@ -114,10 +115,11 @@ module.exports = class BingoCommand extends Command {
             }
             this.client.games.delete(msg.channel.id);
             if (winner === 0) return msg.say('Everyone dropped out...');
-            if (!winner)
+            if (!winner) {
                 return msg.say(
                     'I called the entire board, but no one called bingo...'
                 );
+            }
             return msg.say(`Congrats, ${winner}!`);
         } catch (err) {
             this.client.games.delete(msg.channel.id);
@@ -146,8 +148,9 @@ module.exports = class BingoCommand extends Command {
                 const row = rows[i];
                 const mapVal = values
                     .map((value) => {
-                        if (called.includes(value) || value === 'FR')
+                        if (called.includes(value) || value === 'FR') {
                             return 'XX';
+                        }
                         return value.toString().padStart(2, '0');
                     })
                     .join(' | ');
@@ -191,8 +194,9 @@ module.exports = class BingoCommand extends Command {
                     bd[r][3],
                     bd[r][4]
                 )
-            )
+            ) {
                 return true;
+            }
         }
         for (let c = 0; c < rows.length; c++) {
             if (
@@ -204,17 +208,20 @@ module.exports = class BingoCommand extends Command {
                     bd[3][c],
                     bd[4][c]
                 )
-            )
+            ) {
                 return true;
+            }
         }
         if (
             this.checkLine(ca, bd[0][0], bd[1][1], bd[2][2], bd[3][3], bd[4][4])
-        )
+        ) {
             return true;
+        }
         if (
             this.checkLine(ca, bd[4][0], bd[3][1], bd[2][2], bd[1][3], bd[0][4])
-        )
+        ) {
             return true;
+        }
         return false;
     }
 };

@@ -61,8 +61,9 @@ module.exports = class PruneCommand extends Command {
                                 'links',
                                 'link',
                             ].includes(base.toLowerCase())
-                        )
+                        ) {
                             return true;
+                        }
                         return 'Please enter a valid type of message! `all` `images` `links` `attachments` `bots` `codeblocks` `embeds` `me`';
                     },
                 },
@@ -106,10 +107,11 @@ module.exports = class PruneCommand extends Command {
 
                 const flushable = attachments.concat(urls);
 
-                if (flushable.size == 0)
+                if (flushable.size == 0) {
                     return message.channel.send(
                         `🍇 | **${message.author.username}**, there were no images to prune in the last ${count} messages!`
                     );
+                }
 
                 await message.channel.bulkDelete(flushable);
 
@@ -138,10 +140,11 @@ module.exports = class PruneCommand extends Command {
                 });
                 const flushable = messages.filter((m) => m.author.bot);
                 await message.channel.bulkDelete(flushable);
-                if (flushable.size == 0)
+                if (flushable.size == 0) {
                     return message.channel.send(
                         `🍇 | **${message.author.username}**, there were no bot messages to prune in the last ${count} messages!`
                     );
+                }
 
                 const m = await message.channel.send(
                     `🍇 | **${
@@ -170,10 +173,11 @@ module.exports = class PruneCommand extends Command {
                     m.content.startsWith('```')
                 );
 
-                if (flushable.size == 0)
+                if (flushable.size == 0) {
                     return message.channel.send(
                         `🍇 | **${message.author.username}**, there were no codeblocks to prune in the last ${count} messages!`
                     );
+                }
 
                 await message.channel.bulkDelete(flushable);
                 const m = await message.channel.send(
@@ -207,10 +211,11 @@ module.exports = class PruneCommand extends Command {
                 const flushable = messages.filter(
                     (m) => m.attachments.length > 0
                 );
-                if (flushable.size == 0)
+                if (flushable.size == 0) {
                     return message.channel.send(
                         `🍇 | **${message.author.username}**, there were no attachments to prune in the last ${count} messages!`
                     );
+                }
 
                 await message.channel.bulkDelete(flushable);
                 const m = await message.channel.send(
@@ -237,10 +242,11 @@ module.exports = class PruneCommand extends Command {
                     before: message.id,
                 });
                 const flushable = messages.filter((m) => m.embeds.length > 0);
-                if (flushable.size == 0)
+                if (flushable.size == 0) {
                     return message.channel.send(
                         `🍇 | **${message.author.username}**, there were no embeds to prune in the last ${count} messages!`
                     );
+                }
 
                 await message.channel.bulkDelete(flushable);
                 const m = await message.channel.send(
@@ -269,10 +275,11 @@ module.exports = class PruneCommand extends Command {
                 const flushable = messages.filter(
                     (m) => m.id == message.author.id
                 );
-                if (flushable.size == 0)
+                if (flushable.size == 0) {
                     return message.channel.send(
                         `🍇 | **${message.author.username}**, there were no messages from you to prune in the last ${count} messages!`
                     );
+                }
 
                 await message.channel.bulkDelete(flushable);
                 const m = await message.channel.send(
@@ -297,10 +304,11 @@ module.exports = class PruneCommand extends Command {
                 const flushable = messages.filter((m) =>
                     LinkRegex.test(m.content)
                 );
-                if (flushable.size == 0)
+                if (flushable.size == 0) {
                     return message.channel.send(
                         `🍇 | **${message.author.username}**, there were no links to prune in the last ${count} messages!`
                     );
+                }
 
                 await message.channel.bulkDelete(flushable);
                 const m = await message.channel.send(

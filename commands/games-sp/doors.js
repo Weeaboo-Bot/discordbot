@@ -39,10 +39,11 @@ module.exports = class DoorsCommand extends Command {
 
     async run(msg, { door }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const win = doors[Math.floor(Math.random() * doors.length)];
@@ -54,10 +55,11 @@ module.exports = class DoorsCommand extends Command {
 				${this.emoji(1, noWin)} ${this.emoji(2, noWin)} ${this.emoji(3, noWin)}
 			`);
             const stick = await verify(msg.channel, msg.author);
-            if (!stick)
+            if (!stick) {
                 door = doors.filter(
                     (thisDoor) => door !== thisDoor && thisDoor !== noWin
                 )[0];
+            }
             this.client.games.delete(msg.channel.id);
             return msg.reply(stripIndents`
 				${door === win ? 'You chose wisely.' : 'Hmm... Try again.'}

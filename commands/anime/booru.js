@@ -24,10 +24,11 @@ module.exports = class BooruCommand extends Command {
         if (
             message.content.toUpperCase().includes('LOLI') ||
             message.content.toUpperCase().includes('GORE')
-        )
+        ) {
             return message.channel.send(
                 'That kind of stuff is not allowed! Not even in NSFW channels!'
             );
+        }
 
         const query = message.content.split(/\s+/g).slice(1).join(' ');
 

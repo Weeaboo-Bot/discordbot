@@ -29,13 +29,15 @@ module.exports = class DotsAndBoxesCommand extends Command {
 
     async run(msg, { opponent }) {
         if (opponent.bot) return msg.reply('Bots may not be played against.');
-        if (opponent.id === msg.author.id)
+        if (opponent.id === msg.author.id) {
             return msg.reply('You may not play against yourself.');
+        }
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             await msg.say(`${opponent}, do you accept this challenge?`);
@@ -76,8 +78,9 @@ module.exports = class DotsAndBoxesCommand extends Command {
                         first = second;
                         second = temp;
                     }
-                    if (first > 24 || second > 24 || first < 0 || second < 0)
+                    if (first > 24 || second > 24 || first < 0 || second < 0) {
                         return false;
+                    }
                     const column1 = first % 5;
                     const column2 = second % 5;
                     if (second !== first + 1 && column1 !== column2) {
@@ -138,8 +141,9 @@ module.exports = class DotsAndBoxesCommand extends Command {
                 if (lastTurnTimeout) lastTurnTimeout = false;
             }
             this.client.games.delete(msg.channel.id);
-            if (winner === 'time')
+            if (winner === 'time') {
                 return msg.say('Game ended due to inactivity.');
+            }
             winner =
                 userOwned.length === oppoOwned.length
                     ? null
@@ -167,8 +171,9 @@ module.exports = class DotsAndBoxesCommand extends Command {
     calcNewSquare(taken, userOwned, oppoOwned) {
         const newSquares = [];
         for (const square of squareIDs) {
-            if (userOwned.includes(square) || oppoOwned.includes(square))
+            if (userOwned.includes(square) || oppoOwned.includes(square)) {
                 continue;
+            }
             if (this.calcSquare(square, taken)) newSquares.push(square);
         }
         return newSquares;

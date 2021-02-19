@@ -27,10 +27,11 @@ module.exports = class MadLibsCommand extends Command {
 
     async run(msg) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const lib = libs[Math.floor(Math.random() * libs.length)];

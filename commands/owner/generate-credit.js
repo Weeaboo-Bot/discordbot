@@ -51,8 +51,9 @@ module.exports = class GenerateCreditCommand extends Command {
                     'name'
                 )
                     .map((cmd) => {
-                        if (!cmd.reasonURL)
+                        if (!cmd.reasonURL) {
                             return `	* ${cmd.name} (${cmd.reason})`;
+                        }
                         return `	* ${cmd.name} (${embedURL(
                             cmd.reason,
                             cmd.reasonURL || '',

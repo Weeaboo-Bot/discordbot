@@ -27,10 +27,11 @@ module.exports = class MemoryCommand extends Command {
 
     async run(msg, { level }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             const memorize = this.genArray(level);
@@ -54,13 +55,15 @@ module.exports = class MemoryCommand extends Command {
                 }
             );
             this.client.games.delete(msg.channel.id);
-            if (!msgs.size)
+            if (!msgs.size) {
                 return msg.say(`Sorry, time is up! It was ${memorizeDisplay}.`);
+            }
             const answer = msgs.first().content.toLowerCase();
-            if (answer !== memorizeType)
+            if (answer !== memorizeType) {
                 return msg.say(
                     `Sorry, you typed it wrong. It was ${memorizeDisplay}.`
                 );
+            }
             return msg.say('Nice job! 10/10! You deserve some cake!');
         } catch (err) {
             this.client.games.delete(msg.channel.id);
@@ -73,8 +76,9 @@ module.exports = class MemoryCommand extends Command {
             Math.floor(Math.random() * 3)
         ];
         const arr = [];
-        for (let i = 0; i < level; i++)
+        for (let i = 0; i < level; i++) {
             arr.push(sourceArr[Math.floor(Math.random() * sourceArr.length)]);
+        }
         return arr;
     }
 };

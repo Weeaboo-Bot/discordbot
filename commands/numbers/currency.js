@@ -48,10 +48,11 @@ module.exports = class CurrencyCommand extends Command {
     }
 
     async run(msg, { base, target, amount }) {
-        if (base === target)
+        if (base === target) {
             return msg.say(
                 `Converting ${base} to ${target} is the same value, dummy.`
             );
+        }
         try {
             const rate = await this.fetchRate(base, target);
             return msg.say(

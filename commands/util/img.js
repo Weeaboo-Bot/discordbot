@@ -29,8 +29,9 @@ module.exports = class ImgCommand extends Command {
 
         const search = message.content.split(/\s+/g).slice(1).join(' ');
 
-        if (!search)
+        if (!search) {
             return message.channel.send('Please specify something to search.');
+        }
 
         if (search.length > 0) {
             try {

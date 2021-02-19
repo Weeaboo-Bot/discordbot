@@ -29,21 +29,25 @@ module.exports = class UnMuteCommand extends Command {
     async run(message, { memberName }) {
         const member = message.mentions.members.first();
 
-        if (member.id === this.client.user.id)
+        if (member.id === this.client.user.id) {
             return message.channel.send("Please don't mute me...!");
-        if (member.id === message.author.id)
+        }
+        if (member.id === message.author.id) {
             return message.channel.send("I wouldn't dare mute you...!");
+        }
         if (
             member.roles.highest.position >
             message.member.roles.highest.position - 1
-        )
+        ) {
             return message.channel.send(
                 `❎ | You can't mute **${member.user.username}**! Their position is higher than you!`
             );
-        if (!member.manageable)
+        }
+        if (!member.manageable) {
             return message.channel.send(
                 `❎ | I can't mute **${member.user.username}**! Their role is higher than mine!`
             );
+        }
 
         await message.channel.send(
             `Are you sure you want to unmute **${member.user.tag}** in **${
@@ -62,10 +66,12 @@ module.exports = class UnMuteCommand extends Command {
         if (
             !msgs.size ||
             !['y', 'yes'].includes(msgs.first().content.toLowerCase())
-        )
+        ) {
             return message.channel.send('Cancelled command!');
-        if (['n', 'no'].includes(msgs.first().content.toLowerCase()))
+        }
+        if (['n', 'no'].includes(msgs.first().content.toLowerCase())) {
             return message.channel.send('Cancelled command!');
+        }
 
         try {
             await message.guild.channels.cache

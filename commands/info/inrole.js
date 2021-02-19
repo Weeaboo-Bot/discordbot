@@ -62,13 +62,15 @@ module.exports = class InRoleCommand extends Command {
             .sort((a, b) => a.localeCompare(b))
             .join(', ');
 
-        if (!allMembers)
+        if (!allMembers) {
             return message.channel.send('There are no members in that role!');
+        }
 
-        if (allMembers.length > 2048)
+        if (allMembers.length > 2048) {
             return message.channel.send(
                 "Too much members in that role! I couldn't send the information!"
             );
+        }
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(`${role.name} (${role.id})`, message.guild.iconURL())

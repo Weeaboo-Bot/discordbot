@@ -16,10 +16,11 @@ module.exports = class ReactionTimeCommand extends Command {
 
     async run(msg) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             await msg.say('Get Ready...');
@@ -39,11 +40,13 @@ module.exports = class ReactionTimeCommand extends Command {
             const highScore = highScoreGet
                 ? Number.parseInt(highScoreGet, 10)
                 : null;
-            if (!highScore || highScore > newScore)
+            if (!highScore || highScore > newScore) {
                 await this.client.redis.set('reaction-time', newScore);
+            }
             this.client.games.delete(msg.channel.id);
-            if (!msgs.size)
+            if (!msgs.size) {
                 return msg.say('Failed to answer within 30 seconds.');
+            }
             return msg.say(stripIndents`
 				Nice one! (Took ${newScore / 1000} seconds)
 				${

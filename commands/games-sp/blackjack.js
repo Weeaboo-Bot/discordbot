@@ -29,10 +29,11 @@ module.exports = class BlackjackCommand extends Command {
 
     async run(msg, { deckCount }) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         try {
             this.client.games.set(msg.channel.id, {
                 name: this.name,
@@ -154,8 +155,9 @@ module.exports = class BlackjackCommand extends Command {
             .sort((a, b) => a.blackjackValue - b.blackjackValue)
             .reduce((a, b) => {
                 let { blackjackValue } = b;
-                if (blackjackValue === 11 && a + blackjackValue > 21)
+                if (blackjackValue === 11 && a + blackjackValue > 21) {
                     blackjackValue = 1;
+                }
                 return a + blackjackValue;
             }, 0);
     }

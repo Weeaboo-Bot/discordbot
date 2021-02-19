@@ -30,8 +30,9 @@ module.exports = class ShortenUrlCommand extends Command {
                     prompt: 'What url would you like to shorten?',
                     type: 'string',
                     validate: (url) => {
-                        if (encodeURI(url).length > 2083)
+                        if (encodeURI(url).length > 2083) {
                             return 'Your URL is too long.';
+                        }
                         return true;
                     },
                 },
@@ -47,10 +48,11 @@ module.exports = class ShortenUrlCommand extends Command {
                 .set({ Authorization: `Bearer ${BITLY_KEY}` });
             return msg.say(body.link);
         } catch (err) {
-            if (err.status === 400)
+            if (err.status === 400) {
                 return msg.reply(
                     'You provided an invalid URL. Please try again.'
                 );
+            }
             return msg.reply(
                 `Oh no, an error occurred: \`${err.message}\`. Try again later!`
             );

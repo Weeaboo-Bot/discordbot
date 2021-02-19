@@ -15,8 +15,9 @@ module.exports = class ClapCommand extends Command {
                         'What 👏 text 👏 would 👏 you 👏 like 👏 to 👏 convert?',
                     type: 'string',
                     validate: (text) => {
-                        if (text.replaceAll(' ', ' 👏 ').length < 2000)
+                        if (text.replaceAll(' ', ' 👏 ').length < 2000) {
                             return true;
+                        }
                         return 'Invalid text, your text is too long.';
                     },
                 },

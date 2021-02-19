@@ -36,21 +36,25 @@ module.exports = class SoftbanCommand extends Command {
     async run(message, { memberName, reason }) {
         const member = message.mentions.members.first();
 
-        if (member.id === this.client.user.id)
+        if (member.id === this.client.user.id) {
             return message.channel.send("Please don't softban me...!");
-        if (member.id === message.author.id)
+        }
+        if (member.id === message.author.id) {
             return message.channel.send("I wouldn't dare softban you...!");
+        }
         if (
             member.roles.highest.position >
             message.member.roles.highest.position - 1
-        )
+        ) {
             return message.channel.send(
                 `❎ | You can't softban **${member.user.username}**! Their position is higher than you!`
             );
-        if (!member.bannable)
+        }
+        if (!member.bannable) {
             return message.channel.send(
                 `❎ | I can't softban **${member.user.username}**! Their role is higher than mine!`
             );
+        }
 
         await message.channel.send(
             `Are you sure you want to softban **${member.user.tag}** \`(y/n)?\``
@@ -66,8 +70,9 @@ module.exports = class SoftbanCommand extends Command {
         if (
             !msgs.size ||
             !['y', 'yes'].includes(msgs.first().content.toLowerCase())
-        )
+        ) {
             return message.channel.send('Cancelled command!');
+        }
 
         try {
             await member.send(

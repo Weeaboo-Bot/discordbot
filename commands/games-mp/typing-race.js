@@ -23,13 +23,15 @@ module.exports = class TypingRaceCommand extends Command {
 
     async run(msg, { opponent }) {
         if (opponent.bot) return msg.reply('Bots may not be played against.');
-        if (opponent.id === msg.author.id)
+        if (opponent.id === msg.author.id) {
             return msg.reply('You may not play against yourself.');
+        }
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             await msg.say(`${opponent}, do you accept this challenge?`);
@@ -57,8 +59,9 @@ module.exports = class TypingRaceCommand extends Command {
             const highScore = highScoreGet
                 ? Number.parseInt(highScoreGet, 10)
                 : null;
-            if (!highScore || highScore > newScore)
+            if (!highScore || highScore > newScore) {
                 await this.client.redis.set('typing-test', newScore);
+            }
             this.client.games.delete(msg.channel.id);
             if (!winner.size) return msg.say('Oh... No one won.');
             return msg.say(stripIndents`

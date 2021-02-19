@@ -23,13 +23,15 @@ module.exports = class BattleCommand extends Command {
     }
 
     async run(msg, { opponent }) {
-        if (opponent.id === msg.author.id)
+        if (opponent.id === msg.author.id) {
             return msg.reply('You may not battle yourself.');
+        }
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, {
             name: this.name,
             data: new Battle(msg.author, opponent),
@@ -116,12 +118,14 @@ module.exports = class BattleCommand extends Command {
                 } else {
                     await msg.say('I do not understand what you want to do.');
                 }
-                if (choice !== 'failed:time' && battle.lastTurnTimeout)
+                if (choice !== 'failed:time' && battle.lastTurnTimeout) {
                     battle.lastTurnTimeout = false;
+                }
             }
             this.client.games.delete(msg.channel.id);
-            if (battle.winner === 'time')
+            if (battle.winner === 'time') {
                 return msg.say('Game ended due to inactivity.');
+            }
             return msg.say(`The match is over! Congrats, ${battle.winner}!`);
         } catch (err) {
             this.client.games.delete(msg.channel.id);

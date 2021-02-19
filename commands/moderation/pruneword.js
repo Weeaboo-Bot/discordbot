@@ -51,10 +51,11 @@ module.exports = class PruneWordCommand extends Command {
             const flushable = messages.filter((m) =>
                 m.content.toLowerCase().includes(inc)
             );
-            if (flushable.size == 0)
+            if (flushable.size == 0) {
                 return message.channel.send(
                     `🍇 | **${message.author.username}**, there were no messages containing the word **${inc}** in the last ${count} messages!`
                 );
+            }
             await message.channel.bulkDelete(flushable);
 
             const m = await message.channel.send(

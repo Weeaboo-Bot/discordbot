@@ -32,8 +32,9 @@ module.exports = class RemindMeCommand extends Command {
                     type: 'string',
                     validate: (time) => {
                         const remindTime = sherlock.parse(time);
-                        if (!remindTime.startDate)
+                        if (!remindTime.startDate) {
                             return 'please provide a valid starting time.';
+                        }
 
                         return true;
                     },

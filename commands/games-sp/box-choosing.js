@@ -34,10 +34,11 @@ module.exports = class BoxChoosingCommand extends Command {
 
     async run(msg) {
         const current = this.client.games.get(msg.channel.id);
-        if (current)
+        if (current) {
             return msg.reply(
                 `Please wait until the current game of \`${current.name}\` is finished.`
             );
+        }
         this.client.games.set(msg.channel.id, { name: this.name });
         try {
             let i = 0;
@@ -82,15 +83,18 @@ module.exports = class BoxChoosingCommand extends Command {
                         (this.blue.has(msg.author.id) && pick !== 'blue')
                     ) {
                         path += 'both';
-                        if (this.red.has(msg.author.id))
+                        if (this.red.has(msg.author.id)) {
                             this.red.delete(msg.author.id);
-                        if (this.blue.has(msg.author.id))
+                        }
+                        if (this.blue.has(msg.author.id)) {
                             this.blue.delete(msg.author.id);
+                        }
                     } else {
                         this[pick].add(msg.author.id);
                         setTimeout(() => {
-                            if (this[pick].has(msg.author.id))
+                            if (this[pick].has(msg.author.id)) {
                                 this[pick].delete(msg.author.id);
+                            }
                         }, 600000);
                     }
                     path += pick;
