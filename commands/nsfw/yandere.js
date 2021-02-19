@@ -17,7 +17,7 @@ module.exports = class YandereCommand extends Command {
 			examples: ['~yandere <search>'],
 			throttling: {
 				usages: 1,
-				duration: 3,
+				duration: 5,
 			},
 		});
 	}
