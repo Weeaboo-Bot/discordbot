@@ -1,5 +1,5 @@
 {
     "typeAcquisition": {
-      "include": ["discord-js"]
+        "include": ["discord-js"]
     }
-  }
+}
