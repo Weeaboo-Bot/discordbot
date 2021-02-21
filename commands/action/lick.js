@@ -22,19 +22,11 @@ module.exports = class LickCommand extends Command {
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
+        const embed = new Discord.MessageEmbed();
 
-        if (!recipient) {
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(disgust);
-            return message.channel.send(
-                `${message.author} licks... themselves..?`,
-                { embed: embed }
-            );
-        } else if (message.mentions.users.first() == message.author) {
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(disgust);
+        if (!recipient || message.mentions.users.first() == message.author) {
+            embed.setColor('#FBCFCF');
+            embed.setImage(disgust);
             return message.channel.send(
                 `${message.author} licks... themselves..?`,
                 { embed: embed }
@@ -43,9 +35,8 @@ module.exports = class LickCommand extends Command {
             await axios
                 .get('https://rra.ram.moe/i/r?type=lick')
                 .then(function (res) {
-                    const embed = new Discord.MessageEmbed()
-                        .setColor('#FBCFCF')
-                        .setImage(`https://rra.ram.moe${res.data.path}`);
+                    embed.setColor('#FBCFCF');
+                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
                     return message.channel.send(
                         'Nyaa..♡(｡￫ˇ艸￩) where are you...licking me...',
                         { embed: embed }
@@ -68,12 +59,11 @@ module.exports = class LickCommand extends Command {
             await axios
                 .get('https://rra.ram.moe/i/r?type=lick')
                 .then(function (res) {
-                    const embed2 = new Discord.MessageEmbed()
-                        .setColor('#FBCFCF')
-                        .setImage(`https://rra.ram.moe${res.body.path}`);
+                    embed.setColor('#FBCFCF');
+                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
                     return message.channel.send(
                         `${message.author} licks ${recipient}!`,
-                        { embed: embed2 }
+                        { embed: embed }
                     );
                 })
                 .catch(function (error) {
