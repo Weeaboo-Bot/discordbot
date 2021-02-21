@@ -10,11 +10,7 @@ module.exports = class ReactCommand extends Command {
             memberName: 'react',
             wait: 0.1,
             description: 'Reacts on the given message ID!',
-            examples: ['~react [message ID] [text]'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!react [message ID] [text]'],
             args: [
                 {
                     key: 'inputMsg',

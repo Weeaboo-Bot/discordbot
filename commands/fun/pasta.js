@@ -9,7 +9,7 @@ module.exports = class EasterEggCommand extends Command {
             group: 'fun',
             memberName: 'pasta',
             guildOnly: true,
-            examples: ['~pasta [tag]'],
+            examples: ['!pasta [tag]'],
             description: "Cool custom pastas that I'll make at request",
             args: [
                 {

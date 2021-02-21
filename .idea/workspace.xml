@@ -2,66 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Default_Changelist]/shelved.patch" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Default_Changelist]1/shelved.patch" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/cry.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/cry.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/disgust.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/disgust.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/grope.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/grope.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/hand.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/hand.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/hug.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/hug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/kiss.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/kiss.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/lewd.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/lewd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/lick.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/lick.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/nobully.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/nobully.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/nom.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/nom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/noswearing.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/noswearing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/owo.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/owo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/pat.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/pat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/poke.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/poke.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/pout.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/pout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/slap.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/slap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/smug.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/smug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/stare.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/stare.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/tickle.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/tickle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/wasted.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/wasted.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/wink.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/wink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/anime.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/anime.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/booru.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/booru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/manga.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/manga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/moe.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/moe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/waifu.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/waifu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/crypto.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/crypto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/howto.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/howto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/iku.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/iku.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/nomore.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/nomore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/nsfwcommands.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/nsfwcommands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/stock.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/stock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/support.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/support.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/temperature.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/temperature.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/urban.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/urban.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/wiki.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/wiki.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/youtube.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/youtube.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/8ball.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/8ball.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/advice.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/advice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/b.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/b.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/bird.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/bird.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/cat.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/cat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/dadjoke.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/dadjoke.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/dog.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/dog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/f.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/f.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/fortune.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/fortune.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/garfield.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/garfield.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/giphy.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/giphy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/horoscope.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/horoscope.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/kaomoji.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/kaomoji.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/lizard.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/lizard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/storage.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,8 +50,16 @@
       <option name="presentableId" value="Default" />
       <updated>1613775899604</updated>
       <workItem from="1613775900787" duration="223000" />
-      <workItem from="1613777447806" duration="1569000" />
+      <workItem from="1613777447806" duration="1627000" />
     </task>
+    <task id="LOCAL-00001" summary="Updated commands with new throttling.">
+      <created>1613779115501</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1613779115501</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,5 +76,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated commands with new throttling." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated commands with new throttling." />
   </component>
 </project>

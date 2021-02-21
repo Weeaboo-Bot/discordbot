@@ -18,10 +18,6 @@ module.exports = class QuizCommand extends Command {
             guildOnly: true,
             description: 'Take a simple quiz',
             examples: ['!quiz [category]'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
             args: [
                 {
                     key: 'category',
