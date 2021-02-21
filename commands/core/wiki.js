@@ -12,7 +12,6 @@ module.exports = class WikiCommand extends Command {
             guildOnly: true,
             description: 'Searches for your query on Wikipedia!',
             examples: ['!wiki [query]'],
-
         });
     }
 
