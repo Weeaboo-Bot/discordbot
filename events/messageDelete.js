@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { version } = require('../package.json');
+const { auditMessage } = require('../util/logHandler');
 
 // Export message delete events
 module.exports = async (client, message) => {
@@ -30,14 +31,7 @@ module.exports = async (client, message) => {
     // We will also run a check to make sure the log we got was for the same author's message
     if (target.id === message.author.id) {
         const channel = client.channels.cache.get(client.auditLog);
-        const embed = new MessageEmbed()
-            .setTitle('Audit Event')
-            .setColor('#727293')
-            .addField('Audit Event Name', 'Message Deleted')
-            .addField('Member', message.author.tag)
-            .addField('Delete Event', executor.tag)
-            .setFooter(`v${version}`)
-            .setTimestamp();
+        const embed = auditMessage(deletionLog);
         channel.send({ embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted by ${executor.tag}.`

@@ -12,11 +12,7 @@ module.exports = class EditsCommand extends Command {
             group: 'info',
             memberName: 'edits',
             description: 'Fetches the recent edits of a message!',
-            examples: ['~edits [message ID]'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!edits [message ID]'],
             args: [
                 {
                     key: 'message',

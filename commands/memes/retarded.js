@@ -9,11 +9,7 @@ module.exports = class RetardedCommand extends Command {
             memberName: 'retarded',
             guildOnly: true,
             description: 'A cute(???) little dog???',
-            examples: ['~retarded [message]'],
-            throttling: {
-                usages: 1,
-                duration: 10,
-            },
+            examples: ['!retarded [message]'],
         });
     }
 

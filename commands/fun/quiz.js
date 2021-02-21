@@ -1,5 +1,4 @@
 const Command = require('../../structures/Command');
-const Discord = require('discord.js');
 const quiz = require('./quiz.json');
 const item = quiz[Math.floor(Math.random() * quiz.length)];
 const filter = (response) => {
