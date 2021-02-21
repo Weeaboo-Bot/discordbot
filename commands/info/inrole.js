@@ -10,11 +10,7 @@ module.exports = class InRoleCommand extends Command {
             guildOnly: true,
             memberName: 'inrole',
             description: 'Gets all the members from a given role!',
-            examples: ['~inrole [role]'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!inrole [role]'],
             args: [
                 {
                     key: 'role',

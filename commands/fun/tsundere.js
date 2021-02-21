@@ -37,11 +37,7 @@ module.exports = class TsundereCommand extends Command {
             memberName: 'tsundere',
             guildOnly: true,
             description: 'Get a random tsundere quote!',
-            examples: ['~tsundere'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!tsundere'],
         });
     }
 

@@ -10,13 +10,9 @@ module.exports = class SupportCommand extends Command {
             memberName: 'support',
             guildOnly: true,
             description: "Sends a support message to Techies's main server!",
-            examples: ['~support [bugs, issues, etc]'],
+            examples: ['!support [bugs, issues, etc]'],
             details:
                 'Techie might reply back in the channel you asked for support in!',
-            throttling: {
-                usages: 1,
-                duration: 30,
-            },
             args: [
                 {
                     key: 'support',

@@ -31,11 +31,7 @@ module.exports = class WaifuCommand extends Command {
             description: `Finds you a waifu from a database of ${total} waifus!`,
             details:
                 'Others can vote on the waifu through reactions!\nAlso #119 is best girl.',
-            examples: ['~waifu <optional number>'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!waifu <optional number>'],
             args: [
                 {
                     key: 'number',

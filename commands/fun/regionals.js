@@ -9,11 +9,7 @@ module.exports = class RegionalsCommand extends Command {
             group: 'fun',
             memberName: 'regionals',
             description: 'Converts your given text into regional indicators!',
-            examples: ['~regionals [text]'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!regionals [text]'],
             args: [
                 {
                     key: 'text',

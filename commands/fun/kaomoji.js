@@ -11,11 +11,7 @@ module.exports = class KaomojiCommand extends Command {
             memberName: 'kaomoji',
             description:
                 'Displays a random kaomoji! (´・ω・｀) 3000 will definitely be enough to keep you busy! (ｖ｀▽´)ｖ',
-            examples: ['~kaomoji'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!kaomoji'],
             args: [
                 {
                     key: 'emotion',

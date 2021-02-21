@@ -11,11 +11,7 @@ module.exports = class MoeCommand extends Command {
             memberName: 'moe',
             guildOnly: true,
             description: 'Cute anime girls!',
-            examples: ['~moe'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!moe'],
         });
     }
 

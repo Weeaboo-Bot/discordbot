@@ -11,11 +11,7 @@ module.exports = class GarfieldCommand extends Command {
             group: 'fun',
             memberName: 'garfield',
             description: 'garfield',
-            examples: ['garfield'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!garfield'],
         });
     }
 

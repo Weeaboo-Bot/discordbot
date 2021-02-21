@@ -11,12 +11,8 @@ module.exports = class UrbanCommand extends Command {
             memberName: 'urban',
             guildOnly: true,
             description: 'Searches for your query on Urban Dictionary!',
-            examples: ['~urban [term]'],
-            details: 'Say `~urban` for a random definition!',
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!urban [term]'],
+            details: 'Say `!urban` for a random definition!',
         });
     }
 

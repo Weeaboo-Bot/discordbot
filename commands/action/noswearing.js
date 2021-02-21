@@ -12,11 +12,7 @@ module.exports = class PoutCommand extends Command {
             guildOnly: true,
             description:
                 'Sorry sir no swearing in my Christian Minecraft server',
-            examples: ['~wink <mention>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!wink <mention>'],
         });
     }
 

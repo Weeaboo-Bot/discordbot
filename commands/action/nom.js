@@ -14,11 +14,7 @@ module.exports = class NomCommand extends Command {
             memberName: 'nom',
             guildOnly: true,
             description: 'Noms on the user you mentioned!',
-            examples: ['~nom <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!nom <user>'],
         });
     }
 

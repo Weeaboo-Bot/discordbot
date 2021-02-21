@@ -15,10 +15,6 @@ module.exports = class StockCommand extends Command {
             guildOnly: true,
             description: 'stock prices!',
             examples: ['!stock <symbol>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
             args: [
                 {
                     key: 'stock',

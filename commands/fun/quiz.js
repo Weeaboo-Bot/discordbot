@@ -1,5 +1,4 @@
 const Command = require('../../structures/Command');
-const Discord = require('discord.js');
 const quiz = require('./quiz.json');
 const item = quiz[Math.floor(Math.random() * quiz.length)];
 const filter = (response) => {
@@ -18,10 +17,6 @@ module.exports = class QuizCommand extends Command {
             guildOnly: true,
             description: 'Take a simple quiz',
             examples: ['!quiz [category]'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
             args: [
                 {
                     key: 'category',

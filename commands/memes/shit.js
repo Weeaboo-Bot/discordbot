@@ -10,11 +10,7 @@ module.exports = class ShitCommand extends Command {
             memberName: 'shit',
             guildOnly: true,
             description: "It's shit!!!",
-            examples: ['~shit [message]'],
-            throttling: {
-                usages: 1,
-                duration: 10,
-            },
+            examples: ['!shit [message]'],
         });
     }
 

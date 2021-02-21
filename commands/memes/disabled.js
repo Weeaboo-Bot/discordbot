@@ -10,11 +10,7 @@ module.exports = class DisabledCommand extends Command {
             clientPermissions: ['ATTACH_FILES'],
             memberName: 'disabled',
             description: 'The public should know what disability looks like!',
-            examples: ['~disabled <mention/url>'],
-            throttling: {
-                usages: 1,
-                duration: 10,
-            },
+            examples: ['!disabled <mention/url>'],
         });
     }
 

@@ -11,11 +11,7 @@ module.exports = class PickUpCommand extends Command {
             memberName: 'pickup',
             guildOnly: true,
             description: 'Get a random pick up line!',
-            examples: ['~pickup'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!pickup'],
         });
     }
 

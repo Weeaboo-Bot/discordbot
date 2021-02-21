@@ -11,11 +11,7 @@ module.exports = class SkyrimCommand extends Command {
             memberName: 'skyrim',
             guildOnly: true,
             description: 'Get a random guard quote from skyrim!',
-            examples: ['~skyrim'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!skyrim'],
         });
     }
 

@@ -13,11 +13,7 @@ module.exports = class OwoCommand extends Command {
             memberName: 'owo',
             guildOnly: true,
             description: "OWO what's this!",
-            examples: ['~owo'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!owo'],
         });
     }
 

@@ -10,11 +10,7 @@ module.exports = class LoginCommand extends Command {
             memberName: 'login',
             clientPermissions: ['MANAGE_CHANNELS'],
             description: 'Tells you how to login to FireBase!',
-            examples: ['~login'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!login'],
         });
     }
 

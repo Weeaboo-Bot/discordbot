@@ -11,11 +11,7 @@ module.exports = class WastedCommand extends Command {
             memberName: 'wasted',
             guildOnly: true,
             description: 'W A S T E D',
-            examples: ['~wasted <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!wasted <user>'],
         });
     }
 

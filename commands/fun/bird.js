@@ -14,11 +14,7 @@ module.exports = class BirdCommand extends Command {
             memberName: 'bird',
             guildOnly: true,
             description: 'Sends a random picture of a bird!',
-            examples: ['~bird'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!bird'],
         });
     }
 

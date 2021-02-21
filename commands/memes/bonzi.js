@@ -12,11 +12,7 @@ module.exports = class BonziCommand extends Command {
             clientPermissions: ['ATTACH_FILES'],
             memberName: 'bonzi',
             description: 'Makes Bonzi tell an interesting fact!',
-            examples: ['~bonzi [message]'],
-            throttling: {
-                usages: 1,
-                duration: 10,
-            },
+            examples: ['!bonzi [message]'],
             args: [
                 {
                     key: 'text',

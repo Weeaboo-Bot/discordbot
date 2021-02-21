@@ -10,11 +10,7 @@ module.exports = class TheSearchCommand extends Command {
             memberName: 'thesearch',
             guildOnly: true,
             description: "What if there's intelligible life on Earth?",
-            examples: ['~thesearch [message]'],
-            throttling: {
-                usages: 1,
-                duration: 10,
-            },
+            examples: ['!thesearch [message]'],
         });
     }
 

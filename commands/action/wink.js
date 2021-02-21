@@ -11,11 +11,7 @@ module.exports = class PoutCommand extends Command {
             memberName: 'wink',
             guildOnly: true,
             description: 'Winks at the specified user!',
-            examples: ['~wink <mention>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!wink <mention>'],
         });
     }
 

@@ -9,11 +9,7 @@ module.exports = class SayCommand extends Command {
             memberName: 'sayd',
             guildOnly: true,
             description: 'Makes me say something for you, and then delete it!',
-            examples: ['~say [sentence]'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!say [sentence]'],
             args: [
                 {
                     key: 'sayMessage',

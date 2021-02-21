@@ -11,11 +11,7 @@ module.exports = class SmugCommand extends Command {
             memberName: 'smug',
             guildOnly: true,
             description: 'the epitome of arguments: smug anime girls.',
-            examples: ['~smug'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!smug'],
         });
     }
 

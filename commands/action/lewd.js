@@ -11,11 +11,7 @@ module.exports = class LewdCommand extends Command {
             memberName: 'lewd',
             guildOnly: true,
             description: "That's lewd!",
-            examples: ['~lewd'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!lewd'],
         });
     }
 

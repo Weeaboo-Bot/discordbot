@@ -12,10 +12,6 @@ module.exports = class PokeCommand extends Command {
             guildOnly: true,
             description: 'POke the user you mentioned!',
             examples: ['!poke <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
             args: [
                 {
                     key: 'user',

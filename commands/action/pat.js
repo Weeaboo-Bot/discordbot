@@ -11,11 +11,7 @@ module.exports = class PatCommand extends Command {
             memberName: 'pat',
             guildOnly: true,
             description: 'Pats the user you mentioned on the head!',
-            examples: ['~pat <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!pat <user>'],
         });
     }
 

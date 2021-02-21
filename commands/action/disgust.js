@@ -12,11 +12,7 @@ module.exports = class DisgustCommand extends Command {
             guildOnly: true,
             description:
                 'Absolutely **disgusting**, now which one of you likes handholding?',
-            examples: ['~disgust'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!disgust'],
         });
     }
 

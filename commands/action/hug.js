@@ -11,11 +11,7 @@ module.exports = class HugCommand extends Command {
             memberName: 'hug',
             guildOnly: true,
             description: 'Hugs the user you mentioned!',
-            examples: ['~hug <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!hug <user>'],
         });
     }
 

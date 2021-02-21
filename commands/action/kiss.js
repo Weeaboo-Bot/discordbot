@@ -11,11 +11,7 @@ module.exports = class KissCommand extends Command {
             memberName: 'kiss',
             guildOnly: true,
             description: 'Kisses the user you mentioned!',
-            examples: ['~kiss <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!kiss <user>'],
         });
     }
 

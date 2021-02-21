@@ -11,11 +11,7 @@ module.exports = class NoBullyCommand extends Command {
             memberName: 'nobully',
             guildOnly: true,
             description: 'Absolutely no bullying allowed!',
-            examples: ['~nobully <user>'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!nobully <user>'],
         });
     }
 

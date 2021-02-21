@@ -12,11 +12,7 @@ module.exports = class RightThereCommand extends Command {
             description: 'Sends a random right there copypasta!',
             details:
                 'May include NSFW language and elements or considered as spam.',
-            examples: ['~rightthere'],
-            throttling: {
-                usages: 1,
-                duration: 10,
-            },
+            examples: ['!rightthere'],
         });
     }
 

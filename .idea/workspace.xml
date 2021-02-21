@@ -2,457 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discordbot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discordbot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsonSchemas.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/stylesheetLinters/stylelint.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.prettierignore" beforeDir="false" afterPath="$PROJECT_DIR$/.prettierignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.prettierrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.prettierrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SECURITY.md" beforeDir="false" afterPath="$PROJECT_DIR$/SECURITY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Weaboo.js" beforeDir="false" afterPath="$PROJECT_DIR$/Weaboo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/8-ball.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/8-ball.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/actions.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/actions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/activity.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/activity.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/anagramica.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/anagramica.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/antidepressant-or-tolkien.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/antidepressant-or-tolkien.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/api-errors.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/api-errors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/apple-engraving.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/apple-engraving.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/axis-cult.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/axis-cult.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/be-like-bill.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/be-like-bill.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/bingo.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/bingo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/birthstone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/birthstone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/box-choosing.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/box-choosing.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/braille.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/braille.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/brony-speak.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/brony-speak.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/bunny-fact.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/bunny-fact.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/butt.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/butt.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/cat-fact.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/cat-fact.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/chinese-zodiac.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/chinese-zodiac.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/compliment.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/compliment.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/coolness.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/coolness.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/copyright.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/copyright.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/currency.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/currency.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/cursive.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/cursive.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/cuteness.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/cuteness.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/dating.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/dating.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/dog-fact.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/dog-fact.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/dvorak.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/dvorak.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/emojify.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/emojify.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/errors.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/errors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/fact-core.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/fact-core.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/fancy.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/fancy.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/final-grade.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/final-grade.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/fishy.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/fishy.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/fortune.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/fortune.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/google-feud.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/google-feud.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/gravity.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/gravity.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/guess-looks.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/guess-looks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/guesspionage.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/guesspionage.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/hat.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/hat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/hearing-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/hearing-test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/hentai.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/hentai.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/horoscope.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/horoscope.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/horse-race.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/horse-race.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/hunger-games.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/hunger-games.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/iku.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/iku.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/illegal.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/illegal.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/imposter.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/imposter.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/joke.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/joke.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/kaomoji.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/kaomoji.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/leave-messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/leave-messages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/lint.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/lint.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/lorem-ipsum.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/lorem-ipsum.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/mad-libs.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/mad-libs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/magic-conch.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/magic-conch.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/meme.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/meme.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/missingno.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/missingno.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/month.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/month.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/morse.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/morse.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/name.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/name.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/news.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/news.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/nobody-name.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/nobody-name.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/oracle-turret.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/oracle-turret.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/paladins.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/paladins.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/pasta.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/pasta.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/periodic-table.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/periodic-table.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/permissions.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/permissions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/pickuplines.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/pickuplines.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/pirate.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/pirate.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/pokedex-location.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/pokedex-location.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/pokemon-fusion.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/pokemon-fusion.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/porn.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/porn.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/psycho-pass.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/psycho-pass.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/pun.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/pun.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/quote.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/quote.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/rightthere.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/rightthere.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/roast.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/roast.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/roman.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/roman.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/rule.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/rule.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/scrabble-score.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/scrabble-score.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/shutdown.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/shutdown.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/skyrim.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/skyrim.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/smw-level.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/smw-level.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/sorting-hat.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/sorting-hat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/soundboard.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/soundboard.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/superscript.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/superscript.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/tebahpla.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/tebahpla.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/temmie.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/temmie.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/typing-test.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/typing-test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/undertale.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/undertale.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/upside-down.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/upside-down.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/vocodes.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/vocodes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/waifus.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/waifus.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/waldo.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/waldo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/word-list.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/word-list.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/xiao-fact.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/xiao-fact.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/yo-mama.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/yo-mama.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/zalgo.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/zalgo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/json/zodiac-sign.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/json/zodiac-sign.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/cry.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/cry.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/disgust.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/disgust.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/grope.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/grope.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/hand.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/hand.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/hug.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/hug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/kiss.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/kiss.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/lewd.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/lewd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/lick.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/lick.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/nobully.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/nobully.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/nom.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/nom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/noswearing.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/noswearing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/owo.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/owo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/pat.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/pat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/poke.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/poke.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/pout.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/pout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/slap.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/slap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/smug.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/smug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/stare.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/stare.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/tickle.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/tickle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/wasted.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/wasted.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/wink.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/wink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/anime.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/anime.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/booru.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/booru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/manga.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/manga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/moe.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/moe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/anime/waifu.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/anime/waifu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/crypto.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/crypto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/howto.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/howto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/iku.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/iku.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/nomore.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/nomore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/nsfwcommands.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/nsfwcommands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/stock.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/stock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/support.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/support.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/temperature.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/temperature.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/uptime.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/uptime.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/urban.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/urban.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/weather.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/weather.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/wiki.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/wiki.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/core/youtube.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/core/youtube.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/8ball.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/8ball.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/_talk.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/_talk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/advice.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/advice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/b.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/b.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/bird.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/bird.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/cat.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/cat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/dadjoke.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/dadjoke.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/dog.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/dog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/f.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/f.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/fortune.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/fortune.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/garfield.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/garfield.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/giphy.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/giphy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/horoscope.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/horoscope.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/kaomoji.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/kaomoji.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/lizard.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/lizard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/meme.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/meme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/mock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/pasta.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/pasta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/pickup.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/pickup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/quiz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/quiz.json" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/quiz.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/rate.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/rate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/react.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/react.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/reddit5050.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/reddit5050.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/regionals.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/regionals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/rightthere.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/rightthere.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/say.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/say.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/sayd.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/sayd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/skyrim.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/skyrim.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/speak.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/speak.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/today.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/today.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/fun/tsundere.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/fun/tsundere.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/balloon-pop.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/balloon-pop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/battle.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/battle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/bingo.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/bingo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/connect-four.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/connect-four.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/dots-and-boxes.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/dots-and-boxes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/emoji-emoji-revolution.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/emoji-emoji-revolution.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/guesspionage.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/guesspionage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/gunfight.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/gunfight.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/imposter.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/imposter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/island.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/island.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/lie-swatter.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/lie-swatter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/pick-a-number.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/pick-a-number.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/poker.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/poker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/quiz-duel.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/quiz-duel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/russian-roulette.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/russian-roulette.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/spam-war.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/spam-war.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/tic-tac-toe.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/tic-tac-toe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-mp/typing-race.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-mp/typing-race.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/akinator.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/akinator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/anagramica.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/anagramica.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/antidepressant-or-tolkien.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/antidepressant-or-tolkien.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/blackjack.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/blackjack.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/box-choosing.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/box-choosing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/bubble-wrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/bubble-wrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/captcha.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/captcha.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/chance.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/chance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/doors.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/doors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/fishy.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/fishy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/google-feud.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/google-feud.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/hearing-test.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/hearing-test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/horse-info.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/horse-info.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/horse-race.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/horse-race.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/hunger-games.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/hunger-games.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/ib-hardcore-edition.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/ib-hardcore-edition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/jeopardy.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/jeopardy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/lottery.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/lottery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/mad-libs.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/mad-libs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/math-quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/math-quiz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/memory.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/memory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/quiz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/reaction-time.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/reaction-time.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/rock-paper-scissors.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/rock-paper-scissors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/roulette.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/roulette.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/slots.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/slots.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/sorting-hat.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/sorting-hat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/the-game.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/the-game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/true-or-false.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/true-or-false.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/typing-test.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/typing-test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/waldo.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/waldo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/games-sp/would-you-rather.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/games-sp/would-you-rather.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/avatar.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/avatar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/channel.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/channel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/discrim.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/discrim.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/edits.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/edits.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/emoji-image.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/emoji-image.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/emoji-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/emoji-list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/emoji.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/emoji.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/first-message.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/first-message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/id.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/id.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/inrole.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/inrole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/message-source.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/message-source.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/role.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/role.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/info/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/info/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/memes/bonzi.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/memes/bonzi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/memes/disabled.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/memes/disabled.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/memes/doesnotexist.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/memes/doesnotexist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/memes/retarded.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/memes/retarded.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/memes/shit.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/memes/shit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/memes/shits.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/memes/shits.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/memes/thesearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/memes/thesearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/memes/triggered.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/memes/triggered.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/addrole.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/addrole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/ban.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/ban.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/delrole.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/delrole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/getmessages.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/getmessages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/hackban.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/hackban.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/kick.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/kick.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/listchannels.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/listchannels.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/listmembers.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/listmembers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/listroles.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/listroles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/lockdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/lockdown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/mute.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/mute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/nickname.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/nickname.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/nuke.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/nuke.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/prune.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/prune.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/pruneuser.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/pruneuser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/pruneword.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/pruneword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/softban.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/softban.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/unban.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/unban.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/moderation/unmute.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/unmute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/join.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/leave.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/leave.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/loop.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/loop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/lyrics.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/lyrics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/nowplaying.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/nowplaying.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/pause.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/pause.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/play.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/queue.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/queue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/remove.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/remove.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/resume.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/resume.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/shuffle.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/shuffle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/skip.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/skip.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/skipall.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/skipall.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/skipto.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/skipto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/volume.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/volume.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/news/news.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/news/news.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/news/worldnews.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/news/worldnews.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/ass.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/ass.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/boobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/boobs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/danbooru.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/danbooru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/e621.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/e621.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/gelbooru.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/gelbooru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/gtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/gtn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/hypno.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/hypno.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/konachan.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/konachan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/neko.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/neko.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/nekobomb.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/nekobomb.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/nsfw.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/nsfw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/paheal.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/paheal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/pornhub.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/pornhub.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/rule34.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/rule34.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/subs.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/subs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/tbib.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/tbib.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/xbooru.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/xbooru.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/nsfw/yandere.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/nsfw/yandere.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/currency.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/currency.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/final-grade.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/final-grade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/grade.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/grade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/gravity.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/gravity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/math.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/math.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/prime.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/prime.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/roman.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/roman.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/scientific-notation.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/scientific-notation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/tax.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/tax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/numbers/units.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/numbers/units.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/backdoor.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/backdoor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/dependency-update.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/dependency-update.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/exec.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/exec.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/fleave.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/fleave.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/generate-commands.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/generate-commands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/generate-credit.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/generate-credit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/generate-fun-information.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/generate-fun-information.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/generate-process-env.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/generate-process-env.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/ip.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/ip.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/reload.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/reload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/report-respond.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/report-respond.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/saychannel.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/saychannel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/set-uses.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/set-uses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/shutdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/shutdown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/update-assets.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/update-assets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/update-channels.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/update-channels.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/update-commands.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/update-commands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/update-members.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/update-members.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/update-roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/update-roles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/webhook.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/webhook.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/base64.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/base64.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/binary.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/binary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/braille.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/braille.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/brony-speak.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/brony-speak.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/clap.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/clap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/cow-say.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/cow-say.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/cursive.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/cursive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/dvorak.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/dvorak.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/embed.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/embed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/emojify.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/emojify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/fancy.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/fancy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/hex.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/hex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/latlmes.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/latlmes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/lmgtfy.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/lmgtfy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/lolcat.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/lolcat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/lowercase.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/lowercase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/md5.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/md5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/mocking.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/mocking.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/morse.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/morse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/nobody-name.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/nobody-name.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/owo.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/owo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/pig-latin.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/pig-latin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/pirate.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/pirate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/repeat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/reverse.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/reverse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/sha-1.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/sha-1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/sha-256.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/sha-256.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/ship-name.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/ship-name.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/shorten-url.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/shorten-url.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/shuffle.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/shuffle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/snake-speak.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/snake-speak.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/spoiler-letter.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/spoiler-letter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/superscript.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/superscript.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/tebahpla.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/tebahpla.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/temmie.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/temmie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/translate.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/translate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/txt.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/txt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/unspoiler.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/unspoiler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/uppercase.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/uppercase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/upside-down.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/upside-down.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/url-decode.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/url-decode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/url-encode.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/url-encode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/yoda.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/yoda.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/text/zalgo.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/text/zalgo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/cloc.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/cloc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/color.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/color.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/help.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/help.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/img.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/img.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/invite.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/invite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/jisho.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/jisho.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/options.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/options.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/ping.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/ping.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/prefix.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/prefix.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/remindme.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/remindme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/serverInvite.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/serverInvite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/time.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/time.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/unknown-command.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/unknown-command.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/util/uses.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/util/uses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/debug.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/debug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/disconnect.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/disconnect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/error.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/error.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/guildCreate.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/guildCreate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/guildDelete.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/guildDelete.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/guildMemberAdd.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/guildMemberAdd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/guildMemberRemove.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/guildMemberRemove.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/guildMemberUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/guildMemberUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/guildUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/guildUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/messageDelete.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/messageDelete.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/messageDeleteBulk.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/messageDeleteBulk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/messageUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/messageUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/ready.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/ready.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/reconnecting.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/reconnecting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/resume.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/resume.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/userUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/userUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/voiceStateUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/voiceStateUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/warn.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/warn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/jsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newrelic.js" beforeDir="false" afterPath="$PROJECT_DIR$/newrelic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/Client.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/Client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/Command.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/Command.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/battle/Battle.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/battle/Battle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/battle/Battler.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/battle/Battler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/cards/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/cards/Card.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/cards/Deck.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/cards/Deck.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/types/code.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/image.js" beforeDir="false" afterPath="$PROJECT_DIR$/types/image.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/month.js" beforeDir="false" afterPath="$PROJECT_DIR$/types/month.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/Canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/Canvas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/Util.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/Util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/colors.json" beforeDir="false" afterPath="$PROJECT_DIR$/util/colors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/emojis.json" beforeDir="false" afterPath="$PROJECT_DIR$/util/emojis.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/errorTypes.json" beforeDir="false" afterPath="$PROJECT_DIR$/util/errorTypes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/logHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/logHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/logger.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/permissions.json" beforeDir="false" afterPath="$PROJECT_DIR$/util/permissions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/registry.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/registry.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/storage.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/storage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/tableConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/tableConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -468,12 +18,26 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="START BOT" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -484,10 +48,52 @@
       <option name="presentableId" value="Default" />
       <updated>1613775899604</updated>
       <workItem from="1613775900787" duration="223000" />
+      <workItem from="1613777447806" duration="1627000" />
+      <workItem from="1613885144042" duration="300000" />
+      <workItem from="1613885750423" duration="1062000" />
+      <workItem from="1613886879054" duration="25000" />
     </task>
+    <task id="LOCAL-00001" summary="Updated commands with new throttling.">
+      <created>1613779115501</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1613779115501</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updated commands with new throttling.">
+      <created>1613885438605</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1613885438605</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updated commands with new throttling.">
+      <created>1613886628845</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1613886628845</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated commands with new throttling." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated commands with new throttling." />
   </component>
 </project>

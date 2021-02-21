@@ -9,7 +9,7 @@ module.exports = class NSFWCommandsCommand extends Command {
             group: 'core',
             memberName: 'nsfwcommands',
             description: 'Lists all the NSFW commands!',
-            examples: ['~nsfwcommands'],
+            examples: ['!nsfwcommands'],
         });
     }
 

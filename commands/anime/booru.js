@@ -12,11 +12,8 @@ module.exports = class BooruCommand extends Command {
             guildOnly: true,
             description: 'Searches for images on Safebooru!',
             details: "Keep in mind Safebooru's definition of safe!",
-            examples: ['~safebooru [search]'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!safebooru [search]'],
+
         });
     }
 

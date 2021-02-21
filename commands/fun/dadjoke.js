@@ -13,11 +13,7 @@ module.exports = class DadJokeCommand extends Command {
             memberName: 'dadjoke',
             guildOnly: true,
             description: 'Get a random dad joke!',
-            examples: ['~dadjoke'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!dadjoke'],
         });
     }
 

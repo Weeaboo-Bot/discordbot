@@ -13,11 +13,7 @@ module.exports = class TodayCommand extends Command {
             group: 'fun',
             memberName: 'today',
             description: 'Finds a historical event from today!',
-            examples: ['~today'],
-            throttling: {
-                usages: 1,
-                duration: 5,
-            },
+            examples: ['!today'],
         });
     }
 

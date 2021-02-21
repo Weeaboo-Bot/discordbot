@@ -18,10 +18,6 @@ module.exports = class EightBallCommand extends Command {
             guildOnly: true,
             description: 'Ask the magic 8ball a question!',
             examples: ['!8ball [question]'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
         });
     }
 

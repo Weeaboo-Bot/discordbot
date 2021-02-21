@@ -11,11 +11,7 @@ module.exports = class FortuneCommand extends Command {
             memberName: 'fortune',
             guildOnly: true,
             description: 'Get a random fortune!',
-            examples: ['~fortune'],
-            throttling: {
-                usages: 1,
-                duration: 3,
-            },
+            examples: ['!fortune'],
         });
     }
 
