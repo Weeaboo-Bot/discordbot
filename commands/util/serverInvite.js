@@ -2,7 +2,7 @@ const Command = require('../../structures/Command');
 const { stripIndents } = require('common-tags');
 const permissions = require('../../assets/json/permissions');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class ServerInviteCommand extends Command {
     constructor(client) {

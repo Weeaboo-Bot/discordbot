@@ -1,6 +1,6 @@
 const Command = require('../../structures/Command');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class DeleteRoleCommand extends Command {
     constructor(client) {

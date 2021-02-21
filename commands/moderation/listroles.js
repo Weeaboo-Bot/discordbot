@@ -2,7 +2,7 @@ const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const { ERROR_LOG } = require('../../config').logs;
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class ListRolesCommand extends Command {
     constructor(client) {

@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="hand got simplified and prettier ran again pog">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/hug.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/hug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/kiss.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/kiss.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/lick.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/lick.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/action/nobully.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/nobully.js" afterDir="false" />
-    </list>
+    <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613890684332</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixed pkg.json">
+      <created>1613948620874</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1613948620874</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +124,7 @@
     <MESSAGE value="Updated commands with new throttling." />
     <MESSAGE value="grope got simplified pog" />
     <MESSAGE value="hand got simplified and prettier ran again pog" />
-    <option name="LAST_COMMIT_MESSAGE" value="hand got simplified and prettier ran again pog" />
+    <MESSAGE value="fixed pkg.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed pkg.json" />
   </component>
 </project>

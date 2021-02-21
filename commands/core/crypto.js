@@ -1,7 +1,7 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 const alphakey = require('../../config').api.ALPHA_KEY;
 const alpha = require('alphavantage')({ key: alphakey });
 
