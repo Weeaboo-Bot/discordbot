@@ -17,29 +17,25 @@ module.exports = class NoBullyCommand extends Command {
 
     run(message) {
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
+        const embed = new Discord.MessageEmbed();
         if (!recipient) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(
-                    actions.nobullyP[
-                        Math.round(
-                            Math.random() * (actions.nobullyP.length - 1)
-                        )
-                    ]
-                );
+            embed.setColor('#FBCFCF');
+            embed.setImage(
+                actions.nobullyP[
+                    Math.round(Math.random() * (actions.nobullyP.length - 1))
+                ]
+            );
             return message.channel.send({ embed: embed });
         } else if (message.mentions.users.first() == this.client.user) {
             return message.channel.send('(✿´ ꒳ ` ) am not bulli!!');
         } else {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(
-                    actions.nobullyP[
-                        Math.round(
-                            Math.random() * (actions.nobullyP.length - 1)
-                        )
-                    ]
-                );
+            const embed = new Discord.MessageEmbed();
+            embed.setColor('#FBCFCF');
+            embed.setImage(
+                actions.nobullyP[
+                    Math.round(Math.random() * (actions.nobullyP.length - 1))
+                ]
+            );
             return message.channel.send(`${recipient}, pls no bulli!!`, {
                 embed: embed,
             });

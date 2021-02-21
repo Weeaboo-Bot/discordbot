@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="">
+    <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="hand got simplified and prettier ran again pog">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/action/hug.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/hug.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/action/kiss.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/kiss.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/action/lick.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/lick.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/action/nobully.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/action/nobully.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,6 +14,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1oiidXHWFWSV2nGbjuuSvId4eyj" />
@@ -24,7 +33,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
@@ -52,6 +64,7 @@
       <workItem from="1613885144042" duration="300000" />
       <workItem from="1613885750423" duration="1062000" />
       <workItem from="1613886879054" duration="25000" />
+      <workItem from="1613889629989" duration="1930000" />
     </task>
     <task id="LOCAL-00001" summary="Updated commands with new throttling.">
       <created>1613779115501</created>
@@ -74,7 +87,21 @@
       <option name="project" value="LOCAL" />
       <updated>1613886628845</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="grope got simplified pog">
+      <created>1613890460962</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1613890460962</updated>
+    </task>
+    <task id="LOCAL-00005" summary="hand got simplified and prettier ran again pog">
+      <created>1613890684332</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1613890684332</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -94,6 +121,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated commands with new throttling." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated commands with new throttling." />
+    <MESSAGE value="grope got simplified pog" />
+    <MESSAGE value="hand got simplified and prettier ran again pog" />
+    <option name="LAST_COMMIT_MESSAGE" value="hand got simplified and prettier ran again pog" />
   </component>
 </project>

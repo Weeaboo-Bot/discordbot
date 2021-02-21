@@ -13,7 +13,6 @@ module.exports = class BooruCommand extends Command {
             description: 'Searches for images on Safebooru!',
             details: "Keep in mind Safebooru's definition of safe!",
             examples: ['!safebooru [search]'],
-
         });
     }
 
