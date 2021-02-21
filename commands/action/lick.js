@@ -15,28 +15,33 @@ module.exports = class LickCommand extends Command {
         });
     }
 
-  async run(message) {
-    const reqURL = 'https://rra.ram.moe/i/r?type=lick';
+    async run(message) {
+        const reqURL = 'https://rra.ram.moe/i/r?type=lick';
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
-    const disgust = disgustP[Math.round(Math.random() * (disgustP.length - 1))];
-    const embed = new Discord.MessageEmbed();
+        const disgust =
+            disgustP[Math.round(Math.random() * (disgustP.length - 1))];
+        const embed = new Discord.MessageEmbed();
 
-    if (!recipient || message.mentions.users.first() == message.author) {
-      embed.setColor('#FBCFCF');
-      embed.setImage(disgust);
-      return message.channel.send(`${message.author} licks... themselves..?`,
-                                  {embed : embed});
-    } else if (message.mentions.users.first() == this.client.user) {
-      await message.command.axiosConfig.get(reqURL)
-          .then(function(res) {
+        if (!recipient || message.mentions.users.first() == message.author) {
             embed.setColor('#FBCFCF');
-            embed.setImage(`https://rra.ram.moe${res.data.path}`);
+            embed.setImage(disgust);
             return message.channel.send(
-                'Nyaa..♡(｡￫ˇ艸￩) where are you...licking me...',
-                {embed : embed});
-          })
-          .catch(function(error) {
-            // handle error
+                `${message.author} licks... themselves..?`,
+                { embed: embed }
+            );
+        } else if (message.mentions.users.first() == this.client.user) {
+            await message.command.axiosConfig
+                .get(reqURL)
+                .then(function (res) {
+                    embed.setColor('#FBCFCF');
+                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
+                    return message.channel.send(
+                        'Nyaa..♡(｡￫ˇ艸￩) where are you...licking me...',
+                        { embed: embed }
+                    );
+                })
+                .catch(function (error) {
+                    // handle error
 
             message.client.channels.cache.get(message.client.errorLog).send({
               embed : message.command.discordLogger.errorMessage(error, message.command.errorTypes.API, message.command.name,
