@@ -2,7 +2,7 @@ const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class DadJokeCommand extends Command {
     constructor(client) {

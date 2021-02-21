@@ -4,7 +4,7 @@ const activities = require('../assets/json/activity');
 const leaveMsgs = require('../assets/json/leave-messages');
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
-const { fail } = require('../assets/json/emojis.json');
+const { fail } = require('../util/emojis.json');
 
 const GROUPS = [
     ['action', 'Action'],
@@ -121,7 +121,7 @@ module.exports = class WeabooClient extends CommandoClient {
          */
         this.utils = require('../util/Util');
         this.database = require('../util/db');
-        this.errorTypes = require('../assets/json/errorTypes.json');
+        this.errorTypes = require('../util/errorTypes.json');
         this.logger.info('Initializing...');
         this.webhook = new Discord.WebhookClient(
             config.discord.DISCORD_WEBHOOK_ID,

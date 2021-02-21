@@ -36,6 +36,11 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\Projects\discordbot\assets\json" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="START BOT" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -59,6 +64,7 @@
       <workItem from="1613885750423" duration="1062000" />
       <workItem from="1613886879054" duration="25000" />
       <workItem from="1613889629989" duration="1930000" />
+      <workItem from="1613948809934" duration="286000" />
     </task>
     <task id="LOCAL-00001" summary="Updated commands with new throttling.">
       <created>1613779115501</created>
@@ -102,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613948620874</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Moved JSON files into correct direcory.">
+      <created>1613948972273</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1613948972273</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +138,7 @@
     <MESSAGE value="grope got simplified pog" />
     <MESSAGE value="hand got simplified and prettier ran again pog" />
     <MESSAGE value="fixed pkg.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed pkg.json" />
+    <MESSAGE value="Moved JSON files into correct direcory." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved JSON files into correct direcory." />
   </component>
 </project>

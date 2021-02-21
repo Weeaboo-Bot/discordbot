@@ -2,7 +2,7 @@ const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const ErrorEnum = require('../../util/errorTypes.json');
 const errors = require('../../assets/json/errors');
 
 module.exports = class AssCommand extends Command {

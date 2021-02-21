@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class StareCommand extends Command {
     constructor(client) {
