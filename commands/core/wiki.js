@@ -3,64 +3,58 @@ const Discord = require('discord.js');
 const wiki = require('wikijs').default;
 
 module.exports = class WikiCommand extends Command {
-    constructor(client) {
-        super(client, {
-            name: 'wiki',
-            aliases: ['encyclopedia', 'wikipedia'],
-            group: 'core',
-            memberName: 'wiki',
-            guildOnly: true,
-            description: 'Searches for your query on Wikipedia!',
-            examples: ['!wiki [query]'],
+  constructor(client) {
+    super(client, {
+      name : 'wiki',
+      aliases : [ 'encyclopedia', 'wikipedia' ],
+      group : 'core',
+      memberName : 'wiki',
+      guildOnly : true,
+      description : 'Searches for your query on Wikipedia!',
+      examples : [ '!wiki [query]' ],
 
-        });
+    });
+  }
+
+  async run(message) {
+    const query = message.content.split(/\s+/g).slice(1).join(' ');
+
+    if (!query) {
+      return message.channel.send('You must specify something to search!');
     }
 
-    async run(message) {
-        const query = message.content.split(/\s+/g).slice(1).join(' ');
-
-        if (!query) {
-            return message.channel.send(
-                'You must specify something to search!'
-            );
-        }
-
-        const data = await wiki().search(query, 1);
-        if (!data.results || !data.results.length) {
-            return message.channel.send('No matches found!');
-        }
-
-        const page = await wiki().page(data.results[0]);
-        const summary = await page.summary();
-        const paragraphs = summary.split('\n');
-
-        if (!query.options) {
-            paragraphs.length = Math.min(1, paragraphs.length);
-        }
-        try {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(page.raw.title)
-                .setDescription(paragraphs.join('\n\n'))
-                .addField('Link', `**${page.raw.fullurl}**`)
-                .setFooter('Wikipedia', 'https://a.safe.moe/8GCNj.png')
-                .setColor('#c7c8ca');
-            return message.channel.send(
-                `First search result of \`${query}\` on Wikipedia:`,
-                { embed }
-            );
-        } catch (err) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(page.raw.title)
-                .setDescription(
-                    'This paragraph was too long for the embed, please click the provided link.'
-                )
-                .addField('Link', `**${page.raw.fullurl}**`)
-                .setFooter('Wikipedia', 'https://a.safe.moe/8GCNj.png')
-                .setColor('#c7c8ca');
-            return message.channel.send(
-                `First search result of \`${query}\` on Wikipedia:`,
-                { embed }
-            );
-        }
+    const data = await wiki().search(query, 1);
+    if (!data.results || !data.results.length) {
+      return message.channel.send('No matches found!');
     }
+
+    const page = await wiki().page(data.results[0]);
+    const summary = await page.summary();
+    const paragraphs = summary.split('\n');
+
+    if (!query.options) {
+      paragraphs.length = Math.min(1, paragraphs.length);
+    }
+    try {
+      const embed = new Discord.MessageEmbed()
+                        .setAuthor(page.raw.title)
+                        .setDescription(paragraphs.join('\n\n'))
+                        .addField('Link', `**${page.raw.fullurl}**`)
+                        .setFooter('Wikipedia', 'https://a.safe.moe/8GCNj.png')
+                        .setColor('#c7c8ca');
+      return message.channel.send(
+          `First search result of \`${query}\` on Wikipedia:`, {embed});
+    } catch (err) {
+      const embed =
+          new Discord.MessageEmbed()
+              .setAuthor(page.raw.title)
+              .setDescription(
+                  'This paragraph was too long for the embed, please click the provided link.')
+              .addField('Link', `**${page.raw.fullurl}**`)
+              .setFooter('Wikipedia', 'https://a.safe.moe/8GCNj.png')
+              .setColor('#c7c8ca');
+      return message.channel.send(
+          `First search result of \`${query}\` on Wikipedia:`, {embed});
+    }
+  }
 };
