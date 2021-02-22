@@ -67,6 +67,12 @@ module.exports = class Util {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    static randomNumber(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     static trimArray(arr, maxLen = 10) {
         if (arr.length > maxLen) {
             const len = arr.length - maxLen;
