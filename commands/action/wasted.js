@@ -19,18 +19,11 @@ module.exports = class WastedCommand extends Command {
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
         const wasted =
             wastedP[Math.round(Math.random() * (wastedP.length - 1))];
+        const embed = new Discord.MessageEmbed();
 
-        if (!recipient) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(wasted);
-            return message.channel.send(`${message.author} got wasted!`, {
-                embed: embed,
-            });
-        } else if (message.mentions.users.first() == message.author) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(wasted);
+        if (!recipient || message.mentions.users.first() == message.author) {
+            embed.setColor('#FBCFCF');
+            embed.setImage(wasted);
             return message.channel.send(`${message.author} got wasted!`, {
                 embed: embed,
             });
@@ -39,9 +32,8 @@ module.exports = class WastedCommand extends Command {
                 `${message.author}... please don't bully me! (๑◕︵◕๑)`
             );
         } else {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(wasted);
+            embed.setColor('#FBCFCF');
+            embed.setImage(wasted);
             return message.channel.send(`${recipient} just got wasted!`, {
                 embed: embed,
             });
