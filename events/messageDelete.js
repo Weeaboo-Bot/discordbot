@@ -30,14 +30,14 @@ module.exports = async (client, message) => {
     // And now we can update our output with a bit more information
     // We will also run a check to make sure the log we got was for the same author's message
     if (target.id === message.author.id) {
-        const channel = client.channels.cache.get(client.auditLog);
+        const channel = client.fetchAuditChannel();
         const embed = auditMessage(deletionLog);
         channel.send({ embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted by ${executor.tag}.`
         );
     } else {
-        const channel = client.channels.cache.get(client.auditLog);
+        const channel = client.fetchAuditChannel();
         const embed = new MessageEmbed()
             .setTitle('Audit Event')
             .setColor('#727293')
