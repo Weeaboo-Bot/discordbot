@@ -53,16 +53,16 @@ module.exports = class WaifuCommand extends Command {
     async run(message, args) {
         const somethingThere = message.content.split(/\s+/g).slice(1).join(' ');
         const percentage = Math.random();
+        const embed = new Discord.MessageEmbed();
         if (!somethingThere || args.number == 'none') {
             const random = Math.floor(Math.random() * total + 1);
             var waifu = waifus[random];
 
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(waifu.name, waifu.image)
-                .setDescription(waifu.origin)
-                .setImage(waifu.image)
-                .setFooter(`Waifu Number ${random}`)
-                .setColor('#FAC193');
+            embed.setAuthor(waifu.name, waifu.image)
+            embed.setDescription(waifu.origin)
+            embed.setImage(waifu.image)
+            embed.setFooter(`Waifu Number ${random}`)
+            embed.setColor('#FAC193');
             var ms = await message.channel.send(`💝 **${waifu.name}**? `, {
                 embed: embed,
             });
@@ -73,12 +73,11 @@ module.exports = class WaifuCommand extends Command {
         } else if (somethingThere) {
             const waifuNumber = args.number;
             var waifu = waifus[waifuNumber];
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(waifu.name, waifu.image)
-                .setDescription(waifu.origin)
-                .setImage(waifu.image)
-                .setFooter(`Waifu Number ${waifuNumber}`)
-                .setColor('#FAC193');
+            embed.setAuthor(waifu.name, waifu.image)
+            embed.setDescription(waifu.origin)
+            embed.setImage(waifu.image)
+            embed.setFooter(`Waifu Number ${waifuNumber}`)
+            embed.setColor('#FAC193');
             var ms = await message.channel.send(
                 `💝 Here's waifu number **${waifuNumber}**!`,
                 { embed: embed }
