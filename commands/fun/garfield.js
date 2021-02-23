@@ -1,6 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const moment = require('moment');
+const { randomNumber, garfieldDay, garfieldURL } = require('../../util/Util');
 
 module.exports = class GarfieldCommand extends Command {
     constructor(client) {
@@ -16,25 +16,19 @@ module.exports = class GarfieldCommand extends Command {
     }
 
     run(message) {
-        const year = random(1990, 2016);
-        const day = random(0, 366);
-        const date = moment().year(year).dayOfYear(day);
-        const dateFormat = date.format('YYYY-MM-DD');
-        const dateYear = date.year();
+        const year = randomNumber(1990, 2016);
+        const month = randomNumber(1, 12);
+        const day = garfieldDay(month, year);
+        const garURL = garfieldURL(day, month, year);
+
 
         const embed = new Discord.MessageEmbed()
             .setColor('#E16935')
-            .setFooter(`Published in ${dateYear}`)
+            .setFooter(`Published in ${year}`)
             .setDescription(
-                `[Image URL](https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/${dateYear}/${dateFormat}.gif)`
+                `[Image URL](${garURL})`
             )
-            .setImage(
-                `https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/${dateYear}/${dateFormat}.gif`
-            );
+            .setImage(garURL);
         message.channel.send({ embed });
     }
-};
-
-function random(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
 }
