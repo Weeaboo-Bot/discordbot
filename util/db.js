@@ -22,7 +22,6 @@ module.exports = class WeabooDatabase {
         }
         logger.info(`Status: ${result.success}`);
     }
-
     async findAll(collectionName) {
         let result;
         try {
