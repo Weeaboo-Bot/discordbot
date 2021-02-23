@@ -1,7 +1,7 @@
 const Command = require('../../structures/Command');
 const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const LogHandler = require('../../util/logHandler');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 const moment = require('moment');
 const clocks = [
     '🕛',
@@ -43,6 +43,7 @@ module.exports = class TimeCommand extends Command {
     }
 
     async run(message, { location }) {
+        const LOG = new LogHandler();
         if (!location) {
             return message.channel.send(
                 'Please specify a location for me to gather information from!'
@@ -91,10 +92,10 @@ module.exports = class TimeCommand extends Command {
                 message.channel.send(
                     `❎ | Location **${location}** was not found!`
                 );
-                return message.client.channel.cache
+                return message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: errorMessage(
+                        embed: LOG.errorMessage(
                             err,
                             ErrorEnum.API,
                             message.command.name

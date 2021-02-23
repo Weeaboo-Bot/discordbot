@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const LogHandler = require('../../util/logHandler');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class LizardCommand extends Command {
     constructor(client) {
@@ -18,6 +18,7 @@ module.exports = class LizardCommand extends Command {
     }
 
     async run(message) {
+        const LOG = new LogHandler();
         await axios
             .get('https://nekos.life/api/lizard')
             .then(function (res) {
@@ -34,7 +35,7 @@ module.exports = class LizardCommand extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: errorMessage(
+                    embed: LOG.errorMessage(
                         err,
                         ErrorEnum.API,
                         message.command.name
