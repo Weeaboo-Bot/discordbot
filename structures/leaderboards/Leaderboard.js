@@ -9,7 +9,7 @@ module.exports = class Leaderboard {
 
     makeLeaderboard (leaderboardOptions) {
         const newLeaderboard = {};
-        this.leaderboard = newLeaderboardn;
+        this.leaderboard = newLeaderboard;
         return this.leaderboard;
     }
 

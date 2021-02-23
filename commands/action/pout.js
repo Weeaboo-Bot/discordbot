@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const LogHandler = require('../../util/logHandler');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 // remember to return before every promise
 module.exports = class PoutCommand extends Command {
@@ -18,6 +18,7 @@ module.exports = class PoutCommand extends Command {
     }
 
     async run(message) {
+        const LOG = new LogHandler();
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
 
         await axios
@@ -45,7 +46,7 @@ module.exports = class PoutCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: errorMessage(
+                        embed: LOG.errorMessage(
                             error,
                             ErrorEnum.API,
                             message.command.name

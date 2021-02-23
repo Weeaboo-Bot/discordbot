@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const LogHandler = require('../../util/logHandler');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 const { disgustP } = require('../../assets/json/actions.json');
 
 module.exports = class LickCommand extends Command {
@@ -19,6 +19,7 @@ module.exports = class LickCommand extends Command {
     }
 
     async run(message) {
+        const LOG = new LogHandler();
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
@@ -44,11 +45,10 @@ module.exports = class LickCommand extends Command {
                 })
                 .catch(function (error) {
                     // handle error
-
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: LOG.errorMessage(
                                 error,
                                 ErrorEnum.API,
                                 message.command.name

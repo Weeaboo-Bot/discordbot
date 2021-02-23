@@ -2,8 +2,8 @@ const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const LogHandler = require('../../util/logHandler');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class NomCommand extends Command {
     constructor(client) {
@@ -19,6 +19,7 @@ module.exports = class NomCommand extends Command {
     }
 
     async run(message, args) {
+        const LOG = new LogHandler();
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
@@ -56,7 +57,7 @@ module.exports = class NomCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: LOG.errorMessage(
                                 error,
                                 ErrorEnum.API,
                                 message.command.name

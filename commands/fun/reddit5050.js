@@ -1,7 +1,7 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const LogHandler = require('../../util/logHandler');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 const axios = require('axios');
 
 function getRndInteger(min, max) {
@@ -19,6 +19,7 @@ module.exports = class Reddit5050Command extends Command {
         });
     }
     async run(message) {
+        const LOG = new LogHandler();
         await axios
             .get('https://www.reddit.com/r/FiftyFifty.json')
             .then(function (res) {
@@ -35,7 +36,7 @@ module.exports = class Reddit5050Command extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: errorMessage(
+                    embed: LOG.errorMessage(
                         err,
                         ErrorEnum.API,
                         message.command.name

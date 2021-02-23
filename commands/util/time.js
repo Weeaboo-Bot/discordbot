@@ -1,7 +1,7 @@
 const Command = require('../../structures/Command');
 const axios = require('axios');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 const moment = require('moment');
 const clocks = [
     '🕛',
