@@ -38,7 +38,6 @@ module.exports = class EightBallCommand extends Command {
             return message.channel.send('You must provide a question!');
         }
 
-
         // chooses a random number to determine which type of message + corresponding gif will be sent
         const choice = randomNumber(1, 3);
         const embed = new Discord.MessageEmbed().setTitle('Magic 8-ball');

@@ -21,14 +21,11 @@ module.exports = class GarfieldCommand extends Command {
         const day = garfieldDay(month, year);
         const garURL = garfieldURL(day, month, year);
 
-
         const embed = new Discord.MessageEmbed()
             .setColor('#E16935')
             .setFooter(`Published in ${year}`)
-            .setDescription(
-                `[Image URL](${garURL})`
-            )
+            .setDescription(`[Image URL](${garURL})`)
             .setImage(garURL);
         message.channel.send({ embed });
     }
-}
+};

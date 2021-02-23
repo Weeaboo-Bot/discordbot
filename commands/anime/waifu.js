@@ -58,10 +58,10 @@ module.exports = class WaifuCommand extends Command {
             const random = Math.floor(Math.random() * total + 1);
             var waifu = waifus[random];
 
-            embed.setAuthor(waifu.name, waifu.image)
-            embed.setDescription(waifu.origin)
-            embed.setImage(waifu.image)
-            embed.setFooter(`Waifu Number ${random}`)
+            embed.setAuthor(waifu.name, waifu.image);
+            embed.setDescription(waifu.origin);
+            embed.setImage(waifu.image);
+            embed.setFooter(`Waifu Number ${random}`);
             embed.setColor('#FAC193');
             var ms = await message.channel.send(`💝 **${waifu.name}**? `, {
                 embed: embed,
@@ -73,10 +73,10 @@ module.exports = class WaifuCommand extends Command {
         } else if (somethingThere) {
             const waifuNumber = args.number;
             var waifu = waifus[waifuNumber];
-            embed.setAuthor(waifu.name, waifu.image)
-            embed.setDescription(waifu.origin)
-            embed.setImage(waifu.image)
-            embed.setFooter(`Waifu Number ${waifuNumber}`)
+            embed.setAuthor(waifu.name, waifu.image);
+            embed.setDescription(waifu.origin);
+            embed.setImage(waifu.image);
+            embed.setFooter(`Waifu Number ${waifuNumber}`);
             embed.setColor('#FAC193');
             var ms = await message.channel.send(
                 `💝 Here's waifu number **${waifuNumber}**!`,

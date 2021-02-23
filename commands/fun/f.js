@@ -29,8 +29,8 @@ module.exports = class FCommand extends Command {
             embed.setAuthor(
                 `${message.author.username} has paid their respects.`,
                 message.author.displayAvatarURL({ format: 'png' })
-            )
-            embed.setColor('#4E373B')
+            );
+            embed.setColor('#4E373B');
             embed.setFooter('Press F to pay your respects.');
             message.channel.send({ embed }).then((m) => m.react('🇫'));
 
@@ -39,11 +39,11 @@ module.exports = class FCommand extends Command {
             embed.setAuthor(
                 '\u2000',
                 message.author.displayAvatarURL({ format: 'png' })
-            )
-            embed.setColor('#4E373B')
+            );
+            embed.setColor('#4E373B');
             embed.setDescription(
                 `${message.author} has paid their respects to ${respect}`
-            )
+            );
             embed.setFooter('Press F to pay your respects.');
             message.channel.send({ embed }).then((m) => m.react('🇫'));
 
