@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="" />
+    <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/structures/moderation/Ban.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/structures/moderation/ChatLog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/structures/moderation/Kick.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/structures/moderation/VoiceLog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/storage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/discordbot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discordbot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/Command.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/Command.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -65,6 +81,9 @@
       <workItem from="1613886879054" duration="25000" />
       <workItem from="1613889629989" duration="1930000" />
       <workItem from="1613948809934" duration="286000" />
+      <workItem from="1614050123035" duration="20000" />
+      <workItem from="1614099271371" duration="62000" />
+      <workItem from="1614099507709" duration="90000" />
     </task>
     <task id="LOCAL-00001" summary="Updated commands with new throttling.">
       <created>1613779115501</created>

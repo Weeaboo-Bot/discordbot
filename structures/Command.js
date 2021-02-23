@@ -12,5 +12,8 @@ module.exports = class WeabooCommand extends Command {
             url: 'https://github.com/sdoran35',
             reason: 'Code',
         });
+
+        // Add custom Log Handlers to WeabooCommand
+        // This allows for simple log handling on all commands
     }
 };
