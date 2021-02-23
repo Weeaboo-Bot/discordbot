@@ -30,9 +30,10 @@ module.exports = class WeatherCommand extends Command {
     }
     async run(message, { query }) {
         const LOG = new LogHandler();
+        const reqURL = 'http://api.weatherapi.com/v1/current.json';
         // do normal Req
         await axios
-            .get('http://api.weatherapi.com/v1/current.json', {
+            .get(reqURL, {
                 params: {
                     q: query,
                     key: message.client.apiKeys.WEATHER_KEY,
@@ -60,7 +61,8 @@ module.exports = class WeatherCommand extends Command {
                         embed: LOG.errorMessage(
                             err,
                             ErrorEnum.API,
-                            message.command.name
+                            message.command.name,
+                            reqURL
                         ),
                     });
             });

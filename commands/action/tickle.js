@@ -20,6 +20,7 @@ module.exports = class TickleCommand extends Command {
     async run(message) {
         const LOG = new LogHandler();
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
+        const reqURL = 'https://rra.ram.moe/r?type=tickle';
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
 
@@ -41,7 +42,7 @@ module.exports = class TickleCommand extends Command {
             );
         } else if (message.mentions.users.first() == this.client.user) {
             await axios
-                .get('https://rra.ram.moe/r?type=tickle')
+                .get(reqURL)
                 .then(function (res) {
                     const embed = new Discord.MessageEmbed()
                         .setColor('#FBCFCF')
@@ -57,13 +58,14 @@ module.exports = class TickleCommand extends Command {
                             embed: LOG.errorMessage(
                                 err,
                                 ErrorEnum.API,
-                                message.command.name
+                                message.command.name,
+                                reqURL
                             ),
                         });
                 });
         } else {
             await axios
-                .get('https://rra.ram.moe/i/r?type=tickle')
+                .get(reqURL)
                 .then(function (res) {
                     return message.channel.send(
                         `${message.author} tickles ${recipient}!`,
@@ -83,7 +85,8 @@ module.exports = class TickleCommand extends Command {
                             embed: LOG.errorMessage(
                                 err,
                                 ErrorEnum.API,
-                                message.command.name
+                                message.command.name,
+                                reqURL
                             ),
                         });
                 });

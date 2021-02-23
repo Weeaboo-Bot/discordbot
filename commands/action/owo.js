@@ -19,8 +19,9 @@ module.exports = class OwoCommand extends Command {
 
     async run(message) {
         const LOG = new LogHandler();
+        const reqURL = 'https://rra.ram.moe/i/r?type=owo';
         await axios
-            .get('https://rra.ram.moe/i/r?type=owo')
+            .get(reqURL)
             .then(function (res) {
                 const embed = new Discord.MessageEmbed()
                     .setColor('#FBCFCF')
@@ -32,7 +33,8 @@ module.exports = class OwoCommand extends Command {
                     embed: LOG.errorMessage(
                         err,
                         ErrorEnum.API,
-                        message.command.name
+                        message.command.name,
+                        reqURL
                     ),
                 });
             });

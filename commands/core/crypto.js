@@ -90,7 +90,7 @@ module.exports = class CryptoCommand extends Command {
             });
         } catch (error) {
             message.client.channels.cache.get(message.client.errorLog).send({
-                embed: LOG.errorMessage(error, ErrorEnum.API, message.command.name),
+                embed: LOG.errorMessage(error, ErrorEnum.API, message.command.name, null),
             });
         }
     }

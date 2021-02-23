@@ -2,12 +2,12 @@ const Discord = require('discord.js');
 
 module.exports = class WeabooLogHandler {
 
-    errorMessage(error, error_type, error_command) {
+    errorMessage(error, error_type, error_command, error_url) {
         return new Discord.MessageEmbed()
             .setTitle(`❎ Command: ${error_command}\nError Type: ${error_type}`)
             .setColor('RED')
             .addField('Error Message', error.message || error, true)
-            .addField('Error URL', error.url || error.path, true)
+            .addField('Error URL', error.url || error.path || error_url, true)
             .setTimestamp();
     }
 
