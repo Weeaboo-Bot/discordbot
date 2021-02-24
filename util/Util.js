@@ -67,6 +67,12 @@ module.exports = class Util {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    static randomNumber(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     static trimArray(arr, maxLen = 10) {
         if (arr.length > maxLen) {
             const len = arr.length - maxLen;
@@ -340,5 +346,24 @@ module.exports = class Util {
         const spoilers = (clean.match(/\|\|/g) || []).length;
         if (spoilers !== 0 && spoilers && spoilers % 2) clean += '||';
         return clean;
+    }
+
+    static toArray(obj) {
+        const result = [];
+        for (const prop in obj) {
+            const value = obj[prop];
+            if (typeof value === 'object') {
+                result.push(this.toArray(value));
+            } else {
+                result.push(value);
+            }
+        }
+        return result;
+    }
+
+    static toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 };

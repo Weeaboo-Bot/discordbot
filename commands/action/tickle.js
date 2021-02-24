@@ -23,19 +23,11 @@ module.exports = class TickleCommand extends Command {
         const reqURL = 'https://rra.ram.moe/r?type=tickle';
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
+        const embed = new Discord.MessageEmbed();
 
-        if (!recipient) {
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(disgust);
-            return message.channel.send(
-                `${message.author} tickles... themselves..?`,
-                { embed: embed }
-            );
-        } else if (message.mentions.users.first() == message.author) {
-            var embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(disgust);
+        if (!recipient || message.mentions.users.first() == message.author) {
+            embed.setColor('#FBCFCF');
+            embed.setImage(disgust);
             return message.channel.send(
                 `${message.author} tickles... themselves..?`,
                 { embed: embed }
@@ -44,9 +36,8 @@ module.exports = class TickleCommand extends Command {
             await axios
                 .get(reqURL)
                 .then(function (res) {
-                    const embed = new Discord.MessageEmbed()
-                        .setColor('#FBCFCF')
-                        .setImage(`https://rra.ram.moe${res.data.path}`);
+                    embed.setColor('#FBCFCF');
+                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
                     return message.channel.send('NyaAhaha! ⊂(( ^ ▽ ^ ))⊃', {
                         embed: embed,
                     });
@@ -67,15 +58,11 @@ module.exports = class TickleCommand extends Command {
             await axios
                 .get(reqURL)
                 .then(function (res) {
+                    embed.setColor('#FBCFCF');
+                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
                     return message.channel.send(
                         `${message.author} tickles ${recipient}!`,
-                        {
-                            embed: new Discord.MessageEmbed()
-                                .setColor('#FBCFCF')
-                                .setImage(
-                                    `https://rra.ram.moe${res.data.path}`
-                                ),
-                        }
+                        { embed: embed }
                     );
                 })
                 .catch(function (err) {

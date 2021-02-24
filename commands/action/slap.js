@@ -26,32 +26,22 @@ module.exports = class SlapCommand extends Command {
 
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
         const slap = slapP[Math.round(Math.random() * (slapP.length - 1))];
+        const embed = new Discord.MessageEmbed();
 
-        if (!recipient) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(selfSlap());
-            return message.channel.send(
-                `${message.author}, please don't slap yourself!`,
-                { embed: embed }
-            );
-        } else if (message.mentions.users.first() == message.author) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(selfSlap());
+        if (!recipient || message.mentions.users.first() == message.author) {
+            embed.setColor('#FBCFCF');
+            embed.setImage(selfSlap());
             return message.channel.send(
                 `${message.author}, please don't slap yourself!`,
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
             return message.channel.send(
-                "(；︿ ；✿) I-I'm sorry.. please d-don't slap me...",
-                { embed: embed }
+                "(；︿ ；✿) I-I'm sorry.. please d-don't slap me..."
             );
         } else {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(slap);
+            embed.setColor('#FBCFCF');
+            embed.setImage(slap);
             return message.channel.send(
                 `${message.author} slaps ${recipient}!`,
                 { embed: embed }

@@ -1,6 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const randomPuppy = require('random-puppy');
+const { randomRange } = require('../../util/Util');
 
 module.exports = class MoeCommand extends Command {
     constructor(client) {
@@ -14,22 +14,34 @@ module.exports = class MoeCommand extends Command {
             examples: ['!moe'],
         });
     }
-
-    run(message) {
-        randomPuppy('awwnime')
-            .then((url) => {
-                console.log(url);
-                const embed = new Discord.MessageEmbed()
-                    .setFooter('awwnime')
-                    .setDescription(`[Image URL](${url})`)
-                    .setImage(url)
-                    .setColor('#A187E0');
-                return message.channel.send({ embed });
+    //thanks random code on reddit that helped me figure this shit out
+    async run(message) {
+        const reqURL = 'https://www.reddit.com/r/awwnime.json';
+        await message.command.axiosConfig.get(reqURL, {
+            params: {
+                sort: 'top',
+                t: 'week',
+            },
+        })
+            .then(res => {
+                return message.channel.send({embed : new Discord.MessageEmbed()
+                        .setColor('#A187E0')
+                        .setTitle('Here is a cute pic!')
+                        .setImage(res.data.data.children[randomRange(0,res.data.data.children.length)].data.url)
+                        .setFooter('Provided by /r/awwnime')
+                });
             })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-                // message.client.channels.cache.get(error_log).send({embed: errorMessage(error,ErrorEnum.API,message.command.name)});
-            });
+            .catch(err => {
+                message.client.channel.cache
+                    .get(message.client.errorLog)
+                    .send({
+                        embed: message.command.discordLogger.errorMessage(
+                            err,
+                            message.command.errorTypes.API,
+                            message.command.name,
+                            reqURL + '?sort=top&t=week'
+                        ),
+                    });
+            })
     }
-};
+}

@@ -1,6 +1,6 @@
 const Command = require('../../structures/Command');
 const { stripIndents } = require('common-tags');
-const permissions = require('../../util/permissions.json');
+const permissions = require('../../assets/json/permissions.json');
 const { errorMessage } = require('../../util/logHandler');
 const ErrorEnum = require('../../assets/json/errorTypes.json');
 
