@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class AdviceCommand extends Command {
     constructor(client) {
@@ -17,9 +14,8 @@ module.exports = class AdviceCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
         const reqURL = 'http://api.adviceslip.com/advice';
-        await axios
+        await message.command.axiosConfig
             .get(reqURL)
             .then(function (res) {
                 try {
@@ -35,9 +31,9 @@ module.exports = class AdviceCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 err,
-                                ErrorEnum.JS,
+                                message.command.errorTypes.JS,
                                 message.command.name,
                                 reqURL
                             ),
@@ -48,9 +44,9 @@ module.exports = class AdviceCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: LOG.errorMessage(
+                        embed: message.command.discordLogger.errorMessage(
                             err,
-                            ErrorEnum.API,
+                            message.command.errorTypes.API,
                             message.command.name,
                             reqURL
                         ),

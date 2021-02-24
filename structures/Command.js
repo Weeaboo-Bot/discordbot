@@ -1,4 +1,7 @@
 const { Command } = require('discord.js-commando');
+const LogHandler = require('../util/logHandler');
+const ErrorEnum = require('../assets/json/errorTypes.json');
+const axios = require('axios');
 
 module.exports = class WeabooCommand extends Command {
     constructor(client, info) {
@@ -13,10 +16,18 @@ module.exports = class WeabooCommand extends Command {
             reason: 'Code',
         });
 
-        // this.infoLogger
-        // this.errorLogger
-        // this.apiLogger
-        // Add custom Log Handlers to WeabooCommand
-        // This allows for simple log handling on all commands
+        /**
+         * Custom Discord Log Handler
+         * @type {module.WeabooLogHandler}
+         */
+        this.discordLogger = new LogHandler();
+        this.errorTypes = ErrorEnum;
+
+        /**
+         * Custom WeabooBot Axios Config
+         * @type {AxiosInstance}
+         */
+        this.axiosConfig = axios.create();
+        this.reqURL = '';
     }
 };

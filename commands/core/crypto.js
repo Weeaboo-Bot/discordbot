@@ -1,7 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
 const alpha = require('alphavantage')({ key: require('../../config').api.ALPHA_KEY });
 
 module.exports = class CryptoCommand extends Command {
@@ -26,7 +24,6 @@ module.exports = class CryptoCommand extends Command {
     }
 
     run(message, { crypto }) {
-        const LOG = new LogHandler();
         const currDate = new Date().toISOString().split('T')[0];
         try {
             alpha.crypto.daily(crypto, 'USD').then((data) => {
@@ -80,7 +77,9 @@ module.exports = class CryptoCommand extends Command {
                             ]['6. market cap (USD)']
                         );
 
+                    // Delete original command message
                     message.delete();
+
                     return message.channel.send({ embed: embed });
                 } else {
                     return message.channel.send(
@@ -90,7 +89,7 @@ module.exports = class CryptoCommand extends Command {
             });
         } catch (error) {
             message.client.channels.cache.get(message.client.errorLog).send({
-                embed: LOG.errorMessage(error, ErrorEnum.API, message.command.name, null),
+                embed: message.command.discordLogger.errorMessage(error, message.command.errorTypes.API, message.command.name, null),
             });
         }
     }

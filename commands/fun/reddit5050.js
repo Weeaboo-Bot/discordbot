@@ -1,12 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
-const axios = require('axios');
-
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
+const { randomRange } = require('../../util/Util');
 
 module.exports = class Reddit5050Command extends Command {
     constructor(client) {
@@ -19,11 +13,11 @@ module.exports = class Reddit5050Command extends Command {
         });
     }
     async run(message) {
-        const LOG = new LogHandler();
-        await axios
-            .get('https://www.reddit.com/r/FiftyFifty.json')
+        message.command.reqURL = 'https://www.reddit.com/r/FiftyFifty.json';
+        await message.command.axiosConfig
+            .get(message.command.reqURL)
             .then(function (res) {
-                const index = getRndInteger(0, res.data.data.children.length);
+                const index = randomRange(0, res.data.data.children.length);
                 return message.channel.send({
                     embed: new Discord.MessageEmbed()
                         .setTitle(res.data.data.children[index].data.title)
@@ -36,10 +30,11 @@ module.exports = class Reddit5050Command extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: LOG.errorMessage(
+                    embed: message.command.discordLogger.errorMessage(
                         err,
-                        ErrorEnum.API,
-                        message.command.name
+                        message.command.errorTypes.API,
+                        message.command.name,
+                        message.command.reqURL
                     ),
                 });
             });

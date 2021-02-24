@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
 const signs = [
     'capricorn',
     'aquarius',
@@ -39,7 +36,7 @@ module.exports = class HoroscopeCommand extends Command {
     }
 
     async run(message, { sign }) {
-        const LOG = new LogHandler();
+        message.command.reqURL = 'https://aztro.sameerkumar.website';
         if (!sign) {
             return message.channel.send(
                 'Please give me a sign to get the horoscope of!'
@@ -50,8 +47,11 @@ module.exports = class HoroscopeCommand extends Command {
             return message.channel.send('That is not a valid sign!');
         }
 
-        await axios
-            .post(`https://aztro.sameerkumar.website?sign=${sign}&day=today`)
+        await message.command.axiosConfig
+            .post(message.command.reqURL, {
+                sign : sign,
+                day : 'today'
+            })
             .then(function (res) {
                 const msg = new Discord.MessageEmbed()
 
@@ -73,10 +73,11 @@ module.exports = class HoroscopeCommand extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: LOG.errorMessage(
+                    embed: message.command.discordLogger.errorMessage(
                         err,
-                        ErrorEnum.API,
-                        message.command.name
+                        message.command.errorTypes.API,
+                        message.command.name,
+                        message.command.reqURL
                     ),
                 });
             });

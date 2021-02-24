@@ -5,7 +5,6 @@ const leaveMsgs = require('../assets/json/leave-messages');
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
 const { fail } = require('../assets/json/emojis.json');
-const LogHandler = require('../util/logHandler');
 
 const GROUPS = [
     ['action', 'Action'],
@@ -117,8 +116,6 @@ module.exports = class WeabooClient extends CommandoClient {
             config.discord.DISCORD_WEBHOOK_TOKEN,
             { disableMentions: 'everyone' }
         );
-
-        this.logHandler = new LogHandler();
         /**
          * Several Collections to hold data
          * @type {module:"discord.js".Collection<K, V>}

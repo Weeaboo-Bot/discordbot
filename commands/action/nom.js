@@ -1,8 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class NomCommand extends Command {
     constructor(client) {
@@ -40,7 +38,7 @@ module.exports = class NomCommand extends Command {
                 { embed: embed2 }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            await axios
+            await message.command.axiosConfig
                 .get(reqURL)
                 .then(function (response) {
                     // handle success
@@ -56,16 +54,16 @@ module.exports = class NomCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: this.client.logHandler.errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 error,
-                                ErrorEnum.API,
+                                message.command.errorTypes.API,
                                 message.command.name,
                                 reqURL
                             ),
                         });
                 });
         } else {
-            await axios
+            await message.command.axiosConfig
                 .get(reqURL)
                 .then(function (response) {
                     // handle success
@@ -82,9 +80,9 @@ module.exports = class NomCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: this.client.logHandler.errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 error,
-                                ErrorEnum.API,
+                                message.command.errorTypes.API,
                                 message.command.name,
                                 reqURL
                             ),

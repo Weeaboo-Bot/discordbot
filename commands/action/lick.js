@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
 const { disgustP } = require('../../assets/json/actions.json');
 
 module.exports = class LickCommand extends Command {
@@ -19,7 +16,6 @@ module.exports = class LickCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
         const reqURL = 'https://rra.ram.moe/i/r?type=lick';
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
         const disgust =
@@ -34,7 +30,7 @@ module.exports = class LickCommand extends Command {
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            await axios
+            await message.command.axiosConfig
                 .get(reqURL)
                 .then(function (res) {
                     embed.setColor('#FBCFCF');
@@ -49,16 +45,16 @@ module.exports = class LickCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 error,
-                                ErrorEnum.API,
+                                message.command.errorTypes.API,
                                 message.command.name,
                                 reqURL
                             ),
                         });
                 });
         } else {
-            await axios
+            await message.command.axiosConfig
                 .get(reqURL)
                 .then(function (res) {
                     embed.setColor('#FBCFCF');
@@ -73,9 +69,9 @@ module.exports = class LickCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 error,
-                                ErrorEnum.API,
+                                message.command.errorTypes.API,
                                 message.command.name,
                                 reqURL
                             ),

@@ -7,7 +7,7 @@ module.exports = class WeabooLogHandler {
             .setTitle(`❎ Command: ${error_command}\nError Type: ${error_type}`)
             .setColor('RED')
             .addField('Error Message', error.message || error, true)
-            .addField('Error URL', error.url || error.path || error_url, true)
+            .addField('Error URL | Error Data', error.url || error.path || error_url, true)
             .setTimestamp();
     }
 
@@ -30,5 +30,14 @@ module.exports = class WeabooLogHandler {
             .addField('AUDIT SENDER', auditEntry.executor)
             .addField('AUDIT REASON', auditEntry.reason, true)
             .setTimestamp();
+    }
+
+    supportMessage(userTag, channelID, guildName, channelName, support, displayURL) {
+        return new Discord.MessageEmbed()
+            .setAuthor(`${userTag}`, displayURL)
+            .setColor('#48886D')
+            .setTimestamp()
+            .setFooter(`Channel ID: ${channelID}`)
+            .addField(guildName + ', ' + channelName, support );
     }
 }

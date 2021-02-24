@@ -1,10 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
-const axios = require('axios');
-
-
 
 module.exports = class AnimeListCommand extends Command {
     constructor(client) {
@@ -26,10 +21,9 @@ module.exports = class AnimeListCommand extends Command {
         });
     }
     async run(message, { username } ) {
-        const LOG = new LogHandler();
         const signInLink = message.client.apiKeys.LOGIN_URL;
         const reqURL = `https://api.myanimelist.net/v2/users/${username}/animelist`;
-        await axios.get(reqURL, {
+        await message.command.axiosConfig.get(reqURL, {
             params: {
                 limit: 4,
             },
@@ -42,7 +36,7 @@ module.exports = class AnimeListCommand extends Command {
             })
             .catch(error => {
                 message.client.channels.cache.get(message.client.errorLog).send({
-                    embed: LOG.errorMessage(error, ErrorEnum.API, message.command.name, reqURL),
+                    embed: message.command.discordLogger.errorMessage(error, message.command.errorTypes.API, message.command.name, reqURL),
                 });
             })
 

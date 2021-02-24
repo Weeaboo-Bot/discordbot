@@ -1,9 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class TickleCommand extends Command {
     constructor(client) {
@@ -18,7 +15,6 @@ module.exports = class TickleCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
         const reqURL = 'https://rra.ram.moe/r?type=tickle';
         const disgust =
@@ -41,7 +37,7 @@ module.exports = class TickleCommand extends Command {
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            await axios
+            await message.command.axiosConfig
                 .get(reqURL)
                 .then(function (res) {
                     const embed = new Discord.MessageEmbed()
@@ -55,16 +51,16 @@ module.exports = class TickleCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 err,
-                                ErrorEnum.API,
+                                message.command.errorTypes.API,
                                 message.command.name,
                                 reqURL
                             ),
                         });
                 });
         } else {
-            await axios
+            await message.command.axiosConfig
                 .get(reqURL)
                 .then(function (res) {
                     return message.channel.send(
@@ -82,9 +78,9 @@ module.exports = class TickleCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 err,
-                                ErrorEnum.API,
+                                message.command.errorTypes.API,
                                 message.command.name,
                                 reqURL
                             ),

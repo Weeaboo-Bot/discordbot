@@ -1,11 +1,6 @@
 const Command = require('../../structures/Command');
-const request = require('axios');
 const { stripIndents } = require('common-tags');
 const { Collection } = require('discord.js');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
-const errors = require('../../assets/json/api-errors');
-const LOG = new LogHandler();
 const {
     delay,
     awaitPlayers,
@@ -44,6 +39,7 @@ module.exports = class QuizDuelCommand extends Command {
     }
 
     async run(msg, { players }) {
+        msg.command.reqURL = 'https://opentdb.com/api.php';
 
         const current = this.client.games.get(msg.channel.id);
         if (current) {
@@ -159,10 +155,11 @@ module.exports = class QuizDuelCommand extends Command {
                 // null questions, log it out
                 this.client.logger.error('questions DB was null');
                 this.client.channels.cache.get(msg.client.errorLog).send({
-                    embed: LOG.errorMessage(
+                    embed: msg.command.discordLogger.errorMessage(
                         'question DB was null',
-                        ErrorEnum.API,
-                        msg.command.name
+                        msg.command.errorTypes.API,
+                        msg.command.name,
+                        msg.command.reqURL
                     ),
                 });
             }
@@ -174,7 +171,7 @@ module.exports = class QuizDuelCommand extends Command {
 
     // https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986
     async fetchQuestions(msg) {
-        await request
+        await msg.command.axiosConfig
             .get('https://opentdb.com/api.php', {
                 params: {
                     amount: 10,
@@ -206,7 +203,7 @@ module.exports = class QuizDuelCommand extends Command {
                     errors[Math.round(Math.random() * (errors.length - 1))]
                 );
                 msg.client.channels.cache.get(msg.client.errorLog).send({
-                    embed: LOG.errorMessage(err, ErrorEnum.API, msg.command.name),
+                    embed: msg.command.discordLogger.errorMessage(err, msg.command.errorTypes.API, msg.command.name,msg.command.reqURL),
                 });
                 return null;
             });
