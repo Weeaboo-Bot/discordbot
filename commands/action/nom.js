@@ -1,9 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class NomCommand extends Command {
     constructor(client) {
@@ -19,6 +16,7 @@ module.exports = class NomCommand extends Command {
     }
 
     async run(message, args) {
+        const reqURL = 'https://rra.ram.moe/i/r?type=nom';
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
@@ -40,8 +38,8 @@ module.exports = class NomCommand extends Command {
                 { embed: embed2 }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            await axios
-                .get('https://rra.ram.moe/i/r?type=nom')
+            await message.command.axiosConfig
+                .get(reqURL)
                 .then(function (response) {
                     // handle success
                     const embed3 = new Discord.MessageEmbed()
@@ -56,16 +54,17 @@ module.exports = class NomCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 error,
-                                ErrorEnum.API,
-                                message.command.name
+                                message.command.errorTypes.API,
+                                message.command.name,
+                                reqURL
                             ),
                         });
                 });
         } else {
-            await axios
-                .get('https://rra.ram.moe/i/r?type=nom')
+            await message.command.axiosConfig
+                .get(reqURL)
                 .then(function (response) {
                     // handle success
                     const embed4 = new Discord.MessageEmbed()
@@ -78,7 +77,16 @@ module.exports = class NomCommand extends Command {
                 })
                 .catch(function (error) {
                     // handle error
-                    console.log(error);
+                    message.client.channels.cache
+                        .get(message.client.errorLog)
+                        .send({
+                            embed: message.command.discordLogger.errorMessage(
+                                error,
+                                message.command.errorTypes.API,
+                                message.command.name,
+                                reqURL
+                            ),
+                        });
                 });
         }
     }

@@ -47,6 +47,9 @@ exports.api = {
     EMAIL_USER: process.env.EMAIL_USER,
     EMAIL_PASS: process.env.EMAIL_PASS,
     SUCCESS_EMOJI_ID: process.env.SUCCESS_EMOJI_ID,
+    FAILURE_EMOJI_ID: process.env.FAILURE_EMOJI_ID,
+    MAL_CLIENT_ID : process.env.MAL_CLIENT_ID,
+    MAL_CLIENT_SECRET : process.env.MAL_CLIENT_SECRET,
 };
 
 exports.fbConfig = {

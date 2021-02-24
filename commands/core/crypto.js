@@ -1,9 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
-const alphakey = require('../../config').api.ALPHA_KEY;
-const alpha = require('alphavantage')({ key: alphakey });
+const alpha = require('alphavantage')({ key: require('../../config').api.ALPHA_KEY });
 
 module.exports = class CryptoCommand extends Command {
     constructor(client) {
@@ -80,7 +77,9 @@ module.exports = class CryptoCommand extends Command {
                             ]['6. market cap (USD)']
                         );
 
+                    // Delete original command message
                     message.delete();
+
                     return message.channel.send({ embed: embed });
                 } else {
                     return message.channel.send(
@@ -90,7 +89,7 @@ module.exports = class CryptoCommand extends Command {
             });
         } catch (error) {
             message.client.channels.cache.get(message.client.errorLog).send({
-                embed: errorMessage(error, ErrorEnum.API, message.command.name),
+                embed: message.command.discordLogger.errorMessage(error, message.command.errorTypes.API, message.command.name, null),
             });
         }
     }

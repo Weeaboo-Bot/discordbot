@@ -1,9 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class StareCommand extends Command {
     constructor(client) {
@@ -20,6 +17,7 @@ module.exports = class StareCommand extends Command {
 
     async run(message) {
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
+        const reqURL = 'https://rra.ram.moe/i/r?type=stare';
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
 
@@ -40,8 +38,8 @@ module.exports = class StareCommand extends Command {
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            await axios
-                .get('https://rra.ram.moe/i/r?type=stare')
+            await message.command.axiosConfig
+                .get(reqURL)
                 .then(function (res) {
                     const embed = new Discord.MessageEmbed()
                         .setColor('#FBCFCF')
@@ -54,16 +52,17 @@ module.exports = class StareCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 err,
-                                ErrorEnum.API,
-                                message.command.name
+                                message.command.errorTypes.API,
+                                message.command.name,
+                                reqURL
                             ),
                         });
                 });
         } else {
-            await axios
-                .get('https://rra.ram.moe/i/r?type=stare')
+            await message.command.axiosConfig
+                .get(reqURL)
                 .then(function (res) {
                     const embed = new Discord.MessageEmbed()
                         .setColor('#FBCFCF')
@@ -77,10 +76,11 @@ module.exports = class StareCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.command.discordLogger.errorMessage(
                                 err,
-                                ErrorEnum.API,
-                                message.command.name
+                                message.command.errorTypes.API,
+                                message.command.name,
+                                reqURL
                             ),
                         });
                 });

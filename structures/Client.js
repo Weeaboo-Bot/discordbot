@@ -4,7 +4,7 @@ const activities = require('../assets/json/activity');
 const leaveMsgs = require('../assets/json/leave-messages');
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
-const { fail } = require('../util/emojis.json');
+const { fail } = require('../assets/json/emojis.json');
 
 const GROUPS = [
     ['action', 'Action'],
@@ -63,25 +63,13 @@ module.exports = class WeabooClient extends CommandoClient {
             .registerCommandsIn(join(__dirname, '../commands'));
 
         /**
-         * Create logger
+         * Create winston logger
          */
         this.logger = require('../util/logger');
 
         this.on('commandError', (command, err) =>
             this.logger.error(`[COMMAND:${command.name}]\n${err.stack}`)
         );
-
-        this.on('voiceStateUpdate', async (___, newState) => {
-            if (
-                newState.member.user.bot &&
-                !newState.channelID &&
-                newState.guild.musicData.songDispatcher &&
-                newState.member.user.id === this.user.id
-            ) {
-                newState.guild.musicData.queue.length = 0;
-                newState.guild.musicData.songDispatcher.end();
-            }
-        });
 
         /**
          * Discord API Stuff
@@ -121,14 +109,22 @@ module.exports = class WeabooClient extends CommandoClient {
          */
         this.utils = require('../util/Util');
         this.database = require('../util/db');
-        this.errorTypes = require('../util/errorTypes.json');
+        this.errorTypes = require('../assets/json/errorTypes.json');
         this.logger.info('Initializing...');
         this.webhook = new Discord.WebhookClient(
             config.discord.DISCORD_WEBHOOK_ID,
             config.discord.DISCORD_WEBHOOK_TOKEN,
             { disableMentions: 'everyone' }
         );
+        /**
+         * Several Collections to hold data
+         * @type {module:"discord.js".Collection<K, V>}
+         */
         this.games = new Discord.Collection();
+        this.leaderboards = new Discord.Collection();
+        this.animeList = new Discord.Collection();
+
+
         this.activities = activities;
         this.leaveMessages = leaveMsgs;
     }

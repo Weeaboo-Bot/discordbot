@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class DadJokeCommand extends Command {
     constructor(client) {
@@ -18,8 +15,9 @@ module.exports = class DadJokeCommand extends Command {
     }
 
     async run(message) {
-        await axios
-            .get('https://icanhazdadjoke.com/', {
+        message.command.reqURL = 'https://icanhazdadjoke.com/';
+        await message.command.axiosConfig
+            .get(message.command.reqURL, {
                 headers: { Accept: 'application/json' },
             })
             .then(function (res) {
@@ -30,15 +28,15 @@ module.exports = class DadJokeCommand extends Command {
                     )
                     .setDescription(res.data.joke)
                     .setColor('#727684');
-
                 return message.channel.send({ embed: msg });
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: errorMessage(
+                    embed: message.command.discordLogger.errorMessage(
                         err,
-                        ErrorEnum.API,
-                        message.command.name
+                        message.command.errorTypes.API,
+                        message.command.name,
+                        message.command.reqURL
                     ),
                 });
             });

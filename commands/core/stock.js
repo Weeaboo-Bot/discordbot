@@ -1,10 +1,7 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
-const alphakey = require('../../config').api.ALPHA_KEY;
-const alpha = require('alphavantage')({ key: alphakey });
-
+const alpha = require('alphavantage')({ key: require('../../config').api.ALPHA_KEY });
+const { toArray } = require('../../util/Util');
 module.exports = class StockCommand extends Command {
     constructor(client) {
         super(client, {
@@ -27,12 +24,13 @@ module.exports = class StockCommand extends Command {
     }
 
     run(message, { stock }) {
+        const LOG = new LogHandler();
         try {
             alpha.data
                 .intraday(stock, 'compact', 'json', '5min')
                 .then((data) => {
                     if (data != null) {
-                        const result = this.toArray(data['Time Series (5min)']);
+                        const result = toArray(data['Time Series (5min)']);
                         const embed = new Discord.MessageEmbed()
                             .setTitle(data['Meta Data']['1. Information'])
                             .setColor('#FBCFCF')
@@ -50,7 +48,9 @@ module.exports = class StockCommand extends Command {
                             .addField('Stock Close: ', result[0][3])
                             .addField('Stock Volume: ', result[0][4]);
 
+                        // Delete original command message
                         message.delete();
+
                         return message.channel.send({ embed: embed });
                     } else {
                         return message.channel.send(
@@ -60,20 +60,8 @@ module.exports = class StockCommand extends Command {
                 });
         } catch (error) {
             message.client.channels.cache.get(message.client.errorLog).send({
-                embed: errorMessage(error, ErrorEnum.API, message.command.name),
+                embed: message.command.discordLogger.errorMessage(error, message.command.errorTypes.API, message.command.name, null),
             });
         }
-    }
-    toArray(obj) {
-        const result = [];
-        for (const prop in obj) {
-            const value = obj[prop];
-            if (typeof value === 'object') {
-                result.push(this.toArray(value));
-            } else {
-                result.push(value);
-            }
-        }
-        return result;
     }
 };

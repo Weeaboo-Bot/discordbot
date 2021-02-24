@@ -82,10 +82,16 @@ module.exports = class MangaCommand extends Command {
                 return message.channel.send({ embed });
             })
             .catch((err) => {
-                console.log(err);
-                return message.channel.send(
-                    `No results found for **${search}**!`
-                );
+                message.client.channel.cache
+                    .get(message.client.errorLog)
+                    .send({
+                        embed: message.command.discordLogger.errorMessage(
+                            err,
+                            message.command.errorTypes.API,
+                            message.command.name,
+                            search
+                        ),
+                    });
             });
     }
 };

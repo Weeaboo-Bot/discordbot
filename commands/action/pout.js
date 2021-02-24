@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 // remember to return before every promise
 module.exports = class PoutCommand extends Command {
@@ -19,9 +16,9 @@ module.exports = class PoutCommand extends Command {
 
     async run(message) {
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
-
-        await axios
-            .get('https://rra.ram.moe/i/r?type=pout')
+        const reqURL = 'https://rra.ram.moe/i/r?type=pout';
+        await message.command.axiosConfig
+            .get(reqURL)
             .then(function (res) {
                 if (!recipient) {
                     const embed = new Discord.MessageEmbed()
@@ -45,10 +42,11 @@ module.exports = class PoutCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: errorMessage(
+                        embed: message.command.discordLogger.errorMessage(
                             error,
-                            ErrorEnum.API,
-                            message.command.name
+                            message.command.errorTypes.API,
+                            message.command.name,
+                            reqURL
                         ),
                     });
             });

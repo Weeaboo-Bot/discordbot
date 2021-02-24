@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class TodayCommand extends Command {
     constructor(client) {
@@ -18,8 +15,9 @@ module.exports = class TodayCommand extends Command {
     }
 
     async run(message) {
-        await axios
-            .get('http://history.muffinlabs.com/date')
+        message.command.reqURL = 'http://history.muffinlabs.com/date';
+        await message.command.axiosConfig
+            .get(message.command.reqURL)
             .then(function (res) {
                 const source = res.data.data['Events'];
                 const event =
@@ -45,10 +43,11 @@ module.exports = class TodayCommand extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: errorMessage(
+                    embed: message.command.discordLogger.errorMessage(
                         err,
-                        ErrorEnum.API,
-                        message.command.name
+                        message.command.errorTypes.API,
+                        message.command.name,
+                        message.command.reqURL
                     ),
                 });
             });
