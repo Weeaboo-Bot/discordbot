@@ -27,7 +27,7 @@ module.exports = class MoeCommand extends Command {
                 return message.channel.send({embed : new Discord.MessageEmbed()
                         .setColor('#A187E0')
                         .setTitle('Here is a cute pic!')
-                        .setImage(res.data.data.children[randomNumber(0,res.data.data.children.length)].data.url)
+                        .setImage(res.data.data.children[randomRange(0,res.data.data.children.length)].data.url)
                         .setFooter('Provided by /r/awwnime')
                 });
             })
