@@ -63,7 +63,6 @@
         "moment-duration-format": "^1.3.0",
         "ms": "^2.1.2",
         "newrelic": "^6.13.0",
-        "node-superfetch": "^0.1.10",
         "nodemailer": "^6.4.17",
         "os-toolbox": "^0.2.9",
         "pokersolver": "^2.1.4",

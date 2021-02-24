@@ -1,8 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 
-const { formatXml } = require('discord.js-commando');
-
 module.exports = class CatCommand extends Command {
     constructor(client) {
         super(client, {
