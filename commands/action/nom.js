@@ -2,7 +2,6 @@ const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const LogHandler = require('../../util/logHandler');
 const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class NomCommand extends Command {
@@ -19,7 +18,6 @@ module.exports = class NomCommand extends Command {
     }
 
     async run(message, args) {
-        const LOG = new LogHandler();
         const reqURL = 'https://rra.ram.moe/i/r?type=nom';
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
@@ -58,7 +56,7 @@ module.exports = class NomCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: this.client.logHandler.errorMessage(
                                 error,
                                 ErrorEnum.API,
                                 message.command.name,
@@ -84,7 +82,7 @@ module.exports = class NomCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: this.client.logHandler.errorMessage(
                                 error,
                                 ErrorEnum.API,
                                 message.command.name,

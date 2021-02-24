@@ -13,6 +13,9 @@ module.exports = class WeabooCommand extends Command {
             reason: 'Code',
         });
 
+        // this.infoLogger
+        // this.errorLogger
+        // this.apiLogger
         // Add custom Log Handlers to WeabooCommand
         // This allows for simple log handling on all commands
     }

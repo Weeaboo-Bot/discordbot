@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/structures/moderation/Ban.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/structures/moderation/ChatLog.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/structures/moderation/Kick.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/structures/moderation/VoiceLog.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/util/storage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discordbot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discordbot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/Client.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/Client.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/Command.js" beforeDir="false" afterPath="$PROJECT_DIR$/structures/Command.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +44,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -84,6 +79,10 @@
       <workItem from="1614050123035" duration="20000" />
       <workItem from="1614099271371" duration="62000" />
       <workItem from="1614099507709" duration="90000" />
+      <workItem from="1614112848840" duration="36000" />
+      <workItem from="1614117030110" duration="249000" />
+      <workItem from="1614127036363" duration="254000" />
+      <workItem from="1614128590307" duration="365000" />
     </task>
     <task id="LOCAL-00001" summary="Updated commands with new throttling.">
       <created>1613779115501</created>
@@ -134,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613948972273</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Working on custom logger for all commands and several new moderation structs.">
+      <created>1614112876619</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1614112876619</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +164,7 @@
     <MESSAGE value="hand got simplified and prettier ran again pog" />
     <MESSAGE value="fixed pkg.json" />
     <MESSAGE value="Moved JSON files into correct direcory." />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved JSON files into correct direcory." />
+    <MESSAGE value="Working on custom logger for all commands and several new moderation structs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on custom logger for all commands and several new moderation structs." />
   </component>
 </project>
