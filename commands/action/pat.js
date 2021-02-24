@@ -18,35 +18,25 @@ module.exports = class PatCommand extends Command {
     run(message) {
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
         const pat = patP[Math.round(Math.random() * (patP.length - 1))];
+        const embed = new Discord.MessageEmbed();
 
-        if (!recipient) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(pat);
-            return message.channel.send(
-                `${message.author}, you can't pat yourself, but I'll pat you! (´꒳\`)`,
-                { embed: embed }
-            );
-        } else if (message.mentions.users.first() == message.author) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(pat);
+        if (!recipient || message.mentions.users.first() == message.author) {
+            embed.setColor('#FBCFCF');
+            embed.setImage(pat);
             return message.channel.send(
                 `${message.author}, you can't pat yourself, but I'll pat you! (´꒳\`)`,
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(pat);
+            embed.setColor('#FBCFCF');
+            embed.setImage(pat);
             return message.channel.send(
                 "H-Haa.. (✿´ ꒳ ` ) please don't stop...",
                 { embed: embed }
             );
         } else {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#FBCFCF')
-                .setImage(pat);
+            embed.setColor('#FBCFCF');
+            embed.setImage(pat);
             return message.channel.send(
                 `${message.author} pats ${recipient}!`,
                 { embed: embed }
