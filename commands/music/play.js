@@ -172,9 +172,9 @@ module.exports = class PlayCommand extends Command {
                 return message.say("I don't support live streams!");
             }
             // can be uncommented if you don't want the bot to play videos longer than 1 hour
-            if (video.duration.hours !== 0) {
-                return message.say('I cannot play videos longer than 1 hour');
-            }
+//             if (video.duration.hours !== 0) {
+//                 return message.say('I cannot play videos longer than 1 hour');
+//             }
             // can be uncommented if you want to limit the queue
             if (message.guild.musicData.queue.length > 10) {
                 return message.say(
@@ -254,12 +254,12 @@ module.exports = class PlayCommand extends Command {
                         }
 
                         // can be uncommented if you don't want the bot to play videos longer than 1 hour
-                        if (video.duration.hours !== 0) {
-                            songEmbed.delete();
-                            return message.say(
-                                'I cannot play videos longer than 1 hour'
-                            );
-                        }
+//                         if (video.duration.hours !== 0) {
+//                             songEmbed.delete();
+//                             return message.say(
+//                                 'I cannot play videos longer than 1 hour'
+//                             );
+//                         }
 
                         // can be uncommented if you don't want to limit the queue
                         if (message.guild.musicData.queue.length > 10) {
