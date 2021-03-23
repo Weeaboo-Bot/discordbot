@@ -12,7 +12,7 @@ module.exports = class AnimeCommand extends Command {
             group: 'anime',
             memberName: 'anime',
             guildOnly: true,
-            description: 'Searches for an anime on Kitsu.io!',
+            description: 'Searches for an anime on MAL!',
             examples: ['!anime <anime name>'],
             args: [
                 {
