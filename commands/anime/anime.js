@@ -25,7 +25,7 @@ module.exports = class AnimeCommand extends Command {
     }
 
      async run(message, { search }) {
-            mal.search('anime',search,'page').then((result) => {
+            await mal.search('anime',search,'page').then((result) => {
 
                 // Return Top 5 results to user, let user select the correct anime.
                 const animeArr = [];
@@ -131,9 +131,6 @@ module.exports = class AnimeCommand extends Command {
                             })
                     })
                     .catch(function (err) {
-                        message.say(
-                            'Please try again and enter a number between 1 and 5 or exit'
-                        );
                         message.client.channels.cache
                             .get(message.client.errorLog)
                             .send({
