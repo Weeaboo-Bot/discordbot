@@ -27,7 +27,9 @@ const GROUPS = [
     ['loyal', 'Loyalty Program Commands'],
     ['other', 'Other'],
 ];
+/*
 
+ */
 Discord.Structures.extend('Guild', function (Guild) {
     class MusicGuild extends Guild {
         constructor(client, data) {

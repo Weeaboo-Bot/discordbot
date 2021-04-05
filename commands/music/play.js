@@ -168,9 +168,9 @@ module.exports = class PlayCommand extends Command {
                 );
             });
             // can be uncommented if you don't want the bot to play live streams
-            if (video.raw.snippet.liveBroadcastContent === 'live') {
-                return message.say("I don't support live streams!");
-            }
+            // if (video.raw.snippet.liveBroadcastContent === 'live') {
+            //     return message.say("I don't support live streams!");
+            // }
             // can be uncommented if you don't want the bot to play videos longer than 1 hour
 //             if (video.duration.hours !== 0) {
 //                 return message.say('I cannot play videos longer than 1 hour');
