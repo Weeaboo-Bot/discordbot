@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 const signs = [
     'capricorn',
     'aquarius',
@@ -39,7 +39,6 @@ module.exports = class HoroscopeCommand extends Command {
     }
 
     async run(message, { sign }) {
-        const LOG = new LogHandler();
         if (!sign) {
             return message.channel.send(
                 'Please give me a sign to get the horoscope of!'
@@ -73,7 +72,7 @@ module.exports = class HoroscopeCommand extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: LOG.errorMessage(
+                    embed: errorMessage(
                         err,
                         ErrorEnum.API,
                         message.command.name

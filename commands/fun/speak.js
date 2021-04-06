@@ -1,4 +1,8 @@
 const Command = require('../../structures/Command');
+const Discord = require('discord.js');
+const axios = require('axios');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class SpeakCommand extends Command {
     constructor(client) {

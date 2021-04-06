@@ -1,4 +1,5 @@
 const Command = require('../../structures/Command');
+const request = require('node-superfetch');
 const { MessageEmbed } = require('discord.js');
 const { formatNumber } = require('../../util/Util');
 const questions = require('../../assets/json/google-feud');
@@ -104,13 +105,12 @@ module.exports = class GoogleFeudCommand extends Command {
         }
     }
 
-    async fetchSuggestions(question, msg) {
-        const { text } = await this.command.axiosConfig
-            .get('https://suggestqueries.google.com/complete/search',{
-                params: {
-                    client: 'firefox',
-                    q: question,
-                }
+    async fetchSuggestions(question) {
+        const { text } = await request
+            .get('https://suggestqueries.google.com/complete/search')
+            .query({
+                client: 'firefox',
+                q: question,
             });
         const suggestions = JSON.parse(text)[1].filter(
             (suggestion) => suggestion.toLowerCase() !== question.toLowerCase()

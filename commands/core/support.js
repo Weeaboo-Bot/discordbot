@@ -37,9 +37,19 @@ module.exports = class SupportCommand extends Command {
             return message.channel.send('Please add an issue to your message!');
         } else {
             try {
-                message.client.channels.cache.get(message.client.errorLog).send({
-                    embed: message.command.discordLogger.supportMessage(message.member.user.tag, message.channel.id, message.guild.name, message.channel.name,support,message.member.user.displayAvatarURL({ format: 'png' })),
-                });
+                const embed = new Discord.MessageEmbed()
+                    .setAuthor(
+                        `${message.member.user.tag}`,
+                        message.member.user.displayAvatarURL({ format: 'png' })
+                    )
+                    .setColor('48886D')
+                    .setTimestamp()
+                    .setFooter(`Channel ID: ${message.channel.id}`)
+                    .addField(
+                        message.guild.name + ', ' + message.channel.name,
+                        support
+                    );
+                channel.send({ embed });
 
                 await message.react('🇸').catch(console.error);
                 await message.react('🇪').catch(console.error);

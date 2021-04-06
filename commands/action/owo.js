@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios').default;
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class OwoCommand extends Command {
     constructor(client) {
@@ -18,10 +18,8 @@ module.exports = class OwoCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
-        const reqURL = 'https://rra.ram.moe/i/r?type=owo';
         await axios
-            .get(reqURL)
+            .get('https://rra.ram.moe/i/r?type=owo')
             .then(function (res) {
                 const embed = new Discord.MessageEmbed()
                     .setColor('#FBCFCF')
@@ -30,11 +28,10 @@ module.exports = class OwoCommand extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: LOG.errorMessage(
+                    embed: errorMessage(
                         err,
                         ErrorEnum.API,
-                        message.command.name,
-                        reqURL
+                        message.command.name
                     ),
                 });
             });

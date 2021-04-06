@@ -26,27 +26,38 @@ module.exports = class PokeCommand extends Command {
     run(message, { user }) {
         const recipient = user;
         const poke = pokeP[Math.round(Math.random() * (pokeP.length - 1))];
-        const embed = new Discord.MessageEmbed();
 
-        if (!recipient || message.mentions.users.first() == message.author) {
-            embed.setColor('#FBCFCF');
-            embed.setImage(poke);
+        if (!recipient) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(poke);
+            message.delete();
+            return message.channel.send(
+                `${message.author}, you can't poke yourself, but I'll poke you! (´꒳\`)`,
+                { embed: embed }
+            );
+        } else if (message.mentions.users.first() == message.author) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(poke);
             message.delete();
             return message.channel.send(
                 `${message.author}, you can't poke yourself, but I'll poke you! (´꒳\`)`,
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            embed.setColor('#FBCFCF');
-            embed.setImage(poke);
+            const embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(poke);
             message.delete();
             return message.channel.send(
                 "H-Haa.. (✿´ ꒳ ` ) please don't stop...",
                 { embed: embed }
             );
         } else {
-            embed.setColor('#FBCFCF');
-            embed.setImage(poke);
+            const embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(poke);
             message.delete();
             return message.channel.send(
                 `${message.author} pokes ${recipient}!`,

@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const { GiphyFetch } = require('@giphy/js-fetch-api');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class GiphyCommand extends Command {
     constructor(client) {
@@ -25,7 +25,6 @@ module.exports = class GiphyCommand extends Command {
     }
 
     async run(message, { query }) {
-        const LOG = new LogHandler();
         const gf = new GiphyFetch(message.client.apiKeys.GIPHY_KEY);
 
         await gf
@@ -53,7 +52,7 @@ module.exports = class GiphyCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: LOG.errorMessage(
+                        embed: errorMessage(
                             err,
                             ErrorEnum.API,
                             message.command.name

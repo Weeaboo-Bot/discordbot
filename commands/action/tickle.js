@@ -2,8 +2,8 @@ const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class TickleCommand extends Command {
     constructor(client) {
@@ -18,26 +18,33 @@ module.exports = class TickleCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
-        const reqURL = 'https://rra.ram.moe/r?type=tickle';
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
-        const embed = new Discord.MessageEmbed();
 
-        if (!recipient || message.mentions.users.first() == message.author) {
-            embed.setColor('#FBCFCF');
-            embed.setImage(disgust);
+        if (!recipient) {
+            var embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(disgust);
+            return message.channel.send(
+                `${message.author} tickles... themselves..?`,
+                { embed: embed }
+            );
+        } else if (message.mentions.users.first() == message.author) {
+            var embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(disgust);
             return message.channel.send(
                 `${message.author} tickles... themselves..?`,
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
             await axios
-                .get(reqURL)
+                .get('https://rra.ram.moe/r?type=tickle')
                 .then(function (res) {
-                    embed.setColor('#FBCFCF');
-                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
+                    const embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${res.data.path}`);
                     return message.channel.send('NyaAhaha! ⊂(( ^ ▽ ^ ))⊃', {
                         embed: embed,
                     });
@@ -46,34 +53,36 @@ module.exports = class TickleCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: errorMessage(
                                 err,
                                 ErrorEnum.API,
-                                message.command.name,
-                                reqURL
+                                message.command.name
                             ),
                         });
                 });
         } else {
             await axios
-                .get(reqURL)
+                .get('https://rra.ram.moe/i/r?type=tickle')
                 .then(function (res) {
-                    embed.setColor('#FBCFCF');
-                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
                     return message.channel.send(
                         `${message.author} tickles ${recipient}!`,
-                        { embed: embed }
+                        {
+                            embed: new Discord.MessageEmbed()
+                                .setColor('#FBCFCF')
+                                .setImage(
+                                    `https://rra.ram.moe${res.data.path}`
+                                ),
+                        }
                     );
                 })
                 .catch(function (err) {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: errorMessage(
                                 err,
                                 ErrorEnum.API,
-                                message.command.name,
-                                reqURL
+                                message.command.name
                             ),
                         });
                 });

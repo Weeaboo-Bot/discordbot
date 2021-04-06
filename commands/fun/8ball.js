@@ -1,6 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const { randomNumber } = require('../../util/Util');
 const {
     yesQuotes,
     laterQuotes,
@@ -36,6 +35,12 @@ module.exports = class EightBallCommand extends Command {
 
         if (!question) {
             return message.channel.send('You must provide a question!');
+        }
+
+        function randomNumber(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
         // chooses a random number to determine which type of message + corresponding gif will be sent

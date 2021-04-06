@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class AdviceCommand extends Command {
     constructor(client) {
@@ -17,10 +17,8 @@ module.exports = class AdviceCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
-        const reqURL = 'http://api.adviceslip.com/advice';
         await axios
-            .get(reqURL)
+            .get('http://api.adviceslip.com/advice')
             .then(function (res) {
                 try {
                     const embed = new Discord.MessageEmbed()
@@ -35,11 +33,10 @@ module.exports = class AdviceCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: errorMessage(
                                 err,
                                 ErrorEnum.JS,
-                                message.command.name,
-                                reqURL
+                                message.command.name
                             ),
                         });
                 }
@@ -48,11 +45,10 @@ module.exports = class AdviceCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: LOG.errorMessage(
+                        embed: errorMessage(
                             err,
                             ErrorEnum.API,
-                            message.command.name,
-                            reqURL
+                            message.command.name
                         ),
                     });
             });

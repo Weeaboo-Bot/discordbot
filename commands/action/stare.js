@@ -2,8 +2,8 @@ const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class StareCommand extends Command {
     constructor(client) {
@@ -19,26 +19,33 @@ module.exports = class StareCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
-        const reqURL = 'https://rra.ram.moe/i/r?type=stare';
         const disgust =
             disgustP[Math.round(Math.random() * (disgustP.length - 1))];
-        const embed = new Discord.MessageEmbed();
 
-        if (!recipient || message.mentions.users.first() == message.author) {
-            embed.setColor('#FBCFCF');
-            embed.setImage(disgust);
+        if (!recipient) {
+            var embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(disgust);
+            return message.channel.send(
+                `${message.author} stares at... themselves..?`,
+                { embed: embed }
+            );
+        } else if (message.mentions.users.first() == message.author) {
+            var embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(disgust);
             return message.channel.send(
                 `${message.author} stares at... themselves..?`,
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
             await axios
-                .get(reqURL)
+                .get('https://rra.ram.moe/i/r?type=stare')
                 .then(function (res) {
-                    embed.setColor('#FBCFCF');
-                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
+                    const embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${res.data.path}`);
                     return message.channel.send('Y-Yes? (๑´•ω • `๑)', {
                         embed: embed,
                     });
@@ -47,20 +54,20 @@ module.exports = class StareCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: errorMessage(
                                 err,
                                 ErrorEnum.API,
-                                message.command.name,
-                                reqURL
+                                message.command.name
                             ),
                         });
                 });
         } else {
             await axios
-                .get(reqURL)
+                .get('https://rra.ram.moe/i/r?type=stare')
                 .then(function (res) {
-                    embed.setColor('#FBCFCF');
-                    embed.setImage(`https://rra.ram.moe${res.data.path}`);
+                    const embed = new Discord.MessageEmbed()
+                        .setColor('#FBCFCF')
+                        .setImage(`https://rra.ram.moe${res.data.path}`);
                     return message.channel.send(
                         `${message.author} stares at ${recipient}...`,
                         { embed: embed }
@@ -70,11 +77,10 @@ module.exports = class StareCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: errorMessage(
                                 err,
                                 ErrorEnum.API,
-                                message.command.name,
-                                reqURL
+                                message.command.name
                             ),
                         });
                 });

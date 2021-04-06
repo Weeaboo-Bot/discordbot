@@ -1,10 +1,9 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 const errors = require('../../assets/json/errors');
-const LOG = new LogHandler();
 
 module.exports = class AssCommand extends Command {
     constructor(client) {
@@ -48,7 +47,7 @@ module.exports = class AssCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: errorMessage(
                                 err,
                                 ErrorEnum.API,
                                 message.command.name

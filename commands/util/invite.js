@@ -1,6 +1,6 @@
 const Command = require('../../structures/Command');
 const { stripIndents } = require('common-tags');
-const permissions = require('../../assets/json/permissions.json');
+const permissions = require('../../util/permissions.json');
 
 module.exports = class InviteCommand extends Command {
     constructor(client) {

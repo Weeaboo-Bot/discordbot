@@ -44,7 +44,7 @@ module.exports = async (client) => {
     const channel = client.channels.cache.get(client.statusLog);
     const embed = new MessageEmbed()
         .setAuthor(
-            'Weaboo has (re)started!',
+            `${client.user.tag} has (re)started!`,
             client.user.displayAvatarURL({ format: 'png' })
         )
         .setColor('#727293')

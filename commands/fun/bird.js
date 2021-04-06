@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 const up = true;
 
 module.exports = class BirdCommand extends Command {
@@ -19,7 +19,6 @@ module.exports = class BirdCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
         if (!up) {
             await axios
                 .get('http://random.birb.pw/tweet/')
@@ -38,7 +37,7 @@ module.exports = class BirdCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: errorMessage(
                                 err,
                                 ErrorEnum.API,
                                 message.command.name
@@ -46,7 +45,7 @@ module.exports = class BirdCommand extends Command {
                         });
                 });
         } else {
-            await message.say('Bird Img API is Offline');
+            message.say('Bird Img API is Offline');
         }
     }
 };

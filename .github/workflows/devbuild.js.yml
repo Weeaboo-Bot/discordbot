@@ -1,13 +1,13 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: DEV BOT Build
+name: Node.js CI
 
 on:
     push:
-        branches: [develop_bot]
+        branches: [dev_alpha]
     pull_request:
-        branches: [develop_bot]
+        branches: [dev_alpha]
 
 jobs:
     build:

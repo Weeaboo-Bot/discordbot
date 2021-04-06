@@ -158,10 +158,6 @@ module.exports = class AkinatorCommand extends Command {
             );
         } catch (err) {
             this.client.games.delete(msg.channel.id);
-            msg.client.channels.cache.get(msg.client.errorLog).send({
-                embed: msg.command.discordLogger.errorMessage(err, msg.command.errorTypes.API, msg.command.name,null),
-            });
-
             return msg.reply(
                 `Oh no, an error occurred: \`${err.message}\`. Try again later!`
             );

@@ -1,9 +1,10 @@
 const Command = require('../../structures/Command');
 const { stripIndents } = require('common-tags');
+const request = require('node-superfetch');
 const { reactIfAble } = require('../../util/Util');
 const scores = require('../../assets/json/anagramica');
 const pool = 'abcdefghijklmnopqrstuvwxyz'.split('');
-const { SUCCESS_EMOJI_ID, FAILURE_EMOJI_ID } = require('../../config').api;
+const { SUCCESS_EMOJI_ID, FAILURE_EMOJI_ID } = process.env;
 
 module.exports = class AnagramicaCommand extends Command {
     constructor(client) {
@@ -45,7 +46,7 @@ module.exports = class AnagramicaCommand extends Command {
         }
         try {
             this.client.games.set(msg.channel.id, { name: this.name });
-            const { valid, letters } = await this.fetchList(msg);
+            const { valid, letters } = await this.fetchList();
             let points = 0;
             await msg.reply(stripIndents`
 				**You have ${time} seconds to provide anagrams for the following letters:**
@@ -115,12 +116,12 @@ module.exports = class AnagramicaCommand extends Command {
         }
     }
 
-    async fetchList(msg) {
+    async fetchList() {
         const letters = [];
         for (let i = 0; i < 10; i++) {
             letters.push(pool[Math.floor(Math.random() * pool.length)]);
         }
-        const { body } = await msg.command.axiosConfig.get(
+        const { body } = await request.get(
             `http://www.anagramica.com/all/${letters.join('')}`
         );
         return { valid: body.all, letters };

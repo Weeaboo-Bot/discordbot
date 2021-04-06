@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const axios = require('axios');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
+const { errorMessage } = require('../../util/logHandler');
+const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class DogCommand extends Command {
     constructor(client) {
@@ -18,7 +18,6 @@ module.exports = class DogCommand extends Command {
     }
 
     async run(message) {
-        const LOG = new LogHandler();
         await axios
             .get('https://random.dog/woof.json')
             .then(function (res) {
@@ -35,7 +34,7 @@ module.exports = class DogCommand extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: LOG.errorMessage(
+                    embed: errorMessage(
                         err,
                         ErrorEnum.API,
                         message.command.name

@@ -20,18 +20,19 @@ module.exports = class PoutCommand extends Command {
         const recipient = message.content.split(/\s+/g).slice(1).join(' ');
         const noSwear =
             noSwearP[Math.round(Math.random() * (noSwearP.length - 1))];
-        const embed = new Discord.MessageEmbed();
 
         if (!recipient) {
-            embed.setColor('#FBCFCF');
-            embed.setImage(noSwear);
+            var embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(noSwear);
             return message.channel.send(
                 '**NO SWEARING! <:NOSWEARING:379103012007706624>**',
                 { embed: embed }
             );
         } else {
-            embed.setColor('#FBCFCF');
-            embed.setImage(noSwear);
+            var embed = new Discord.MessageEmbed()
+                .setColor('#FBCFCF')
+                .setImage(noSwear);
             return message.channel.send(`${recipient}, NO SWEARING!`, {
                 embed: embed,
             });
