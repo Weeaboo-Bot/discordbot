@@ -4,6 +4,7 @@
     <option name="branchProtectionPatterns">
       <list>
         <option value="release" />
+        <option value="master" />
       </list>
     </option>
   </component>

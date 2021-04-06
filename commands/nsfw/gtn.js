@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 const errors = require('../../assets/json/errors');
 
 module.exports = class GTNCommand extends Command {
@@ -23,11 +20,11 @@ module.exports = class GTNCommand extends Command {
         const errMessage =
             errors[Math.round(Math.random() * (errors.length - 1))];
         if (!message.channel.nsfw) {
-            message.react('💢');
+            await message.react('💢');
             return message.channel.send(errMessage);
         }
 
-        await axios
+        await this.apiReq
             .get('https://rra.ram.moe/i/r', {
                 params: {
                     nsfw: true,
@@ -42,9 +39,9 @@ module.exports = class GTNCommand extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: errorMessage(
+                    embed: message.client.errorMessage(
                         err,
-                        ErrorEnum.API,
+                        message.client.errorTypes.API,
                         message.command.name
                     ),
                 });

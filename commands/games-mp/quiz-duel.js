@@ -2,9 +2,6 @@ const Command = require('../../structures/Command');
 const request = require('axios');
 const { stripIndents } = require('common-tags');
 const { Collection } = require('discord.js');
-const { errorMessage } = require('../../util/logHandler');
-const errors = require('../../assets/json/api-errors');
-const ErrorEnum = require('../../util/errorTypes');
 const {
     delay,
     awaitPlayers,
@@ -157,9 +154,9 @@ module.exports = class QuizDuelCommand extends Command {
                 // null questions, log it out
                 this.client.logger.error('questions DB was null');
                 this.client.channels.cache.get(msg.client.errorLog).send({
-                    embed: errorMessage(
+                    embed: msg.client.errorMessage(
                         'question DB was null',
-                        ErrorEnum.API,
+                        msg.client.errorTypes.API,
                         msg.command.name
                     ),
                 });
@@ -204,7 +201,7 @@ module.exports = class QuizDuelCommand extends Command {
                     errors[Math.round(Math.random() * (errors.length - 1))]
                 );
                 msg.client.channels.cache.get(msg.client.errorLog).send({
-                    embed: errorMessage(err, ErrorEnum.API, msg.command.name),
+                    embed: msg.client.errorMessage(err, msg.client.errorTypes.API, msg.command.name),
                 });
                 return null;
             });

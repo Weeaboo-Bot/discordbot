@@ -1,6 +1,4 @@
 const Command = require('../../structures/Command');
-const LogHandler = require('../../util/logHandler');
-const ErrorEnum = require('../../assets/json/errorTypes.json');
 const Database = require('../../util/db');
 const db = new Database();
 
@@ -31,7 +29,6 @@ module.exports = class AddStrikeCommand extends Command {
     }
 
     async run(message, { memberName  }) {
-        const LOG = new LogHandler();
         const member = message.mentions.members.first();
 
         const docData = {
@@ -50,17 +47,15 @@ module.exports = class AddStrikeCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: LOG.errorMessage(
+                            embed: message.client.errorMessage(
                                 err,
-                                ErrorEnum.DISCORD_API,
+                                message.client.errorTypes.DISCORD_API,
                                 message.command.name
                             ),
                         });
                 });
         } catch (err) {
-            return message.channel.send(
-                `❎ | **${member.displayName}** already has the role **${role.name}**!`
-            );
+            message.client.logger.error(err);
         }
     }
 };

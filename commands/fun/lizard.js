@@ -1,8 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+
 
 module.exports = class LizardCommand extends Command {
     constructor(client) {
@@ -34,9 +32,9 @@ module.exports = class LizardCommand extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: errorMessage(
+                    embed: message.client.errorMessage(
                         err,
-                        ErrorEnum.API,
+                        message.client.errorTypes.API,
                         message.command.name
                     ),
                 });

@@ -12,6 +12,7 @@ exports.logs = {
     STATUS_LOG: process.env.STATUS_LOG,
     SUPPORT_LOG: process.env.SUPPORT_LOG,
     WEBHOOK_LOG: process.env.WEBHOOK_LOG,
+    MESSAGE_LOG: process.env.MESSAGE_LOG,
     MOD_LOG: process.env.MOD_LOG,
 };
 

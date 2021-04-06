@@ -21,6 +21,7 @@ module.exports = class WeabooDatabase {
             result = { success: false, error: error.message };
         }
         logger.info(`Status: ${result.success}`);
+        return result;
     }
 
     async findAll(collectionName) {
@@ -40,6 +41,7 @@ module.exports = class WeabooDatabase {
             result = { success: false, error: error.message };
         }
         logger.info(`Status: ${result.success}`);
+        return result;
     }
 
     async createDocument(collectionName, documentData, autoID) {
@@ -65,6 +67,7 @@ module.exports = class WeabooDatabase {
                 result = { success: false, error: error.message };
             }
             logger.info(`Status: ${result.success}`);
+            return result;
         }
     }
 
@@ -83,5 +86,6 @@ module.exports = class WeabooDatabase {
             result = { success: false, error: error.message };
         }
         logger.info(`Status: ${result.success}`);
+        return result;
     }
 };

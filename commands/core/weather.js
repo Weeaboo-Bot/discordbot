@@ -1,14 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
-
-function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-}
+const { toTitleCase } = require('../../util/Util');
 
 module.exports = class WeatherCommand extends Command {
     constructor(client) {
@@ -30,7 +22,7 @@ module.exports = class WeatherCommand extends Command {
     }
     async run(message, { query }) {
         // do normal Req
-        await axios
+        await this.apiReq
             .get('http://api.weatherapi.com/v1/current.json', {
                 params: {
                     q: query,
@@ -56,9 +48,9 @@ module.exports = class WeatherCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: errorMessage(
+                        embed: message.client.errorMessage(
                             err,
-                            ErrorEnum.API,
+                            message.client.errorTypes.API,
                             message.command.name
                         ),
                     });

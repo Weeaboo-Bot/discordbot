@@ -2,7 +2,6 @@ const config = require('./config');
 const { Intents } = require('discord.js');
 const Client = require('./structures/Client');
 const Sentry = require('@sentry/node');
-const Tracing = require('@sentry/tracing');
 const admin = require('firebase-admin');
 const fbConfig = require('./config').fbAdminConfig;
 
@@ -52,20 +51,6 @@ function init() {
         op: 'test',
         name: 'My First Test Transaction',
     });
-
-    setTimeout(() => {
-        try {
-            foo();
-        } catch (e) {
-            Sentry.captureException(e);
-        } finally {
-            transaction.finish();
-        }
-    }, 99);
-}
-
-function foo() {
-    console.log('foo');
 }
 
 init();

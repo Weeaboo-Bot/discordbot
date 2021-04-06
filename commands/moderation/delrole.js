@@ -1,6 +1,4 @@
 const Command = require('../../structures/Command');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class DeleteRoleCommand extends Command {
     constructor(client) {
@@ -34,7 +32,7 @@ module.exports = class DeleteRoleCommand extends Command {
         const role = message.guild.roles.cache.find(
             (role) => role.name === roleName
         );
-        if (!message.mentions.members.first().roles.cache.get(role.id)) {
+        if (!message.mentions.members.first().guild.roles.cache.get(role.id)) {
             return message.channel.send(
                 `❎ | **${
                     message.mentions.members.first().displayName
@@ -56,9 +54,9 @@ module.exports = class DeleteRoleCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: errorMessage(
+                        embed: message.client.errorMessage(
                             err,
-                            ErrorEnum.DISCORD_API,
+                            message.client.errorTypes.DISCORD_API,
                             message.command.name
                         ),
                     });
