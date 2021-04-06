@@ -25,7 +25,7 @@ module.exports = class CreateLogCommand extends Command {
 
     async run(msg, { log_name }) {
 
-       const newChannel = (await msg.guild.channels.create(log_name));
+       const newChannel = await msg.guild.channels.create(log_name);
        const hookName = 'LogHook';
         newChannel.createWebhook(hookName, {
             avatar: msg.client.user.displayAvatarURL({ format: 'png' }),
