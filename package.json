@@ -34,7 +34,6 @@
         "booru": "^0.3.6",
         "canvas": "^2.6.1",
         "cheerio": "^1.0.0-rc.3",
-        "cleverbot-node": "^0.3.11",
         "color": "^3.1.2",
         "common-tags": "^1.8.0",
         "crypto": "^1.0.1",

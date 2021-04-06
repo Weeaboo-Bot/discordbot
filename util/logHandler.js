@@ -9,14 +9,14 @@ function errorMessage(error, error_type, error_command) {
         .setTimestamp();
 }
 
-function auditMessage(auditEntry) {
+function auditMessage(auditEntry, reason) {
     return new Discord.MessageEmbed()
         .setTitle('AUDIT EVENT')
         .setColor('Color')
         .addField('AUDIT ACTION', auditEntry.action)
         .addField('AUDIT TYPE', auditEntry.actionType)
         .addField('AUDIT SENDER', auditEntry.executor)
-        .addField('AUDIT REASON', auditEntry.reason, true)
+        .addField('AUDIT REASON', auditEntry.reason || reason, true)
         .setTimestamp();
 }
 
