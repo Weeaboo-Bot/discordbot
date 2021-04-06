@@ -53,6 +53,7 @@
         "graphql-request": "^2.0.0",
         "html-entities": "^2.0.2",
         "https": "^1.0.0",
+        "jikan-node": "^1.2.1",
         "jimp": "^0.16.1",
         "kitsu.js": "^2.0.0",
         "libsodium-wrappers": "^0.7.8",
