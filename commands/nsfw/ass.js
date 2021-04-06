@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 const errors = require('../../assets/json/errors');
 
 module.exports = class AssCommand extends Command {
@@ -23,11 +20,11 @@ module.exports = class AssCommand extends Command {
         const errMessage =
             errors[Math.round(Math.random() * (errors.length - 1))];
         if (!message.channel.nsfw) {
-            message.react('💢');
+            await message.react('💢');
             return message.channel.send(errMessage);
         } else {
             const id = [Math.floor(Math.random() * 4923)];
-            await axios
+            await this.apiReq
                 .get('http://api.obutts.ru/butts/', {
                     params: {
                         id: id,
@@ -47,9 +44,9 @@ module.exports = class AssCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.client.errorMessage(
                                 err,
-                                ErrorEnum.API,
+                                message.client.errorTypes.API,
                                 message.command.name
                             ),
                         });

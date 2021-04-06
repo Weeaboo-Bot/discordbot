@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 const { disgustP } = require('../../assets/json/actions.json');
 
 module.exports = class LickCommand extends Command {
@@ -32,7 +29,7 @@ module.exports = class LickCommand extends Command {
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            await axios
+            await this.apiReq
                 .get('https://rra.ram.moe/i/r?type=lick')
                 .then(function (res) {
                     embed.setColor('#FBCFCF');
@@ -48,15 +45,15 @@ module.exports = class LickCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.client.errorMessage(
                                 error,
-                                ErrorEnum.API,
+                                message.client.errorTypes.API,
                                 message.command.name
                             ),
                         });
                 });
         } else {
-            await axios
+            await this.apiReq
                 .get('https://rra.ram.moe/i/r?type=lick')
                 .then(function (res) {
                     embed.setColor('#FBCFCF');

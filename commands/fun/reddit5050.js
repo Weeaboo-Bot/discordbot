@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
-const axios = require('axios');
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -19,7 +16,7 @@ module.exports = class Reddit5050Command extends Command {
         });
     }
     async run(message) {
-        await axios
+        await this.apiReq
             .get('https://www.reddit.com/r/FiftyFifty.json')
             .then(function (res) {
                 const index = getRndInteger(0, res.data.data.children.length);
@@ -35,9 +32,9 @@ module.exports = class Reddit5050Command extends Command {
             })
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
-                    embed: errorMessage(
+                    embed: message.client.errorMessage(
                         err,
-                        ErrorEnum.API,
+                        message.client.errorTypes.API,
                         message.command.name
                     ),
                 });

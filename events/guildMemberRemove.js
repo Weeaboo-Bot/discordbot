@@ -6,9 +6,6 @@ module.exports = async (client, member) => {
     if (member.id === client.user.id) return null;
     if (member.partial) await member.fetch();
     const channel = client.fetchJoinLeaveChannel();
-    if (!channel || !channel.permissionsFor(client.user).has('SEND_MESSAGES')) {
-        return null;
-    }
     if (channel.topic && channel.topic.includes('<weaboo:disable-leave>')) {
         return null;
     }

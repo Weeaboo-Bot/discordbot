@@ -1,6 +1,4 @@
 const Command = require('../../structures/Command');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class AddRoleCommand extends Command {
     constructor(client) {
@@ -38,7 +36,7 @@ module.exports = class AddRoleCommand extends Command {
         const role = message.guild.roles.cache.find(
             (role) => role.name === roleName
         );
-        if (member.roles.cache.get(role.id)) {
+        if (member.guild.roles.cache.get(role.id)) {
             return message.channel.send(
                 `❎ | **${member.displayName}** already has the role **${role.name}**!`
             );
@@ -56,9 +54,9 @@ module.exports = class AddRoleCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.client.errorMessage(
                                 err,
-                                ErrorEnum.DISCORD_API,
+                                message.client.errorTypes.DISCORD_API,
                                 message.command.name
                             ),
                         });

@@ -2,9 +2,10 @@ const { CommandoClient } = require('discord.js-commando');
 const Discord = require('discord.js');
 const activities = require('../assets/json/activity');
 const leaveMsgs = require('../assets/json/leave-messages');
+const { errorMessage, auditMessage} = require('../util/logHandler');
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
-const { fail } = require('../util/emojis.json');
+const { fail } = require('../assets/json/emojis.json');
 
 const GROUPS = [
     ['action', 'Action'],
@@ -115,6 +116,7 @@ module.exports = class WeabooClient extends CommandoClient {
         this.supportLog = config.logs.SUPPORT_LOG;
         this.joinLeaveLog = config.logs.JOIN_LEAVE_LOG;
         this.webhookLog = config.logs.WEBHOOK_LOG;
+        this.messageLog = config.logs.MESSAGE_LOG;
         this.modLog = config.logs.MOD_LOG;
 
         /**
@@ -123,7 +125,9 @@ module.exports = class WeabooClient extends CommandoClient {
          */
         this.utils = require('../util/Util');
         this.database = require('../util/db');
-        this.errorTypes = require('../util/errorTypes.json');
+        this.errorMessage = errorMessage;
+        this.auditMessage = auditMessage;
+        this.errorTypes = require('../assets/json/errorTypes.json');
         this.logger.info('Initializing...');
         this.webhook = new Discord.WebhookClient(
             config.discord.DISCORD_WEBHOOK_ID,

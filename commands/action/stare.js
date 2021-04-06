@@ -1,9 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class StareCommand extends Command {
     constructor(client) {
@@ -40,7 +37,7 @@ module.exports = class StareCommand extends Command {
                 { embed: embed }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            await axios
+            await this.apiReq
                 .get('https://rra.ram.moe/i/r?type=stare')
                 .then(function (res) {
                     const embed = new Discord.MessageEmbed()
@@ -54,15 +51,15 @@ module.exports = class StareCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.client.errorMessage(
                                 err,
-                                ErrorEnum.API,
+                                message.client.errorTypes.API,
                                 message.command.name
                             ),
                         });
                 });
         } else {
-            await axios
+            await this.apiReq
                 .get('https://rra.ram.moe/i/r?type=stare')
                 .then(function (res) {
                     const embed = new Discord.MessageEmbed()
@@ -77,9 +74,9 @@ module.exports = class StareCommand extends Command {
                     message.client.channel.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.client.errorMessage(
                                 err,
-                                ErrorEnum.API,
+                                message.client.errorTypes.API,
                                 message.command.name
                             ),
                         });

@@ -1,7 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 const alphakey = require('../../config').api.ALPHA_KEY;
 const alpha = require('alphavantage')({ key: alphakey });
 
@@ -90,7 +88,7 @@ module.exports = class CryptoCommand extends Command {
             });
         } catch (error) {
             message.client.channels.cache.get(message.client.errorLog).send({
-                embed: errorMessage(error, ErrorEnum.API, message.command.name),
+                embed: message.client.errorMessage(error, message.client.errorTypes.API, message.command.name),
             });
         }
     }

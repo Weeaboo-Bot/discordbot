@@ -1,8 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const { GiphyFetch } = require('@giphy/js-fetch-api');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class GiphyCommand extends Command {
     constructor(client) {
@@ -52,9 +50,9 @@ module.exports = class GiphyCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: errorMessage(
+                        embed: message.client.errorMessage(
                             err,
-                            ErrorEnum.API,
+                            message.client.errorTypes.API,
                             message.command.name
                         ),
                     });

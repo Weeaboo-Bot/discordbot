@@ -50,6 +50,12 @@ module.exports = class Util {
         return Math.floor(Math.random() * 6) + 1;
     }
 
+    static toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
     static list(arr, conj = 'and') {
         const len = arr.length;
         if (len === 0) return '';
