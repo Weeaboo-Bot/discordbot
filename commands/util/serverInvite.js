@@ -1,8 +1,8 @@
 const Command = require('../../structures/Command');
 const { stripIndents } = require('common-tags');
-const permissions = require('../../util/permissions.json');
+const permissions = require('../../assets/json/permissions.json');
 const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+const ErrorEnum = require('../../assets/json/errorTypes.json');
 
 module.exports = class ServerInviteCommand extends Command {
     constructor(client) {
@@ -27,7 +27,7 @@ module.exports = class ServerInviteCommand extends Command {
             .catch((error) => {
                 console.log(error);
                 msg.client.channel.cache.get(msg.client.errorLog).send({
-                    embed: errorMessage(error, ErrorEnum.API, msg.command.name),
+                    embed: errorMessage(error, message.client.errorTypes.API, msg.command.name),
                 });
             });
 

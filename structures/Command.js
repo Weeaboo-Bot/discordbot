@@ -1,5 +1,4 @@
 const { Command } = require('discord.js-commando');
-
 module.exports = class WeabooCommand extends Command {
     constructor(client, info) {
         super(client, info);
@@ -13,5 +12,6 @@ module.exports = class WeabooCommand extends Command {
             url: 'https://github.com/sdoran35',
             reason: 'Code',
         });
+        this.apiReq = require('axios');
     }
 };

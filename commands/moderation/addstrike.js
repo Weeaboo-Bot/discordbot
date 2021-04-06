@@ -1,14 +1,16 @@
 const Command = require('../../structures/Command');
+const Database = require('../../util/db');
+const db = new Database();
 
-module.exports = class AddRoleCommand extends Command {
+module.exports = class AddStrikeCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'addrole',
+            name: 'addstrike',
             group: 'moderation',
-            aliases: ['newrole', 'ar', 'addr', 'assign'],
-            memberName: 'addrole',
-            description: 'Adds a role to a member!',
-            examples: ['!addrole [name] [role]'],
+            aliases: ['addstr', 'astr'],
+            memberName: 'addstrike',
+            description: 'Adds a strike to a member!',
+            examples: ['!addstrike [name]'],
             guildOnly: true,
             clientPermissions: ['MANAGE_ROLES'],
             userPermissions: ['MANAGE_ROLES'],
@@ -16,11 +18,6 @@ module.exports = class AddRoleCommand extends Command {
                 {
                     key: 'memberName',
                     prompt: 'Please provide me a member to add the role to!',
-                    type: 'string',
-                },
-                {
-                    key: 'roleName',
-                    prompt: 'Please provide me a role to add!',
                     type: 'string',
                 },
             ],
@@ -31,23 +28,19 @@ module.exports = class AddRoleCommand extends Command {
         return message.member.hasPermission('MANAGE_ROLES');
     }
 
-    async run(message, { memberName, roleName }) {
+    async run(message, { memberName  }) {
         const member = message.mentions.members.first();
-        const role = message.guild.roles.cache.find(
-            (role) => role.name === roleName
-        );
-        if (member.guild.roles.cache.get(role.id)) {
-            return message.channel.send(
-                `❎ | **${member.displayName}** already has the role **${role.name}**!`
-            );
-        }
 
+        const docData = {
+            'member_name': member.nickname,
+            'strike_time': Date.now()
+        };
         try {
-            await member.roles
-                .add(role)
-                .then((roleRes) => {
+            await db.createDocument('strikes',
+                docData,false)
+                .then((res) => {
                     return message.channel.send(
-                        `✅ | **${member.displayName}** has been given the role **${role.name}**!`
+                        `✅ | **${member.displayName}** has been given a Strike!`
                     );
                 })
                 .catch((err) => {
@@ -62,9 +55,7 @@ module.exports = class AddRoleCommand extends Command {
                         });
                 });
         } catch (err) {
-            return message.channel.send(
-                `❎ | **${member.displayName}** already has the role **${role.name}**!`
-            );
+            message.client.logger.error(err);
         }
     }
 };

@@ -91,5 +91,8 @@ package-lock.json
 test/
 /test/
 
+.idea/workspace.xml
+
 *.exe
 node_modules
+.idea

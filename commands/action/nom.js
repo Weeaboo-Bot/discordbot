@@ -1,9 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
 const { disgustP } = require('../../assets/json/actions.json');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class NomCommand extends Command {
     constructor(client) {
@@ -40,7 +37,7 @@ module.exports = class NomCommand extends Command {
                 { embed: embed2 }
             );
         } else if (message.mentions.users.first() == this.client.user) {
-            await axios
+            await this.apiReq
                 .get('https://rra.ram.moe/i/r?type=nom')
                 .then(function (response) {
                     // handle success
@@ -56,15 +53,15 @@ module.exports = class NomCommand extends Command {
                     message.client.channels.cache
                         .get(message.client.errorLog)
                         .send({
-                            embed: errorMessage(
+                            embed: message.client.errorMessage(
                                 error,
-                                ErrorEnum.API,
+                                message.client.errorTypes.API,
                                 message.command.name
                             ),
                         });
                 });
         } else {
-            await axios
+            await this.apiReq
                 .get('https://rra.ram.moe/i/r?type=nom')
                 .then(function (response) {
                     // handle success

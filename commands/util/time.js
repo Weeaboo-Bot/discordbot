@@ -1,7 +1,5 @@
 const Command = require('../../structures/Command');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
+
 const moment = require('moment');
 const clocks = [
     '🕛',
@@ -96,7 +94,7 @@ module.exports = class TimeCommand extends Command {
                     .send({
                         embed: errorMessage(
                             err,
-                            ErrorEnum.API,
+                            message.client.errorTypes.API,
                             message.command.name
                         ),
                     });

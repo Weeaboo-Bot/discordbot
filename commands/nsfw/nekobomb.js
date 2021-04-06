@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const axios = require('axios');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 module.exports = class NekoBombCommand extends Command {
     constructor(client) {
@@ -15,7 +12,7 @@ module.exports = class NekoBombCommand extends Command {
     }
     async run(message) {
         if (!message.channel.nsfw) {
-            await axios
+            await this.apiReq
                 .get('http://nekos.life/api/neko')
                 .then(function (res) {
                     return message.channel.send({
@@ -34,7 +31,7 @@ module.exports = class NekoBombCommand extends Command {
                         .send({
                             embed: errorMessage(
                                 err,
-                                ErrorEnum.API,
+                                message.client.errorTypes.API,
                                 message.command.name
                             ),
                         });
@@ -59,7 +56,7 @@ module.exports = class NekoBombCommand extends Command {
                         message.client.channels.cache.get(ERROR_LOG).send({
                             embed: errorMessage(
                                 err,
-                                ErrorEnum.API,
+                                message.client.errorTypes.API,
                                 message.command.name
                             ),
                         });

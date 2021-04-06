@@ -1,8 +1,5 @@
 const Discord = require('discord.js');
-const axios = require('axios');
 const Command = require('../../structures/Command');
-const { errorMessage } = require('../../util/logHandler');
-const ErrorEnum = require('../../util/errorTypes.json');
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -21,7 +18,7 @@ module.exports = class DoesNotExistCommand extends Command {
     }
 
     async run(message) {
-        await axios
+        await this.apiReq
             .get('https://api.imgflip.com/get_memes')
             .then(function (res) {
                 const index = getRndInteger(0, res.data.data.memes.length);
@@ -39,9 +36,9 @@ module.exports = class DoesNotExistCommand extends Command {
                 message.client.channels.cache
                     .get(message.client.errorLog)
                     .send({
-                        embed: errorMessage(
+                        embed: message.client.errorMessage(
                             error,
-                            ErrorEnum.API,
+                            message.client.errorTypes.API,
                             message.command.name
                         ),
                     });

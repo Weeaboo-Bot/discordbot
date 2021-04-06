@@ -40,12 +40,12 @@ module.exports = class GlobalNewsCommand extends Command {
             async function processArray(array) {
                 for (const article of array) {
                     const msg = await processArticle(article);
-                    message.say(msg);
+                    await message.say(msg);
                 }
             }
             await processArray(articleArr);
         } catch (e) {
-            message.say('Something failed along the way');
+            await message.say('Something failed along the way');
             return console.error(e);
         }
     }
