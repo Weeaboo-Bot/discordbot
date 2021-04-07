@@ -42,8 +42,6 @@ const client = new Client(config, {
     partials: ['GUILD_MEMBER'],
     ws: { intents: intents },
     database: database,
-    botLogger : fetchBotLog(),
-    webhook: fetchDoc()
 });
 
 // Initialize client
@@ -56,23 +54,5 @@ function init() {
 
 init();
 
-
-
-
-async function fetchDoc() {
-    const res = await database.findOne('webhooks','weabooWebhook').catch(client.logger.error);
-
-    if(!res) return null;
-    return new Discord.WebhookClient(
-        res.document.webhook_id,
-        res.document.webhook_token,
-        { disableMentions: 'everyone' }
-    );
-}
-
-async function fetchBotLog() {
-    const res = await database.findOne('logs','weabooLog').catch(client.logger.error);
-    return res;
-}
 
 process.on('unhandledRejection', (err) => client.logger.error(err));

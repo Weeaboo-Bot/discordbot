@@ -4,7 +4,8 @@ dotenv.config();
 
 exports.logs = {
     GENERAL_CHAT: process.env.GENERAL_CHAT,
-    BOT_COMMANDS_CHAT: process.env.BOT_COMMAND_CHAT
+    BOT_COMMANDS_CHAT: process.env.BOT_COMMAND_CHAT,
+    BOT_LOG: process.env.BOT_LOG,
 };
 
 exports.discord = {
