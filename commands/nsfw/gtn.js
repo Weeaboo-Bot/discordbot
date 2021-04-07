@@ -38,7 +38,7 @@ module.exports = class GTNCommand extends Command {
                 });
             })
             .catch(function (err) {
-                message.client.channel.cache.get(message.client.errorLog).send({
+                message.client.botLogger.send({
                     embed: message.client.errorMessage(
                         err,
                         message.client.errorTypes.API,

@@ -51,8 +51,7 @@ module.exports = class DeleteRoleCommand extends Command {
                 );
             })
             .catch(function (err) {
-                message.client.channels.cache
-                    .get(message.client.errorLog)
+                message.client.botLogger
                     .send({
                         embed: message.client.errorMessage(
                             err,

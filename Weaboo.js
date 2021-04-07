@@ -1,5 +1,5 @@
 const config = require('./config');
-const { Intents } = require('discord.js');
+const Discord = require('discord.js');
 const Client = require('./structures/Client');
 const Sentry = require('@sentry/node');
 const admin = require('firebase-admin');
@@ -9,6 +9,8 @@ admin.initializeApp({
     credential: admin.credential.cert(fbConfig),
     storageBucket: 'gs://weaboo-bot-73b07.appspot.com/',
 });
+const db = require('./util/db');
+const database = new db();
 
 global.__basedir = __dirname;
 
@@ -22,7 +24,7 @@ Sentry.init({
 });
 
 // Client setup
-const intents = new Intents();
+const intents = new Discord.Intents();
 intents.add(
     'GUILD_PRESENCES',
     'GUILD_MEMBERS',
@@ -39,6 +41,9 @@ const client = new Client(config, {
     disableMentions: 'everyone',
     partials: ['GUILD_MEMBER'],
     ws: { intents: intents },
+    database: database,
+    botLogger : fetchBotLog(),
+    webhook: fetchDoc()
 });
 
 // Initialize client
@@ -47,12 +52,27 @@ function init() {
     client.loadGroups();
     client.loadCommands();
     client.login(client.token);
-    const transaction = Sentry.startTransaction({
-        op: 'test',
-        name: 'My First Test Transaction',
-    });
 }
 
 init();
+
+
+
+
+async function fetchDoc() {
+    const res = await database.findOne('webhooks','weabooWebhook').catch(client.logger.error);
+
+    if(!res) return null;
+    return new Discord.WebhookClient(
+        res.document.webhook_id,
+        res.document.webhook_token,
+        { disableMentions: 'everyone' }
+    );
+}
+
+async function fetchBotLog() {
+    const res = await database.findOne('logs','weabooLog').catch(client.logger.error);
+    return res;
+}
 
 process.on('unhandledRejection', (err) => client.logger.error(err));

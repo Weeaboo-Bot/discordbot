@@ -4,16 +4,7 @@ dotenv.config();
 
 exports.logs = {
     GENERAL_CHAT: process.env.GENERAL_CHAT,
-    BOT_COMMANDS_CHAT: process.env.BOT_COMMAND_CHAT,
-    JOIN_LEAVE_LOG: process.env.JOIN_LEAVE_LOG,
-    AUDIT_LOG: process.env.AUDIT_LOG,
-    DM_LOG: process.env.DM_LOG,
-    ERROR_LOG: process.env.ERROR_LOG,
-    STATUS_LOG: process.env.STATUS_LOG,
-    SUPPORT_LOG: process.env.SUPPORT_LOG,
-    WEBHOOK_LOG: process.env.WEBHOOK_LOG,
-    MESSAGE_LOG: process.env.MESSAGE_LOG,
-    MOD_LOG: process.env.MOD_LOG,
+    BOT_COMMANDS_CHAT: process.env.BOT_COMMAND_CHAT
 };
 
 exports.discord = {

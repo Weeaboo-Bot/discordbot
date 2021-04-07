@@ -1,10 +1,7 @@
 const { MessageEmbed } = require('discord.js');
-const { formatNumber } = require('../util/Util');
 
 // Export guild delete events
 module.exports = async (client, guild) => {
-    const channel = client.channels.cache.get(client.joinLeaveLog);
-
     const online = guild.members.cache.filter(
         (m) => m.user.presence.status === 'online'
     ).size;
@@ -15,7 +12,7 @@ module.exports = async (client, guild) => {
         (c) => c.type === 'voice'
     );
 
-    const embed = new Discord.MessageEmbed()
+    const embed = new MessageEmbed()
         .setAuthor('Removed from a Server!', guild.iconURL())
         .setColor('#898276')
         .setThumbnail(guild.iconURL())
@@ -50,17 +47,7 @@ module.exports = async (client, guild) => {
         )
         .setTimestamp()
         .setFooter(`(${client.guilds.cache.size})`);
-    return channel.send({ embed });
+    return client.botLogger.send({ embed });
 
-    const joinLeaveChannel = await client.fetchJoinLeaveChannel();
-    if (joinLeaveChannel) {
-        const embed = new MessageEmbed()
-            .setColor(0xff0000)
-            .setThumbnail(guild.iconURL({ format: 'png' }))
-            .setTitle(`Left ${guild.name}...`)
-            .setFooter(`ID: ${guild.id}`)
-            .setTimestamp()
-            .addField('❯ Members', formatNumber(guild.memberCount));
-        await joinLeaveChannel.send({ embed });
-    }
+
 };

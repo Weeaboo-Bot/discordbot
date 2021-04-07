@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const logger = require('../util/logger');
+//const logger = require('../util/logger');
 
 const db = admin.firestore();
 
@@ -17,10 +17,10 @@ module.exports = class WeabooDatabase {
                 result = { success: true, document: ref.data() };
             }
         } catch (error) {
-            logger.error(`A Firebase Error: ${error}`);
+            console.error(`A Firebase Error: ${error}`);
             result = { success: false, error: error.message };
         }
-        logger.info(`Status: ${result.success}`);
+        console.info(`Status: ${result.success}`);
         return result;
     }
 
@@ -37,10 +37,10 @@ module.exports = class WeabooDatabase {
             });
             result = { success: true, documents: documents };
         } catch (error) {
-            logger.error(`A Firebase Error: ${error}`);
+            console.error(`A Firebase Error: ${error}`);
             result = { success: false, error: error.message };
         }
-        logger.info(`Status: ${result.success}`);
+        console.info(`Status: ${result.success}`);
         return result;
     }
 
@@ -51,10 +51,10 @@ module.exports = class WeabooDatabase {
                 await db.collection(collectionName).add(documentData);
                 result = { success: true, doc: documentData };
             } catch (error) {
-                logger.error(`A Firebase Error: ${error}`);
+                console.error(`A Firebase Error: ${error}`);
                 result = { success: false, error: error.message };
             }
-            logger.info(`Status: ${result.success}`);
+            console.info(`Status: ${result.success}`);
         } else {
             try {
                 await db
@@ -63,10 +63,10 @@ module.exports = class WeabooDatabase {
                     .set(documentData, { merge: true });
                 result = { success: true, doc: documentData };
             } catch (error) {
-                logger.error(`A Firebase Error: ${error}`);
+                console.error(`A Firebase Error: ${error}`);
                 result = { success: false, error: error.message };
             }
-            logger.info(`Status: ${result.success}`);
+            console.info(`Status: ${result.success}`);
             return result;
         }
     }
@@ -82,10 +82,10 @@ module.exports = class WeabooDatabase {
                     result = { success: true, time: res.writeTime };
                 });
         } catch (error) {
-            logger.error(`A Firebase Error: ${error}`);
+            console.error(`A Firebase Error: ${error}`);
             result = { success: false, error: error.message };
         }
-        logger.info(`Status: ${result.success}`);
+        console.info(`Status: ${result.success}`);
         return result;
     }
 };

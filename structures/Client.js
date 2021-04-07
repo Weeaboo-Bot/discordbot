@@ -2,7 +2,7 @@ const { CommandoClient } = require('discord.js-commando');
 const Discord = require('discord.js');
 const activities = require('../assets/json/activity');
 const leaveMsgs = require('../assets/json/leave-messages');
-const { errorMessage, auditMessage} = require('../util/logHandler');
+const { errorMessage, auditMessage, readyMessage, roleMessage, guildMessage, newMessage, dmMessage } = require('../util/logHandler');
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
 const { fail } = require('../assets/json/emojis.json');
@@ -109,54 +109,24 @@ module.exports = class WeabooClient extends CommandoClient {
         /**
          * Weaboo's Log IDs
          */
-        this.auditLog = config.logs.AUDIT_LOG;
-        this.dmLog = config.logs.DM_LOG;
-        this.errorLog = config.logs.ERROR_LOG;
-        this.statusLog = config.logs.STATUS_LOG;
-        this.supportLog = config.logs.SUPPORT_LOG;
-        this.joinLeaveLog = config.logs.JOIN_LEAVE_LOG;
-        this.webhookLog = config.logs.WEBHOOK_LOG;
-        this.messageLog = config.logs.MESSAGE_LOG;
-        this.modLog = config.logs.MOD_LOG;
 
         /**
          * Utility functions
          * @type {Object}
          */
         this.utils = require('../util/Util');
-        this.database = require('../util/db');
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
+        this.readyMessage = readyMessage;
+        this.roleMessage = roleMessage;
+        this.guildMessage = guildMessage;
+        this.newMessage = newMessage;
+        this.dmMessage = dmMessage;
         this.errorTypes = require('../assets/json/errorTypes.json');
         this.logger.info('Initializing...');
-        this.webhook = new Discord.WebhookClient(
-            config.discord.DISCORD_WEBHOOK_ID,
-            config.discord.DISCORD_WEBHOOK_TOKEN,
-            { disableMentions: 'everyone' }
-        );
         this.games = new Discord.Collection();
         this.activities = activities;
         this.leaveMessages = leaveMsgs;
-    }
-
-    fetchReportChannel() {
-        if (!this.supportLog) return null;
-        return this.channels.fetch(this.supportLog);
-    }
-
-    fetchJoinLeaveChannel() {
-        if (!this.joinLeaveLog) return null;
-        return this.channels.fetch(this.joinLeaveLog);
-    }
-
-    fetchModChannel() {
-        if (!this.modLog) return null;
-        return this.channels.fetch(this.modLog);
-    }
-
-    fetchAuditChannel() {
-        if (!this.auditLog) return null;
-        return this.channels.fetch(this.auditLog);
     }
 
     /**

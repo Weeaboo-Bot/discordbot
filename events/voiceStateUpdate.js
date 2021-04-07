@@ -1,12 +1,15 @@
 // Export voice state update events
-module.exports = (client, oldState, newState) => {
+let temporary = [];
+module.exports = async (client, oldMember, newMember) => {
     if (
-        newState.member.user.bot &&
-        !newState.channelID &&
-        newState.guild.musicData.songDispatcher &&
-        newState.member.user.id === client.user.id
+        newMember.member.user.bot &&
+        !newMember.channelID &&
+        newMember.guild.musicData.songDispatcher &&
+        newMember.member.user.id === client.user.id
     ) {
-        newState.guild.musicData.queue.length = 0;
-        newState.guild.musicData.songDispatcher.end();
+        newMember.guild.musicData.queue.length = 0;
+        newMember.guild.musicData.songDispatcher.end();
     }
 };
+
+
