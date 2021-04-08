@@ -36,7 +36,7 @@ module.exports = class AddRoleCommand extends Command {
         const role = message.guild.roles.cache.find(
             (role) => role.name === roleName
         );
-        if (member.guild.roles.cache.get(role.id)) {
+        if (member._roles.includes(role.id)) {
             return message.channel.send(
                 `❎ | **${member.displayName}** already has the role **${role.name}**!`
             );

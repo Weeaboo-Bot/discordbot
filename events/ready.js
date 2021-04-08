@@ -1,5 +1,6 @@
 const { version } = require('../package.json');
 const { formatNumber } = require('../util/Util');
+const { readyMessage } = require('../util/logHandler');
 
 // Export ready events
 module.exports = async (client) => {
@@ -39,4 +40,9 @@ module.exports = async (client) => {
     client.logger.info(
         `${client.user.tag} is running on ${client.guilds.cache.size} server(s)`
     );
+    const embed = readyMessage({
+        client,
+        version
+    });
+    client.botLogger.send(embed);
 };
