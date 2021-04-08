@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discordbot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discordbot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="62224e9a-1415-4d25-b797-768644aa6106" name="Default Changelist" comment="Working on auto-scaling VCs">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/createlog.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/createlog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/message.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/util/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/moderation/addrole.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/moderation/addrole.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +95,10 @@
       <workItem from="1613886879054" duration="25000" />
       <workItem from="1613889629989" duration="1930000" />
       <workItem from="1617668052413" duration="1227000" />
+      <workItem from="1617757907167" duration="8690000" />
+      <workItem from="1617835518976" duration="3581000" />
+      <workItem from="1617840027265" duration="164000" />
+      <workItem from="1617840233727" duration="45000" />
     </task>
     <task id="LOCAL-00001" summary="Updated commands with new throttling.">
       <created>1613779115501</created>
@@ -149,7 +149,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617677836035</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Working on auto-scaling VCs">
+      <created>1617766556330</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1617766556330</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Working on auto-scaling VCs">
+      <created>1617838241512</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1617838241512</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,24 +187,7 @@
     <MESSAGE value="hand got simplified and prettier ran again pog" />
     <MESSAGE value="fixed pkg.json" />
     <MESSAGE value="Added new createlog command" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new createlog command" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/commands/moderation/delrole.js</url>
-          <line>34</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/commands/moderation/addrole.js</url>
-          <line>38</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Working on auto-scaling VCs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on auto-scaling VCs" />
   </component>
 </project>
