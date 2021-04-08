@@ -27,8 +27,7 @@ module.exports = class AdviceCommand extends Command {
                         .setColor('#727684');
                     return message.channel.send({ embed });
                 } catch (err) {
-                    message.client.channels.cache
-                        .get(message.client.errorLog)
+                    message.client.botLogger
                         .send({
                             embed: message.client.errorMessage(
                                 err,
@@ -39,8 +38,7 @@ module.exports = class AdviceCommand extends Command {
                 }
             })
             .catch(function (err) {
-                message.client.channels.cache
-                    .get(message.client.errorLog)
+                message.client.botLogger
                     .send({
                         embed: message.client.errorMessage(
                             err,

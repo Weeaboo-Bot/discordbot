@@ -7,11 +7,11 @@ module.exports = async (client, member) => {
         `${member.guild.name}: ${member.user.tag} has joined the server`
     );
 
-    const memberLog = client.fetchJoinLeaveChannel();
+
     if (
-        memberLog &&
-        memberLog.viewable &&
-        memberLog
+        client.botLogger &&
+        client.botLogger.viewable &&
+        client.botLogger
             .permissionsFor(member.guild.me)
             .has(['SEND_MESSAGES', 'EMBED_LINKS'])
     ) {
@@ -29,6 +29,6 @@ module.exports = async (client, member) => {
             )
             .setTimestamp()
             .setColor(member.guild.me.displayHexColor);
-        memberLog.send(embed);
+        client.botLogger.send(embed);
     }
 };

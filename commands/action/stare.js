@@ -49,7 +49,7 @@ module.exports = class StareCommand extends Command {
                 })
                 .catch(function (err) {
                     message.client.channel.cache
-                        .get(message.client.errorLog)
+                        .get(message.client.botLogger)
                         .send({
                             embed: message.client.errorMessage(
                                 err,
@@ -71,8 +71,7 @@ module.exports = class StareCommand extends Command {
                     );
                 })
                 .catch(function (err) {
-                    message.client.channel.cache
-                        .get(message.client.errorLog)
+                    message.client.botLogger
                         .send({
                             embed: message.client.errorMessage(
                                 err,

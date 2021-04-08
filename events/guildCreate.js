@@ -10,7 +10,6 @@ module.exports = async (client, guild) => {
         guild.systemChannel.permissionsFor(client.user).has('SEND_MESSAGES')
     ) {
         try {
-            const channel = client.channels.cache.get(client.joinLeaveLog);
 
             const online = guild.members.cache.filter(
                 (m) => m.user.presence.status === 'online'
@@ -59,7 +58,7 @@ module.exports = async (client, guild) => {
                 )
                 .setTimestamp()
                 .setFooter(`(${client.guilds.cache.size})`);
-            channel.send({ embed });
+            client.botLogger.send({ embed });
 
             const usage = client.registry.commands.get('help').usage();
             await guild.systemChannel.send(
@@ -82,8 +81,7 @@ module.exports = async (client, guild) => {
             // Nothing!
         }
     }
-    const joinLeaveChannel = await client.fetchJoinLeaveChannel();
-    if (joinLeaveChannel) {
+    if (client.botLogger) {
         if (!guild.members.cache.has(guild.ownerID)) {
             await guild.members.fetch(guild.ownerID);
         }
@@ -95,6 +93,6 @@ module.exports = async (client, guild) => {
             .setTimestamp()
             .addField('❯ Members', formatNumber(guild.memberCount))
             .addField('❯ Owner', guild.owner.user.tag);
-        await joinLeaveChannel.send({ embed });
+        await client.botLogger.send({ embed });
     }
 };

@@ -1,7 +1,4 @@
-const { MessageEmbed, WebhookClient } = require('discord.js');
 const BannedWords = require('../assets/json/bannedwords.json');
-const db = require('../util/db');
-const DB = new db();
 // Export message events
 module.exports = async (client, message) => {
 
@@ -9,14 +6,7 @@ module.exports = async (client, message) => {
 
     if (message.channel.type == 'dm') {
         if (message.content.startsWith(message.client.prefix)) return;
-        const channel = client.channels.cache.get(client.dmLog);
-
-        const embed = new MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setDescription(message.content)
-            .setColor('#D48AD8')
-            .setTimestamp();
-        return channel.send({ embed });
+        return client.channels.cache.get(client.dmLog).send({ embed : client.dmMessage(message) });
     }
 
     // Log Messages on Server
@@ -26,17 +16,8 @@ module.exports = async (client, message) => {
             await message.author.send('❌ Warning: Do not swear!');
         }
 
-        // const doc = await DB.findOne('webhooks', message.guild.id).catch(message.client.logger.error);
-        // const whClient = new WebhookClient(doc.document.webhook_id,doc.document.webhook_token);
-        //
-        //
-        // const embed = new MessageEmbed()
-        //     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-        //     .setDescription(message.content)
-        //     .addField('Channel', message.channel)
-        //     .setColor('#D48AD8')
-        //     .setTimestamp();
-        // await whClient.send(embed )
+        const embed = client.newMessage(message);
+        await client.webhook.send(embed);
     }
 
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;

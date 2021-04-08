@@ -26,8 +26,7 @@ module.exports = class NekoBombCommand extends Command {
                     });
                 })
                 .catch(function (err) {
-                    message.client.channel.cache
-                        .get(message.client.errorLog)
+                    message.client.botLogger
                         .send({
                             embed: errorMessage(
                                 err,
@@ -53,7 +52,7 @@ module.exports = class NekoBombCommand extends Command {
                         });
                     })
                     .catch(function (err) {
-                        message.client.channels.cache.get(ERROR_LOG).send({
+                        message.client.botLogger.send({
                             embed: errorMessage(
                                 err,
                                 message.client.errorTypes.API,

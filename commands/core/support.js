@@ -27,10 +27,6 @@ module.exports = class SupportCommand extends Command {
 
     async run(message, args) {
         const { support } = args;
-        console.log(support);
-        const channel = this.client.channels.cache.get(
-            message.client.supportLog
-        );
 
         if (support == 'N////A') {
             message.react('💢');
@@ -49,7 +45,7 @@ module.exports = class SupportCommand extends Command {
                         message.guild.name + ', ' + message.channel.name,
                         support
                     );
-                channel.send({ embed });
+                message.client.botLogger.send({ embed });
 
                 await message.react('🇸').catch(console.error);
                 await message.react('🇪').catch(console.error);
