@@ -119,9 +119,9 @@ module.exports = class AnimeCommand extends Command {
                                 'An error has occured when trying to get the MAL ID from mal'
                             );
                             message.client.channels.cache
-                                .get(message.client.errorLog)
+                                .get(message.client.botLogger)
                                 .send({
-                                    embed: message.command.discordLogger.errorMessage(
+                                    embed: message.client.errorMessage(
                                         detailError,
                                         message.command.errorTypes.API,
                                         message.command.name,
@@ -132,9 +132,9 @@ module.exports = class AnimeCommand extends Command {
                 })
                 .catch(function (err) {
                     message.client.channels.cache
-                        .get(message.client.errorLog)
+                        .get(message.client.botLogger)
                         .send({
-                            embed: message.command.discordLogger.errorMessage(
+                            embed: message.client.errorMessage(
                                 err,
                                 message.command.errorTypes.API,
                                 message.command.name,

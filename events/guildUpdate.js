@@ -7,8 +7,8 @@ module.exports = async (client, oldGuild, newGuild) => {
     );
 
     try {
-        const statusLog = client.channels.cache.get(client.statusLog);
-        await statusLog.send(
+
+        await client.botLogger.send(
             `${oldGuild.name} server name changed to ${newGuild.name}`
         );
         return null;

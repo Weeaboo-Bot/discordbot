@@ -50,8 +50,7 @@ module.exports = class NomCommand extends Command {
                     );
                 })
                 .catch(function (error) {
-                    message.client.channels.cache
-                        .get(message.client.errorLog)
+                    message.client.botLogger
                         .send({
                             embed: message.client.errorMessage(
                                 error,

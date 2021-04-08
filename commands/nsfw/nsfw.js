@@ -64,8 +64,7 @@ module.exports = class NSFWCommand extends Command {
                 .catch(function (error) {
                     // handle error
 
-                    message.client.channels.cache
-                        .get(message.client.errorLog)
+                    message.client.botLogger
                         .send({
                             embed: errorMessage(
                                 error,

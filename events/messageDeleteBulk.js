@@ -4,11 +4,11 @@ const { MessageEmbed } = require('discord.js');
 module.exports = (client, messages) => {
     const message = messages.first();
 
-    const messageDeleteLog = client.fetchAuditChannel();
+
     if (
-        messageDeleteLog &&
-        messageDeleteLog.viewable &&
-        messageDeleteLog
+        client.botLogger &&
+        client.botLogger.viewable &&
+        client.botLogger
             .permissionsFor(message.guild.me)
             .has(['SEND_MESSAGES', 'EMBED_LINKS'])
     ) {
@@ -23,6 +23,6 @@ module.exports = (client, messages) => {
             )
             .setTimestamp()
             .setColor(message.guild.me.displayHexColor);
-        messageDeleteLog.send(embed);
+        client.botLogger.send(embed);
     }
 };

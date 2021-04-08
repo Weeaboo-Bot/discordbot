@@ -5,8 +5,7 @@ module.exports = async (client, member) => {
     );
     if (member.id === client.user.id) return null;
     if (member.partial) await member.fetch();
-    const channel = client.fetchJoinLeaveChannel();
-    if (channel.topic && channel.topic.includes('<weaboo:disable-leave>')) {
+    if (client.botLogger.topic && client.botLogger.topic.includes('<weaboo:disable-leave>')) {
         return null;
     }
     try {
@@ -14,7 +13,7 @@ module.exports = async (client, member) => {
             client.leaveMessages[
                 Math.floor(Math.random() * client.leaveMessages.length)
             ];
-        await channel.send(
+        await client.botLogger.send(
             leaveMessage.replaceAll('{{user}}', `**${member.user.tag}**`)
         );
         return null;

@@ -31,8 +31,7 @@ module.exports = class BirdCommand extends Command {
                     return message.channel.send({ embed: msg });
                 })
                 .catch(function (err) {
-                    message.client.channel.cache
-                        .get(message.client.errorLog)
+                    message.client.botLogger
                         .send({
                             embed: message.client.errorMessage(
                                 err,

@@ -69,7 +69,7 @@ module.exports = class HoroscopeCommand extends Command {
                 message.channel.send({ embed: msg });
             })
             .catch(function (err) {
-                message.client.channel.cache.get(message.client.errorLog).send({
+                message.client.botLogger.send({
                     embed: message.client.errorMessage(
                         err,
                         message.client.errorTypes.API,

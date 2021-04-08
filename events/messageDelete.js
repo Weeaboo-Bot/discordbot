@@ -30,14 +30,12 @@ module.exports = async (client, message) => {
     // And now we can update our output with a bit more information
     // We will also run a check to make sure the log we got was for the same author's message
     if (executor.id === message.author.id) {
-        const channel = client.channels.cache.get(client.auditLog);
         const embed = auditMessage(deletionLog, 'Message Deleted');
-        channel.send({ embed });
+        client.botLogger.send({ embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted by ${executor.tag}.`
         );
     } else {
-        const channel = client.channels.cache.get(client.auditLog);
         const embed = new MessageEmbed()
             .setTitle('Audit Event')
             .setColor('#727293')
@@ -46,7 +44,7 @@ module.exports = async (client, message) => {
             .addField('Delete Event', 'Member is Unknown')
             .setFooter(`v${version}`)
             .setTimestamp();
-        channel.send({ embed });
+        client.botLogger.send({ embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted, but we don't know by who.`
         );

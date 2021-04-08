@@ -23,11 +23,11 @@ module.exports = (client, oldMessage, newMessage) => {
 
     // Content change
     if (oldMessage.content != newMessage.content) {
-        const messageEditLog = client.fetchAuditChannel();
+
         if (
-            messageEditLog &&
-            messageEditLog.viewable &&
-            messageEditLog
+            client.botLogger &&
+            client.botLogger.viewable &&
+            client.botLogger
                 .permissionsFor(newMessage.guild.me)
                 .has(['SEND_MESSAGES', 'EMBED_LINKS'])
         ) {
@@ -47,7 +47,7 @@ module.exports = (client, oldMessage, newMessage) => {
                 )
                 .addField('Before', oldMessage.content)
                 .addField('After', newMessage.content);
-            messageEditLog.send(embed);
+            client.botLogger.send(embed);
         }
     }
 

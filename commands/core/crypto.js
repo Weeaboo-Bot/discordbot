@@ -87,7 +87,7 @@ module.exports = class CryptoCommand extends Command {
                 }
             });
         } catch (error) {
-            message.client.channels.cache.get(message.client.errorLog).send({
+            message.client.botLogger.send({
                 embed: message.client.errorMessage(error, message.client.errorTypes.API, message.command.name),
             });
         }

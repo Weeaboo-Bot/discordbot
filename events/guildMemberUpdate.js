@@ -12,11 +12,11 @@ module.exports = (client, oldMember, newMember) => {
 
     // Nickname change
     if (oldMember.nickname != newMember.nickname) {
-        const nicknameLog = client.fetchModChannel();
+
         if (
-            nicknameLog &&
-            nicknameLog.viewable &&
-            nicknameLog
+            client.botLogger &&
+            client.botLogger.viewable &&
+            client.botLogger
                 .permissionsFor(oldMember.guild.me)
                 .has(['SEND_MESSAGES', 'EMBED_LINKS'])
         ) {
@@ -26,17 +26,16 @@ module.exports = (client, oldMember, newMember) => {
                 .setTitle('Member Update: `Nickname`')
                 .setDescription(`${newMember}'s **nickname** was changed.`)
                 .addField('Nickname', `${oldNickname} ➔ ${newNickname}`);
-            nicknameLog.send(embed);
+            client.botLogger.send(embed);
         }
     }
 
     // Role add
     if (oldMember.roles.cache.size < newMember.roles.cache.size) {
-        const roleLog = client.fetchModChannel();
         if (
-            roleLog &&
-            roleLog.viewable &&
-            roleLog
+            client.botLogger &&
+            client.botLogger.viewable &&
+            client.botLogger
                 .permissionsFor(oldMember.guild.me)
                 .has(['SEND_MESSAGES', 'EMBED_LINKS'])
         ) {
@@ -46,17 +45,16 @@ module.exports = (client, oldMember, newMember) => {
             embed
                 .setTitle('Member Update: `Role Add`')
                 .setDescription(`${newMember} was **given** the ${role} role.`);
-            roleLog.send(embed);
+            client.botLogger.send(embed);
         }
     }
 
     // Role remove
     if (oldMember.roles.cache.size > newMember.roles.cache.size) {
-        const roleLog = client.fetchModChannel();
         if (
-            roleLog &&
-            roleLog.viewable &&
-            roleLog
+            client.botLogger &&
+            client.botLogger.viewable &&
+            client.botLogger
                 .permissionsFor(oldMember.guild.me)
                 .has(['SEND_MESSAGES', 'EMBED_LINKS'])
         ) {
@@ -68,7 +66,7 @@ module.exports = (client, oldMember, newMember) => {
                 .setDescription(
                     `${newMember} was **removed** from ${role} role.`
                 );
-            roleLog.send(embed);
+            client.botLogger.send(embed);
         }
     }
 };

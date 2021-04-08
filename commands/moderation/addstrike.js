@@ -44,8 +44,7 @@ module.exports = class AddStrikeCommand extends Command {
                     );
                 })
                 .catch((err) => {
-                    message.client.channels.cache
-                        .get(message.client.errorLog)
+                    message.client.botLogger
                         .send({
                             embed: message.client.errorMessage(
                                 err,
