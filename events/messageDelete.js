@@ -31,7 +31,7 @@ module.exports = async (client, message) => {
     // We will also run a check to make sure the log we got was for the same author's message
     if (executor.id === message.author.id) {
         const embed = auditMessage(deletionLog, 'Message Deleted');
-        client.botLogger.send({ embed });
+  //      client.botLogger.send({ embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted by ${executor.tag}.`
         );
@@ -44,7 +44,7 @@ module.exports = async (client, message) => {
             .addField('Delete Event', 'Member is Unknown')
             .setFooter(`v${version}`)
             .setTimestamp();
-        client.botLogger.send({ embed });
+    //    client.botLogger.send({ embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted, but we don't know by who.`
         );
