@@ -93,6 +93,7 @@ module.exports = class WeabooClient extends CommandoClient {
         this.token = config.discord.DISCORD_TOKEN;
         this.successEmoji = config.api.SUCCESS_EMOJI_ID;
         this.commandPrefix = config.discord.DISCORD_PREFIX;
+        this.guildId = config.discord.GUILD_ID;
 
         /**
          * API keys

@@ -15,6 +15,7 @@ exports.discord = {
     DISCORD_WEBHOOK_TOKEN: process.env.DISCORD_WEBHOOK_TOKEN,
     DISCORD_OWNER_ID: process.env.DISCORD_OWNER_ID,
     DISCORD_INVITE: process.env.DISCORD_INVITE,
+    GUILD_ID: process.env.GUILD_ID,
 };
 
 exports.api = {
