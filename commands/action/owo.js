@@ -24,7 +24,7 @@ module.exports = class OwoCommand extends Command {
                 return message.channel.send({ embed });
             })
             .catch(function (err) {
-                message.client.botLogger.send({
+                message.client.botLogger({
                     embed: message.client.errorMessage(
                         err,
                         message.client.errorTypes.API,

@@ -28,7 +28,7 @@ module.exports = class AdviceCommand extends Command {
                     return message.channel.send({ embed });
                 } catch (err) {
                     message.client.botLogger
-                        .send({
+                        ({
                             embed: message.client.errorMessage(
                                 err,
                                 message.client.errorTypes.JS,
@@ -39,7 +39,7 @@ module.exports = class AdviceCommand extends Command {
             })
             .catch(function (err) {
                 message.client.botLogger
-                    .send({
+                    ({
                         embed: message.client.errorMessage(
                             err,
                             message.client.errorTypes.API,
