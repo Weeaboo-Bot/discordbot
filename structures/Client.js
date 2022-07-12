@@ -128,7 +128,16 @@ module.exports = class WeabooClient extends CommandoClient {
         this.games = new Discord.Collection();
         this.activities = activities;
         this.leaveMessages = leaveMsgs;
-        this.botLogger = this.channels.fetch(config.logs.BOT_LOG);
+        this.botLogger = (logMessage) => {
+            this.channels.fetch(config.logs.BOT_LOG)
+                .then((channel) => {
+                    channel.send(logMessage);
+                }
+                ).catch((err) => {
+                    this.logger.error(err);
+                }
+                );
+        };
         this.webhook = new Discord.WebhookClient(
             config.discord.DISCORD_WEBHOOK_ID,
             config.discord.DISCORD_WEBHOOK_TOKEN,
