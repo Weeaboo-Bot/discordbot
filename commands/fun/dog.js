@@ -31,7 +31,7 @@ module.exports = class DogCommand extends Command {
                 });
             })
             .catch(function (err) {
-                message.client.botLogger.send({
+                message.client.botLogger({
                     embed: message.client.errorMessage(
                         err,
                         message.client.errorTypes.API,

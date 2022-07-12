@@ -45,7 +45,7 @@ module.exports = class SupportCommand extends Command {
                         message.guild.name + ', ' + message.channel.name,
                         support
                     );
-                message.client.botLogger.send({ embed });
+                message.client.botLogger({ embed });
 
                 await message.react('🇸').catch(console.error);
                 await message.react('🇪').catch(console.error);

@@ -93,6 +93,7 @@ module.exports = class WeabooClient extends CommandoClient {
         this.token = config.discord.DISCORD_TOKEN;
         this.successEmoji = config.api.SUCCESS_EMOJI_ID;
         this.commandPrefix = config.discord.DISCORD_PREFIX;
+        this.guildId = config.discord.GUILD_ID;
 
         /**
          * API keys
@@ -127,7 +128,16 @@ module.exports = class WeabooClient extends CommandoClient {
         this.games = new Discord.Collection();
         this.activities = activities;
         this.leaveMessages = leaveMsgs;
-        this.botLogger = this.channels.fetch(config.logs.BOT_LOG);
+        this.botLogger = (logMessage) => {
+            this.channels.fetch(config.logs.BOT_LOG)
+                .then((channel) => {
+                    channel.send(logMessage);
+                }
+                ).catch((err) => {
+                    this.logger.error(err);
+                }
+                );
+        };
         this.webhook = new Discord.WebhookClient(
             config.discord.DISCORD_WEBHOOK_ID,
             config.discord.DISCORD_WEBHOOK_TOKEN,

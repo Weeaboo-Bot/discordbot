@@ -28,11 +28,28 @@ module.exports = class LockdownCommand extends Command {
                     },
                     parse: (type) => type.toLowerCase(),
                 },
+                {
+                    key: 'role',
+                    prompt: 'Please enter the name of the role to be locked down.',
+                    type: 'string',
+                    default: '@everyone',
+                    validate: (role) => {
+                        if (
+                            message.guild.roles.cache.find(
+                                (role) => role.name === role
+                            )
+                        ) {
+                            return true;
+                        }
+                        return 'Please enter the name of the role to be locked down.';
+                    },
+                    parse: (role) => role,
+                },
             ],
         });
     }
 
-    async run(message, { type }) {
+    async run(message, { type, role }) {
         // eslint-disable-line consistent-return
 
         if (type === 'start') {
@@ -42,7 +59,7 @@ module.exports = class LockdownCommand extends Command {
                     [
                         {
                             id: message.guild.roles.cache.find(
-                                (role) => role.name === 'Weaboos'
+                                (role) => role.name === `${role}`
                             ),
                             deny: ['SEND_MESSAGES'],
                         },
@@ -52,7 +69,7 @@ module.exports = class LockdownCommand extends Command {
             return message.channel.send(
                 `Lockdown has initiated! ${
                     message.guild.roles.cache.find(
-                        (role) => role.name === 'Weaboos'
+                        (role) => role.name === `${role}`
                     ).name
                 } are now unable to send a message in this channel!\n\Please use \`lockdown stop\` to end the lockdown!`
             );
@@ -63,7 +80,7 @@ module.exports = class LockdownCommand extends Command {
                     [
                         {
                             id: message.guild.roles.cache.find(
-                                (role) => role.name === 'Weaboos'
+                                (role) => role.name === `${role}`
                             ).id,
                             allow: ['SEND_MESSAGES'],
                         },
