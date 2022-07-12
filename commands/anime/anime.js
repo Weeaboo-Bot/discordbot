@@ -118,9 +118,7 @@ module.exports = class AnimeCommand extends Command {
                             message.say(
                                 'An error has occured when trying to get the MAL ID from mal'
                             );
-                            message.client.channels.cache
-                                .get(message.client.botLogger)
-                                .send({
+                            message.client.botLogger({
                                     embed: message.client.errorMessage(
                                         detailError,
                                         message.command.errorTypes.API,
@@ -131,9 +129,7 @@ module.exports = class AnimeCommand extends Command {
                         })
                 })
                 .catch(function (err) {
-                    message.client.channels.cache
-                        .get(message.client.botLogger)
-                        .send({
+                    message.client.botLogger({
                             embed: message.client.errorMessage(
                                 err,
                                 message.command.errorTypes.API,

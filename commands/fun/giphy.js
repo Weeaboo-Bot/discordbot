@@ -48,7 +48,7 @@ module.exports = class GiphyCommand extends Command {
             })
             .catch(function (err) {
                 message.client.botLogger
-                    .send({
+                    ({
                         embed: message.client.errorMessage(
                             err,
                             message.client.errorTypes.API,

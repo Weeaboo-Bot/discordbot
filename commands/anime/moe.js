@@ -28,8 +28,7 @@ module.exports = class MoeCommand extends Command {
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
-                // message.client.channels.cache.get(error_log).send({embed: errorMessage(error,ErrorEnum.API,message.command.name)});
+                message.client.botLogger({embed: errorMessage(error,ErrorEnum.API,message.command.name)});
             });
     }
 };
