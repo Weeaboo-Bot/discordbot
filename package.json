@@ -20,7 +20,7 @@
     },
     "homepage": "https://github.com/sdoran35/discordbot#readme",
     "dependencies": {
-        "@discordjs/opus": "^0.3.2",
+        "@discordjs/opus": "^0.8.0",
         "@giphy/js-fetch-api": "^2.4.0",
         "@sentry/node": "^5.29.2",
         "@sentry/tracing": "^5.29.2",
