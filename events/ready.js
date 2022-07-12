@@ -44,5 +44,5 @@ module.exports = async (client) => {
         client,
         version
     });
-    client.botLogger.send(embed);
+    client.botLogger(embed);
 };

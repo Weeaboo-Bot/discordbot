@@ -32,6 +32,7 @@ module.exports = class DadJokeCommand extends Command {
                 return message.channel.send({ embed: msg });
             })
             .catch(function (err) {
+                message.client.logger.error(err);
                 message.client.botLogger({
                     embed: message.client.errorMessage(
                         err,
