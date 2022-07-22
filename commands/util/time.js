@@ -47,7 +47,7 @@ module.exports = class TimeCommand extends Command {
             );
         }
 
-        await axios
+        await this.apiReq
             .get(`https://time.is/${location}`)
             .then(function (res) {
                 if (res.status !== 200) {
@@ -89,10 +89,8 @@ module.exports = class TimeCommand extends Command {
                 message.channel.send(
                     `❎ | Location **${location}** was not found!`
                 );
-                return message.client.channel.cache
-                    .get(message.client.errorLog)
-                    .send({
-                        embed: errorMessage(
+                return message.client.botLogger({
+                        embed: message.client.errorMessage(
                             err,
                             message.client.errorTypes.API,
                             message.command.name
