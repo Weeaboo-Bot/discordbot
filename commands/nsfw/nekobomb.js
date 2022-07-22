@@ -38,7 +38,7 @@ module.exports = class NekoBombCommand extends Command {
         } else {
             let counter = 0;
             while (counter < 5) {
-                await axios
+                await this.apiReq
                     .get('http://nekos.life/api/lewd/neko')
                     .then(function (res) {
                         return message.channel.send({
@@ -53,7 +53,7 @@ module.exports = class NekoBombCommand extends Command {
                     })
                     .catch(function (err) {
                         message.client.botLogger.send({
-                            embed: errorMessage(
+                            embed: message.client.errorMessage(
                                 err,
                                 message.client.errorTypes.API,
                                 message.command.name
