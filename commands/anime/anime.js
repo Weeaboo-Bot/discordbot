@@ -121,7 +121,7 @@ module.exports = class AnimeCommand extends Command {
                             message.client.botLogger({
                                     embed: message.client.errorMessage(
                                         detailError,
-                                        message.command.errorTypes.API,
+                                        message.client.errorTypes.API,
                                         message.command.name,
                                         search
                                     ),
