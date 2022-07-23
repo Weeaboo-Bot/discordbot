@@ -82,6 +82,7 @@ dist
 #Config Directory
 #Includes Discord Config, Firebase Config, Twitch Config, Youtube Configs, SoundCloud Configs
 config/
+config.js
 
 service-account-file.json
 

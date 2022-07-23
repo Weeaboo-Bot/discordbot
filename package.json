@@ -5,6 +5,7 @@
     "main": "Weaboo.js",
     "scripts": {
         "start": "nodemon Weaboo.js",
+        "debug": "node Weaboo.js",
         "lint": "eslint .",
         "lint:fix": "eslint --fix --ext .js,.jsx ."
     },
