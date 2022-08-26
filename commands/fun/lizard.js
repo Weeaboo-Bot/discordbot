@@ -16,7 +16,7 @@ module.exports = class LizardCommand extends Command {
     }
 
     async run(message) {
-        await axios
+        await this.apiReq
             .get('https://nekos.life/api/lizard')
             .then(function (res) {
                 return message.channel.send({
