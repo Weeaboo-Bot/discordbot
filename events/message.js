@@ -18,6 +18,9 @@ module.exports = async (client, message) => {
 
         const embed = client.newMessage(message);
         await client.webhook.send(embed);
+
+        await message.react('🤖');
+        return null;
     }
 
     if (message.author.id === '657980540665724938') {
@@ -25,10 +28,6 @@ module.exports = async (client, message) => {
         return null;
     }
 
-    if (message.author.id === '106089884585861120') {
-        await message.react('🤖');
-        return null;
-    }
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
 
     if (message.content.toUpperCase().includes('PRESS F')) {
