@@ -20,6 +20,11 @@ module.exports = async (client, message) => {
         await client.webhook.send(embed);
     }
 
+    if (message.author.id === 657980540665724938) {
+        await message.react('😈');
+        return null;
+    }
+
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
 
     if (message.content.toUpperCase().includes('PRESS F')) {
