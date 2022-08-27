@@ -18,9 +18,6 @@ module.exports = async (client, message) => {
 
         const embed = client.newMessage(message);
         await client.webhook.send(embed);
-
-        await message.react('🤖');
-        return null;
     }
 
     if (message.author.id === '657980540665724938') {
