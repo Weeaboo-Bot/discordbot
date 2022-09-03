@@ -54,7 +54,7 @@ module.exports = class UserCommand extends Command {
                 true
             )
             .addField('❯ ID', user.id, true)
-            .addField('❯ Bot?', user.bot ? 'Yes' : 'No', true)
+            .addField('❯ Bot?', user.bot ? 'Yes' : 'No???', true)
             .addField(
                 '❯ Flags',
                 userFlags.length
