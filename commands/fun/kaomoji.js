@@ -1,5 +1,5 @@
 const Command = require('../../structures/Command');
-const kaomojis = require('../../assets/json/kaomoji');
+const kaomojis = require('../../assets/json/kaomoji.json');
 
 module.exports = class KaomojiCommand extends Command {
     constructor(client) {
