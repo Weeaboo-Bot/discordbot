@@ -2,15 +2,6 @@ const config = require('./config');
 const Discord = require('discord.js');
 const Client = require('./structures/Client');
 const Sentry = require('@sentry/node');
-const admin = require('firebase-admin');
-const fbConfig = require('./config').fbAdminConfig;
-
-admin.initializeApp({
-    credential: admin.credential.cert(fbConfig),
-    storageBucket: 'gs://weaboo-bot-73b07.appspot.com/',
-});
-const db = require('./util/db');
-const database = new db();
 
 global.__basedir = __dirname;
 
@@ -41,7 +32,6 @@ const client = new Client(config, {
     disableMentions: 'everyone',
     partials: ['GUILD_MEMBER'],
     ws: { intents: intents },
-    database: database,
 });
 
 // Initialize client

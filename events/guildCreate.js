@@ -1,7 +1,6 @@
-const Database = require('../util/db');
 const { MessageEmbed } = require('discord.js');
 const { formatNumber } = require('../util/Util');
-const db = new Database();
+
 
 // Export guild create events
 module.exports = async (client, guild) => {
@@ -65,18 +64,6 @@ module.exports = async (client, guild) => {
                 `Hi! I'm Weaboo, use ${usage} to see my commands, yes?`
             );
 
-            // Add users table
-            guild.members.cache.forEach((member) => {
-                db.createDocument('users', {
-                    id: member.id,
-                    username: member.user.username,
-                    disc: member.user.discriminator,
-                    guild: guild.id,
-                    guild_name: guild.name,
-                    joined: member.joinedAt,
-                    isBot: member.bot ? 1 : 0,
-                });
-            });
         } catch {
             // Nothing!
         }
