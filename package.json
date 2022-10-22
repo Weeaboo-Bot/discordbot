@@ -33,7 +33,6 @@
         "ascii-table": "0.0.9",
         "axios": "^0.21.1",
         "booru": "^0.3.6",
-        "canvas": "^2.9.3",
         "cheerio": "^1.0.0-rc.10",
         "color": "^3.2.1",
         "common-tags": "^1.8.0",
