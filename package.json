@@ -5,6 +5,7 @@
     "main": "Weaboo.js",
     "scripts": {
         "start": "nodemon Weaboo.js",
+        "start:server": "pm2 start Weaboo.js",
         "debug": "node Weaboo.js",
         "lint": "eslint .",
         "lint:fix": "eslint --fix --ext .js,.jsx ."
@@ -90,6 +91,7 @@
         "@babel/register": "^7.14.5",
         "eslint": "^7.32.0",
         "nodemon": "^2.0.12",
+        "pm2": "^5.2.2",
         "stylelint": "^13.13.1",
         "stylelint-config-standard": "^20.0.0"
     }
