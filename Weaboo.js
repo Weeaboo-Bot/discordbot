@@ -1,18 +1,8 @@
 const config = require('./config');
 const Discord = require('discord.js');
 const Client = require('./structures/Client');
-const Sentry = require('@sentry/node');
 
 global.__basedir = __dirname;
-
-Sentry.init({
-    dsn:
-        'https://c7c6cdcfb19041ddb0a0946b360ddb97@o499509.ingest.sentry.io/5578077',
-
-    // We recommend adjusting this value in production, or using tracesSampler
-    // for finer control
-    tracesSampleRate: 1.0,
-});
 
 // Client setup
 const intents = new Discord.Intents();
