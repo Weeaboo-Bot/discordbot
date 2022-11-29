@@ -42,6 +42,9 @@ exports.api = {
     EMAIL_PASS: process.env.EMAIL_PASS,
     SUCCESS_EMOJI_ID: process.env.SUCCESS_EMOJI_ID,
     CAT_API_KEY: process.env.CAT_API_KEY,
+    AZURE_KEY_A: process.env.AZURE_KEY_A,
+    AZURE_ENDPOINT: process.env.AZURE_ENDPOINT,
+    AZURE_LOCATION: process.env.AZURE_LOCATION,
 };
 
 exports.fbConfig = {

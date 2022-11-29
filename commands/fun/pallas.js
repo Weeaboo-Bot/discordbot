@@ -1,9 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const request = require('node-superfetch');
-const cheerio = require('cheerio');
-
-const PALLAS_CAT_URL = 'https://www.google.com/search?q=pallas+cat&tbm=isch';
 
 module.exports = class PallasCommand extends Command {
     constructor(client) {
@@ -19,24 +15,38 @@ module.exports = class PallasCommand extends Command {
     }
 
     async run(message) {
-        try {
-            const { text } = await this.apiReq.get(PALLAS_CAT_URL);
-            const $ = cheerio.load(text);
-            const setOfImages = $('')
-
-        } catch (err) {
-            // Send Error log to channel
-            message.client.botLogger({
-                embed: message.client.errorMessage(
-                    err,
-                    message.client.errorTypes.API,
-                    message.command.name
-                ),
+        // do normal Req
+        await this.apiReq
+            .get(message.client.apiKeys.AZURE_ENDPOINT + 'v7.0/images/search', {
+                params: {
+                    q: 'pallas cat',
+                    imageType: 'photo'
+                },
+                headers: {
+                    'Ocp-Apim-Subscription-Key': message.client.apiKeys.AZURE_KEY_A,                }
+            })
+            .then(function (res) {
+                return message.channel.send({
+                    embed: new Discord.MessageEmbed()
+                        .setImage(res.value[0].contentUrl)
+                        .setTitle('Pallas Cat')
+                        .setDescription(`[Image URL](${res.data.url})`)
+                        .setFooter(
+                            `${res.value[0].hostPageDisplayUrl}`,
+                            `${res.value[0].thumbnailUrl}`
+                        )
+                        .setColor('#71A3BE'),
+                });
+            })
+            .catch(function (err) {
+                message.client.botLogger
+                    ({
+                        embed: message.client.errorMessage(
+                            err,
+                            message.client.errorTypes.API,
+                            message.command.name
+                        ),
+                    });
             });
-            // Tell the user about this error
-            return msg.reply(
-                `Oh no, an error occurred: \`${err.message}\`. Try again later!`
-            );
-        }
     }
 };
