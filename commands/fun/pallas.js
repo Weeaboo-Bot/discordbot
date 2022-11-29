@@ -11,6 +11,7 @@ module.exports = class PallasCommand extends Command {
             guildOnly: true,
             description: 'Sends a random picture of a pallas cat!',
             examples: ['!pallas'],
+            throttling: { usages: 1, duration: 5 },
         });
     }
 
