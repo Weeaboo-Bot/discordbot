@@ -26,14 +26,16 @@ module.exports = class PallasCommand extends Command {
                     'Ocp-Apim-Subscription-Key': message.client.apiKeys.AZURE_KEY_A,                }
             })
             .then(function (res) {
+                const pallasCat = res.data.value[Math.floor(Math.random()*res.data.value.length)];
                 return message.channel.send({
                     embed: new Discord.MessageEmbed()
-                        .setImage(res.value[0].contentUrl)
+                        .setImage(pallasCat.contentUrl)
                         .setTitle('Pallas Cat')
-                        .setDescription(`[Image URL](${res.data.url})`)
+                        .setURL(pallasCat.hostPageDisplayUrl)
+                        .setDescription('This is Pallas Cat')
                         .setFooter(
-                            `${res.value[0].hostPageDisplayUrl}`,
-                            `${res.value[0].thumbnailUrl}`
+                            `${pallasCat.hostPageDisplayUrl}`,
+                            `${pallasCat.thumbnailUrl}`
                         )
                         .setColor('#71A3BE'),
                 });
