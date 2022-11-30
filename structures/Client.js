@@ -138,6 +138,16 @@ module.exports = class WeabooClient extends CommandoClient {
                 }
                 );
         };
+        this.pingChannel = (pingMessage) => {
+            this.channels.fetch(config.logs.PING_CHANNEL)
+                .then((channel) => {
+                    channel.send(pingMessage);
+                }
+                ).catch((err) => {
+                    this.logger.error(err);
+                }
+                );
+        };
         this.webhook = new Discord.WebhookClient(
             config.discord.DISCORD_WEBHOOK_ID,
             config.discord.DISCORD_WEBHOOK_TOKEN,

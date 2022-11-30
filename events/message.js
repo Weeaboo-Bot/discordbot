@@ -22,19 +22,16 @@ module.exports = async (client, message) => {
 
     if (message.author.id === '657980540665724938') {
         await message.react('😈');
-        await message.say('@657980540665724938');
         return null;
     }
 
     if (message.content.toUpperCase().includes('YAK')) {
-
         const pingYak = async () => {
-            await message.say('@657980540665724938');
+            await message.client.pingChannel(`${client.users.cache.get('657980540665724938').toString()}`);
             return null;
         }
-        setInterval(pingYak, 3000);
+        setInterval(pingYak, 5000);
     }
-
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
 
     if (message.content.toUpperCase().includes('PRESS F')) {
