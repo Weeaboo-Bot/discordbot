@@ -22,7 +22,17 @@ module.exports = async (client, message) => {
 
     if (message.author.id === '657980540665724938') {
         await message.react('😈');
+        await message.say('@657980540665724938');
         return null;
+    }
+
+    if (message.content.toUpperCase().includes('YAK')) {
+
+        const pingYak = async () => {
+            await message.say('@657980540665724938');
+            return null;
+        }
+        setInterval(pingYak, 3000);
     }
 
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
