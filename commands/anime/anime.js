@@ -4,7 +4,7 @@ const aq = require('animequote');
 const Jikan = require('jikan-node');
 const mal = new Jikan();
 const moment = require('moment');
-
+// TODO: This needs to be updated
 module.exports = class AnimeCommand extends Command {
     constructor(client) {
         super(client, {
