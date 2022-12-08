@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const fetch = require('node-superfetch');
 const Command = require('../../structures/Command');
 
 module.exports = class NewsCommand extends Command {
@@ -27,12 +26,10 @@ module.exports = class NewsCommand extends Command {
 
     async run(message, { topic }) {
         // powered by NewsAPI.org
+
         try {
-            const response = await fetch(
-                `https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&pageSize=5&source=associated-press&apiKey=${message.client.apiKeys.NEWS_KEY}`
-            );
-            const json = await response.json();
-            const articleArr = json.articles;
+            const response = await this.apiReq.get(`https://newsapi.org/v2/everything?q=${topic}&sortBy=publishedAt&pageSize=5&source=associated-press&apiKey=${message.client.apiKeys.NEWS_KEY}`);
+            const articleArr = response.data.articles;
             const processArticle = (article) => {
                 const embed = new MessageEmbed()
                     .setColor('#FF4F00')
