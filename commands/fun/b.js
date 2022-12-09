@@ -1,4 +1,5 @@
 const Command = require('../../structures/Command');
+// TODO: This needs updating
 
 module.exports = class BCommand extends Command {
     constructor(client) {
