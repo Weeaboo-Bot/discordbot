@@ -3,6 +3,7 @@ const BannedWords = require('../assets/json/bannedwords.json');
 module.exports = async (client, message) => {
     const yakEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'yahkuna');
     const lumenEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'defLikeLumen');
+    const nullEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'defLikeNull');
 
     if (message.author.bot) return undefined;
 
@@ -22,7 +23,7 @@ module.exports = async (client, message) => {
         await client.webhook.send(embed);
     }
 
-    switch (message.author.id || message.mentions.members.has) {
+    switch (message.author.id) {
         case '657980540665724938':
             await message.react(yakEmote);
             break;
@@ -31,6 +32,9 @@ module.exports = async (client, message) => {
             break;
         case '632759154200674304':
             await message.react('🍆');
+            break;
+        case '827485907182944256':
+            await message.react(nullEmote);
             break;
         default:
             break;
