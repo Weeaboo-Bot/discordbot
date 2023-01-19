@@ -20,8 +20,13 @@ module.exports = async (client, message) => {
         await client.webhook.send(embed);
     }
 
-    if (message.author.id === '657980540665724938') {
-        await message.react('😈');
+    if ((message.author.id === '657980540665724938') || (message.mentions.members.has('657980540665724938'))) {
+        await message.react(message.guild.emojis.cache.get('1065483853206130729'));
+        return null;
+    }
+
+    if ((message.author.id === '327631148736053248') || (message.mentions.members.has('327631148736053248'))) {
+        await message.react(message.guild.emojis.cache.get('1065483892431278151'));
         return null;
     }
 
