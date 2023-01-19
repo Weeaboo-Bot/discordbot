@@ -1,9 +1,14 @@
 const BannedWords = require('../assets/json/bannedwords.json');
+const ConstantUsers = require('../assets/json/constant-users.json');
 // Export message events
 module.exports = async (client, message) => {
     const yakEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'yahkuna');
     const lumenEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'defLikeLumen');
     const nullEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'defLikeNull');
+    const yak = '657980540665724938';
+    const lumen = '327631148736053248';
+    const armhad = '632759154200674304';
+    const n_ull = '827485907182944256';
 
     if (message.author.bot) return undefined;
 
@@ -24,20 +29,26 @@ module.exports = async (client, message) => {
     }
 
     switch (message.author.id) {
-        case '657980540665724938':
+        case yak:
             await message.react(yakEmote);
             break;
-        case '327631148736053248':
+        case lumen:
             await message.react(lumenEmote);
             break;
-        case '632759154200674304':
+        case armhad:
             await message.react('🍆');
             break;
-        case '827485907182944256':
+        case n_ull:
             await message.react(nullEmote);
             break;
         default:
             break;
+    }
+
+    // Reply on Pinned message
+    if(message.pinned) {
+        await message.reply('This message has been pinned');
+        return null;
     }
 
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
