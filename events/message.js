@@ -1,15 +1,7 @@
 const BannedWords = require('../assets/json/bannedwords.json');
-const ConstantUsers = require('../assets/json/constant-users.json');
+const { getValue } = require('../util/dbhandler');
 // Export message events
 module.exports = async (client, message) => {
-    const yakEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'yahkuna');
-    const lumenEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'defLikeLumen');
-    const nullEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'defLikeNull');
-    const yak = '657980540665724938';
-    const lumen = '327631148736053248';
-    const armhad = '632759154200674304';
-    const n_ull = '827485907182944256';
-
     if (message.author.bot) return undefined;
 
     if (message.channel.type == 'dm') {
@@ -28,22 +20,6 @@ module.exports = async (client, message) => {
         await client.webhook.send(embed);
     }
 
-    switch (message.author.id) {
-        case yak:
-            await message.react(yakEmote);
-            break;
-        case lumen:
-            await message.react(lumenEmote);
-            break;
-        case armhad:
-            await message.react('🍆');
-            break;
-        case n_ull:
-            await message.react(nullEmote);
-            break;
-        default:
-            break;
-    }
 
     // Reply on Pinned message
     if(message.pinned) {
@@ -53,6 +29,13 @@ module.exports = async (client, message) => {
 
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
 
+    // Check to see if we have a stored reaction for this user
+    await getValue(message.author.id)
+        .then((reactionRes) => {
+            if (reactionRes) {
+                message.react(reactionRes);
+            }
+        })
     if (message.content.toUpperCase().includes('PRESS F')) {
         await message.react('🇫');
         return null;
