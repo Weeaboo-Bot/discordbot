@@ -23,6 +23,7 @@
     "homepage": "https://github.com/sdoran35/discordbot#readme",
     "dependencies": {
         "@giphy/js-fetch-api": "^2.4.0",
+        "@keyv/sqlite": "^3.6.4",
         "@vitalets/google-translate-api": "^4.0.0",
         "aki-api": "^5.2.0",
         "alphavantage": "^2.2.0",
@@ -51,6 +52,7 @@
         "https": "^1.0.0",
         "jikan-node": "^1.2.1",
         "jimp": "^0.16.1",
+        "keyv": "^4.5.2",
         "kitsu.js": "^2.0.0",
         "libsodium-wrappers": "^0.7.8",
         "lodash": "^4.17.21",
@@ -72,6 +74,7 @@
         "sherlockjs": "^1.4.2",
         "simple-youtube-api": "^5.2.1",
         "speak-tts": "^2.0.8",
+        "sqlite3": "^5.1.4",
         "util": "^0.10.3",
         "uws": "^8.14.1",
         "wanakana": "^2.3.1",
