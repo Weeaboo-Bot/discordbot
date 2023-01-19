@@ -1,6 +1,8 @@
 const BannedWords = require('../assets/json/bannedwords.json');
 // Export message events
 module.exports = async (client, message) => {
+    const yakEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'yahkuna');
+    const lumenEmote = message.guild.emojis.cache.find((emoji) => emoji.name === 'defLikeLumen');
 
     if (message.author.bot) return undefined;
 
@@ -20,14 +22,18 @@ module.exports = async (client, message) => {
         await client.webhook.send(embed);
     }
 
-    if ((message.author.id === '657980540665724938') || (message.mentions.members.has('657980540665724938'))) {
-        await message.react(message.guild.emojis.cache.get('1065483853206130729'));
-        return null;
-    }
-
-    if ((message.author.id === '327631148736053248') || (message.mentions.members.has('327631148736053248'))) {
-        await message.react(message.guild.emojis.cache.get('1065483892431278151'));
-        return null;
+    switch (message.author.id || message.mentions.members.has) {
+        case '657980540665724938':
+            await message.react(yakEmote);
+            break;
+        case '327631148736053248':
+            await message.react(lumenEmote);
+            break;
+        case '632759154200674304':
+            await message.react('🍆');
+            break;
+        default:
+            break;
     }
 
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
