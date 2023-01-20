@@ -33,7 +33,9 @@ module.exports = class AddReactionCommand extends Command {
         // If the author mentions themselves
         if ((member.id === message.author.id) || (member == null)) {
             memberToUse = message.author.id;
-        } 
+        } else {
+            memberToUse = member.id;
+        }
 
         try {
             await setValue(memberToUse, reactionName, 'user-reactions')

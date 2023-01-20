@@ -27,7 +27,9 @@ module.exports = class GetReactionCommand extends Command {
         // If the author mentions themselves
         if ((member.id === message.author.id) || (member == null)) {
             memberToUse = message.author.id;
-        } 
+        } else {
+            memberToUse = member.id;
+        }
 
 
         try {
