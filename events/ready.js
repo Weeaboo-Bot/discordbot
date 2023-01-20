@@ -1,7 +1,7 @@
 const { version } = require('../package.json');
 const { formatNumber } = require('../util/Util');
 const { readyMessage } = require('../util/logHandler');
-
+const { setValue } = require('../util/dbhandler');
 // Export ready events
 module.exports = async (client) => {
     // Push client-related activities
@@ -25,7 +25,7 @@ module.exports = async (client) => {
     client.setInterval(() => {
         const activity =
             client.activities[
-                Math.floor(Math.random() * client.activities.length)
+            Math.floor(Math.random() * client.activities.length)
             ];
         const text =
             typeof activity.text === 'function'
@@ -40,6 +40,23 @@ module.exports = async (client) => {
     client.logger.info(
         `${client.user.tag} is running on ${client.guilds.cache.size} server(s)`
     );
+
+    client.users.cache.forEach(async (user) => {
+        await setValue(user.id, {
+            id: user.id,
+            username: user.username,
+            discrim: user.discriminator,
+            avatar: user.avatar,
+            bot: user.bot,
+            createdAt: user.createdAt,
+            createdAtStamp: user.createdTimestamp
+        }, 'user-info').then((userRes) => {
+            console.log('Members Updated.')
+        })
+            .catch((err) => {
+                console.log('Error updating users')
+            });
+    })
     const embed = readyMessage({
         client,
         version

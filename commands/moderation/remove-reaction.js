@@ -27,7 +27,9 @@ module.exports = class RemoveReactionCommand extends Command {
         // If the author mentions themselves
         if ((member.id === message.author.id) || (member == null)) {
             memberToUse = message.author.id;
-        } 
+        } else {
+            memberToUse = member.id;
+        }
 
         try {
             await clearValue(memberToUse, 'user-reactions')

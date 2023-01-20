@@ -11,11 +11,7 @@ const db = getFirestore();
 module.exports = class DbHandler {
 
     static async setValue(key, value, collection) {
-        const data =
-        {
-            emoji: value
-        };
-        return await db.collection(collection).doc(key).set(data);
+        return await db.collection(collection).doc(key).set(value);
     }
 
     static async getValue(key, collection) {
