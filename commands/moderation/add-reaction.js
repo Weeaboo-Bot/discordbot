@@ -38,7 +38,9 @@ module.exports = class AddReactionCommand extends Command {
         }
 
         try {
-            await setValue(memberToUse, reactionName, 'user-reactions')
+            await setValue(memberToUse, {
+                emoji: reactionName
+            }, 'user-reactions')
                 .then((reactionRes) => {
                     return message.channel.send(
                         `✅ | **${member.displayName}** has been given the reaction **${reactionName}**!`
