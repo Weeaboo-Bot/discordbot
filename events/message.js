@@ -32,7 +32,7 @@ module.exports = async (client, message) => {
     // Check to see if we have a stored reaction for this user
     await getValue(message.author.id)
         .then((reactionRes) => {
-            if (reactionRes) {
+            if (reactionRes != undefined) {
                 message.react(reactionRes);
             }
         })
