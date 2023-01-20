@@ -30,7 +30,7 @@ module.exports = class RemoveReactionCommand extends Command {
         } 
 
         try {
-            await clearValue(memberToUse)
+            await clearValue(memberToUse, 'user-reactions')
                 .then((reactionRes) => {
                     return message.channel.send(
                         `✅ | **${member.displayName}** has lost the reaction !`

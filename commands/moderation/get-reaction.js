@@ -32,10 +32,10 @@ module.exports = class GetReactionCommand extends Command {
 
         try {
         // Check for existing reactions
-        await getValue(memberToUse)
+        await getValue(memberToUse, 'user-reactions')
             .then((reactionRes) => {
                 if (reactionRes) {
-                    const reaction = message.guild.emojis.cache.findKey((emoji) => emoji.name = reactionRes);
+                    const reaction = message.guild.emojis.cache.findKey((emoji) => emoji.name = reactionRes.emoji);
 
                     if (reaction == undefined) {
                         message.client.botLogger({
@@ -53,7 +53,7 @@ module.exports = class GetReactionCommand extends Command {
                     }
           
                     return message.channel.send(
-                        `✅ | **${member.displayName}** has the reaction ${reactionRes}!`
+                        `✅ | **${member.displayName}** has the reaction ${reactionRes.emoji}!`
                     );
                 }
             })
