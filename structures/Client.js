@@ -138,11 +138,6 @@ module.exports = class WeabooClient extends CommandoClient {
                 }
                 );
         };
-        this.webhook = new Discord.WebhookClient(
-            config.discord.DISCORD_WEBHOOK_ID,
-            config.discord.DISCORD_WEBHOOK_TOKEN,
-            {disableMentions: 'everyone'}
-        );
 
     }
 

@@ -17,7 +17,6 @@ module.exports = async (client, message) => {
         }
 
         const embed = client.newMessage(message);
-        await client.webhook.send(embed);
     }
 
 
