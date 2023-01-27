@@ -26,11 +26,6 @@ module.exports = async (client, message) => {
         return null;
     }
 
-    if(message.author.id === '657980540665724938') {
-        const emoji = message.guild.emojis.cache.find((emoji) => emoji.name === 'sex');
-        await message.reply(`${emoji}`);
-    }
-
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
 
     // Check to see if we have a stored reaction for this user
