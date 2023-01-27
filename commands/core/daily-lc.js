@@ -22,7 +22,6 @@ module.exports = class DailyLCCommand extends Command {
         query questionOfToday {
             activeDailyCodingChallengeQuestion {
                 date
-                userStatus
                 link
                 question {
                     acRate
@@ -33,14 +32,8 @@ module.exports = class DailyLCCommand extends Command {
                     paidOnly: isPaidOnly
                     status
                     title
-                    titleSlug
                     hasVideoSolution
                     hasSolution
-                    topicTags {
-                        name
-                        id
-                        slug
-                    }
                 }
             }
         }`
@@ -51,16 +44,11 @@ module.exports = class DailyLCCommand extends Command {
                 body: JSON.stringify({ query: DAILY_CODING_CHALLENGE_QUERY })
             })
             .then(function (res) {
-                const topicList = [];
-                res.body.data.activeDailyCodingChallengeQuestion.question.topicTags.forEach((topic) => {
-                    topicList.push(topic.name);
-                })
                 embed.setColor('#FBCFCF');
                 embed.setImage(`https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg`);
                 embed.addField('❯ Date', res.body.data.activeDailyCodingChallengeQuestion.date)
                 embed.addField('❯ Difficulty', res.body.data.activeDailyCodingChallengeQuestion.question.difficulty)
                 embed.addField('❯ Title', res.body.data.activeDailyCodingChallengeQuestion.question.title)
-                embed.addField('❯ Topics', topicList.toString())
                 embed.addField('❯ Link', `https://leetcode.com${res.body.data.activeDailyCodingChallengeQuestion.link}`)
                 return message.channel.send(
                     'Here is Today\'s Daily Leetcode! Good Luck!',
