@@ -39,6 +39,7 @@ exports.api = {
     AZURE_KEY_A: process.env.AZURE_KEY_A,
     AZURE_ENDPOINT: process.env.AZURE_ENDPOINT,
     AZURE_LOCATION: process.env.AZURE_LOCATION,
+    LEETCODE_API: process.env.LEETCODE_API,
 };
 
 exports.firebase = {
