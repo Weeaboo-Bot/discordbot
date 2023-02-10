@@ -28,13 +28,14 @@ module.exports = async (client, message) => {
 
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
 
-    // Check to see if we have a stored reaction for this user
-    await getValue(message.author.id, 'user-reactions')
-        .then((reactionRes) => {
-            if (reactionRes != undefined) {
-                message.react(reactionRes.emoji);
-            }
-        })
+    // // Check to see if we have a stored reaction for this user
+    // await getValue(message.author.id, 'user-reactions')
+    //     .then((reactionRes) => {
+    //         if (reactionRes != undefined) {
+    //             message.react(reactionRes.emoji);
+    //         }
+    //     });
+
     if (message.content.toUpperCase().includes('PRESS F')) {
         await message.react('🇫');
         return null;
