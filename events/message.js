@@ -1,4 +1,3 @@
-const BannedWords = require('../assets/json/bannedwords.json');
 const { getValue } = require('../util/dbhandler');
 // Export message events
 module.exports = async (client, message) => {
@@ -11,11 +10,6 @@ module.exports = async (client, message) => {
 
     // Log Messages on Server
     if(message) {
-        if (BannedWords.some(word => message.content.toString().includes(word))) {
-            message.delete().catch(e => message.client.logger.error("Couldn't delete message."));
-            await message.author.send('❌ Warning: Do not swear!');
-        }
-
         const embed = client.newMessage(message);
         await client.webhook.send(embed);
     }
