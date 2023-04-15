@@ -54,8 +54,6 @@ List coming soon
     "wanakana": "^2.3.1",
     "wikijs": "^3.1.4",
     "ws": "^3.2.0",
-    "youtube-node": "^1.3.2",
-    "ytdl-core": "^2.1.5",
     "zalgolize": "^1.2.4"
 
 ```
