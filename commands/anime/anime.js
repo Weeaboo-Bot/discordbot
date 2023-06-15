@@ -1,10 +1,8 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const aq = require('animequote');
-const Jikan = require('jikan-node');
-const mal = new Jikan();
-const moment = require('moment');
-// TODO: This needs to be updated
+const Jikan = require('jikan4.js');
+const mal = new Jikan.Client();
+
 module.exports = class AnimeCommand extends Command {
     constructor(client) {
         super(client, {
@@ -25,12 +23,12 @@ module.exports = class AnimeCommand extends Command {
     }
 
     async run(message, { search }) {
-        await mal.search('anime',search,'page').then((result) => {
+        await mal.anime.search(search).then((result) => {
 
             // Return Top 5 results to user, let user select the correct anime.
             const animeArr = [];
-            for (let i = 0; i < result.results.length; i++) {
-                animeArr.push(`${i + 1}: ${result.results[i].title}`);
+            for (let i = 0; i < result.length; i++) {
+                animeArr.push(`${i + 1}: ${result[i].title}`);
             }
             animeArr.push('exit');
             const animeEmbed = new Discord.MessageEmbed()
@@ -63,16 +61,15 @@ module.exports = class AnimeCommand extends Command {
                     if (response.first().content === 'exit') {
                         return animeEmbed.delete();
                     }
-                    //DO Stuff here
-                    //Then search with MAL ID to get better info ?
-                    mal.findAnime(result.results[animeIndex - 1].mal_id)
+
+                    mal.anime.getFull(result[animeIndex - 1].id)
                         .then((anime) => {
 
                             const embed = new Discord.MessageEmbed()
                                 .setColor('#FF9D6E')
                                 .setURL(anime.url)
                                 .setTitle(
-                                    `${anime.title_english ? anime.title_english : 'N/A'} | ${anime.type ? anime.type : 'N/A'}`
+                                    `${anime.title.english ? anime.title.english : 'N/A'} | ${anime.type ? anime.type : 'N/A'}`
                                 )
                                 .setAuthor(anime.studios[0].name ? anime.studios[0].name : 'N/A')
                                 .setDescription(
@@ -81,7 +78,7 @@ module.exports = class AnimeCommand extends Command {
                                 .addField(
                                     '❯\u2000Information',
                                     `•\u2000\**Japanese Name:** ${
-                                        anime.title_japanese ? anime.title_japanese : 'N/A'
+                                        anime.title.japanese ? anime.title.japanese : 'N/A'
                                     }\n\•\u2000\**Age Rating:** ${
                                         anime.rating ? anime.rating : 'N/A'
                                     }\n\•\u2000\**NSFW:** ${anime.rating.includes('R+') ? 'Yes' : 'No'
@@ -95,23 +92,24 @@ module.exports = class AnimeCommand extends Command {
                                 )
                                 .addField(
                                     '❯\u2000Status',
-
                                     `•\u2000\**Current Status:** ${
-                                        anime.status ? anime.status : 'N/A'
+                                        anime.airInfo.status ? anime.airInfo.status : 'N/A'
                                     }\n\•\u2000\**Episodes:** ${
                                         anime.episodes ? anime.episodes : 'N/A'
-                                    }\n\•\u2000\**Broadcast Time:** ${
-                                        anime.broadcast ? anime.broadcast : 'N/A'
-                                    }\n\•\u2000\**Premiered:** ${
-                                        anime.premiered ? anime.premiered : 'N/A'
-                                    }\n\•\u2000\**Start Date:** ${
-                                        anime.aired.from ? moment().format(anime.aired.from) : 'N/A'
-                                    }\n\•\u2000\**End Date:** ${
-                                        anime.aired.to ? moment().format(anime.aired.to) : 'N/A'
                                     }`,
                                     true
                                 )
-                                .setImage(anime.image_url);
+                                .setImage(anime.image.webp.default);
+
+                                anime.themes.forEach((theme) => {
+                                    embed.addField(`\n\•\u2000\**Anime Theme:**`, theme.name, true);
+                                });
+                                anime.themeSongs.openings.forEach((theme) => {
+                                    embed.addField(`\n\•\u2000\**Anime Opening Theme:**`, theme, true);
+                                });
+                                anime.themeSongs.endings.forEach((theme) => {
+                                    embed.addField(`\n\•\u2000\**Anime Ending Theme:**`, theme, true);
+                                });
                             return message.channel.send({ embed: embed });
                         })
                         .catch((detailError) => {
