@@ -25,11 +25,7 @@ module.exports = class BoobsCommand extends Command {
         } else {
             const id = [Math.floor(Math.random() * 4923)];
             await this.apiReq
-                .get('http://api.oboobs.ru/boobs/', {
-                    params: {
-                        id: id,
-                    },
-                })
+                .get(`http://api.oboobs.ru/boobs/${id}`)
                 .then(function (res) {
                     return message.channel.send({
                         embed: new Discord.MessageEmbed()
