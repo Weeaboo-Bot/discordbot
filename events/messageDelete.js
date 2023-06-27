@@ -44,7 +44,7 @@ module.exports = async (client, message) => {
             .addField('Delete Event', 'Member is Unknown')
             .setFooter(`v${version}`)
             .setTimestamp();
-    //    client.botLogger.send({ embed });
+        client.botLogger.send({ embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted, but we don't know by who.`
         );
