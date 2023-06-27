@@ -24,13 +24,6 @@ module.exports = (client, oldMessage, newMessage) => {
     // Content change
     if (oldMessage.content != newMessage.content) {
 
-        if (
-            client.botLogger &&
-            client.botLogger.viewable &&
-            client.botLogger
-                .permissionsFor(newMessage.guild.me)
-                .has(['SEND_MESSAGES', 'EMBED_LINKS'])
-        ) {
             if (newMessage.content.length > 1024) {
                 newMessage.content = newMessage.content.slice(0, 1021) + '...';
             }
@@ -48,7 +41,6 @@ module.exports = (client, oldMessage, newMessage) => {
                 .addField('Before', oldMessage.content)
                 .addField('After', newMessage.content);
             client.botLogger.send(embed);
-        }
     }
 
     // Embed delete
