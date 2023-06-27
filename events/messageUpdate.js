@@ -40,7 +40,7 @@ module.exports = (client, oldMessage, newMessage) => {
                 )
                 .addField('Before', oldMessage.content)
                 .addField('After', newMessage.content);
-            client.botLogger.send(embed);
+            client.botLogger({ embed: embed });
     }
 
     // Embed delete
