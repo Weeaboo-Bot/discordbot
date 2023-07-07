@@ -38,6 +38,9 @@ function auditMessage(auditEntry, reason, message) {
         .addField('AUDIT ACTION', auditEntry.action)
         .addField('AUDIT TYPE', auditEntry.actionType)
         .addField('AUDIT SENDER', auditEntry.executor)
+        .addField('AUDIT TARGET', auditEntry.target)
+        .addField('AUDIT CHANNEL', auditEntry.extra.channel.name)
+        .addField('AUDIT GUILD', auditEntry.extra.channel.guild)
         .addField('AUDIT MESSAGE', message)
         .addField('AUDIT REASON', auditEntry.reason || reason, true)
         .setTimestamp();
