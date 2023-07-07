@@ -1,4 +1,3 @@
-const BannedWords = require('../assets/json/bannedwords.json');
 const { getValue } = require('../util/dbhandler');
 // Export message events
 module.exports = async (client, message) => {
@@ -11,12 +10,8 @@ module.exports = async (client, message) => {
 
     // Log Messages on Server
     if(message) {
-        if (BannedWords.some(word => message.content.toString().includes(word))) {
-            message.delete().catch(e => message.client.logger.error("Couldn't delete message."));
-            await message.author.send('❌ Warning: Do not swear!');
-        }
-
         const embed = client.newMessage(message);
+        await client.webhook.send(embed);
     }
 
 
@@ -28,13 +23,14 @@ module.exports = async (client, message) => {
 
     //  if (!message.channel.(client.user.id).has('SEND_MESSAGES')) return undefined;
 
-    // Check to see if we have a stored reaction for this user
-    await getValue(message.author.id, 'user-reactions')
-        .then((reactionRes) => {
-            if (reactionRes != undefined) {
-                message.react(reactionRes.emoji);
-            }
-        })
+    // // Check to see if we have a stored reaction for this user
+    // await getValue(message.author.id, 'user-reactions')
+    //     .then((reactionRes) => {
+    //         if (reactionRes != undefined) {
+    //             message.react(reactionRes.emoji);
+    //         }
+    //     });
+
     if (message.content.toUpperCase().includes('PRESS F')) {
         await message.react('🇫');
         return null;
