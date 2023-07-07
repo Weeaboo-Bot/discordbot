@@ -25,12 +25,9 @@ module.exports = class AssCommand extends Command {
         } else {
             const id = [Math.floor(Math.random() * 4923)];
             await this.apiReq
-                .get('http://api.obutts.ru/butts/', {
-                    params: {
-                        id: id,
-                    },
-                })
+                .get(`http://api.obutts.ru/butts/${id}`)
                 .then(function (res) {
+                    const y = id;
                     return message.channel.send({
                         embed: new Discord.MessageEmbed()
                             .setFooter('http://obutts.ru/')

@@ -1,7 +1,9 @@
 const Command = require('../../structures/Command');
-const PH = require('pornhub');
+const Discord = require('discord.js');
+const { PornHub } = require('pornhub.js');
 const { errorMessage } = require('../../util/logHandler');
 const errors = require('../../assets/json/errors');
+const pornhub = new PornHub();
 
 module.exports = class PornHubCommand extends Command {
     constructor(client) {
@@ -32,33 +34,28 @@ module.exports = class PornHubCommand extends Command {
         }
 
         try {
-            await PH.search({
-                search: search,
-                thumbsize: 'medium',
-            })
+            await pornhub.searchVideo(search)
                 .then(function (res) {
-                    console.log(res);
-                    // res.data.slice(0,4).forEach(item => {
-                    //     const viewKey = item.url.slice(47);
-                    //    return message.channel.send({embed : new Discord.MessageEmbed()
-                    //            .setTitle(item.title)
-                    //            .setImage(item.preview)
-                    //            .addField('HD: ',item.hd)
-                    //            .addField('Video Length',item.duration)
-                    //            .addField('Video URL',` **${search}** (https://www.pornhub.com/view_video.php?viewkey=${viewKey})`)
-                    //            .setURL(item.url)})
-                    //
-                    // })
+                    res.data.forEach(item => {
+                       const embed = new Discord.MessageEmbed()
+                               .setTitle(item.title)
+                               .setImage(item.preview)
+                               .addField('HD: ',item.hd)
+                               .addField('Video Length',item.duration)
+                               .addField('Video URL', item.url)
+                               .setURL(item.url);
+                        message.channel.send({ embed: embed});
+                    })
                 })
                 .catch(function (error) {
-                    message.client.botLogger
-                        .send({
-                            embed: errorMessage(
-                                error,
-                                message.client.errorTypes.API,
-                                message.command.name
-                            ),
-                        });
+                    message.client.botLogger({
+                        embed: message.client.errorMessage(
+                            error,
+                            message.client.errorTypes.API,
+                            message.command.name,
+                            search
+                        ),
+                    });
                 });
 
             return null;

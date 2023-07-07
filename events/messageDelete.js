@@ -25,13 +25,13 @@ module.exports = async (client, message) => {
 
     // We now grab the user object of the person who deleted the message
     // Let us also grab the target of this action to double check things
-    const { executor, target } = deletionLog;
+    const { executor } = deletionLog;
 
     // And now we can update our output with a bit more information
     // We will also run a check to make sure the log we got was for the same author's message
     if (executor.id === message.author.id) {
-        const embed = auditMessage(deletionLog, 'Message Deleted');
-  //      client.botLogger.send({ embed });
+        const embed = auditMessage(deletionLog, 'Message Deleted', message.content);
+       client.botLogger({ embed: embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted by ${executor.tag}.`
         );
@@ -42,9 +42,10 @@ module.exports = async (client, message) => {
             .addField('Audit Event Name', 'Message Deleted')
             .addField('Member', 'Member is Unknown')
             .addField('Delete Event', 'Member is Unknown')
+            .addField('Message', message)
             .setFooter(`v${version}`)
             .setTimestamp();
-    //    client.botLogger.send({ embed });
+        client.botLogger({ embed: embed });
         client.logger.info(
             `A message by ${message.author.tag} was deleted, but we don't know by who.`
         );

@@ -42,7 +42,7 @@ module.exports = class NSFWCommand extends Command {
         if (Object.keys(SubsToSearch).includes(subList)) {
             const subIndex = getRndInteger(0, SubsToSearch[subList].length);
 
-            await axios
+            await this.apiReq
                 .get(
                     `https://www.reddit.com/r/${SubsToSearch[subList][subIndex]}.json`
                 )
@@ -51,27 +51,23 @@ module.exports = class NSFWCommand extends Command {
                         0,
                         res.data.data.children.length
                     );
-
                     const embed = new Discord.MessageEmbed()
-                        .setFooter(`${subList}`)
-                        .setDescription(
-                            `[Image URL](${res.data.data.children[index].data.permalink})`
-                        )
+                        .setFooter(`${res.data.data.children[index].data.subreddit}`)
+                        .setDescription(`[Image URL](${res.data.data.children[index].data.permalink})`)
                         .setImage(res.data.data.children[index].data.url)
                         .setColor('#A187E0');
-                    return message.channel.send({ embed });
+                    return message.channel.send({embed:  embed });
                 })
                 .catch(function (error) {
                     // handle error
-
-                    message.client.botLogger
-                        .send({
-                            embed: errorMessage(
-                                error,
-                                message.client.errorTypes.API,
-                                message.command.name
-                            ),
-                        });
+                    message.client.botLogger({
+                        embed: message.client.errorMessage(
+                            error,
+                            message.client.errorTypes.API,
+                            message.command.name,
+                            message.argString
+                        ),
+                    });
                 });
         } else {
             message.say('This Section is not searchable thru Subs');
