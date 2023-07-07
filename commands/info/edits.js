@@ -1,7 +1,7 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const moment = require('moment');
-const { fromNow } = require('discord.js-commando');
+const {  } = require('discord.js-commando');
 
 module.exports = class EditsCommand extends Command {
     constructor(client) {
