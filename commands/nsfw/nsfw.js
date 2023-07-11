@@ -68,6 +68,8 @@ module.exports = class NSFWCommand extends Command {
                             message.argString
                         ),
                     });
+
+                    message.channel.send('Sorry, this is currently not usable');
                 });
         } else {
             message.say('This Section is not searchable thru Subs');
