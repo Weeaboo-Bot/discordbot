@@ -35,6 +35,11 @@ module.exports = class MockingCommand extends Command {
         ) {
             letters[i] = letters[i].toUpperCase();
         }
+
+        message.delete();
+        return msg.say(
+            `${letters.join('')}${canEmoji ? this.mockingEmoji : ''}`
+        );
         return msg.say(
             `${letters.join('')}${canEmoji ? this.mockingEmoji : ''}`
         );
