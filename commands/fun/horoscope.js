@@ -47,7 +47,7 @@ module.exports = class HoroscopeCommand extends Command {
             return message.channel.send('That is not a valid sign!');
         }
 
-        await axios
+        await this.apiReq
             .post(`https://aztro.sameerkumar.website?sign=${sign}&day=today`)
             .then(function (res) {
                 const msg = new Discord.MessageEmbed()
