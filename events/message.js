@@ -8,13 +8,6 @@ module.exports = async (client, message) => {
         return client.channels.cache.get(client.dmLog).send({ embed : client.dmMessage(message) });
     }
 
-    // Log Messages on Server
-    if(message) {
-        const embed = client.newMessage(message);
-        await client.webhook.send(embed);
-    }
-
-
     // Reply on Pinned message
     if(message.pinned) {
         await message.reply('This message has been pinned');
