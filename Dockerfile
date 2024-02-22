@@ -15,7 +15,7 @@ ENV NODE_ENV production
 COPY . .
 
 # Expose Discord bot port (5000)
-EXPOSE 5000
+EXPOSE 3000
 
 # Start the bot using PM2
 CMD ["npm", "run", "start"]
