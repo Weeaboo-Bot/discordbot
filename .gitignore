@@ -96,3 +96,5 @@ test/
 *.exe
 node_modules
 .idea
+
+venv

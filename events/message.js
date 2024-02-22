@@ -1,4 +1,3 @@
-const { getValue } = require('../util/dbhandler');
 // Export message events
 module.exports = async (client, message) => {
     if (message.author.bot) return undefined;
