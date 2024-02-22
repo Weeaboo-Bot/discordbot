@@ -23,8 +23,6 @@
     "homepage": "https://github.com/sdoran35/discordbot#readme",
     "dependencies": {
         "@giphy/js-fetch-api": "^2.4.0",
-        "@sentry/node": "^7.102.1",
-        "@sentry/profiling-node": "^7.102.1",
         "@vitalets/google-translate-api": "^4.0.0",
         "aki-api": "^5.2.0",
         "alphavantage": "^2.2.0",
