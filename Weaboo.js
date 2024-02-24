@@ -22,7 +22,6 @@ const client = new Client(config, {
     disableMentions: 'everyone',
     partials: ['GUILD_MEMBER'],
     ws: { intents: intents },
-    shards: auto,
 });
 
 // Initialize client
