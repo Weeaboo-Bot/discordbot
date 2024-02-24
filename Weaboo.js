@@ -12,7 +12,7 @@ intents.add(
     'GUILDS',
     'GUILD_VOICE_STATES',
     'GUILD_MESSAGES',
-    'GUILD_MESSAGE_REACTIONS'
+    'GUILD_MESSAGE_REACTIONS',
 );
 
 const client = new Client(config, {
@@ -22,6 +22,7 @@ const client = new Client(config, {
     disableMentions: 'everyone',
     partials: ['GUILD_MEMBER'],
     ws: { intents: intents },
+    shards: auto,
 });
 
 // Initialize client
