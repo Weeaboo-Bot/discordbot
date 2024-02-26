@@ -18,4 +18,5 @@ COPY . .
 EXPOSE 3000
 
 # Start the bot using PM2
-CMD ["npm", "run", "start"]
+ENTRYPOINT ["npm", "run"]
+CMD ["start"]
