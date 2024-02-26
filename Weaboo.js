@@ -16,13 +16,15 @@ intents.add(
 );
 
 const client = new Client(config, {
-    commandPrefix: config.discord.DISCORD_PREFIX,
+    intents: intents,
+    commandPrefix: '$',
     owner: config.discord.DISCORD_OWNER_ID,
     invite: config.discord.DISCORD_INVITE,
     disableMentions: 'everyone',
     partials: ['GUILD_MEMBER'],
     ws: { intents: intents },
 });
+
 
 // Initialize client
 function init() {

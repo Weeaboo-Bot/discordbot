@@ -74,6 +74,8 @@ module.exports = class WeabooClient extends CommandoClient {
             this.logger.error(`[COMMAND:${command.name}]\n${err.stack}`)
         );
 
+        this.logger.info(config.discord.DISCORD_PREFIX);
+
         this.on('voiceStateUpdate', async (___, newState) => {
             if (
                 newState.member.user.bot &&
@@ -92,7 +94,6 @@ module.exports = class WeabooClient extends CommandoClient {
          */
         this.token = config.discord.DISCORD_TOKEN;
         this.successEmoji = config.api.SUCCESS_EMOJI_ID;
-        this.commandPrefix = config.discord.DISCORD_PREFIX;
         this.guildId = config.discord.GUILD_ID;
 
         /**
