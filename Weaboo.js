@@ -17,7 +17,7 @@ intents.add(
 
 const client = new Client(config, {
     intents: intents,
-    commandPrefix: '$',
+    commandPrefix: '%',
     owner: config.discord.DISCORD_OWNER_ID,
     invite: config.discord.DISCORD_INVITE,
     disableMentions: 'everyone',
