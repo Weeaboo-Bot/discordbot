@@ -8,6 +8,7 @@ module.exports = class BanCommand extends Command {
             group: 'moderation',
             memberName: 'hackban',
             guildOnly: true,
+            ownerOnly: true,
             clientPermissions: ['BAN_MEMBERS'],
             userPermissions: ['BAN_MEMBERS'],
             description:
@@ -19,7 +20,7 @@ module.exports = class BanCommand extends Command {
             },
             args: [
                 {
-                    key: 'memberName',
+                    key: 'memberId',
                     prompt: 'Please provide me a user ID to hackban!',
                     type: 'string',
                 },
@@ -36,27 +37,14 @@ module.exports = class BanCommand extends Command {
         });
     }
 
-    async run(message, { memberName, reason }) {
-        const member = message.mentions.members.first();
+    async run(message, { memberId, reason }) {
+        const member = await this.client.users.fetch(memberId);
 
         if (member.id === this.client.user.id) {
             return message.channel.send("Please don't ban me...!");
         }
         if (member.id === message.author.id) {
             return message.channel.send("I wouldn't dare ban you...!");
-        }
-        if (
-            member.roles.highest.position >
-            message.member.roles.highest.position - 1
-        ) {
-            return message.channel.send(
-                `❎ | You can't ban **${member.user.username}**! Their position is higher than you!`
-            );
-        }
-        if (!member.bannable) {
-            return message.channel.send(
-                `❎ | I can't ban **${member.user.username}**! Their role is higher than mine!`
-            );
         }
 
         this.client.users.fetch(member.id).then(async (usr) => {
