@@ -17,9 +17,9 @@ module.exports = class BanCommand extends Command {
             },
             args: [
                 {
-                    key: 'memberName',
+                    key: 'memberId',
                     prompt: 'Please provide me a user to ban!',
-                    type: 'member',
+                    type: 'string',
                 },
                 {
                     key: 'reason',
@@ -36,8 +36,8 @@ module.exports = class BanCommand extends Command {
         });
     }
 
-    async run(message, { memberName, reason }) {
-        const member = message.mentions.members.first();
+    async run(message, { memberId, reason }) {
+        const member = await this.client.users.fetch(memberId);
 
         if (member.id === this.client.user.id) {
             return message.channel.send("Please don't ban me...!");
@@ -45,22 +45,9 @@ module.exports = class BanCommand extends Command {
         if (member.id === message.author.id) {
             return message.channel.send("I wouldn't dare ban you...!");
         }
-        if (
-            member.roles.highest.position >
-            message.member.roles.highest.position - 1
-        ) {
-            return message.channel.send(
-                `❎ | You can't ban **${member.user.username}**! Their position is higher than you!`
-            );
-        }
-        if (!member.bannable) {
-            return message.channel.send(
-                `❎ | I can't ban **${member.user.username}**! Their role is higher than mine!`
-            );
-        }
 
         await message.channel.send(
-            `Are you sure you want to ban **${member.user.tag}**? \`\`(y/n)\`\``
+            `Are you sure you want to ban **${member.tag}**? \`\`(y/n)\`\``
         );
         const msgs = await message.channel.awaitMessages(
             (res) => res.author.id === message.author.id,
@@ -90,7 +77,7 @@ module.exports = class BanCommand extends Command {
             );
         }
 
-        await member.ban({
+        await message.guild.members.ban(member, {
             days: 7,
             reason: `${message.author.tag}: ${reason}`,
         });
