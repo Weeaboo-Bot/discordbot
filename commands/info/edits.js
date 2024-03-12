@@ -1,7 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 const moment = require('moment');
-const {  } = require('discord.js-commando');
 
 module.exports = class EditsCommand extends Command {
     constructor(client) {
@@ -78,4 +77,8 @@ function truncate(string, max, append = '') {
         string = string.replace(/\s+?$/, '');
     }
     return string + '\u2026' + append;
+}
+
+function fromNow(date) {
+    return moment(date).fromNow();
 }
