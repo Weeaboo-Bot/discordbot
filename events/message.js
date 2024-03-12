@@ -12,7 +12,7 @@ module.exports = async (client, message) => {
         content: message,
         username: message.author.username,
         avatarURL: message.author.displayAvatarURL({ format: 'png', size: 128 }),
-        embeds: [new Discord.EmbedBuilder()
+        embeds: [new Discord.MessageEmbed()
             .setTitle('Message History')
             .setColor(0x00FFFF)],
     });
