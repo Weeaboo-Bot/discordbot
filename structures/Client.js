@@ -144,6 +144,11 @@ module.exports = class WeabooClient extends CommandoClient {
             config.discord.DISCORD_WEBHOOK_TOKEN,
             {disableMentions: 'everyone'}
         );
+        this.loggingWebhook = new Discord.WebhookClient(
+            config.discord.DISCORD_LOGGING_WEBHOOK_ID,
+            config.discord.DISCORD_LOGGING_WEBHOOK_TOKEN,
+            {disableMentions: 'everyone'}
+        );
 
     }
 

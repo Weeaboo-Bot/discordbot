@@ -4,11 +4,20 @@ module.exports = async (client, message) => {
 
     if (message.channel.type == 'dm') {
         if (message.content.startsWith(message.client.prefix)) return;
-        return client.channels.cache.get(client.dmLog).send({ embed : client.dmMessage(message) });
+        return client.channels.cache.get(client.dmLog).send({ embed: client.dmMessage(message) });
     }
 
+    client.loggingWebhook.send({
+        content: message,
+        username: message.author.username,
+        avatarURL: message.author.displayAvatarURL({ format: 'png', size: 128 }),
+        embeds: [new EmbedBuilder()
+            .setTitle('Message History')
+            .setColor(0x00FFFF)],
+    });
+
     // Reply on Pinned message
-    if(message.pinned) {
+    if (message.pinned) {
         await message.reply('This message has been pinned');
         return null;
     }
