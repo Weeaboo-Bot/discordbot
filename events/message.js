@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 // Export message events
 module.exports = async (client, message) => {
     if (message.author.bot) return undefined;
@@ -11,7 +12,7 @@ module.exports = async (client, message) => {
         content: message,
         username: message.author.username,
         avatarURL: message.author.displayAvatarURL({ format: 'png', size: 128 }),
-        embeds: [new EmbedBuilder()
+        embeds: [new Discord.EmbedBuilder()
             .setTitle('Message History')
             .setColor(0x00FFFF)],
     });
