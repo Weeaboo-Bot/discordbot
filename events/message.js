@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 // Export message events
 module.exports = async (client, message) => {
     if (message.author.bot) return undefined;
@@ -7,15 +6,6 @@ module.exports = async (client, message) => {
         if (message.content.startsWith(message.client.prefix)) return;
         return client.channels.cache.get(client.dmLog).send({ embed: client.dmMessage(message) });
     }
-
-    client.loggingWebhook.send({
-        content: message,
-        username: message.author.username,
-        avatarURL: message.author.displayAvatarURL({ format: 'png', size: 128 }),
-        embeds: [new Discord.MessageEmbed()
-            .setTitle('Message History')
-            .setColor(0x00FFFF)],
-    });
 
     // Reply on Pinned message
     if (message.pinned) {
