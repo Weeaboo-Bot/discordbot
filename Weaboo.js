@@ -3,7 +3,7 @@ const express = require('express');
 const Discord = require('discord.js');
 const Client = require('./structures/Client');
 const Sentry = require("@sentry/node");
-import { nodeProfilingIntegration } from "@sentry/profiling-node";
+const { nodeProfilingIntegration } = require("@sentry/profiling-node");
 
 
 global.__basedir = __dirname;
