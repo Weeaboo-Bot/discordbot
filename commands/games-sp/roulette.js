@@ -21,30 +21,49 @@ module.exports = class RouletteCommand extends Command {
       description: 'Play a game of roulette.',
       args: [
         {
-          key: 'space',
-          prompt: 'What space do you want to bet on?',
+          key: 'spaces',
+          prompt: 'What spaces do you want to bet on (separated by commas)?',
           type: 'string',
-          validate: (space) => {
-            const validOption = Object.values(rouletteOptions).some(
-              (option) => option.includes(space.toLowerCase())
-            );
-            return validOption || isNumber(space);
+          validate: (spaces) => {
+            const allValid = spaces.split(',').every((space) => {
+              const validOption = Object.values(rouletteOptions).some(
+                (option) => option.includes(space.toLowerCase())
+              );
+              return validOption || isNumber(space);
+            });
+            return allValid || oneLine`
+              Invalid spaces provided, please enter a comma-separated list of valid options. Valid options include:
+              * Numbers (e.g. 5, 17)
+              * Dozens (e.g. 1-12, 25-36)
+              * Halves (e.g. 1-18, 19-36)
+              * Columns (e.g. 1st, 2nd, 3rd)
+              * Parity (e.g. even, odd)
+              * Colors (e.g. red, black)
+            `;
           },
-          parse: (space) => space.toLowerCase(),
+          parse: (spaces) => spaces.split(',').map((space) => space.toLowerCase()),
         },
       ],
     });
   }
 
-  run(msg, { space }) {
+  run(msg, { spaces }) {
     const number = Math.floor(Math.random() * 37);
     const color = number ? (this.isRed(number) ? 'RED' : 'BLACK') : null;
-    const win = this.verifyWin(space, number);
-    return msg.reply(
-      `The result is **${number}${color ? ` ${color}` : ''}**. ${
-        win ? 'You win!' : 'You lose...'
-      }`
-    );
+
+    const wins = spaces.map((space) => this.verifyWin(space, number));
+    const winCount = wins.filter(Boolean).length;
+
+    let resultMessage = `The result is **${number}${color ? ` ${color}` : ''}**. `;
+    if (winCount === 0) {
+      resultMessage += 'You lose...';
+    } else if (winCount === spaces.length) {
+      resultMessage += 'You win on all bets!';
+    } else {
+      resultMessage += `You win on ${winCount} out of ${spaces.length} bets.`;
+    }
+
+    return msg.reply(resultMessage);
   }
 
   isRed(number) {
