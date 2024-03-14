@@ -117,6 +117,7 @@ module.exports = class WeabooClient extends CommandoClient {
          * @type {Object}
          */
         this.utils = require('../util/Util');
+        this.casinoChannel = config.discord.CASINO_CHANNEL;
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;

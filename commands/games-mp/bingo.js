@@ -28,6 +28,9 @@ module.exports = class BingoCommand extends Command {
     }
 
     async run(msg, { playersCount }) {
+        if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
+            return; // Do nothing if channel doesn't match
+        }
         const current = this.client.games.get(msg.channel.id);
         if (current) {
             return msg.reply(

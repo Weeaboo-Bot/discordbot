@@ -28,6 +28,9 @@ module.exports = class BlackjackCommand extends Command {
     }
 
     async run(msg, { deckCount }) {
+        if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
+            return; // Do nothing if channel doesn't match
+        }
         const current = this.client.games.get(msg.channel.id);
         if (current) {
             return msg.reply(
@@ -106,25 +109,22 @@ module.exports = class BlackjackCommand extends Command {
                     } else if (total >= 17) {
                         const playerTotal = this.calculate(playerHand);
                         if (total === playerTotal) {
-                            reason = `${
-                                card
+                            reason = `${card
                                     ? `Dealer drew ${card.display}, making it `
                                     : ''
-                            }${playerTotal}-${total}`;
+                                }${playerTotal}-${total}`;
                             break;
                         } else if (total > playerTotal) {
-                            reason = `${
-                                card
+                            reason = `${card
                                     ? `Dealer drew ${card.display}, making it `
                                     : ''
-                            }${playerTotal}-**${total}**`;
+                                }${playerTotal}-**${total}**`;
                             break;
                         } else {
-                            reason = `${
-                                card
+                            reason = `${card
                                     ? `Dealer drew ${card.display}, making it `
                                     : ''
-                            }**${playerTotal}**-${total}`;
+                                }**${playerTotal}**-${total}`;
                             win = true;
                         }
                     } else {

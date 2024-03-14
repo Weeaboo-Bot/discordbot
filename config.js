@@ -18,6 +18,7 @@ exports.discord = {
     DISCORD_OWNER_ID: process.env.DISCORD_OWNER_ID,
     DISCORD_INVITE: process.env.DISCORD_INVITE,
     GUILD_ID: process.env.GUILD_ID,
+    CASINO_CHANNEL: process.env.CASINO_CHANNEL,
 };
 
 exports.sentry = {
