@@ -8,6 +8,9 @@ primary_region = 'ewr'
 
 [build]
 
+[env]
+  PORT = '3000'
+
 [http_service]
   internal_port = 3000
   force_https = true
@@ -15,7 +18,7 @@ primary_region = 'ewr'
   auto_start_machines = true
   min_machines_running = 2
   processes = ['app']
-[http_service.concurrency]
+[[http_service.concurrency]]
   type = "requests"
   hard_limit = 25
   soft_limit = 20

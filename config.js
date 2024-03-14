@@ -20,6 +20,10 @@ exports.discord = {
     GUILD_ID: process.env.GUILD_ID,
 };
 
+exports.sentry = {
+    SENTRY_DSN: process.env.SENTRY_DSN,
+};
+
 exports.api = {
     ALPHA_KEY: process.env.ALPHA_VANTAGE,
     LOGIN_URL: 'https://us-central1-weaboo-bot-73b07.cloudfunctions.net/api/login',
