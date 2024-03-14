@@ -1,4 +1,5 @@
 const config = require('./config');
+const express = require('express');
 const Discord = require('discord.js');
 const Client = require('./structures/Client');
 
@@ -15,6 +16,7 @@ intents.add(
     'GUILD_MESSAGE_REACTIONS',
 );
 
+const app = express();
 const client = new Client(config, {
     intents: intents,
     commandPrefix: '%',
@@ -35,6 +37,21 @@ function init() {
 }
 
 init();
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    const uptime = Math.round(process.uptime());
+    const guilds = client.guilds.cache.size;
+    const latency = Math.round(client.ws.ping);
+
+    res.status(200);
+    res.json({
+      uptime,
+      guilds,
+      latency,
+      message: 'Bot Ok and Running',
+    });
+  });
 
 
 process.on('unhandledRejection', (err) => client.logger.error(err));

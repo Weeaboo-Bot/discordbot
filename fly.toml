@@ -20,13 +20,12 @@ primary_region = 'ewr'
   hard_limit = 25
   soft_limit = 20
 
-[checks]
-  [checks.bot_tcp_check]
-    grace_period = "30s"
-    interval = "15s"
-    port = 1234
-    timeout = "10s"
-    type = "tcp"
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  timeout = "5s"
+  path = "/health"
 
 [[vm]]
   size = 'shared-cpu-1x'
