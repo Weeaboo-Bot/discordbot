@@ -20,5 +20,13 @@ primary_region = 'ord'
   hard_limit = 25
   soft_limit = 20
 
+[checks]
+  [checks.bot_tcp_check]
+    grace_period = "30s"
+    interval = "15s"
+    port = 1234
+    timeout = "10s"
+    type = "tcp"
+
 [[vm]]
   size = 'shared-cpu-1x'
