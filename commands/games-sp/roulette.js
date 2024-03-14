@@ -1,13 +1,14 @@
 const Command = require('../../structures/Command');
 const { oneLine } = require('common-tags');
 
-const numbers = Array.from({ length: 37 }, (_, i) => i); // Correctly generates numbers 0 to 36
+// Generate numbers 0 to 36 correctly
+const numbers = Array.from({ length: 37 }, (_, i) => i + 1); // Start from 1
 
 const rouletteOptions = {
-  numbers: numbers, // Directly use the generated array
+  numbers, // Use the generated array
   dozens: ['1-12', '13-24', '25-36'],
   halves: ['1-18', '19-36'],
-  columns: ['1st', '2nd', '3rd'],
+  columns: ['1', '2', '3'], // Change to numerical values for consistency
   parity: ['even', 'odd'],
   colors: ['red', 'black'],
 };
@@ -69,7 +70,7 @@ module.exports = class RouletteCommand extends Command {
   }
 
   isRed(number) {
-    return rouletteOptions.colors.red.includes(number);
+    return rouletteOptions.colors?.red?.includes(number);
   }
 
   verifyWin(choice, result) {
