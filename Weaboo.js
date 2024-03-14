@@ -17,6 +17,8 @@ intents.add(
 );
 
 const app = express();
+const port = process.env.PORT || 3000;
+
 const client = new Client(config, {
     intents: intents,
     commandPrefix: '%',
@@ -51,6 +53,10 @@ app.get('/health', (req, res) => {
       latency,
       message: 'Bot Ok and Running',
     });
+  });
+
+app.listen(port, () => {
+    console.log(`Health check server listening on port ${port}`);
   });
 
 
