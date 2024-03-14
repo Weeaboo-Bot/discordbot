@@ -1,8 +1,10 @@
 const Command = require('../../structures/Command');
 const { oneLine } = require('common-tags');
 
+const numbers = Array.from({ length: 37 }, (_, i) => i); // Correctly generates numbers 0 to 36
+
 const rouletteOptions = {
-  numbers: [0].concat([1, 3, 5, 7, ..., 36]),
+  numbers: numbers, // Directly use the generated array
   dozens: ['1-12', '13-24', '25-36'],
   halves: ['1-18', '19-36'],
   columns: ['1st', '2nd', '3rd'],
