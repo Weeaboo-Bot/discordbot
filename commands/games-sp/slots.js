@@ -12,7 +12,7 @@ module.exports = class SlotsCommand extends Command {
         });
     }
 
-    run(msg) {
+    async run(msg) {
         if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
             return; // Do nothing if channel doesn't match
         }
