@@ -62,19 +62,20 @@ module.exports = class RouletteCommand extends Command {
     // Determine winning color directly (conditional logic)
     const winningColor = winningNumber <= 18 ? 'RED' : 'BLACK';
   
-    // Determine winning bets concisely
-    const winningBets = spaces.filter((space) => this.verifyWin(space, winningNumber));
-    const winCount = winningBets.length;
-  
-    // Construct the result message with clear formatting
-    const resultMessage = `The result is **${winningNumber} ${winningColor}**.\n`;
-    resultMessage += winCount === 0 ? 'You lose...' :
-                             winCount === spaces.length ? 'You win on all bets!' :
-                             `You win on ${winCount} out of ${spaces.length} bets.`;
-  
-    // Reply with the crafted message
-    return msg.reply(resultMessage);
-  }
+      const winningBets = spaces.filter((space) => this.verifyWin(space, winningNumber));
+      const winCount = winningBets.length;
+    
+      // Construct the result message with clear formatting, adding win details
+      let resultMessage = `The result is **${winningNumber} ${winningColor}**.\n`;
+
+      resultMessage += winCount === 0 ? 'You lose...' :
+                       winCount === spaces.length ? 'You win on all bets!' :
+                       `You win on ${winCount} out of ${spaces.length} bets. Winning bets: ${JSON.stringify(winningBets)}`;
+    
+      // Reply with the crafted message
+      return msg.reply(resultMessage);
+    }
+    
 
   isRed(number) {
     return rouletteOptions.red.includes(number);
