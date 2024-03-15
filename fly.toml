@@ -11,11 +11,6 @@ primary_region = 'ewr'
 [deploy]
   strategy = 'bluegreen'
 
-[health]
-  command = 'curl http://localhost:3000/health && echo success'
-  interval = '10s'
-  timeout = '5s'
-
 [env]
   PORT = '3000'
 
@@ -24,7 +19,7 @@ primary_region = 'ewr'
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 2
+  min_machines_running = 1
   processes = ['app']
 [http_service.concurrency]
   type = "requests"
