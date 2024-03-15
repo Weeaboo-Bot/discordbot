@@ -7,6 +7,16 @@ app = 'weaboobot'
 primary_region = 'ewr'
 
 [build]
+  builder = "paketobuildpacks/builder:base"
+  buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
+
+[deploy]
+  strategy = 'bluegreen'
+
+[health]
+  command = 'curl http://localhost:3000/health && echo success'
+  interval = '10s'
+  timeout = '5s'
 
 [env]
   PORT = '3000'
