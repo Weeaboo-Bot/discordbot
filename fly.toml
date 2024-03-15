@@ -11,7 +11,7 @@ primary_region = 'ewr'
   buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
 
 [deploy]
-  strategy = 'bluegreen'
+  strategy = 'rolling'
 
 [health]
   command = 'curl http://localhost:3000/health && echo success'
