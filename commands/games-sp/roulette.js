@@ -5,6 +5,8 @@ const { oneLine } = require('common-tags');
 const numbers = Array.from({ length: 37 }, (_, i) => i + 1); // Start from 1
 
 const rouletteOptions = {
+  red: [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36],
+  black: [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35],
   numbers, // Use the generated array
   dozens: ['1-12', '13-24', '25-36'],
   halves: ['1-18', '19-36'],
@@ -51,55 +53,59 @@ module.exports = class RouletteCommand extends Command {
   }
 
   async run(msg, { spaces }) {
-    if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
-      return; // Do nothing if channel doesn't match
-    }
-    const number = Math.floor(Math.random() * 37);
-    const color = number ? (this.isRed(number) ? 'RED' : 'BLACK') : null;
-
-    const wins = spaces.map((space) => this.verifyWin(space, number));
-    const winCount = wins.filter(Boolean).length;
-
-    let resultMessage = `The result is **${number}${color ? ` ${color}` : ''}**. `;
-    if (winCount === 0) {
-      resultMessage += 'You lose...';
-    } else if (winCount === spaces.length) {
-      resultMessage += 'You win on all bets!';
-    } else {
-      resultMessage += `You win on ${winCount} out of ${spaces.length} bets.`;
-    }
-
+    // Early return for invalid channels
+    if (msg.channel.id !== this.client.casinoChannel) return;
+  
+    // Generate the winning number and color
+    const winningNumber = Math.floor(Math.random() * 37);
+    const winningColor = winningNumber <= colorMap.red ? 'RED' : 'BLACK';
+  
+    // Determine winning bets concisely
+    const winningBets = spaces.filter((space) => this.verifyWin(space, winningNumber));
+    const winCount = winningBets.length;
+  
+    // Construct the result message with clear formatting
+    const resultMessage = `The result is **${winningNumber} ${winningColor}**.\n`;
+    resultMessage += winCount === 0 ? 'You lose...' :
+                             winCount === spaces.length ? 'You win on all bets!' :
+                             `You win on ${winCount} out of ${spaces.length} bets.`;
+  
+    // Reply with the crafted message
     return msg.reply(resultMessage);
   }
 
   isRed(number) {
-    return rouletteOptions.colors?.red?.includes(number);
+    return rouletteOptions.red.includes(number);
   }
 
   verifyWin(choice, result) {
-    const checkOption = (option) => {
+    // Early return for invalid results (improves readability)
+    if (!result) return false;
+  
+    // Handle numbers directly
+    const number = Number.parseInt(choice, 10);
+    if (!isNaN(number) && rouletteOptions.numbers.includes(number)) {
+      return number === result;
+    }
+  
+    // Use lookup table (colorMap) for color checks
+    if (choice === 'red') {
+      return result <= colorMap.red;
+    } else if (choice === 'black') {
+      return result > colorMap.red;
+    }
+  
+    // Leverage existing logic for dozens, halves, parity, and columns
+    const optionsToCheck = ['dozens', 'halves', 'parity', 'columns'];
+    for (const option of optionsToCheck) {
       if (rouletteOptions[option].includes(choice)) {
         const range = choice.split('-');
         return result >= range[0] && range[1] >= result;
       }
-      return false;
-    };
-
-    if (checkOption('dozens') || checkOption('halves')) return true;
-
-    if (rouletteOptions.colors.includes(choice)) {
-      return this.isRed(choice) === this.isRed(result);
     }
-
-    if (rouletteOptions.parity.includes(choice)) {
-      return rouletteOptions.parity[result % 2] === choice;
-    }
-
-    if (rouletteOptions.columns.includes(choice)) {
-      return rouletteOptions.columns[(result - 1) % 3] === choice;
-    }
-
-    const number = Number.parseInt(choice, 10);
-    return number === result;
+  
+    // No match found
+    return false;
   }
+  
 };
