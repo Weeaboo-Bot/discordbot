@@ -54,18 +54,49 @@ function init() {
 
 init();
 
+const getFormattedTime = () => {
+  const now = new Date();
+  const pad = (num) => num.toString().padStart(2, '0'); // Helper function for padding
+
+  const hours = pad(now.getHours());
+  const minutes = pad(now.getMinutes());
+  const seconds = pad(now.getSeconds());
+
+  const day = pad(now.getDate());
+  const month = pad(now.getMonth() + 1); // Months are 0-indexed
+  const year = now.getFullYear();
+
+  return `${hours}:${minutes}:${seconds} ${month}/${day}/${year}`;
+};
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     const uptime = Math.round(process.uptime());
     const guilds = client.guilds.cache.size;
     const latency = Math.round(client.ws.ping);
+    const uptimeStats = {
+      uptime: Math.round(process.uptime()),
+      guilds: client.guilds.cache.size,
+      latency: Math.round(client.ws.ping),
+      status: client.ws.status,
+      readyMessage: client.readyMessage,
+      ownerId: client.ownerId,
+      readyAt: client.readyAt,
+      message: 'Bot Ok and Running',
+
+    }
 
     res.status(200);
     res.json({
-      uptime,
-      guilds,
-      latency,
-      message: 'Bot Ok and Running',
+      process_uptime: Math.round(process.uptime()),
+      client_update: Math.round(client.uptime),
+      guilds: client.guilds.cache.size,
+      latency: Math.round(client.ws.ping),
+      status: client.ws.status,
+      readyMessage: client.readyMessage,
+      ownerId: client.ownerId,
+      readyAt: client.readyAt,
+      message: `Bot Ok and Running at ${getFormattedTime()}`,
     });
   });
 
