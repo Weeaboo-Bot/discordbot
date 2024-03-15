@@ -22,34 +22,34 @@ Sentry.init({
 // Client setup
 const intents = new Discord.Intents();
 intents.add(
-    'GUILD_PRESENCES',
-    'GUILD_MEMBERS',
-    'GUILDS',
-    'GUILD_VOICE_STATES',
-    'GUILD_MESSAGES',
-    'GUILD_MESSAGE_REACTIONS',
+  'GUILD_PRESENCES',
+  'GUILD_MEMBERS',
+  'GUILDS',
+  'GUILD_VOICE_STATES',
+  'GUILD_MESSAGES',
+  'GUILD_MESSAGE_REACTIONS',
 );
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 const client = new Client(config, {
-    intents: intents,
-    commandPrefix: '%',
-    owner: config.discord.DISCORD_OWNER_ID,
-    invite: config.discord.DISCORD_INVITE,
-    disableMentions: 'everyone',
-    partials: ['GUILD_MEMBER'],
-    ws: { intents: intents },
+  intents: intents,
+  commandPrefix: '%',
+  owner: config.discord.DISCORD_OWNER_ID,
+  invite: config.discord.DISCORD_INVITE,
+  disableMentions: 'everyone',
+  partials: ['GUILD_MEMBER'],
+  ws: { intents: intents },
 });
 
 
 // Initialize client
 function init() {
-    client.loadEvents('./events');
-    client.loadGroups();
-    client.loadCommands();
-    client.login(client.token);
+  client.loadEvents('./events');
+  client.loadGroups();
+  client.loadCommands();
+  client.login(client.token);
 }
 
 init();
@@ -71,38 +71,22 @@ const getFormattedTime = () => {
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-    const uptime = Math.round(process.uptime());
-    const guilds = client.guilds.cache.size;
-    const latency = Math.round(client.ws.ping);
-    const uptimeStats = {
-      uptime: Math.round(process.uptime()),
-      guilds: client.guilds.cache.size,
-      latency: Math.round(client.ws.ping),
-      status: client.ws.status,
-      readyMessage: client.readyMessage,
-      ownerId: client.ownerId,
-      readyAt: client.readyAt,
-      message: 'Bot Ok and Running',
-
-    }
-
-    res.status(200);
-    res.json({
-      process_uptime: Math.round(process.uptime()),
-      client_update: Math.round(client.uptime),
-      guilds: client.guilds.cache.size,
-      latency: Math.round(client.ws.ping),
-      status: client.ws.status,
-      readyMessage: client.readyMessage,
-      ownerId: client.ownerId,
-      readyAt: client.readyAt,
-      message: `Bot Ok and Running at ${getFormattedTime()}`,
-    });
+  res.status(200).json({
+    process_uptime: Math.round(process.uptime()),
+    client_update: Math.round(client.uptime),
+    guilds: client.guilds.cache.size,
+    latency: Math.round(client.ws.ping),
+    status: client.ws.status,
+    readyMessage: client.readyMessage,
+    ownerId: client.ownerId,
+    readyAt: client.readyAt,
+    message: `Bot Ok and Running at ${getFormattedTime()}`,
   });
+});
 
 app.listen(port, () => {
-    console.log(`Health check server listening on port ${port}`);
-  });
+  console.log(`Health check server listening on port ${port}`);
+});
 
 
 process.on('unhandledRejection', (err) => client.logger.error(err));
