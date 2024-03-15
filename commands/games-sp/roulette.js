@@ -56,9 +56,11 @@ module.exports = class RouletteCommand extends Command {
     // Early return for invalid channels
     if (msg.channel.id !== this.client.casinoChannel) return;
   
-    // Generate the winning number and color
+    // Generate the winning number
     const winningNumber = Math.floor(Math.random() * 37);
-    const winningColor = winningNumber <= colorMap.red ? 'RED' : 'BLACK';
+  
+    // Determine winning color directly (conditional logic)
+    const winningColor = winningNumber <= 18 ? 'RED' : 'BLACK';
   
     // Determine winning bets concisely
     const winningBets = spaces.filter((space) => this.verifyWin(space, winningNumber));
