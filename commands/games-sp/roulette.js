@@ -56,7 +56,7 @@ module.exports = class RouletteCommand extends Command {
     const number = Math.floor(Math.random() * 37);
     const color = number ? (this.isRed(number) ? 'RED' : 'BLACK') : null;
 
-    const wins = spaces.map((space) => this.verifyWinAlt(space, number));
+    const wins = spaces.map((space) => this.verifyWin(space, number));
     const winCount = wins.filter(Boolean).length;
 
     let resultMessage = `The result is **${number}${color ? ` ${color}` : ''}**. `;
