@@ -1,13 +1,10 @@
 const Command = require('../../structures/Command');
 const { oneLine } = require('common-tags');
 
-// Generate numbers 0 to 36 correctly
-const numbers = Array.from({ length: 37 }, (_, i) => i + 1); // Start from 1
-
 const rouletteOptions = {
   red: [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36],
   black: [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35],
-  numbers, // Use the generated array
+  numbers: Array.from({ length: 37 }, (_, i) => i + 1),
   dozens: ['1-12', '13-24', '25-36'],
   halves: ['1-18', '19-36'],
   columns: ['1', '2', '3'], // Change to numerical values for consistency
@@ -53,61 +50,61 @@ module.exports = class RouletteCommand extends Command {
   }
 
   async run(msg, { spaces }) {
-    // Early return for invalid channels
-    if (msg.channel.id !== this.client.casinoChannel) return;
-  
-    // Generate the winning number
-    const winningNumber = Math.floor(Math.random() * 37);
-  
-    // Determine winning color directly (conditional logic)
-    const winningColor = winningNumber <= 18 ? 'RED' : 'BLACK';
-  
-      const winningBets = spaces.filter((space) => this.verifyWin(space, winningNumber));
-      const winCount = winningBets.length;
-    
-      // Construct the result message with clear formatting, adding win details
-      let resultMessage = `The result is **${winningNumber} ${winningColor}**.\n`;
-
-      resultMessage += winCount === 0 ? 'You lose...' :
-                       winCount === spaces.length ? 'You win on all bets!' :
-                       `You win on ${winCount} out of ${spaces.length} bets. Winning bets: ${JSON.stringify(winningBets)}`;
-    
-      // Reply with the crafted message
-      return msg.reply(resultMessage);
+    if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
+      return; // Do nothing if channel doesn't match
     }
-    
+    const number = Math.floor(Math.random() * 37);
+    const color = number ? (this.isRed(number) ? 'RED' : 'BLACK') : null;
+
+    const wins = spaces.map((space) => this.verifyWinAlt(space, number));
+    const winCount = wins.filter(Boolean).length;
+
+    let resultMessage = `The result is **${number}${color ? ` ${color}` : ''}**. `;
+    if (winCount === 0) {
+      resultMessage += 'You lose...';
+    } else if (winCount === spaces.length) {
+      resultMessage += 'You win on all bets!';
+    } else {
+      resultMessage += `You win on ${winCount} out of ${spaces.length} bets.`;
+    }
+
+    return msg.reply(resultMessage);
+  }
 
   isRed(number) {
     return rouletteOptions.red.includes(number);
   }
-
+    
   verifyWin(choice, result) {
-    // Early return for invalid results (improves readability)
-    if (!result) return false;
+    const { red, black, numbers } = rouletteOptions;
   
-    // Handle numbers directly
-    const number = Number.parseInt(choice, 10);
-    if (!isNaN(number) && rouletteOptions.numbers.includes(number)) {
-      return number === result;
+    // Check for numbers first for efficiency
+    if (Number.isInteger(Number.parseInt(choice, 10))) {
+      return numbers.includes(choice) && result === choice;
     }
   
-    if (choice === 'red') {
-      return this.isRed(result);
-    } else if (choice === 'black') {
-      return !this.isRed(result);
+    // Check for dozens, halves, and columns (assuming numerical values)
+    const rangeCheck = choice.split('-');
+    if (rangeCheck.length === 2 && rangeCheck.every(Number.isInteger)) {
+      const [min, max] = rangeCheck.map(Number);
+      return result >= min && result <= max;
     }
   
-    // Leverage existing logic for dozens, halves, parity, and columns
-    const optionsToCheck = ['dozens', 'halves', 'parity', 'columns'];
-    for (const option of optionsToCheck) {
-      if (rouletteOptions[option].includes(choice)) {
-        const range = choice.split('-');
-        return result >= range[0] && range[1] >= result;
-      }
+    // Check for colors
+    if (choice === 'black') {
+      return black.includes(result);
+    } else if (choice === 'red') {
+      return red.includes(result);
     }
   
-    // No match found
+    // Check for parity
+    if (choice === 'even') {
+      return result % 2 === 0;
+    } else if (choice === 'odd') {
+      return result % 2 !== 0;
+    }
+  
+    // Invalid choice
     return false;
   }
-  
 };
