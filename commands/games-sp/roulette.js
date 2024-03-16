@@ -91,11 +91,10 @@ module.exports = class RouletteCommand extends Command {
       return number === result;
     }
   
-    // Use lookup table (colorMap) for color checks
     if (choice === 'red') {
-      return result <= colorMap.red;
+      return this.isRed(result);
     } else if (choice === 'black') {
-      return result > colorMap.red;
+      return !this.isRed(result);
     }
   
     // Leverage existing logic for dozens, halves, parity, and columns
