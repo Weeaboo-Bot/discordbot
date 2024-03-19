@@ -98,3 +98,5 @@ node_modules
 .idea
 
 venv
+
+service-account.json
