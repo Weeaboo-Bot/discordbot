@@ -6,11 +6,13 @@ const { errorMessage, auditMessage, readyMessage, roleMessage, guildMessage, new
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
 const { fail } = require('../assets/json/emojis.json');
+const CasinoUtils = require('../util/casino-utils');
 
 const GROUPS = [
     ['action', 'Action'],
     ['anime', 'Anime'],
     ['core', 'Core'],
+    ['casino-utils', 'Casino Utils'],
     ['fun', 'Fun'],
     ['games-mp', 'Multi-Player Games'],
     ['games-sp', 'Single-Player Games'],
@@ -28,24 +30,7 @@ const GROUPS = [
     ['loyal', 'Loyalty Program Commands'],
     ['other', 'Other'],
 ];
-/*
 
- */
-Discord.Structures.extend('Guild', function (Guild) {
-    class MusicGuild extends Guild {
-        constructor(client, data) {
-            super(client, data);
-            this.musicData = {
-                queue: [],
-                isPlaying: false,
-                nowPlaying: null,
-                songDispatcher: null,
-                volume: 0.6,
-            };
-        }
-    }
-    return MusicGuild;
-});
 
 module.exports = class WeabooClient extends CommandoClient {
     constructor(config, options = {}) {
@@ -76,18 +61,6 @@ module.exports = class WeabooClient extends CommandoClient {
 
         this.logger.info(config.discord.DISCORD_PREFIX);
 
-        this.on('voiceStateUpdate', async (___, newState) => {
-            if (
-                newState.member.user.bot &&
-                !newState.channelID &&
-                newState.guild.musicData.songDispatcher &&
-                newState.member.user.id === this.user.id
-            ) {
-                newState.guild.musicData.queue.length = 0;
-                newState.guild.musicData.songDispatcher.end();
-            }
-        });
-
         /**
          * Discord API Stuff
          * @type {string}
@@ -95,13 +68,11 @@ module.exports = class WeabooClient extends CommandoClient {
         this.token = config.discord.DISCORD_TOKEN;
         this.successEmoji = config.api.SUCCESS_EMOJI_ID;
         this.guildId = config.discord.GUILD_ID;
-
         /**
          * API keys
          * @type {Object}
          */
         this.apiKeys = config.api;
-
         /**
          * Weaboo's owner ID
          * @type {string}
@@ -109,15 +80,12 @@ module.exports = class WeabooClient extends CommandoClient {
         this.ownerId = config.discord.DISCORD_OWNER_ID;
 
         /**
-         * Weaboo's Log IDs
-         */
-
-        /**
          * Utility functions
          * @type {Object}
          */
         this.utils = require('../util/Util');
         this.casinoChannel = config.discord.CASINO_CHANNEL;
+        this.casino = new CasinoUtils(this.logger);
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;
@@ -143,12 +111,12 @@ module.exports = class WeabooClient extends CommandoClient {
         this.webhook = new Discord.WebhookClient(
             config.discord.DISCORD_WEBHOOK_ID,
             config.discord.DISCORD_WEBHOOK_TOKEN,
-            {disableMentions: 'everyone'}
+            { disableMentions: 'everyone' }
         );
         this.loggingWebhook = new Discord.WebhookClient(
             config.discord.DISCORD_LOGGING_WEBHOOK_ID,
             config.discord.DISCORD_LOGGING_WEBHOOK_TOKEN,
-            {disableMentions: 'everyone'}
+            { disableMentions: 'everyone' }
         );
 
     }
@@ -216,7 +184,7 @@ module.exports = class WeabooClient extends CommandoClient {
      * @param {string} errorMessage
      */
     sendSystemErrorMessage(guild, error, errorMessage) {
-        const systemChannel = guild.channels.cache.get(this.errorLog);
+        const systemChannel = guild.channels.cache.get(config.logs.BOT_LOG);
 
         // Check channel and permissions
         if (

@@ -1,10 +1,7 @@
 // config.js
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 
 exports.logs = {
-    GENERAL_CHAT: process.env.GENERAL_CHAT,
-    BOT_COMMANDS_CHAT: process.env.BOT_COMMAND_CHAT,
     BOT_LOG: process.env.BOT_LOG,
 };
 
@@ -27,7 +24,6 @@ exports.sentry = {
 
 exports.api = {
     ALPHA_KEY: process.env.ALPHA_VANTAGE,
-    LOGIN_URL: 'https://us-central1-weaboo-bot-73b07.cloudfunctions.net/api/login',
     FIREBASE_KEY: process.env.FIREBASE_WEB_API_KEY,
     FIREBASE_STORAGE_LINK: process.env.FIREBASE_STORAGE_LINK,
     GOOGLE_KEY: process.env.GOOGLE_API_KEY,
@@ -47,4 +43,18 @@ exports.api = {
     AZURE_LOCATION: process.env.AZURE_LOCATION,
     LEETCODE_API: process.env.LEETCODE_API,
     AIRNOW_API: process.env.AIRNOW_API,
+};
+
+exports.firebase = {
+    type: process.env.FIREBASE_TYPE,
+    project_id: process.env.FIREBASE_PROJECT_ID,
+    private_key_id: '87e9206f895072189c2ae427c0e2e3cb3f12ddef',
+    private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+    client_id: process.env.FIREBASE_CLIENT_ID,
+    auth_uri: process.env.FIREBASE_AUTH_URI,
+    token_uri: process.env.FIREBASE_TOKEN_URI,
+    auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+    client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
+    universe_domain: process.env.FIREBASE_UNIVERSE_DOMAIN,
 };

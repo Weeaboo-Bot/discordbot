@@ -31,6 +31,21 @@ const inviteRegex = /(https?:\/\/)?(www\.|canary\.|ptb\.)?discord(\.gg|(app)?\.c
 const botInvRegex = /(https?:\/\/)?(www\.|canary\.|ptb\.)?discord(app)?\.com\/(api\/)?oauth2\/authorize\?([^ ]+)\/?/gi;
 
 module.exports = class Util {
+
+    static getFormattedTime() {
+        const now = new Date();
+        const pad = (num) => num.toString().padStart(2, '0'); // Helper function for padding
+      
+        const hours = pad(now.getHours());
+        const minutes = pad(now.getMinutes());
+        const seconds = pad(now.getSeconds());
+      
+        const day = pad(now.getDate());
+        const month = pad(now.getMonth() + 1); // Months are 0-indexed
+        const year = now.getFullYear();
+      
+        return `${hours}:${minutes}:${seconds} ${month}/${day}/${year}`;
+    }
     static delay(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }

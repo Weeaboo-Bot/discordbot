@@ -4,7 +4,10 @@ const Discord = require('discord.js');
 const Client = require('./structures/Client');
 const Sentry = require("@sentry/node");
 const { nodeProfilingIntegration } = require("@sentry/profiling-node");
+const { getFormattedTime } = require('./util/Util');
+const cron = require('node-cron');
 
+const DAILY_BALANCE_CHECK = '0 0 * * *';
 
 global.__basedir = __dirname;
 
@@ -20,27 +23,28 @@ Sentry.init({
 });
 
 // Client setup
-const intents = new Discord.Intents();
-intents.add(
-  'GUILD_PRESENCES',
-  'GUILD_MEMBERS',
-  'GUILDS',
-  'GUILD_VOICE_STATES',
-  'GUILD_MESSAGES',
-  'GUILD_MESSAGE_REACTIONS',
-);
-
 const app = express();
 const port = process.env.PORT || 3000;
-
 const client = new Client(config, {
-  intents: intents,
-  commandPrefix: '%',
+  intents: new Discord.Intents().add('GUILD_PRESENCES',
+    'GUILD_MEMBERS',
+    'GUILDS',
+    'GUILD_VOICE_STATES',
+    'GUILD_MESSAGES',
+    'GUILD_MESSAGE_REACTIONS'),
+  commandPrefix: '$',
   owner: config.discord.DISCORD_OWNER_ID,
   invite: config.discord.DISCORD_INVITE,
   disableMentions: 'everyone',
   partials: ['GUILD_MEMBER'],
-  ws: { intents: intents },
+  ws: {
+    intents: new Discord.Intents().add('GUILD_PRESENCES',
+      'GUILD_MEMBERS',
+      'GUILDS',
+      'GUILD_VOICE_STATES',
+      'GUILD_MESSAGES',
+      'GUILD_MESSAGE_REACTIONS')
+  },
 });
 
 
@@ -50,24 +54,8 @@ function init() {
   client.loadGroups();
   client.loadCommands();
   client.login(client.token);
+  // Load FireBase app
 }
-
-init();
-
-const getFormattedTime = () => {
-  const now = new Date();
-  const pad = (num) => num.toString().padStart(2, '0'); // Helper function for padding
-
-  const hours = pad(now.getHours());
-  const minutes = pad(now.getMinutes());
-  const seconds = pad(now.getSeconds());
-
-  const day = pad(now.getDate());
-  const month = pad(now.getMonth() + 1); // Months are 0-indexed
-  const year = now.getFullYear();
-
-  return `${hours}:${minutes}:${seconds} ${month}/${day}/${year}`;
-};
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -89,5 +77,13 @@ app.listen(port, () => {
   console.log(`Health check server listening on port ${port}`);
 });
 
+
+init();
+
+const job = cron.schedule(DAILY_BALANCE_CHECK, client.casino.checkDailyUserBalance, {
+  scheduled: true,
+  timezone: 'UTC'
+});
+job.start();
 
 process.on('unhandledRejection', (err) => client.logger.error(err));
