@@ -11,6 +11,7 @@ const GROUPS = [
     ['action', 'Action'],
     ['anime', 'Anime'],
     ['core', 'Core'],
+    ['casino-utils', 'Casino Utils'],
     ['fun', 'Fun'],
     ['games-mp', 'Multi-Player Games'],
     ['games-sp', 'Single-Player Games'],
