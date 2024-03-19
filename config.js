@@ -48,3 +48,12 @@ exports.api = {
     LEETCODE_API: process.env.LEETCODE_API,
     AIRNOW_API: process.env.AIRNOW_API,
 };
+
+exports.database = {
+    dialect: process.env.DB_DIALECT,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+};

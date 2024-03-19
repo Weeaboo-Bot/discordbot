@@ -6,6 +6,8 @@ const { errorMessage, auditMessage, readyMessage, roleMessage, guildMessage, new
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
 const { fail } = require('../assets/json/emojis.json');
+const DBHelper = require('../util/database/db-helper');
+const dbConnection = require('../util/database/db-connection');
 
 const GROUPS = [
     ['action', 'Action'],
@@ -29,24 +31,6 @@ const GROUPS = [
     ['loyal', 'Loyalty Program Commands'],
     ['other', 'Other'],
 ];
-/*
-
- */
-Discord.Structures.extend('Guild', function (Guild) {
-    class MusicGuild extends Guild {
-        constructor(client, data) {
-            super(client, data);
-            this.musicData = {
-                queue: [],
-                isPlaying: false,
-                nowPlaying: null,
-                songDispatcher: null,
-                volume: 0.6,
-            };
-        }
-    }
-    return MusicGuild;
-});
 
 module.exports = class WeabooClient extends CommandoClient {
     constructor(config, options = {}) {
@@ -76,19 +60,6 @@ module.exports = class WeabooClient extends CommandoClient {
         );
 
         this.logger.info(config.discord.DISCORD_PREFIX);
-
-        this.on('voiceStateUpdate', async (___, newState) => {
-            if (
-                newState.member.user.bot &&
-                !newState.channelID &&
-                newState.guild.musicData.songDispatcher &&
-                newState.member.user.id === this.user.id
-            ) {
-                newState.guild.musicData.queue.length = 0;
-                newState.guild.musicData.songDispatcher.end();
-            }
-        });
-
         /**
          * Discord API Stuff
          * @type {string}
@@ -119,6 +90,19 @@ module.exports = class WeabooClient extends CommandoClient {
          */
         this.utils = require('../util/Util');
         this.casinoChannel = config.discord.CASINO_CHANNEL;
+        // Create the Casino and db
+        this.casino = new Discord.Collection();
+        this.dbHelper = new DBHelper(this.casino, this.logger);
+        this.database = (async () => {
+            try {
+              const sequelize = await dbConnection(config.database);
+              return sequelize;
+            } catch (error) {
+              console.error(error);
+            } finally {
+              await sequelize.disconnect(); // Assuming connection object is returned
+            }
+          })();
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;
