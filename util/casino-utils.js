@@ -40,12 +40,10 @@ module.exports = class CasinoUtils {
         // Return the formatted Discord timestamp string
         return `<t:${year}-${month}-${day}T${hours}:${minutes}:00.000Z>`;
     }
-
     // Helper function to validate timestamp format
     isValidTimestamp(timestamp) {
         return typeof timestamp === 'number' && !isNaN(timestamp) || (typeof timestamp === 'object' && timestamp._seconds && timestamp._nanoseconds);
     }
-
     async getUser(userId) {
         try {
             const userData = await this.db.getDocument('users', userId);
@@ -59,7 +57,6 @@ module.exports = class CasinoUtils {
             this.logger.error(`Error getting user: ${error}`);
         }
     }
-
     async getUsers() {
         try {
             const users = await this.db.getDocs('users');
@@ -81,7 +78,6 @@ module.exports = class CasinoUtils {
             // You might want to rethrow the error or handle it differently here
         }
     }
-
     async getUserBalance(userId) {
         try {
             const userBalanceDoc = await this.db.getDocument('user_balances', userId);
@@ -91,7 +87,6 @@ module.exports = class CasinoUtils {
             return 0; // Return 0 for error handling
         }
     }
-
     getUserWins(userId) {
         try {
             const userWins = this.db.getRecordsById('user_wins', 'userId', userId);
@@ -110,7 +105,12 @@ module.exports = class CasinoUtils {
             return 0; // Return 0 for error handling
         }
     }
-    getUserWinRate(casino, user) {
+    getUserWinRate(user) {
+        // calculate win rate based on wins and losses
+        const wins = this.getUserWins(user.userId);
+        const losses = this.getUserLosses(user.userId);
+        const winRate = wins / (wins + losses) * 100;
+        return winRate; // Return the calculated win rate as a number between 0 and 100
     }
     async addBalance(id, amount) {
         try {
@@ -122,7 +122,25 @@ module.exports = class CasinoUtils {
         }
 
     }
-    placeBet(casino, user, amount) {
+    placeBet(user, amount, gameType) {
+    }
+    async createGame(gameData) {
+        try {
+            const gameDoc = await this.db.addDocument('game_log', gameData, true);
+            return gameDoc.data();
+        } catch (error) {
+            this.logger.error("Error creating game data", error);
+            return 0; // Return 0 for error handling
+        }
+    }
+    async getGame(gameId) {
+        try {
+            const gameDoc = await this.db.getDocument('game_log', gameId);
+            return gameDoc.data();
+        } catch (error) {
+            this.logger.error("Error getting game data", error);
+            return 0; // Return 0 for error handling
+        }
     }
     async checkUserBalance(id) {
         try {

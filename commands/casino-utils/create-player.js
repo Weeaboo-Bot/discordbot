@@ -29,6 +29,8 @@ module.exports = class CreatePlayerCommand extends Command {
       const existingUser = await this.client.casino.getUser(user.id);
       if (existingUser) return msg.reply('User already exists in the Casino');
 
+      // First attach the CasinoPlayer role
+      
       const createdUser = await this.client.casino.createUser(
         {
           userId: user.id,

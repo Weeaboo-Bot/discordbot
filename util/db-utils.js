@@ -13,13 +13,6 @@ module.exports = class FirestoreDB {
   createNowTimestamp() {
     // Get the current date in milliseconds since epoch (Jan 1, 1970)
     const now = Date.now();
-
-    // Convert milliseconds to seconds (Firestore timestamp uses seconds)
-    const seconds = Math.floor(now / 1000);
-
-    // Get remaining milliseconds for nanoseconds (Firestore uses nanoseconds too)
-    const nanoseconds = now % 1000 * 1000000; // Multiply by 1 million for nanoseconds
-
     // Return a new Firestore Timestamp object (assuming you have the firebase library)
     return Timestamp.fromDate(new Date(now));
   }
@@ -48,7 +41,7 @@ module.exports = class FirestoreDB {
     if (!collectionName || !data) {
       throw new Error('Collection name and data are required!');
     }
-    const docRef = await this.getCollection(collectionName).add(data);
+    const docRef = (await this.getCollection(collectionName).add(data));
     return autoGenId ? docRef.id : docRef;
   }
 
