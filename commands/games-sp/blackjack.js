@@ -28,7 +28,7 @@ module.exports = class BlackjackCommand extends Command {
     }
 
     async run(msg, { deckCount }) {
-        if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
+        if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
             return; // Do nothing if channel doesn't match
         }
         const current = this.client.games.get(msg.channel.id);
@@ -41,6 +41,7 @@ module.exports = class BlackjackCommand extends Command {
             this.client.games.set(msg.channel.id, {
                 name: this.name,
                 data: new Deck({ deckCount }),
+                gameType: 'blackjack',
             });
             const dealerHand = [];
             this.draw(msg.channel, dealerHand);

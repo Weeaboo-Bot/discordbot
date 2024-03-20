@@ -50,7 +50,7 @@ module.exports = class RouletteCommand extends Command {
   }
 
   async run(msg, { spaces }) {
-    if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
+    if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
       return; // Do nothing if channel doesn't match
     }
     const number = Math.floor(Math.random() * 37);
