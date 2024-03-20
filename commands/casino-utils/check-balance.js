@@ -21,8 +21,8 @@ module.exports = class CheckBalanceCommand extends Command {
         });
     }
 
-    run(msg, { user }) {
-        const balance = this.client.dbHelper.getBalance(user.id);
+    async run(msg, { user }) {
+        const balance = await this.client.dbHelper.getBalance(user.id);
         return msg.say(
             `Balance of ${user.tag}: ${balance} tokens`
         );

@@ -22,7 +22,7 @@ module.exports = class RussianRouletteCommand extends Command {
     }
 
     async run(msg, { opponent }) {
-        if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
+        if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
             return; // Do nothing if channel doesn't match
         }
         if (opponent.id === msg.author.id) {

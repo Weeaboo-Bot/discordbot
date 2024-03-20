@@ -12,24 +12,24 @@ module.exports = class AddBalanceCommand extends Command {
             description: 'Add token balance to a user',
             args: [
                 {
-                    key: 'user',
-                    prompt: 'Which user would you like to add tokens to?',
-                    type: 'user',
-                    default: (msg) => msg.author,
-                },
-                {
                     key: 'amount',
                     prompt:
                         'How many tokens to add?',
                     type: 'integer',
                     default: 0,
                 },
+                {
+                    key: 'user',
+                    prompt: 'Which user would you like to add tokens to?',
+                    type: 'user',
+                    default: (msg) => msg.author,
+                },
             ],
         });
     }
 
-    run(msg, { user, amount }) {
-        const balance = this.client.dbHelper.addBalance(user.id, amount);
+    async run(msg, { user, amount }) {
+        const balance = await this.client.dbHelper.addBalance(user.id, amount);
         return msg.say(
             `Added ${balance} tokens to ${user.tag}! Their new balance is ${balance}`
         );

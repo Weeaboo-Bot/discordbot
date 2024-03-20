@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('PlayerLosses', [{
+    return queryInterface.bulkInsert('PlayerLoss', [{
       lossId: 1,
       gameType: 'blackjack',
       betAmount: 100,
@@ -13,6 +13,6 @@ module.exports = {
     }]);
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('PlayerLosses', null, {});
+    return queryInterface.bulkDelete('PlayerLoss', null, {});
   }
 };

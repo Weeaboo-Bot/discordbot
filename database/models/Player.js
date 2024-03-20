@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db-connection');
 
-module.exports = () => {
   const Player = sequelize.define('Player', {
     userId: {
       type: DataTypes.STRING,
@@ -25,13 +24,8 @@ module.exports = () => {
       defaultValue: 0,
     },
   }, {
-    // Additional model options if needed
+    timestamps: true,
+    tableName: 'Player',
   });
 
-  // Define associations (optional)
-  Player.associate = (models) => {
-    // Define associations here (e.g., with CasinoGameLog)
-  };
-
-  return Player;
-};
+module.exports = Player;

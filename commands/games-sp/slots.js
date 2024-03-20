@@ -13,7 +13,7 @@ module.exports = class SlotsCommand extends Command {
     }
 
     async run(msg) {
-        if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
+        if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
             return; // Do nothing if channel doesn't match
         }
         const slotOne = Math.floor(Math.random() * slots.length);

@@ -1,8 +1,30 @@
 const { version } = require('../package.json');
 const { formatNumber } = require('../util/Util');
 const { readyMessage } = require('../util/logHandler');
+const { Player, CasinoGame, CasinoGameLog } = require('../database/models/index');
 // Export ready events
 module.exports = async (client) => {
+    client.database.sync({ alter: true });
+    async function fetchAndCacheData() {
+        try {
+            const [casinoUsers, casinoGames, casinoGameLogs] = await Promise.all([
+                Player.findAll(),
+                CasinoGame.findAll(),
+                CasinoGameLog.findAll(),
+            ]);
+
+            cacheData(casinoUsers, client.casinoUsers, 'userId');
+            cacheData(casinoGames, client.casinoGames, 'gameId');
+            cacheData(casinoGameLogs, client.casinoGameLogs, 'gameLogId');
+        } catch (error) {
+            client.logger.error('Error fetching and caching data:', error);
+        }
+    }
+
+    function cacheData(items, cacheMap, keyProperty) {
+        items.forEach((item) => cacheMap.set(item[keyProperty], item));
+    }
+    await fetchAndCacheData();
     // Push client-related activities
     client.activities.push(
         {

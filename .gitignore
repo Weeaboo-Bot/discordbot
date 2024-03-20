@@ -90,3 +90,4 @@ node_modules
 .idea
 
 venv
+database/config/config.json

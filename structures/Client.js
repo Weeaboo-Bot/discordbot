@@ -92,9 +92,10 @@ module.exports = class WeabooClient extends CommandoClient {
         this.utils = require('../util/Util');
         this.casinoChannel = config.discord.CASINO_CHANNEL;
         // Create the Casino and db
-        this.casino = new Discord.Collection();
+        this.casinoUsers = new Discord.Collection();
+        this.games = new Discord.Collection();
         this.database = sequelize;
-        this.dbHelper = new DBHelper(this.casino, this.logger, this.database);
+        this.dbHelper = new DBHelper(this.casinoUsers,this.games, this.logger);
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;
@@ -104,7 +105,6 @@ module.exports = class WeabooClient extends CommandoClient {
         this.dmMessage = dmMessage;
         this.errorTypes = require('../assets/json/errorTypes.json');
         this.logger.info('Initializing...');
-        this.games = new Discord.Collection();
         this.activities = activities;
         this.leaveMessages = leaveMsgs;
         this.botLogger = (logMessage) => {

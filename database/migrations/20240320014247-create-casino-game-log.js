@@ -10,6 +10,17 @@ module.exports = {
         primaryKey: true,
         unique: true,
       },
+      gameId: {
+        type: Sequelize.INTEGER,
+        references: {
+          module: 'CasinoGame',
+          key: 'gameId',
+          as: 'gameId',
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE',
+          allowNull: false,
+        }
+      },
       gameType: {
         type: Sequelize.ENUM,
         values: ['blackjack', 'poker', 'slots', 'roulette'],

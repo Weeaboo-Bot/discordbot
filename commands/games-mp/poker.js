@@ -38,7 +38,7 @@ module.exports = class PokerCommand extends Command {
     }
 
     async run(msg, { playersCount }) {
-        if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
+        if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
             return; // Do nothing if channel doesn't match
         }
         const current = this.client.games.get(msg.channel.id);
@@ -58,6 +58,7 @@ module.exports = class PokerCommand extends Command {
                     highestBetter: null,
                 },
             },
+            gameType: 'poker',
         });
         try {
             const awaitedPlayers = await awaitPlayers(msg, playersCount, min);

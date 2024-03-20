@@ -10,6 +10,10 @@ module.exports = {
         primaryKey: true,
         unique: true,
       },
+      data: {
+        type: Sequelize.JSON,
+        allowNull: false,
+      },
       gameType: {
         type: Sequelize.ENUM,
         values: ['blackjack', 'poker', 'slots', 'roulette'],
