@@ -34,7 +34,7 @@ const port = process.env.PORT || 3000;
 
 const client = new Client(config, {
   intents: intents,
-  commandPrefix: '$',
+  commandPrefix: config.discord.DISCORD_PREFIX,
   owner: config.discord.DISCORD_OWNER_ID,
   invite: config.discord.DISCORD_INVITE,
   disableMentions: 'everyone',
