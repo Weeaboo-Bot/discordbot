@@ -52,6 +52,21 @@ function init() {
 
 init();
 
+nowTimestamp = () => {
+  const now = new Date();
+  const pad = (num) => num.toString().padStart(2, '0'); // Helper function for padding
+
+  const hours = pad(now.getHours());
+  const minutes = pad(now.getMinutes());
+  const seconds = pad(now.getSeconds());
+
+  const day = pad(now.getDate());
+  const month = pad(now.getMonth() + 1); // Months are 0-indexed
+  const year = now.getFullYear();
+
+  return `${hours}:${minutes}:${seconds} ${month}/${day}/${year}`;
+};
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -64,20 +79,7 @@ app.get('/health', (req, res) => {
     status: client.ws.status,
     ownerId: client.ownerId,
     readyAt: client.readyAt,
-    message: `Bot Ok and Running at ${() => {
-      const now = new Date();
-      const pad = (num) => num.toString().padStart(2, '0'); // Helper function for padding
-
-      const hours = pad(now.getHours());
-      const minutes = pad(now.getMinutes());
-      const seconds = pad(now.getSeconds());
-
-      const day = pad(now.getDate());
-      const month = pad(now.getMonth() + 1); // Months are 0-indexed
-      const year = now.getFullYear();
-
-      return `${hours}:${minutes}:${seconds} ${month}/${day}/${year}`;
-    }}`,
+    message: `Bot Ok and Running at ${nowTimestamp()}`,
   });
 });
 

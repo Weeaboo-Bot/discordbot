@@ -7,7 +7,6 @@ const { readdir } = require('fs');
 const { join, resolve } = require('path');
 const { fail } = require('../assets/json/emojis.json');
 const DBHelper = require('../database/db-helper');
-const dbConnection = require('../database/db-connection');
 const sequelize = require('../database/db-connection');
 
 const GROUPS = [
@@ -95,7 +94,7 @@ module.exports = class WeabooClient extends CommandoClient {
         this.casinoUsers = new Discord.Collection();
         this.games = new Discord.Collection();
         this.database = sequelize;
-        this.dbHelper = new DBHelper(this.casinoUsers,this.games, this.logger);
+        this.dbHelper = new DBHelper(this.casinoUsers, this.games, this.logger);
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;
@@ -120,12 +119,12 @@ module.exports = class WeabooClient extends CommandoClient {
         this.webhook = new Discord.WebhookClient(
             config.discord.DISCORD_WEBHOOK_ID,
             config.discord.DISCORD_WEBHOOK_TOKEN,
-            {disableMentions: 'everyone'}
+            { disableMentions: 'everyone' }
         );
         this.loggingWebhook = new Discord.WebhookClient(
             config.discord.DISCORD_LOGGING_WEBHOOK_ID,
             config.discord.DISCORD_LOGGING_WEBHOOK_TOKEN,
-            {disableMentions: 'everyone'}
+            { disableMentions: 'everyone' }
         );
 
     }
