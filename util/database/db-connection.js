@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize');
 
 class DatabaseConnection {
-  constructor(config) {
+  constructor(config, logger) {
     this.config = config;
+    this.logger = logger
   }
 
   createConnection() {
@@ -14,9 +15,9 @@ class DatabaseConnection {
     try {
       this.sequelize = await this.createConnection();
       await this.sequelize.authenticate();
-      console.log('Connection to database has been established successfully.');
+      this.logger.info('Connection to database has been established successfully.');
     } catch (error) {
-      console.error('Unable to connect to the database:', error);
+      this.logger.error('Unable to connect to the database:', error);
       throw error;
     }
   }
@@ -26,8 +27,8 @@ class DatabaseConnection {
   }
 }
 
-module.exports = async (config) => {
-  const connection = new DatabaseConnection(config);
+module.exports = async (config, logger) => {
+  const connection = new DatabaseConnection(config, logger);
   await connection.connect();
   return connection;
 };

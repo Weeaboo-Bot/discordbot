@@ -1,32 +1,44 @@
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('players', {
-		user_id: {
-			type: DataTypes.STRING,
-			primaryKey: true,
-            unique: true,
-            allowNull: false,
-		},
-        user_name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        user_tag: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        bot: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-            allowNull: false,
-        },
-		balance: {
-			type: DataTypes.INTEGER,
-			defaultValue: 0,
-			allowNull: false,
-		},
-	}, {
-		timestamps: true,
-	});
+  class Player extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  Player.init({
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
+      allowNull: false,
+      unique: true,
+    },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    userTag: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    balance: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    }
+  }, {
+    sequelize,
+    modelName: 'Player',
+  });
+  return Player;
 };

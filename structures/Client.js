@@ -93,16 +93,7 @@ module.exports = class WeabooClient extends CommandoClient {
         // Create the Casino and db
         this.casino = new Discord.Collection();
         this.dbHelper = new DBHelper(this.casino, this.logger);
-        this.database = (async () => {
-            try {
-              const sequelize = await dbConnection(config.database);
-              return sequelize;
-            } catch (error) {
-              console.error(error);
-            } finally {
-              await sequelize.disconnect(); // Assuming connection object is returned
-            }
-          })();
+        this.database = dbConnection(config.database, this.logger);
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;

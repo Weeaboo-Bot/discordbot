@@ -1,37 +1,44 @@
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('player_win', {
-        player_win_id: {
-            type: DataTypes.STRING,
-            unique: true,
-            primaryKey: true,
-            allowNull: false,
-        },
-		user_id: {
-			type: DataTypes.STRING,
-			primaryKey: false,
-            allowNull: false,
-            unique: 'player_win_player_win_id_user_id_unique',
-            references: {
-                model: 'player',
-                key: 'user_id',
-                deferrable: sequelize.Deferrable.INITIALLY_IMMEDIATE,
-                onUpdate: 'CASCADE',
-                onDelete: 'CASCADE',
-            }
-		},
-        move: DataTypes.STRING,
-		game_type: DataTypes.ENUM('blackjack', 'poker', 'roulette'),
-        bet_amount: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            default: 0,
-        },
-        win_amount: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            default: 0,
-        },
-	}, {
-		timestamps: true,
-	});
+  class PlayerWin extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  PlayerWin.init({
+    winId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      unique: true,
+    },
+    gameType: {
+      type: DataTypes.ENUM,
+      values: ['blackjack', 'poker', 'slots', 'roulette'],
+      allowNull: false,
+    },
+    betAmount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    winAmount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    }
+  }, {
+    sequelize,
+    modelName: 'PlayerWin',
+  });
+  return PlayerWin;
 };

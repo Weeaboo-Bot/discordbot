@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PlayerLoss extends Model {
+  class CasinoGameLog extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,32 +13,39 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  PlayerLoss.init({
-    lossId: {
+  CasinoGameLog.init({
+    gameLogId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
       unique: true,
     },
     gameType: {
       type: DataTypes.ENUM,
       values: ['blackjack', 'poker', 'slots', 'roulette'],
       allowNull: false,
+
     },
-    betAmount: {
-      type: DataTypes.INTEGER,
+    moveType: {
+      type: DataTypes.ENUM,
+      values: ['bet', 'win', 'loss', 'draw'],
       allowNull: false,
-      defaultValue: 0,
     },
-    lossAmount: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
+    userId: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Player',
+        key: 'userId',
+        as: 'userId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        allowNull: false,
+      }
     }
   }, {
     sequelize,
-    modelName: 'PlayerLoss',
+    modelName: 'CasinoGameLog',
   });
-  return PlayerLoss;
+  return CasinoGameLog;
 };
