@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     moveType: {
       type: DataTypes.ENUM,
-      values: ['bet', 'win', 'loss', 'draw'],
+      values: ['bet', 'win', 'loss', 'draw', 'move'],
       allowNull: false,
     },
     userId: {

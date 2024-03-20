@@ -4,25 +4,25 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('CasinoGameLog', {
       gameLogId: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         unique: true,
       },
       gameType: {
-        type: DataTypes.ENUM,
+        type: Sequelize.ENUM,
         values: ['blackjack', 'poker', 'slots', 'roulette'],
         allowNull: false,
   
       },
       moveType: {
-        type: DataTypes.ENUM,
-        values: ['bet', 'win', 'loss', 'draw'],
+        type: Sequelize.ENUM,
+        values: ['bet', 'win', 'loss', 'draw', 'move'],
         allowNull: false,
       },
       userId: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         references: {
           model: 'Player',
           key: 'userId',
