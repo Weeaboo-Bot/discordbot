@@ -1,34 +1,20 @@
-const Sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
+const config = require('../config').database;
 
-class DatabaseConnection {
-  constructor(config, logger) {
-    this.config = config;
-    this.logger = logger
+const sequelize = new Sequelize(config.database, config.username, config.password, {
+  host: config.host,
+  dialect: config.dialect,
+  dialectOptions: config.dialectOptions,
+});
+
+// Test connection (optional)
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
   }
+})();
 
-  createConnection() {
-    const { dialect, database, username, password, ...options } = this.config;
-    return new Sequelize(database, username, password, { dialect, ...options });
-  }
-
-  async connect() {
-    try {
-      this.sequelize = await this.createConnection();
-      await this.sequelize.authenticate();
-      this.logger.info('Connection to database has been established successfully.');
-    } catch (error) {
-      this.logger.error('Unable to connect to the database:', error);
-      throw error;
-    }
-  }
-
-  async disconnect() {
-    await this.sequelize.close();
-  }
-}
-
-module.exports = async (config, logger) => {
-  const connection = new DatabaseConnection(config, logger);
-  await connection.connect();
-  return connection;
-};
+module.exports = sequelize;

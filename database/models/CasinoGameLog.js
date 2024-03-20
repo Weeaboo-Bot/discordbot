@@ -1,19 +1,8 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class CasinoGameLog extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  CasinoGameLog.init({
+const { DataTypes } = require('sequelize');
+const sequelize = require('../db-connection');
+
+module.exports = () => {
+  const CasinoGameLog = sequelize.define('CasinoGameLog', {
     gameLogId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -21,11 +10,18 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       unique: true,
     },
+    gameId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'CasinoGame',
+        key: 'gameId',
+      },
+      allowNull: false,
+    },
     gameType: {
       type: DataTypes.ENUM,
       values: ['blackjack', 'poker', 'slots', 'roulette'],
       allowNull: false,
-
     },
     moveType: {
       type: DataTypes.ENUM,
@@ -37,15 +33,18 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Player',
         key: 'userId',
-        as: 'userId',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-        allowNull: false,
-      }
-    }
+      },
+      allowNull: false,
+    },
   }, {
-    sequelize,
-    modelName: 'CasinoGameLog',
+    // Additional model options if needed
   });
+
+  // Define associations (optional)
+  CasinoGameLog.associate = (models) => {
+    // Define association with Player model here
+    CasinoGameLog.belongsTo(models.Player, { foreignKey: 'userId', as: 'userId' });
+  };
+
   return CasinoGameLog;
 };

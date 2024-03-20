@@ -1,5 +1,8 @@
+const Sequelize = require('sequelize');
+const { Player, PlayerWin, PlayerLoss, CasinoGame, CasinoGameLog } = require('../database/models');
+
 module.exports = class DBHelper {
-    constructor(casino, logger){
+    constructor(casino, logger, database){
         this.casino = casino;
         this.logger = logger;
     }
@@ -17,7 +20,7 @@ module.exports = class DBHelper {
         return player ? player.balance : 0;
     }
     async createPlayer(playerData) {
-        const newPlayer = await Players.create(playerData);
+        const newPlayer = await Player.create(playerData);
         this.casino.set(id, newPlayer);
         return newPlayer;
     }

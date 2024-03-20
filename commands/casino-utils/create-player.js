@@ -1,6 +1,8 @@
 const Command = require('../../structures/Command');
 const moment = require('moment');
 const { MessageEmbed } = require('discord.js');
+const Player = require('../../database/models/Player');
+const { Sequelize, Model, DataTypes } = require("sequelize");
 
 module.exports = class CreatePlayer extends Command {
     constructor(client) {
@@ -23,12 +25,11 @@ module.exports = class CreatePlayer extends Command {
 
     async run(msg, { user }) {
         try {
-            await user.roles.add(msg.guild.roles.cache.find(role => role.name === 'Casino Player'));
+            await msg.guild.members.cache.get(user.id).roles.add(msg.guild.roles.cache.find(role => role.name === 'Casino Player'));
             const newPlayer = await msg.client.dbHelper.createPlayer({
-                user_id: user.id,
-                user_name: user.username,
-                user_tag: user.tag,
-                bot: user.bot,
+                userId: user.id,
+                userName: user.username,
+                userTag: user.tag,
                 balance: 0,
             });
             msg.client.logger.info(`Successfully added role "${role.name}" to user "${member.user.username}"`);
@@ -37,10 +38,10 @@ module.exports = class CreatePlayer extends Command {
             );
         } catch (error) {
             msg.client.botLogger({
-                embed: message.client.errorMessage(
+                embed: msg.client.errorMessage(
                     error,
-                    message.client.errorTypes.DATABASE,
-                    message.command.name
+                    msg.client.errorTypes.DATABASE,
+                    msg.command.name
                 ),
             });
         }

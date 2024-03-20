@@ -1,19 +1,8 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class PlayerLoss extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  PlayerLoss.init({
+const { DataTypes } = require('sequelize');
+const sequelize = require('../db-connection');
+
+module.exports = () => {
+  const PlayerLoss = sequelize.define('PlayerLoss', {
     lossId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -35,10 +24,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
-    }
+    },
   }, {
-    sequelize,
-    modelName: 'PlayerLoss',
+    // Additional model options if needed
   });
+
+  // Define associations (optional)
+  PlayerLoss.associate = (models) => {
+    // Define associations here
+  };
+
   return PlayerLoss;
 };

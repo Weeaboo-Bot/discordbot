@@ -6,8 +6,9 @@ const { errorMessage, auditMessage, readyMessage, roleMessage, guildMessage, new
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
 const { fail } = require('../assets/json/emojis.json');
-const DBHelper = require('../util/database/db-helper');
-const dbConnection = require('../util/database/db-connection');
+const DBHelper = require('../database/db-helper');
+const dbConnection = require('../database/db-connection');
+const sequelize = require('../database/db-connection');
 
 const GROUPS = [
     ['action', 'Action'],
@@ -92,8 +93,8 @@ module.exports = class WeabooClient extends CommandoClient {
         this.casinoChannel = config.discord.CASINO_CHANNEL;
         // Create the Casino and db
         this.casino = new Discord.Collection();
-        this.dbHelper = new DBHelper(this.casino, this.logger);
-        this.database = dbConnection(config.database, this.logger);
+        this.database = sequelize;
+        this.dbHelper = new DBHelper(this.casino, this.logger, this.database);
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;
