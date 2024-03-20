@@ -78,14 +78,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-
-#Config Directory
-#Includes Discord Config, Firebase Config, Twitch Config, Youtube Configs, SoundCloud Configs
-config/
-config.js
-
-service-account-file.json
-
 .vercel
 
 test/
@@ -98,5 +90,3 @@ node_modules
 .idea
 
 venv
-
-service-account.json
