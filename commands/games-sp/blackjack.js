@@ -31,14 +31,14 @@ module.exports = class BlackjackCommand extends Command {
         if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
             return; // Do nothing if channel doesn't match
         }
-        const current = this.client.games.get(msg.channel.id);
-        if (current) {
+        const currentGame = this.client.games.get(msg.channel.id);
+        if (currentGame) {
             return msg.reply(
-                `Please wait until the current game of \`${current.name}\` is finished.`
+                `Please wait until the current game of \`${currentGame.name}\` is finished.`
             );
         }
         try {
-            this.client.games.set(msg.channel.id, {
+            this.client.dbHelper.createGame({
                 name: this.name,
                 data: new Deck({ deckCount }),
                 gameType: 'blackjack',

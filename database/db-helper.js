@@ -1,9 +1,10 @@
 const { Player, CasinoGame, CasinoGameLog } = require('../database/models/index');
 
 module.exports = class DBHelper {
-    constructor(casinoUsers, casinoGames, logger) {
-        this.casinoUsers = casinoUsers;
-        this.casinoGames = casinoGames;
+    constructor(casinoUsers, casinoGames, gameLog, logger) {
+        this.casinoUsers = casinoUsers; // collection of casino players
+        this.casinoGames = casinoGames; // collection of casino games
+        this.gameLog = gameLog; // collection of game logs
         this.logger = logger;
     }
     convertTimestamp(timestamp) {
@@ -49,6 +50,7 @@ module.exports = class DBHelper {
       }
     async createGame(gameData) {
       const newGame = await CasinoGame.create(gameData);
+      this.casinoGames.set(newGame.gameId, newGame); // Add the new game to the collection
       return newGame; // Return the newly created game object
     }
     async deleteGame(id) {
