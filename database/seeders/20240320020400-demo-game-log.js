@@ -1,11 +1,11 @@
 'use strict';
-
+const { v4: uuidv4 } = require('uuid');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('CasinoGameLog', [{
-      gameLogId: 1,
-      gameId: 1,
+      gameLogId: uuidv4(),
+      gameId: uuidv4(),
       gameType: 'blackjack',
       moveType: 'win',
       userId: '1',

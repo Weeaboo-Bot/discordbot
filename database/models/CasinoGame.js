@@ -3,11 +3,11 @@ const sequelize = require('../db-connection');
 
 const CasinoGame = sequelize.define('CasinoGame', {
   gameId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUIDV4,
     allowNull: false,
-    autoIncrement: true,
     primaryKey: true,
     unique: true,
+    defaultValue: sequelize.literal('uuid_generate_v4()'),
   },
   data: {
     type: DataTypes.JSON,

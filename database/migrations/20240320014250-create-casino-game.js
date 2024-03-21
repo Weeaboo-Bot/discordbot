@@ -4,11 +4,11 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('CasinoGame', {
       gameId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         unique: true,
+        defaultValue: Sequelize.literal('gen_random_uuid()'),
       },
       data: {
         type: Sequelize.JSON,

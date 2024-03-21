@@ -28,9 +28,9 @@ module.exports = class BlackjackCommand extends Command {
     }
 
     async run(msg, { deckCount }) {
-        if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
-            return; // Do nothing if channel doesn't match
-        }
+        // if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
+        //     return; // Do nothing if channel doesn't match
+        // }
         const currentGame = this.client.games.get(msg.channel.id);
         if (currentGame) {
             return msg.reply(
@@ -111,20 +111,20 @@ module.exports = class BlackjackCommand extends Command {
                         const playerTotal = this.calculate(playerHand);
                         if (total === playerTotal) {
                             reason = `${card
-                                    ? `Dealer drew ${card.display}, making it `
-                                    : ''
+                                ? `Dealer drew ${card.display}, making it `
+                                : ''
                                 }${playerTotal}-${total}`;
                             break;
                         } else if (total > playerTotal) {
                             reason = `${card
-                                    ? `Dealer drew ${card.display}, making it `
-                                    : ''
+                                ? `Dealer drew ${card.display}, making it `
+                                : ''
                                 }${playerTotal}-**${total}**`;
                             break;
                         } else {
                             reason = `${card
-                                    ? `Dealer drew ${card.display}, making it `
-                                    : ''
+                                ? `Dealer drew ${card.display}, making it `
+                                : ''
                                 }**${playerTotal}**-${total}`;
                             win = true;
                         }
@@ -140,7 +140,13 @@ module.exports = class BlackjackCommand extends Command {
             return msg.say(`${reason}! Too bad.`);
         } catch (err) {
             this.client.games.delete(msg.channel.id);
-            throw err;
+            msg.client.botLogger({
+                embed: msg.client.errorMessage(
+                    err,
+                    msg.client.errorTypes.DATABASE,
+                    msg.command.name
+                ),
+            });
         }
     }
 

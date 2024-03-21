@@ -4,11 +4,11 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('PlayerWin', {
       winId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
         unique: true,
+        defaultValue: Sequelize.literal('gen_random_uuid()'),
       },
       gameType: {
         type: Sequelize.ENUM,

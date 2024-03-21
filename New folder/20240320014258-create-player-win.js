@@ -2,13 +2,13 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PlayerLoss', {
-      lossId: {
-        type: Sequelize.UUID,
+    await queryInterface.createTable('PlayerWin', {
+      winId: {
+        type: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
         unique: true,
-        defaultValue: Sequelize.literal('gen_random_uuid()'),
+        defaultValue: Sequelize.literal('uuid_generate_v4()'),
       },
       gameType: {
         type: Sequelize.ENUM,
@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-      lossAmount: {
+      winAmount: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0,
@@ -36,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PlayerLoss');
+    await queryInterface.dropTable('PlayerWin');
   }
 };

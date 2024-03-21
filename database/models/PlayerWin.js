@@ -3,11 +3,11 @@ const sequelize = require('../db-connection');
 
 const PlayerWin = sequelize.define('PlayerWin', {
   winId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true,
     unique: true,
+    defaultValue: sequelize.literal('uuid_generate_v4()'),
   },
   gameType: {
     type: DataTypes.ENUM,
