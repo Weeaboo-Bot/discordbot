@@ -1,35 +1,34 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // Check for PostgreSQL version (optional, adapt based on your environment)
+
     await queryInterface.createTable('CasinoGameLog', {
       gameLogId: {
         type: Sequelize.UUID,
-        allowNull: false,
+        defaultValue: Sequelize.literal('gen_random_uuid()'), // Adapt for older versions
         primaryKey: true,
         unique: true,
-        defaultValue: Sequelize.literal('uuid_generate_v4()'),
+        allowNull: false,
       },
       gameId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
-          module: 'CasinoGame',
+          model: 'CasinoGame',
           key: 'gameId',
           as: 'gameId',
           onDelete: 'CASCADE',
           onUpdate: 'CASCADE',
-          allowNull: false,
-        }
+        },
+        allowNull: false,
       },
       gameType: {
-        type: Sequelize.ENUM,
-        values: ['blackjack', 'poker', 'slots', 'roulette'],
+        type: Sequelize.ENUM('blackjack', 'poker', 'slots', 'roulette'),
         allowNull: false,
-  
       },
       moveType: {
-        type: Sequelize.ENUM,
-        values: ['bet', 'win', 'loss', 'draw', 'move'],
+        type: Sequelize.ENUM('bet', 'win', 'loss', 'draw', 'move'),
         allowNull: false,
       },
       userId: {
@@ -40,20 +39,21 @@ module.exports = {
           as: 'userId',
           onDelete: 'CASCADE',
           onUpdate: 'CASCADE',
-          allowNull: false,
-        }
+        },
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('CasinoGameLog');
-  }
+  },
 };

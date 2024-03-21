@@ -1,9 +1,8 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PlayerWin', {
-      winId: {
+    await queryInterface.createTable('PlayerLoss', {
+      lossId: {
         type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
@@ -20,10 +19,20 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-      winAmount: {
+      lossAmount: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0,
+      },
+      userId: {
+        type: Sequelize.STRING,
+        references: {
+          model: 'Player',
+          key: 'userId',
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE',
+          allowNull: false,
+        }
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +45,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PlayerWin');
+    await queryInterface.dropTable('PlayerLoss');
   }
 };

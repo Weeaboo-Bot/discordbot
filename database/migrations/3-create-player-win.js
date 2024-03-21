@@ -1,36 +1,28 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('CasinoGameLog', {
-      gameLogId: {
-        type: Sequelize.UUIDV4,
+    await queryInterface.createTable('PlayerWin', {
+      winId: {
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
         unique: true,
-        defaultValue: Sequelize.literal('uuid_generate_v4()'),
-      },
-      gameId: {
-        type: Sequelize.INTEGER,
-        references: {
-          module: 'CasinoGame',
-          key: 'gameId',
-          as: 'gameId',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE',
-          allowNull: false,
-        }
+        defaultValue: Sequelize.literal('gen_random_uuid()'),
       },
       gameType: {
         type: Sequelize.ENUM,
         values: ['blackjack', 'poker', 'slots', 'roulette'],
         allowNull: false,
-  
       },
-      moveType: {
-        type: Sequelize.ENUM,
-        values: ['bet', 'win', 'loss', 'draw', 'move'],
+      betAmount: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
+      },
+      winAmount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       userId: {
         type: Sequelize.STRING,
@@ -54,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('CasinoGameLog');
+    await queryInterface.dropTable('PlayerWin');
   }
 };

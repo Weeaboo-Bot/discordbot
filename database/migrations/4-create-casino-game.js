@@ -1,29 +1,22 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PlayerLoss', {
-      lossId: {
+    await queryInterface.createTable('CasinoGame', {
+      gameId: {
         type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
         unique: true,
         defaultValue: Sequelize.literal('gen_random_uuid()'),
       },
+      data: {
+        type: Sequelize.JSON,
+        allowNull: false,
+      },
       gameType: {
         type: Sequelize.ENUM,
         values: ['blackjack', 'poker', 'slots', 'roulette'],
         allowNull: false,
-      },
-      betAmount: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-      },
-      lossAmount: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PlayerLoss');
+    await queryInterface.dropTable('CasinoGame');
   }
 };
