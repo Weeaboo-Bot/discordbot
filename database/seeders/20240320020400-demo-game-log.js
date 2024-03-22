@@ -8,7 +8,7 @@ module.exports = {
       gameId: uuidv4(),
       gameType: 'blackjack',
       moveType: 'win',
-      userId: '1',
+      id: '1',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

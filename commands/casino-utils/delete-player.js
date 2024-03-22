@@ -28,7 +28,7 @@ module.exports = class DeletePlayer extends Command {
             const deletedPlayer = await msg.client.dbHelper.deletePlayer(user.id);
             msg.client.logger.info(`Successfully removed role "${role.name}" from user "${member.user.username}"`);
             return msg.reply(
-                `Deleted player ${user.tag} with ID ${deletedPlayer.userId} at <t:${msg.client.dbHelper.convertTimestamp(deletedPlayer.updatedAt)}:f>`
+                `Deleted player ${user.tag} with ID ${deletedPlayer.id} at <t:${msg.client.dbHelper.convertTimestamp(deletedPlayer.updatedAt)}:f>`
             );
         } catch (error) {
             msg.client.botLogger({
