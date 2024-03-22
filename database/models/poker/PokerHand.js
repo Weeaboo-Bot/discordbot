@@ -46,7 +46,10 @@ const { DataTypes } = require('sequelize');
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-  });
+  }, {
+    timestamps: true,
+    tableName: 'PokerHand',
+});
 
   PokerHand.associate = (models) => {
     PokerHand.belongsTo(models.PokerGame, { foreignKey: 'id' });

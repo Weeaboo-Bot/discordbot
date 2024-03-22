@@ -1,4 +1,4 @@
-const { Player, PlayerLoss, PlayerWin, BJGame, BJGameLog, PokerGame, PokerGameLog, PokerGamePlayers, RouletteGame, RouletteGameLog } = require('../database/models/index');
+const { Player, PlayerLoss, PlayerWin, BJGame, BJGameLog, BJHand, PokerGame, PokerGameLog, PokerGamePlayers, PokerHand, RouletteGame, RouletteGameLog } = require('../database/models/index');
 const { v4: uuidv4 } = require('uuid');
 
 // Import the event types
@@ -114,7 +114,7 @@ module.exports = class DBHelper {
         this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       default:
-        gameLogData.gameEvent = 'INVALID_GAME_TYPE';
+        return 'INVALID_GAME_TYPE';
     }
     return newGameLog; // Return the newly created game log object
   }
@@ -133,5 +133,41 @@ module.exports = class DBHelper {
     } else {
       return null; // Indicate game log not found
     }
+  }
+  async createGameHand(handData, gameType) {
+    let newHand;
+    handData.id = uuidv4();
+    try {
+      switch (gameType) {
+        case gameTypes.BLACKJACK:
+          newHand = await BJHand.create(handData);
+          break;
+        case gameTypes.POKER:
+          newHand = await PokerHand.create(handData);
+          break;
+        default:
+          return 'INVALID_GAME_TYPE';
+ 
+      }
+    } catch (error ){
+      console.log(error);
+    }
+    return newHand;
+
+  }
+  async deleteGameHand(id, gameType) {
+    let hand;
+    switch (gameType) {
+      case gameTypes.BLACKJACK:
+        hand = await BJHand.destroy({ where: { id: id } });
+        break;
+      case gameTypes.POKER:
+        hand = await PokerHand.destroy({ where: { id: id } });
+        break;
+      default:
+        return 'INVALID_GAME_TYPE';
+
+    }
+    return hand; // Return the deleted game log object
   }
 }

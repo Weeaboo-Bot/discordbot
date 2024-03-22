@@ -54,6 +54,18 @@ module.exports = class BlackjackCommand extends Command {
 
             const dealerInitialTotal = this.calculate(dealerHand);
             const playerInitialTotal = this.calculate(playerHand);
+            this.client.dbHelper.createGameHand({
+                gameId: id,
+                playerId: '1',
+                cards: dealerHand,
+                total: dealerInitialTotal,
+            }, 'blackjack');
+            this.client.dbHelper.createGameHand({
+                gameId: id,
+                playerId: msg.author.id,
+                cards: playerHand,
+                total: playerInitialTotal,
+            }, 'blackjack');
 
             let outcome = await this.handleInitialRound(dealerInitialTotal, playerInitialTotal, id, msg.author.id);
             if (outcome) {
@@ -75,7 +87,7 @@ module.exports = class BlackjackCommand extends Command {
                     }
                     playerTurn = false;
                 } else {
-                    outcome = await this.handleDealerTurn(dealerHand, msg, id);
+                    outcome = await this.handleDealerTurn(dealerHand, playerHand, msg, id);
                     if (outcome) {
                         reason = outcome;
                         win = true;
@@ -86,7 +98,20 @@ module.exports = class BlackjackCommand extends Command {
             }
 
             await this.client.dbHelper.deleteGame(id, false);
-            return win ? msg.say(`${reason}! You won!`) : msg.say(`${reason}! Too bad.`);
+            if (win) {
+                await this.client.dbHelper.createGameLog({
+                    gameId: id,
+                    event: 'PLAYER_WIN',
+                    playerId: msg.author.id,
+                }, 'blackjack');
+                return msg.reply(`${reason}! You won!`);
+            }
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'DEALER_WIN',
+                playerId: '1',
+            }, 'blackjack');
+            return msg.reply(`${reason}! Too bad.`);
         } catch (error) {
             msg.client.botLogger({
                 embed: msg.client.errorMessage(
@@ -114,11 +139,21 @@ module.exports = class BlackjackCommand extends Command {
                 event: 'DEALER_BLACKJACK',
                 playerId: playerId,
             }, 'blackjack');
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'DEALER_WIN',
+                playerId: '1'
+            }, 'blackjack');
             return 'Ouch, the dealer hit blackjack right away! Try again!';
         } else if (playerTotal === 21) {
             await this.client.dbHelper.createGameLog({
                 gameId: id,
                 event: 'PLAYER_BLACKJACK',
+                playerId: playerId,
+            }, 'blackjack');
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'PLAYER_WIN',
                 playerId: playerId,
             }, 'blackjack');
             return 'Wow, you hit blackjack right away! Lucky you!';
@@ -149,6 +184,12 @@ module.exports = class BlackjackCommand extends Command {
             }, 'blackjack');
             const card = this.draw(id, playerHand);
             const total = this.calculate(playerHand);
+            this.client.dbHelper.createGameHand({
+                gameId: id,
+                playerId: msg.author.id,
+                cards: playerHand,
+                total: total,
+            }, 'blackjack');
             if (total > 21) {
                 await this.client.dbHelper.createGameLog({
                     gameId: id,
@@ -171,19 +212,31 @@ module.exports = class BlackjackCommand extends Command {
                 playerId: msg.author.id,
             });
             const dealerTotal = this.calculate(dealerHand);
+            this.client.dbHelper.createGameHand({
+                gameId: id,
+                playerId: '1',
+                cards: dealerHand,
+                total: dealerTotal,
+            }, 'blackjack');
             await msg.say(`Second dealer card is ${dealerHand[1].display}, total of ${dealerTotal}.`);
         }
         return null; // No outcome determined yet
     }
 
 
-    async handleDealerTurn(dealerHand, msg, id) {
+    async handleDealerTurn(dealerHand, playerHand, msg, id) {
         let card;
         let total = this.calculate(dealerHand);
 
         while (total < 17) {
             card = this.draw(id, dealerHand);
             total = this.calculate(dealerHand);
+            this.client.dbHelper.createGameHand({
+                gameId: id,
+                playerId: '1',
+                cards: dealerHand,
+                total: total,
+            }, 'blackjack');
             await msg.say(`Dealer drew ${card.display}, total of ${total}.`);
         }
 
@@ -196,6 +249,12 @@ module.exports = class BlackjackCommand extends Command {
             return `Dealer drew ${card.display}, total of ${total}! Dealer bust`;
         } else if (total >= 17) {
             const playerTotal = this.calculate(playerHand);
+            this.client.dbHelper.createGameHand({
+                gameId: id,
+                playerId: msg.author.id,
+                cards: playerHand,
+                total: playerTotal,
+            }, 'blackjack');
             if (total === playerTotal) {
                 await this.client.dbHelper.createGameLog({
                     gameId: id,

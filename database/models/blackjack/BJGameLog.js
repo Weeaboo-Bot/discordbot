@@ -21,7 +21,7 @@ const BJGameLog = sequelize.define('BJGameLog', {
     defaultValue: DataTypes.NOW,
   },
   event: {
-    type: DataTypes.ENUM(['PLAYER_JOINED', 'PLAYER_HIT', 'PLAYER_STAND', 'PLAYER_BUST', 'DEALER_DRAWN', 'DEALER_BUST', 'PLAYER_BLACKJACK', 'DEALER_BLACKJACK', 'PLAYER_WIN', 'DEALER_WIN', 'PUSH']),
+    type: DataTypes.ENUM(['PLAYER_JOINED', 'PLAYER_PLACED_BET', 'PLAYER_HIT', 'PLAYER_STAND', 'PLAYER_BUST', 'DEALER_DRAWN', 'DEALER_BUST', 'PLAYER_BLACKJACK', 'DEALER_BLACKJACK', 'PLAYER_WIN', 'DEALER_WIN', 'PUSH']),
     allowNull: false,
   },
   playerId: {

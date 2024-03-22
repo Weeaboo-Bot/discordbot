@@ -52,11 +52,11 @@ const BJHand = sequelize.define('BJHand', {
     tableName: 'BJHand',
 });
 
-BJGameLog.associate = (models) => {
+BJHand.associate = (models) => {
     // Define associations with other models (e.g., Player, Hand)
     // ...
-    BJGameLog.belongsTo(models.BJGame, { foreignKey: 'id' });
-    BJGameLog.belongsTo(models.Player, { foreignKey: 'id' });
+    BJHand.belongsTo(models.BJGame, { foreignKey: 'id' });
+    BJHand.belongsTo(models.Player, { foreignKey: 'id' });
     // ...
 };
 

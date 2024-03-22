@@ -21,7 +21,10 @@ const { DataTypes } = require('sequelize');
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-  });
+  }, {
+    timestamps: true,
+    tableName: 'RouletteGame',
+});
 
   // Optional: Add associations with other models here (e.g., User)
 

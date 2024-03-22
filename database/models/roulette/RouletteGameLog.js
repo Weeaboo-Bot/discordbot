@@ -46,6 +46,9 @@ const RouletteGameLog = sequelize.define('RouletteGameLog', {
     defaultValue: DataTypes.NOW,
   },
   // Additional event-specific data (optional)
+},{
+  timestamps: true,
+  tableName: 'RouletteGameLog',
 });
 
 RouletteGameLog.associate = (models) => {
