@@ -19,8 +19,6 @@ const GROUPS = [
     ['games-sp', 'Single-Player Games'],
     ['info', 'Info'],
     ['moderation', 'Moderation'],
-    ['news', 'News'],
-    ['nsfw', 'NSFW'],
     ['numbers', 'Number Commands'],
     ['owner', 'Hidden + Owner'],
     ['text', 'Text Commands'],
@@ -137,15 +135,6 @@ module.exports = class WeabooClient extends CommandoClient {
             files = files.filter((f) => f.split('.').pop() === 'js');
             if (files.length === 0) return this.logger.warn('No events found');
             this.logger.info(`${files.length} event(s) found...`);
-            files.forEach((f) => {
-                const eventName = f.substring(0, f.indexOf('.'));
-                const event = require(resolve(__basedir, join(path, f)));
-                super.on(eventName, event.bind(null, this));
-                delete require.cache[
-                    require.resolve(resolve(__basedir, join(path, f)))
-                ]; // Clear cache
-                this.logger.info(`Loading event: ${eventName}`);
-            });
         });
         return this;
     }
@@ -156,9 +145,6 @@ module.exports = class WeabooClient extends CommandoClient {
     loadGroups() {
         this.logger.info('Loading groups...');
         this.logger.info(`${this.registry.groups.size} groups(s) found...`);
-        this.registry.groups.forEach((group) => {
-            this.logger.info(`Loading group: ${group.name}`);
-        });
         return this;
     }
 
@@ -168,9 +154,6 @@ module.exports = class WeabooClient extends CommandoClient {
     loadCommands() {
         this.logger.info('Loading commands...');
         this.logger.info(`${this.registry.commands.size} commands(s) found...`);
-        this.registry.commands.forEach((command) => {
-            this.logger.info(`Loading command: ${command.name}`);
-        });
         return this;
     }
 
