@@ -1,10 +1,5 @@
-const { Player, PlayerLoss, PlayerWin, BJGame, BJGameLog, BJHand, PokerGame, PokerGameLog, PokerGamePlayers, PokerHand, RouletteGame, RouletteGameLog } = require('../database/models/index');
+const { Player, PlayerLoss, PlayerWin, BJGame, BJGameLog, BJHand, PokerGame, PokerGameLog, PokerGamePlayers, PokerHand, RouletteGame, RouletteGameLog, BJBet, PokerBet } = require('../database/models/index');
 const { v4: uuidv4 } = require('uuid');
-
-// Import the event types
-const blackjackEvents = require('../assets/json/blackjack-events.json');
-const pokerEvents = require('../assets/json/poker-events.json');
-const rouletteEvents = require('../assets/json/roulette-events.json');
 
 const gameTypes = require('../assets/json/game-types.json');
 module.exports = class DBHelper {
@@ -30,8 +25,28 @@ module.exports = class DBHelper {
     }
     this.logger.info('Player not found');
   }
+  async removeBalance(id, amount) {
+    const player = this.casinoUsers.get(id);
+
+    if (player) {
+      player.balance -= Number(amount);
+      await Player.update({ balance: player.balance }, {
+        where: { id: id },
+      });
+      return player ? player.balance : 0;
+    }
+    this.logger.info('Player not found');
+  }
   async getBalance(id) {
     const player = this.casinoUsers.get(id);
+    // also check db
+    if (!player) {
+      const dbPlayer = await Player.findOne({ where: { id: id } });
+      if (dbPlayer) {
+        this.casinoUsers.set(id, dbPlayer);
+        return dbPlayer.balance;
+      }
+    }
     return player ? player.balance : 0;
   }
   async createPlayer(playerData) {
@@ -169,5 +184,28 @@ module.exports = class DBHelper {
 
     }
     return hand; // Return the deleted game log object
+  }
+  async createGameBet(betData, gameType) {
+    let newBet;
+    betData.id = uuidv4();
+    try {
+      switch (gameType) {
+        case gameTypes.BLACKJACK:
+          newBet = await BJBet.create(betData);
+          break;
+        case gameTypes.POKER:
+          newBet = await PokerBet.create(betData);
+          break;
+        default:
+          return 'INVALID_GAME_TYPE';
+ 
+      }
+    } catch (error ){
+      console.log(error);
+    }
+    return newBet;
+  }
+  async deleteGameBet(id) {
+
   }
 }

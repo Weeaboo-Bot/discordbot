@@ -1,6 +1,4 @@
 const Command = require('../../structures/Command');
-const moment = require('moment');
-const { MessageEmbed } = require('discord.js');
 
 module.exports = class AddBalanceCommand extends Command {
     constructor(client) {
