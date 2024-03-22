@@ -22,7 +22,6 @@ module.exports = class RouletteCommand extends Command {
               return true;
               // Proceed with processing the bet (considering other validations like bet amount)
             } else {
-              console.log(`${betType} is not a valid bet type. Please choose from: ${validBetTypes.join(', ')}`);
               return (`Please choose from: ${validBetTypes.join(', ')}`);
               // Handle invalid bet type (e.g., send an informative message to the user)
             }

@@ -311,7 +311,7 @@ module.exports = class BlackjackCommand extends Command {
         }, 'blackjack');
     }
     draw(id, hand) {
-        const deck = this.client.games.get(id).data;
+        const deck = this.client.casinoGames.get(id).data;
         const card = deck.draw();
         hand.push(card);
         return card;
