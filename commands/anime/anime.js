@@ -118,6 +118,7 @@ module.exports = class AnimeCommand extends Command {
                             );
                             message.client.botLogger({
                                     embed: message.client.errorMessage(
+                                        message.client.logger,
                                         detailError,
                                         message.client.errorTypes.API,
                                         message.command.name,
@@ -129,6 +130,7 @@ module.exports = class AnimeCommand extends Command {
                 .catch(function (err) {
                     message.client.botLogger({
                             embed: message.client.errorMessage(
+                                message.client.logger,
                                 err,
                                 message.client.errorTypes.API,
                                 message.command.name,

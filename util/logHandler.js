@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-
+const { v4: uuidv4 } = require('uuid');
 
 // Weaboo Bot Log Handler
 // Call these functions from within Commands - Will log to the Webhook Log Channel
@@ -13,7 +13,8 @@ function dmMessage(dm) {
         .setTimestamp();
 }
 
-function newMessage(message) {
+function newMessage(logger, message) {
+    logger.info(message);
     return new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setDescription(message.content)
@@ -22,17 +23,21 @@ function newMessage(message) {
         .setTimestamp();
 }
 
-function errorMessage(error, error_type, error_command) {
+function errorMessage(logger, error, error_type, error_command) {
+    const logId = uuidv4();
+    logger.error(`${logId} ${error}`);
     return new Discord.MessageEmbed()
         .setTitle(`❎ Command: ${error_command}\nError Type: ${error_type}`)
         .setColor('RED')
+        .addField('Error ID', logId, true)
         .addField('Error Name', error.name || 'Unknown Error', true)
         .addField('Error Message', error.message || error , true)
         .addField('Error URL', error.url || error.path, true)
         .setTimestamp();
 }
 
-function statusMessage(status, status_type, status_details) {
+function statusMessage(logger, status, status_type, status_details) {
+    logger.info(`${status_type} - ${status} - ${status_details}`);
     return new Discord.MessageEmbed()
         .setTitle(`✅ Status: ${status}\n Status Type: ${status_type}`)
         .setColor('GREEN')
@@ -40,7 +45,8 @@ function statusMessage(status, status_type, status_details) {
         .setTimestamp();
 }
 
-function auditMessage(auditEntry, reason, message) {
+function auditMessage(logger, auditEntry, reason, message) {
+    logger.info(`${JSON.stringify(auditEntry)} - ${reason} - ${message}`);
     return new Discord.MessageEmbed()
         .setTitle('AUDIT EVENT')
         .setColor('BLUE')
@@ -55,7 +61,8 @@ function auditMessage(auditEntry, reason, message) {
         .setTimestamp();
 }
 
-function roleMessage(roleEntry, reason) {
+function roleMessage(logger, roleEntry, reason) {
+    logger.info(`${JSON.stringify(roleEntry)} - ${reason}`);
     return new Discord.MessageEmbed()
         .setTitle('Role Event')
         .setColor('GREEN')
@@ -67,7 +74,8 @@ function roleMessage(roleEntry, reason) {
         .setTimestamp();
 }
 
-function guildMessage(guildEntry, reason) {
+function guildMessage(logger, guildEntry, reason) {
+    logger.info(`${JSON.stringify(guildEntry)} - ${reason}`)
     return new Discord.MessageEmbed()
         .setTitle('Guild Event')
         .setColor('GOLD')
@@ -79,6 +87,7 @@ function guildMessage(guildEntry, reason) {
 }
 
 function readyMessage(readyEntry) {
+    readyEntry.client.logger.info(`${JSON.stringify(readyEntry)}`);
     return new Discord.MessageEmbed()
         .setAuthor(
             `${readyEntry.client.user.tag} has (re)started!`,

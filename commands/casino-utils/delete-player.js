@@ -33,6 +33,7 @@ module.exports = class DeletePlayer extends Command {
         } catch (error) {
             msg.client.botLogger({
                 embed: msg.client.errorMessage(
+                    message.client.logger,
                     error,
                     msg.client.errorTypes.DATABASE,
                     msg.command.name

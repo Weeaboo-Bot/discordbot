@@ -35,6 +35,7 @@ module.exports = class NekoCommand extends Command {
                     message.client.botLogger
                         .send({
                             embed: message.client.errorMessage(
+                                message.client.logger,
                                 err,
                                 message.client.errorTypes.API,
                                 message.command.name
@@ -59,6 +60,7 @@ module.exports = class NekoCommand extends Command {
                     message.client.botLogger
                         .send({
                             embed: message.client.errorMessage(
+                                message.client.logger,
                                 err,
                                 message.client.errorTypes.API,
                                 message.command.name

@@ -155,6 +155,7 @@ module.exports = class QuizDuelCommand extends Command {
                 this.client.logger.error('questions DB was null');
                 this.client.channels.cache.get(msg.client.errorLog).send({
                     embed: msg.client.errorMessage(
+                        msg.client.logger,
                         'question DB was null',
                         msg.client.errorTypes.API,
                         msg.command.name
@@ -201,7 +202,7 @@ module.exports = class QuizDuelCommand extends Command {
                     errors[Math.round(Math.random() * (errors.length - 1))]
                 );
                 msg.client.channels.cache.get(msg.client.errorLog).send({
-                    embed: msg.client.errorMessage(err, msg.client.errorTypes.API, msg.command.name),
+                    embed: msg.client.errorMessage(msg.client.logger, err, msg.client.errorTypes.API, msg.command.name),
                 });
                 return null;
             });

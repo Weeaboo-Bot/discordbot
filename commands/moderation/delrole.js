@@ -54,6 +54,7 @@ module.exports = class DeleteRoleCommand extends Command {
                 message.client.botLogger
                     .send({
                         embed: message.client.errorMessage(
+                            message.client.logger,
                             err,
                             message.client.errorTypes.DISCORD_API,
                             message.command.name

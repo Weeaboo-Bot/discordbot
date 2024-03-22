@@ -48,6 +48,7 @@ module.exports = class WeatherCommand extends Command {
                 message.client.botLogger
                     ({
                         embed: message.client.errorMessage(
+                            message.client.logger,
                             err,
                             message.client.errorTypes.API,
                             message.command.name

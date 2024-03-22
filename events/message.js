@@ -4,7 +4,7 @@ module.exports = async (client, message) => {
 
     if (message.channel.type == 'dm') {
         if (message.content.startsWith(message.client.prefix)) return;
-        return client.channels.cache.get(client.dmLog).send({ embed: client.dmMessage(message) });
+        return client.channels.cache.get(client.dmLog).send({ embed: client.dmMessage(client.logger, message) });
     }
 
     // Reply on Pinned message

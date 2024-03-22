@@ -52,6 +52,7 @@ module.exports = class NomCommand extends Command {
                 .catch(function (error) {
                     message.client.botLogger({
                             embed: message.client.errorMessage(
+                                message.client.logger,
                                 error,
                                 message.client.errorTypes.API,
                                 message.command.name

@@ -30,6 +30,7 @@ module.exports = class AdviceCommand extends Command {
                     message.client.botLogger
                         ({
                             embed: message.client.errorMessage(
+                                message.client.logger,
                                 err,
                                 message.client.errorTypes.JS,
                                 message.command.name
@@ -41,6 +42,7 @@ module.exports = class AdviceCommand extends Command {
                 message.client.botLogger
                     ({
                         embed: message.client.errorMessage(
+                            message.client.logger,
                             err,
                             message.client.errorTypes.API,
                             message.command.name

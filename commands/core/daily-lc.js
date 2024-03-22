@@ -59,6 +59,7 @@ module.exports = class DailyLCCommand extends Command {
                 // handle error
                 message.client.botLogger({
                     embed: message.client.errorMessage(
+                        message.client.logger,
                         error,
                         message.client.errorTypes.API,
                         message.command.name

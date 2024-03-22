@@ -35,6 +35,7 @@ module.exports = class DadJokeCommand extends Command {
                 message.client.logger.error(err);
                 message.client.botLogger({
                     embed: message.client.errorMessage(
+                        message.client.logger,
                         err,
                         message.client.errorTypes.API,
                         message.command.name

@@ -40,6 +40,7 @@ module.exports = class GTNCommand extends Command {
             .catch(function (err) {
                 message.client.botLogger.send({
                     embed: message.client.errorMessage(
+                        message.client.logger,
                         err,
                         message.client.errorTypes.API,
                         message.command.name

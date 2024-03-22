@@ -50,6 +50,7 @@ module.exports = class AirQualityCommand extends Command {
                 message.client.botLogger
                     ({
                         embed: message.client.errorMessage(
+                            message.client.logger,
                             err,
                             message.client.errorTypes.API,
                             message.command.name

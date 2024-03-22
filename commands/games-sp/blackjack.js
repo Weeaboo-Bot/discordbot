@@ -124,6 +124,7 @@ module.exports = class BlackjackCommand extends Command {
         } catch (error) {
             msg.client.botLogger({
                 embed: msg.client.errorMessage(
+                    msg.client.logger,
                     error,
                     msg.client.errorTypes.DATABASE,
                     msg.command.name

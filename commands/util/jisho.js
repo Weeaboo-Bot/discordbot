@@ -83,6 +83,7 @@ module.exports = class JishoCommand extends Command {
             .catch(function (err) {
                 message.client.channel.cache.get(message.client.errorLog).send({
                     embed: message.client.errorMessage(
+                        message.client.logger,
                         err,
                         message.client.errorTypes.API,
                         message.command.name

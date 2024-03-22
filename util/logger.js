@@ -8,7 +8,7 @@ const logFormat = format.printf((info) => {
     let log;
     const { timestamp, level, label, message, ...rest } = info;
     if (level == 'error') {
-        log = `${id} - ${timestamp} - ${level} [${label}]: ${message}`;
+        log = `ERROR - ${timestamp} - ${level} [${label}]: ${message}`;
     }
     log = `${timestamp} - ${level} [${label}]: ${message}`;
 
@@ -21,9 +21,11 @@ const logFormat = format.printf((info) => {
 
 
   const errorFormat = format.printf((info) => {
-    const id = uuidv4();
     const { timestamp, level, label, message, ...rest } = info;
-    let log = `${id} - ${timestamp} - ${level} [${label}]: ${message}`;
+    let log = `ERROR - ${timestamp} - ${level} [${label}]: ${message}`;
+    if (!(Object.keys(rest).length === 0 && rest.constructor === Object)) {
+        log = `${log}\n${JSON.stringify(rest, null, 2)}`.replace(/\\n/g, '\n');
+    }
     return log;
   });
 

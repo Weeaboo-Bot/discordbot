@@ -56,6 +56,7 @@ init();
 const task = cron.schedule('0 0 * * *', () => {
   client.botLogger({
     embed: message.client.statusMessage(
+        client.logger,
         'Daily Token Refresh',
         message.client.statusTypes.DAILY_TOKEN,
         'Adding daily free 150 tokens to all players'

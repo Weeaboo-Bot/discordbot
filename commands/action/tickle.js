@@ -49,6 +49,7 @@ module.exports = class TickleCommand extends Command {
                 .catch(function (err) {
                     message.client.botLogger({
                             embed: message.client.errorMessage(
+                                message.client.logger,
                                 err,
                                 message.client.errorTypes.API,
                                 message.command.name
@@ -74,6 +75,7 @@ module.exports = class TickleCommand extends Command {
                     message.client.botLogger
                         ({
                             embed: message.client.errorMessage(
+                                message.client.logger,
                                 err,
                                 message.client.errorTypes.API,
                                 message.command.name

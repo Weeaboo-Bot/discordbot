@@ -46,6 +46,7 @@ module.exports = class LickCommand extends Command {
                         .get(message.client.errorLog)
                         .send({
                             embed: message.client.errorMessage(
+                                message.client.logger,
                                 error,
                                 message.client.errorTypes.API,
                                 message.command.name
