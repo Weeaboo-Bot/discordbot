@@ -32,6 +32,14 @@ function errorMessage(error, error_type, error_command) {
         .setTimestamp();
 }
 
+function statusMessage(status, status_type, status_details) {
+    return new Discord.MessageEmbed()
+        .setTitle(`✅ Status: ${status}\n Status Type: ${status_type}`)
+        .setColor('GREEN')
+        .addField('Status Details', status_details , true)
+        .setTimestamp();
+}
+
 function auditMessage(auditEntry, reason, message) {
     return new Discord.MessageEmbed()
         .setTitle('AUDIT EVENT')
@@ -92,6 +100,5 @@ module.exports = {
     roleMessage,
     guildMessage,
     readyMessage,
-
-
+    statusMessage,
 };

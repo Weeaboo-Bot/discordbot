@@ -70,6 +70,11 @@ module.exports = class DBHelper {
       return null; // Indicate player not found
     }
   }
+
+  async getAllPlayers() {
+    const players = await Player.findAll();
+    return players;
+  }
   async createGame(gameData, gameType) {
     let newGame;
     gameData.id = uuidv4();

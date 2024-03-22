@@ -29,7 +29,7 @@ module.exports = class CreatePlayer extends Command {
                 id: user.id,
                 userName: user.username,
                 userTag: user.tag,
-                balance: 0,
+                balance: 1000, // we give everyone 1000 to start 
             });
             msg.client.logger.info(`Successfully added role "${role.name}" to user "${member.user.username}"`);
             return msg.reply(

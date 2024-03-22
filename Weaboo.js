@@ -1,5 +1,6 @@
 const config = require('./config');
 const express = require('express');
+const cron = require('node-cron');
 const Discord = require('discord.js');
 const Client = require('./structures/Client');
 const Sentry = require("@sentry/node");
@@ -52,6 +53,21 @@ function init() {
 
 init();
 
+const task = cron.schedule('0 0 * * *', () => {
+  client.botLogger({
+    embed: message.client.statusMessage(
+        'Daily Token Refresh',
+        message.client.statusTypes.DAILY_TOKEN,
+        'Adding daily free 150 tokens to all players'
+    ),
+});
+  client.dbHelper.getAllPlayers().then((players) => {
+    players.forEach((player) => {
+      client.dbHelper.addBalance(player.id, 150);
+    });
+  });
+});
+
 nowTimestamp = () => {
   const now = new Date();
   const pad = (num) => num.toString().padStart(2, '0'); // Helper function for padding
@@ -87,5 +103,7 @@ app.listen(port, () => {
   console.log(`Health check server listening on port ${port}`);
 });
 
+task.start();
+console.log('Cron job started');
 
 process.on('unhandledRejection', (err) => client.logger.error(err));
