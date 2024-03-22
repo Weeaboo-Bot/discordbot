@@ -3,11 +3,10 @@ const sequelize = require('../db-connection');
 const Player = require('./player/Player');
 const PlayerWin = require('./player/PlayerWin');
 const PlayerLoss = require('./player/PlayerLoss');
-const BJHand = require('./blackjack/BJHand');
 const BJGame = require('./blackjack/BJGame');
 const BJGameLog = require('./blackjack/BJGameLog');
 
-const PokerGame = require('./pokerPokerGame');
+const PokerGame = require('./poker/PokerGame');
 const PokerGameLog = require('./poker/PokerGameLog');
 const PokerGamePlayers = require('./poker/PokerGamePlayers');
 
@@ -18,7 +17,6 @@ module.exports = {
   Player,
   PlayerWin,
   PlayerLoss,
-  BJHand,
   BJGame,
   BJGameLog,
   PokerGame,

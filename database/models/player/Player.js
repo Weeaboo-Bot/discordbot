@@ -1,6 +1,5 @@
-const Sequelize = require('sequelize');
+const sequelize = require('../../db-connection');
 
-module.exports = (sequelize, DataTypes) => {
   const Player = sequelize.define('Player', {
     id: {
       type: DataTypes.STRING,
@@ -28,5 +27,4 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Player',
   });
 
-  return Player;
-};
+module.exports = Player;

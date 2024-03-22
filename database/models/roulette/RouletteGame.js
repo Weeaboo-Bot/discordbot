@@ -1,6 +1,5 @@
-const Sequelize = require('sequelize');
+const sequelize = require('../../db-connection');
 
-module.exports = (sequelize, DataTypes) => {
   const RouletteGame = sequelize.define('RouletteGame', {
     id: {
       type: DataTypes.UUID,
@@ -21,5 +20,4 @@ module.exports = (sequelize, DataTypes) => {
 
   // Optional: Add associations with other models here (e.g., User)
 
-  return RouletteGame;
-};
+module.exports = RouletteGame;
