@@ -1,0 +1,19 @@
+{
+    "PLAYER_JOINED": "player_joined",
+    "PLAYER_LEFT": "player_left",
+    "BLIND_POSTED": "blind_posted",
+    "GAME_STARTED": "game_started",
+    "DEALING_CARDS": "dealing_cards",
+    "PRE_FLOP_BETTING": "pre_flop_betting",
+    "FLOP_REVEALED": "flop_revealed",
+    "FLOP_BETTING": "flop_betting",
+    "TURN_REVEALED": "turn_revealed",
+    "TURN_BETTING": "turn_betting",
+    "RIVER_REVEALED": "river_revealed",
+    "RIVER_BETTING": "river_betting",
+    "SHOWDOWN": "showdown",
+    "POT_AWARDED": "pot_awarded",
+    "GAME_ENDED": "game_ended",
+    "TABLE_DISSOLVED": "table_dissolved"
+  }
+  

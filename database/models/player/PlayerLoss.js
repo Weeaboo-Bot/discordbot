@@ -1,8 +1,9 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../db-connection');
 
-const PlayerWin = sequelize.define('PlayerWin', {
-  winId: {
+const Sequelize = require('sequelize');
+
+module.exports = (sequelize, DataTypes) => {
+const PlayerLoss = sequelize.define('PlayerLoss', {
+  lossId: {
     type: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
@@ -19,15 +20,15 @@ const PlayerWin = sequelize.define('PlayerWin', {
     allowNull: false,
     defaultValue: 0,
   },
-  winAmount: {
+  lossAmount: {
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 0,
   },
 }, {
   timestamps: true,
-  tableName: 'PlayerWin',
+  tableName: 'PlayerLoss',
 });
 
-
-module.exports = PlayerWin;
+return PlayerLoss;
+};

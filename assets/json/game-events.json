@@ -1,0 +1,5 @@
+{
+    "GAME_STARTED": "game_started",
+    "GAME_ENDED": "game_ended",
+    "GAME_DELETED": "game_deleted"
+}

@@ -1,0 +1,11 @@
+{
+    "PLAYER_JOINED": "player_joined",  
+    "PLAYER_PLACED_BET": "player_placed_bet",
+    "PLACED_BETS_CLOSED": "placed_bets_closed",
+    "WHEEL_SPUN": "wheel_spun",
+    "BALL_LANDED": "ball_landed",
+    "WINNINGS_DISTRIBUTED": "winnings_distributed",
+    "ROUND_ENDED": "round_ended",
+    "GAME_ENDED": "game_ended"
+  }
+  

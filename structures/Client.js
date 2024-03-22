@@ -104,6 +104,7 @@ module.exports = class WeabooClient extends CommandoClient {
         this.newMessage = newMessage;
         this.dmMessage = dmMessage;
         this.errorTypes = require('../assets/json/errorTypes.json');
+        this.casinoTypes = require('../assets/json/game-events.json') + require('../assets/json/blackjack-events.json') + require('../assets/json/poker-events.json') + require('../assets/json/roulette-events.json'),
         this.logger.info('Initializing...');
         this.activities = activities;
         this.leaveMessages = leaveMsgs;

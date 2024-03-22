@@ -26,22 +26,24 @@ module.exports = {
       },
       userId: {
         type: Sequelize.STRING,
+        defaultValue: null,
         references: {
           model: 'Player',
-          key: 'userId',
-          as: 'userId',
+          key: 'playerId',
+          as: 'playerId',
           onDelete: 'CASCADE',
           onUpdate: 'CASCADE',
-          allowNull: false,
         }
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       }
     });
   },

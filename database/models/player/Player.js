@@ -1,8 +1,8 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../db-connection');
+const Sequelize = require('sequelize');
 
+module.exports = (sequelize, DataTypes) => {
   const Player = sequelize.define('Player', {
-    userId: {
+    id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
@@ -28,4 +28,5 @@ const sequelize = require('../db-connection');
     tableName: 'Player',
   });
 
-module.exports = Player;
+  return Player;
+};
