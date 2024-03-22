@@ -49,6 +49,19 @@ module.exports = class DBHelper {
     }
     return player ? player.balance : 0;
   }
+  async isPlayer(id) {
+    const player = this.casinoUsers.get(id);
+    if (!player) {
+      const dbPlayer = await Player.findOne({ where: { id: id } });
+      if (dbPlayer) {
+        this.casinoUsers.set(id, dbPlayer);
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
   async createPlayer(playerData) {
     const newPlayer = await Player.create(playerData);
     this.casinoUsers.set(newPlayer.id, newPlayer);
@@ -86,11 +99,11 @@ module.exports = class DBHelper {
         break;
       case gameTypes.POKER:
         newGame = await PokerGame.create(gameData);
-        this.casinoGames.set(newGame.gameLogId, gameData); // Add the new game log to the collection
+        this.casinoGames.set(newGame.id, gameData); // Add the new game log to the collection
         break;
       case gameTypes.ROULETTE:
-        newGame = await RouletteGame.create(gameLogData);
-        this.casinoGames.set(newGame.gameLogId, gameData); // Add the new game log to the collection
+        newGame = await RouletteGame.create(gameData);
+        this.casinoGames.set(newGame.id, gameData); // Add the new game log to the collection
         break;
       default:
         return 'INVALID GAME_TYPE';
@@ -157,20 +170,16 @@ module.exports = class DBHelper {
   async createGameHand(handData, gameType) {
     let newHand;
     handData.id = uuidv4();
-    try {
-      switch (gameType) {
-        case gameTypes.BLACKJACK:
-          newHand = await BJHand.create(handData);
-          break;
-        case gameTypes.POKER:
-          newHand = await PokerHand.create(handData);
-          break;
-        default:
-          return 'INVALID_GAME_TYPE';
- 
-      }
-    } catch (error ){
-      console.log(error);
+    switch (gameType) {
+      case gameTypes.BLACKJACK:
+        newHand = await BJHand.create(handData);
+        break;
+      case gameTypes.POKER:
+        newHand = await PokerHand.create(handData);
+        break;
+      default:
+        return 'INVALID_GAME_TYPE';
+
     }
     return newHand;
 
@@ -193,20 +202,16 @@ module.exports = class DBHelper {
   async createGameBet(betData, gameType) {
     let newBet;
     betData.id = uuidv4();
-    try {
-      switch (gameType) {
-        case gameTypes.BLACKJACK:
-          newBet = await BJBet.create(betData);
-          break;
-        case gameTypes.POKER:
-          newBet = await PokerBet.create(betData);
-          break;
-        default:
-          return 'INVALID_GAME_TYPE';
- 
-      }
-    } catch (error ){
-      console.log(error);
+    switch (gameType) {
+      case gameTypes.BLACKJACK:
+        newBet = await BJBet.create(betData);
+        break;
+      case gameTypes.POKER:
+        newBet = await PokerBet.create(betData);
+        break;
+      default:
+        return 'INVALID_GAME_TYPE';
+
     }
     return newBet;
   }

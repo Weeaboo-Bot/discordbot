@@ -27,6 +27,10 @@ module.exports = class AddBalanceCommand extends Command {
     }
 
     async run(msg, { user, amount }) {
+        const isPlayer = await this.client.dbHelper.isPlayer(user.id);
+        if (!isPlayer) {
+            return msg.say('You need to register your account before playing!');
+        }
         const balance = await this.client.dbHelper.addBalance(user.id, amount);
         return msg.say(
             `Added ${balance} tokens to ${user.tag}! Their new balance is ${balance}`
