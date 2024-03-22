@@ -64,7 +64,6 @@ module.exports = class WeabooClient extends CommandoClient {
          * Discord API Stuff
          * @type {string}
          */
-        this.token = config.discord.DISCORD_TOKEN;
         this.successEmoji = config.api.SUCCESS_EMOJI_ID;
         this.guildId = config.discord.GUILD_ID;
 

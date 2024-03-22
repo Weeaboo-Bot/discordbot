@@ -1,18 +1,7 @@
 const Command = require('../../structures/Command');
 const { oneLine } = require('common-tags');
 
-const rouletteOptions = {
-  red: [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36],
-  black: [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35],
-  numbers: Array.from({ length: 37 }, (_, i) => i + 1),
-  dozens: ['1-12', '13-24', '25-36'],
-  halves: ['1-18', '19-36'],
-  columns: ['1', '2', '3'], // Change to numerical values for consistency
-  parity: ['even', 'odd'],
-  colors: ['red', 'black'],
-};
-
-const isNumber = (choice) => !isNaN(Number.parseInt(choice, 10));
+const validBetTypes = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns'];
 
 module.exports = class RouletteCommand extends Command {
   constructor(client) {
@@ -23,89 +12,252 @@ module.exports = class RouletteCommand extends Command {
       description: 'Play a game of roulette.',
       args: [
         {
-          key: 'spaces',
-          prompt: 'What spaces do you want to bet on (separated by commas)?',
+          key: 'bet',
+          prompt: 'What betType would you like to place? i.e. redBlack',
           type: 'string',
-          validate: (spaces) => {
-            const allValid = spaces.split(',').every((space) => {
-              const validOption = Object.values(rouletteOptions).some(
-                (option) => option.includes(space.toLowerCase())
-              );
-              return validOption || isNumber(space);
-            });
-            return allValid || oneLine`
-              Invalid spaces provided, please enter a comma-separated list of valid options. Valid options include:
-              * Numbers (e.g. 5, 17)
-              * Dozens (e.g. 1-12, 25-36)
-              * Halves (e.g. 1-18, 19-36)
-              * Columns (e.g. 1st, 2nd, 3rd)
-              * Parity (e.g. even, odd)
-              * Colors (e.g. red, black)
-            `;
+          validate: (bet) => {
+            const betType = bet.split(' ')[0]; // Extract first word (bet type)
+
+            if (this.validateBetType(betType)) {
+              return true;
+              // Proceed with processing the bet (considering other validations like bet amount)
+            } else {
+              console.log(`${betType} is not a valid bet type. Please choose from: ${validBetTypes.join(', ')}`);
+              return (`Please choose from: ${validBetTypes.join(', ')}`);
+              // Handle invalid bet type (e.g., send an informative message to the user)
+            }
           },
-          parse: (spaces) => spaces.split(',').map((space) => space.toLowerCase()),
         },
       ],
     });
   }
 
-  async run(msg, { spaces }) {
+  validateBetType(betTypeInput) {
+    return validBetTypes.includes(betTypeInput);
+  }
+
+  async run(msg, { bet }) {
     if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
       return; // Do nothing if channel doesn't match
     }
-  
-    const number = Math.floor(Math.random() * 37);
-    const color = number ? (this.isRed(number) ? 'RED' : 'BLACK') : null;
+    const isPlayer = await this.client.dbHelper.isPlayer(msg.author.id);
+    if (!isPlayer) {
+        return msg.say('You need to register your account before playing!');
+    }
 
-    const wins = spaces.map((space) => this.verifyWin(space, number));
-    const winCount = wins.filter(Boolean).length;
+    try {
+      const { id } = await this.client.dbHelper.createGame({
+        data: 'New Roulette Game'
+      }, 'roulette');
+      msg.say(`Starting new Roulette Game with ID: ${id}`);
+      await this.client.dbHelper.createGameLog({
+        gameId: id,
+        event: 'PLAYER_JOINED',
+        playerId: msg.author.id,
+      }, 'roulette');
+      const betAmount = await this.waitForBet(msg);
+      this.placeBets(betAmount, id, msg.author.id);
+      await this.client.dbHelper.createGameLog({
+        gameId: id,
+        event: 'PLACED_BETS_CLOSED',
+        playerId: msg.author.id,
+      }, 'roulette');
+      msg.say('Bets placed. Game starting...');
 
-    let resultMessage = `The result is **${number}${color ? ` ${color}` : ''}**. `;
-    if (winCount === 0) {
-      resultMessage += 'You lose...';
-    } else if (winCount === spaces.length) {
-      resultMessage += 'You win on all bets!';
+      // get winnings
+      const winnings = this.calculateRouletteWinnings(msg, bet, betAmount, 'european');
+      await this.client.dbHelper.createGameLog({
+        gameId: id,
+        event: 'WHEEL_SPUN',
+        playerId: msg.author.id,
+      }, 'roulette');
+      await this.client.dbHelper.createGameLog({
+        gameId: id,
+        event: 'BALL_LANDED',
+        playerId: msg.author.id,
+      }, 'roulette');
+
+      let resultMessage;
+      if (winnings > 0) {
+        await this.client.dbHelper.createGameLog({
+          gameId: id,
+          event: 'WINNINGS_DISTRIBUTED',
+          playerId: msg.author.id,
+        }, 'roulette');
+        resultMessage = `Congratulations! You won ${winnings} on your ${bet} bet.`;
+        resultMessage += ` Your new token balance is ${await this.calcWinAndUpdateBal(msg.author.id, winnings, betAmount, true)}.`;
+      } else {
+        newBal = await this.calcWinAndUpdateBal(msg.author.id, winnings, betAmount);
+        resultMessage = `Sorry, you didn't win this round.`;
+        resultMessage += ` Your new token balance is ${await this.calcWinAndUpdateBal(msg.author.id, winnings, betAmount, false)}.`;
+      }
+
+      await this.client.dbHelper.createGameLog({
+        gameId: id,
+        event: 'GAME_ENDED',
+        playerId: msg.author.id,
+      }, 'roulette');
+      return msg.reply(resultMessage);
+
+    } catch (error) {
+      msg.client.botLogger({
+        embed: msg.client.errorMessage(
+          error,
+          msg.client.errorTypes.DATABASE,
+          msg.command.name
+        ),
+      });
+      this.client.logger.error(error);
+      return msg.say('An error occurred during the game. Please try again later.');
+    }
+  }
+  async waitForBet(msg, timeout = 30000) {
+    await msg.say(`You have ${await this.client.dbHelper.getBalance(msg.author.id)} tokens. Place your bet!`);
+    const filter = (m) => m.author.id === msg.author.id; // Filter for messages from the specified user
+    try {
+      const messages = await msg.channel.awaitMessages(filter, { max: 1, time: timeout });
+      return messages.first().content; // Return the first message received
+    } catch (error) {
+      if (error.name === 'MessageCollectorTimeout') {
+        console.log(`User did not respond in time.`);
+      } else {
+        console.error('An error occurred:', error);
+      }
+      return null; // Indicate timeout or other error
+    }
+  }
+  async placeBets(betAmount, id, playerId) {
+    await this.client.dbHelper.createGameLog({
+      gameId: id,
+      event: 'PLAYER_PLACED_BET',
+      playerId: playerId,
+    }, 'roulette');
+    await this.client.dbHelper.createGameBet({
+      gameId: id,
+      playerId: playerId,
+      betAmount: betAmount,
+    }, 'roulette');
+  }
+
+
+  calculateRouletteWinnings(msg, betType, betAmount, rouletteVariant) {
+    const payouts = this.getPayouts(rouletteVariant); // Function to retrieve payouts based on variant
+
+    // Check if the bet type exists
+    if (!payouts[betType]) {
+      throw new Error(`Invalid bet type: ${betType}`);
+    }
+
+    const winningNumber = this.getWinningNumber(rouletteVariant); // Get winning number based on variant
+
+    // Check if the outcome matches the bet
+    let winnings = 0;
+    switch (betType) {
+      case 'straightUp':
+        winnings = betAmount * payouts[betType] ** (winningNumber === betAmount); // Direct number match using exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'split':
+        winnings = betAmount * payouts[betType] ** ([betAmount - 1, betAmount + 1].includes(winningNumber)); // Adjacent numbers, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'street':
+        const streetStart = Math.floor((betAmount - 1) / 3) * 3 + 1; // Calculate street starting number
+        winnings = betAmount * payouts[betType] ** ([streetStart, streetStart + 1, streetStart + 2].includes(winningNumber)); // Numbers in the street, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'corner':
+        const cornerRow = Math.floor((betAmount - 1) / 4); // Calculate corner row
+        const cornerCol = (betAmount - 1) % 4; // Calculate corner column
+        const cornerNumbers = [
+          cornerRow * 4 + cornerCol + 1,
+          cornerRow * 4 + cornerCol + 2,
+          (cornerRow + 1) * 4 + cornerCol + 1,
+          (cornerRow + 1) * 4 + cornerCol + 2,
+        ];
+        winnings = betAmount * payouts[betType] ** (cornerNumbers.includes(winningNumber)); // Numbers in the corner, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'fiveNumberBet': // American Roulette only
+        if (rouletteVariant !== 'american') {
+          throw new Error('Five Number Bet is only available in American Roulette');
+        }
+        winnings = betAmount * payouts[betType] * ([0, 0o0, 1, 2, 3].includes(winningNumber));
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'redBlack':
+        const winningColor = winningNumber === 0 ? 'green' : (winningNumber % 2 === 0 ? 'black' : 'red');
+        winnings = betAmount * payouts[betType] ** (winningColor === betAmount); // Color match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber} ${winningColor}`);
+        break;
+      case 'evenOdd':
+        winnings = betAmount * payouts[betType] ** ((winningNumber % 2 === 0 && betAmount === 'even') || (winningNumber % 2 !== 0 && betAmount === 'odd')); // Even/odd match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'highLow':
+        const highLowBoundary = 18;
+        winnings = betAmount * payouts[betType] ** ((winningNumber >= highLowBoundary && betAmount === 'high') || (winningNumber < highLowBoundary && betAmount === 'low')); // High/low match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'dozens':
+        const dozen = Math.ceil(winningNumber / 12);
+        winnings = betAmount * payouts[betType] ** (dozen === betAmount); // Dozen match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'columns':
+        const column = Math.ceil(betAmount / 3);
+        const columnNumbers = [column, column + 3, column + 6];
+        winnings = betAmount * payouts[betType] ** (columnNumbers.includes(winningNumber)); // Column match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      default:
+        throw new Error(`Unhandled bet type: ${betType}`);
+    }
+
+    return winnings;
+  }
+  // Function to retrieve payouts based on roulette variant (implement logic here)
+  getPayouts(rouletteVariant) {
+    if (rouletteVariant === 'european') {
+      return {
+        straightUp: 35,
+        split: 17,
+        street: 11,
+        corner: 8,
+        redBlack: 1,
+        evenOdd: 1,
+        highLow: 1,
+        dozens: 2,
+        columns: 2,
+      };
+    } else if (rouletteVariant === 'american') {
+      return {
+        // ... include payouts for American Roulette (including fiveNumberBet)
+      };
     } else {
-      resultMessage += `You win on ${winCount} out of ${spaces.length} bets.`;
+      throw new Error(`Unsupported roulette variant: ${rouletteVariant}`);
     }
-
-    return msg.reply(resultMessage);
   }
 
-  isRed(number) {
-    return rouletteOptions.red.includes(number);
+  getWinningNumber(rouletteVariant) {
+    if (rouletteVariant === 'european') {
+      // Simulate roulette spin (replace with actual casino API or random number generation logic)
+      const winningNumber = Math.floor(Math.random() * 37); // Range 0-36
+      return winningNumber;
+    } else if (rouletteVariant === 'american') {
+      // Simulate roulette spin (replace with actual casino API or random number generation logic)
+      const winningNumber = Math.floor(Math.random() * 38); // Range 0-37 (including 00)
+      return winningNumber;
+    } else {
+      throw new Error('Unsupported roulette variant: ' + rouletteVariant);
+    }
+
   }
-    
-  verifyWin(choice, result) {
-    const { red, black, numbers } = rouletteOptions;
-  
-    // Check for numbers first for efficiency
-    if (Number.isInteger(Number.parseInt(choice, 10))) {
-      return numbers.includes(choice) && result === choice;
+
+  async calcWinAndUpdateBal(playerId, winAmount, betAmount, isWin) {
+    if (isWin) {
+      return await this.client.dbHelper.addBalance(playerId, winAmount);
     }
-  
-    // Check for dozens, halves, and columns (assuming numerical values)
-    const rangeCheck = choice.split('-');
-    if (rangeCheck.length === 2 && rangeCheck.every(Number.isInteger)) {
-      const [min, max] = rangeCheck.map(Number);
-      return result >= min && result <= max;
-    }
-  
-    // Check for colors
-    if (choice === 'black') {
-      return black.includes(result);
-    } else if (choice === 'red') {
-      return red.includes(result);
-    }
-  
-    // Check for parity
-    if (choice === 'even') {
-      return result % 2 === 0;
-    } else if (choice === 'odd') {
-      return result % 2 !== 0;
-    }
-  
-    // Invalid choice
-    return false;
+    return await this.client.dbHelper.removeBalance(playerId, betAmount);
   }
 };

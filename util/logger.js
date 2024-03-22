@@ -1,10 +1,16 @@
 const { createLogger, format, transports } = require('winston');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 
 // Custom log formatting
 const logFormat = format.printf((info) => {
+    const id = uuidv4();
+    let log;
     const { timestamp, level, label, message, ...rest } = info;
-    let log = `${timestamp} - ${level} [${label}]: ${message}`;
+    if (level == 'error') {
+        log = `${id} - ${timestamp} - ${level} [${label}]: ${message}`;
+    }
+    log = `${timestamp} - ${level} [${label}]: ${message}`;
 
     // Check if rest is an object
     if (!(Object.keys(rest).length === 0 && rest.constructor === Object)) {
@@ -12,6 +18,15 @@ const logFormat = format.printf((info) => {
     }
     return log;
 });
+
+
+  const errorFormat = format.printf((info) => {
+    const id = uuidv4();
+    const { timestamp, level, label, message, ...rest } = info;
+    let log = `${id} - ${timestamp} - ${level} [${label}]: ${message}`;
+    return log;
+  });
+
 
 /**
  * Create a new logger
@@ -27,7 +42,12 @@ const logger = createLogger({
     transports: [
         // Logging to console
         new transports.Console({
+            level: 'info',
             format: format.combine(format.colorize(), logFormat),
+        }),
+        new transports.Console({
+            level: 'error',
+            format: format.combine(format.colorize(), errorFormat),
         }),
         // Logging info and up to file
         new transports.File({

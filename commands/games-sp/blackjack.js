@@ -31,6 +31,10 @@ module.exports = class BlackjackCommand extends Command {
         if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
             return; // Do nothing if channel doesn't match
           }
+        const isPlayer = await this.client.dbHelper.isPlayer(msg.author.id);
+        if (!isPlayer) {
+            return msg.say('You need to register your account before playing!');
+        }
         try {
             const { id } = await this.client.dbHelper.createGame({
                 data: new Deck({ deckCount }),

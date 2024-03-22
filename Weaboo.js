@@ -100,10 +100,11 @@ app.get('/health', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Health check server listening on port ${port}`);
+  client.logger.info(`Health check server listening on port ${port}`);
 });
 
 task.start();
-console.log('Cron job started');
+client.logger.info('Cron job started');
+
 
 process.on('unhandledRejection', (err) => client.logger.error(err));
