@@ -18,18 +18,13 @@ const GROUPS = [
     ['games-mp', 'Multi-Player Games'],
     ['games-sp', 'Single-Player Games'],
     ['info', 'Info'],
-    ['memes', 'Memes'],
     ['moderation', 'Moderation'],
-    ['music', 'Music Commands'],
     ['news', 'News'],
     ['nsfw', 'NSFW'],
     ['numbers', 'Number Commands'],
     ['owner', 'Hidden + Owner'],
     ['text', 'Text Commands'],
     ['util', 'Utility'],
-    ['general', 'General'],
-    ['loyal', 'Loyalty Program Commands'],
-    ['other', 'Other'],
 ];
 
 module.exports = class WeabooClient extends CommandoClient {
