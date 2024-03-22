@@ -28,6 +28,9 @@ module.exports = class BlackjackCommand extends Command {
     }
 
     async run(msg, { deckCount }) {
+        if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
+            return; // Do nothing if channel doesn't match
+          }
         try {
             const { id } = await this.client.dbHelper.createGame({
                 data: new Deck({ deckCount }),
