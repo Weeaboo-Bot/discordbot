@@ -3,9 +3,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 exports.logs = {
-    GENERAL_CHAT: process.env.GENERAL_CHAT,
-    BOT_COMMANDS_CHAT: process.env.BOT_COMMAND_CHAT,
     BOT_LOG: process.env.BOT_LOG,
+    CASINO_CHANNEL: process.env.CASINO_CHANNEL,
 };
 
 exports.discord = {
@@ -18,14 +17,10 @@ exports.discord = {
     DISCORD_OWNER_ID: process.env.DISCORD_OWNER_ID,
     DISCORD_INVITE: process.env.DISCORD_INVITE,
     GUILD_ID: process.env.GUILD_ID,
-    CASINO_CHANNEL: process.env.CASINO_CHANNEL,
-};
-
-exports.sentry = {
-    SENTRY_DSN: process.env.SENTRY_DSN,
 };
 
 exports.api = {
+    SENTRY_DSN: process.env.SENTRY_DSN,
     ALPHA_KEY: process.env.ALPHA_VANTAGE,
     LOGIN_URL: 'https://us-central1-weaboo-bot-73b07.cloudfunctions.net/api/login',
     GOOGLE_KEY: process.env.GOOGLE_API_KEY,
