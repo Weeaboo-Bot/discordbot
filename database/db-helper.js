@@ -1,12 +1,26 @@
-const { Player, PlayerLoss, PlayerWin, BJGame, BJGameLog, BJHand, PokerGame, PokerGameLog, PokerGamePlayers, PokerHand, RouletteGame, RouletteGameLog, BJBet, PokerBet } = require('../database/models/index');
+const { Player, 
+  PlayerLoss, 
+  PlayerWin, 
+  BJGame, 
+  BJGameLog, 
+  BJHand, 
+  PokerGame, 
+  PokerGameLog, 
+  PokerGamePlayers, 
+  PokerHand, 
+  RouletteGame, 
+  RouletteGameLog, 
+  BJBet, 
+  PokerBet, CasinoGame } = require('../database/models/index');
 const { v4: uuidv4 } = require('uuid');
 
 const gameTypes = require('../assets/json/game-types.json');
 module.exports = class DBHelper {
-  constructor(casinoUsers, casinoGames, casinoGameLog, logger) {
+  constructor(casinoUsers, casinoGames, casinoGameLog, casinoMapping, logger) {
     this.casinoUsers = casinoUsers; // collection of casino players
     this.casinoGames = casinoGames; // collection of casino games
     this.casinoGameLog = casinoGameLog; // collection of game logs
+    this.casinoMapping = casinoMapping; // collection of game mapping
     this.logger = logger;
   }
   convertTimestamp(timestamp) {
@@ -95,20 +109,20 @@ module.exports = class DBHelper {
     switch (gameType) {
       case gameTypes.BLACKJACK:
         newGame = await BJGame.create(gameData);
-        this.casinoGames.set(newGame.id, gameData); // Add the new game log to the collection
+        newGame.data = gameData.data;
         break;
       case gameTypes.POKER:
         newGame = await PokerGame.create(gameData);
-        this.casinoGames.set(newGame.id, gameData); // Add the new game log to the collection
         break;
       case gameTypes.ROULETTE:
         newGame = await RouletteGame.create(gameData);
-        this.casinoGames.set(newGame.id, gameData); // Add the new game log to the collection
         break;
       default:
         return 'INVALID GAME_TYPE';
     }
-    this.casinoGames.set(newGame.id, gameData); // Add the new game to the collection
+    this.casinoGames.set(newGame.id, newGame.dataValues); // Add the new game to the collection
+    this.casinoMapping.set(newGame.id, gameType); // Add the new game to the collection
+    CasinoGame.create({ id: newGame.id, gameType: gameType });
     return newGame; // Return the newly created game log object
   }
   async deleteGame(id, force) {
@@ -130,25 +144,56 @@ module.exports = class DBHelper {
       return null; // Indicate game not found
     }
   }
+  async getGame(id) {
+    try {
+      const gameType = this.casinoMapping.get(id).gameType;
+      const game = this.casinoGames.get(id);
+      game.gameType = gameType;
+      return game;
+    } catch (error) {
+      throw Error(`Game Not Found ${error}`);
+    }
+  }
+  async getGameLog(id) {
+    try {
+      const gameType = this.casinoMapping.get(id).gameType;
+      const gameLogs = this.casinoGameLog.filter(gameLog => gameLog.gameId === id);
+      // switch (gameType) {
+      //   case gameTypes.BLACKJACK:
+      //     return await BJGameLog.findAll(id);
+      //   case gameTypes.POKER:
+      //     return await PokerGameLog.findAll(id);
+      //   case gameTypes.ROULETTE:
+      //     return await RouletteGameLog.findAll(id);
+      //   default:
+      //     return 'INVALID GAME_TYPE';
+      // }
+      gameLogs.each((gameLog) => {
+        gameLog.gameType = gameType;
+      })
+
+      return gameLogs;
+    } catch (error) {
+      throw Error(`Game Log Not Found: ${error}`);
+    }
+  }
   async createGameLog(gameLogData, gameType) {
     let newGameLog;
     gameLogData.id = uuidv4();
     switch (gameType) {
       case gameTypes.BLACKJACK:
         newGameLog = await BJGameLog.create(gameLogData);
-        this.casinoGameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       case gameTypes.POKER:
         newGameLog = await PokerGameLog.create(gameLogData);
-        this.casinoGameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       case gameTypes.ROULETTE:
         newGameLog = await RouletteGameLog.create(gameLogData);
-        this.casinoGameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       default:
         return 'INVALID_GAME_TYPE';
     }
+    this.casinoGameLog.set(newGameLog.id, newGameLog.dataValues); // Add the new game log to the collection
     return newGameLog; // Return the newly created game log object
   }
   async deleteGameLog(id) {

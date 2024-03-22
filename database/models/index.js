@@ -17,6 +17,8 @@ const RouletteGame = require('./roulette/RouletteGame');
 const RouletteGameLog = require('./roulette/RouletteGameLog');
 const RouletteBet = require('./roulette/RouletteBet');
 
+const CasinoGame = require('./game/CasinoGame');
+
 module.exports = {
   BJBet,
   PokerBet,
@@ -33,4 +35,5 @@ module.exports = {
   PokerHand,
   RouletteGame,
   RouletteGameLog,
+  CasinoGame,
 };
