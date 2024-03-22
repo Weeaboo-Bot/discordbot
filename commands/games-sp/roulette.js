@@ -37,8 +37,12 @@ module.exports = class RouletteCommand extends Command {
   }
 
   async run(msg, { bet }) {
-    if (msg.channel.id !== '1211098334966714378') { // Replace with the actual channel ID
+    if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
       return; // Do nothing if channel doesn't match
+    }
+    const isPlayer = await this.client.dbHelper.isPlayer(msg.author.id);
+    if (!isPlayer) {
+        return msg.say('You need to register your account before playing!');
     }
 
     try {
