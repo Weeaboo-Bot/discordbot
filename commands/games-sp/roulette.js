@@ -53,6 +53,7 @@ module.exports = class RouletteCommand extends Command {
     if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
       return; // Do nothing if channel doesn't match
     }
+  
     const number = Math.floor(Math.random() * 37);
     const color = number ? (this.isRed(number) ? 'RED' : 'BLACK') : null;
 

@@ -1,14 +1,21 @@
+const sequelize = require('../../db-connection');
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db-connection');
-
 
 const PlayerLoss = sequelize.define('PlayerLoss', {
   lossId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true,
     unique: true,
+    defaultValue: sequelize.literal('uuid_generate_v4()'),
+  },
+  playerId: {
+    type: DataTypes.UUID,
+    defaultValue: null,
+    references: {
+      model: 'Player',
+      key: 'id',
+    },
   },
   gameType: {
     type: DataTypes.ENUM,
@@ -30,5 +37,11 @@ const PlayerLoss = sequelize.define('PlayerLoss', {
   tableName: 'PlayerLoss',
 });
 
+PlayerLoss.associate = (models) => {
+  // Define associations with other models (e.g., Player, Hand)
+  // ...
+  PlayerLoss.belongsTo(models.Player, { foreignKey: 'id' });
+  // ...
+};
 
 module.exports = PlayerLoss;

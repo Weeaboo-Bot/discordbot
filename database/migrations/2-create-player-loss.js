@@ -1,14 +1,13 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('PlayerLoss', {
       lossId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
         unique: true,
+        defaultValue: Sequelize.literal('gen_random_uuid()'),
       },
       gameType: {
         type: Sequelize.ENUM,
@@ -25,13 +24,26 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
+      playerId: {
+        type: Sequelize.STRING,
+        defaultValue: null,
+        references: {
+          model: 'Player',
+          key: 'id',
+          as: 'playerId',
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE',
+        }
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       }
     });
   },

@@ -1,8 +1,7 @@
+const sequelize = require('../../db-connection');
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db-connection');
-
   const Player = sequelize.define('Player', {
-    userId: {
+    id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,

@@ -1,21 +1,23 @@
 const { version } = require('../package.json');
 const { formatNumber } = require('../util/Util');
 const { readyMessage } = require('../util/logHandler');
-const { Player, CasinoGame, CasinoGameLog } = require('../database/models/index');
+const { Player, BJGame, PokerGame, RouletteGame, BJGameLog, RouletteGameLog, PokerGameLog } = require('../database/models/index');
 // Export ready events
 module.exports = async (client) => {
-    client.database.sync({ alter: true });
+    client.database.sync();
     async function fetchAndCacheData() {
         try {
             const [casinoUsers, casinoGames, casinoGameLogs] = await Promise.all([
                 Player.findAll(),
-                CasinoGame.findAll(),
-                CasinoGameLog.findAll(),
+                Promise.all([BJGame.findAll(), PokerGame.findAll(), RouletteGame.findAll()]),
+                Promise.all([BJGameLog.findAll(), PokerGameLog.findAll(), RouletteGameLog.findAll()]),
             ]);
 
-            cacheData(casinoUsers, client.casinoUsers, 'userId');
-            cacheData(casinoGames, client.casinoGames, 'gameId');
-            cacheData(casinoGameLogs, client.casinoGameLogs, 'gameLogId');
+            const flattenedCasinoGames = casinoGames.flat();
+            const flattenedCasinoGameLogs = casinoGameLogs.flat();
+            cacheData(casinoUsers, client.casinoUsers, 'id');
+            cacheData(flattenedCasinoGames, client.casinoGames, 'id');
+            cacheData(flattenedCasinoGameLogs, client.casinoGameLogs, 'id');
             client.logger.info('Reloaded DB and Cache');
         } catch (error) {
             client.logger.error('Error fetching and caching data:', error);

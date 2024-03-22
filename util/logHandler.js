@@ -28,8 +28,15 @@ function errorMessage(error, error_type, error_command) {
         .setColor('RED')
         .addField('Error Name', error.name || 'Unknown Error', true)
         .addField('Error Message', error.message || error , true)
-        .addField('Error Additional Message', error.original.message || 'No more details', true)
         .addField('Error URL', error.url || error.path, true)
+        .setTimestamp();
+}
+
+function statusMessage(status, status_type, status_details) {
+    return new Discord.MessageEmbed()
+        .setTitle(`✅ Status: ${status}\n Status Type: ${status_type}`)
+        .setColor('GREEN')
+        .addField('Status Details', status_details , true)
         .setTimestamp();
 }
 
@@ -93,6 +100,5 @@ module.exports = {
     roleMessage,
     guildMessage,
     readyMessage,
-
-
+    statusMessage,
 };
