@@ -3,10 +3,10 @@ const { v4: uuidv4 } = require('uuid');
 
 const gameTypes = require('../assets/json/game-types.json');
 module.exports = class DBHelper {
-  constructor(casinoUsers, casinoGames, gameLog, logger) {
+  constructor(casinoUsers, casinoGames, casinoGameLog, logger) {
     this.casinoUsers = casinoUsers; // collection of casino players
     this.casinoGames = casinoGames; // collection of casino games
-    this.gameLog = gameLog; // collection of game logs
+    this.casinoGameLog = casinoGameLog; // collection of game logs
     this.logger = logger;
   }
   convertTimestamp(timestamp) {
@@ -136,15 +136,15 @@ module.exports = class DBHelper {
     switch (gameType) {
       case gameTypes.BLACKJACK:
         newGameLog = await BJGameLog.create(gameLogData);
-        this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
+        this.casinoGameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       case gameTypes.POKER:
         newGameLog = await PokerGameLog.create(gameLogData);
-        this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
+        this.casinoGameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       case gameTypes.ROULETTE:
         newGameLog = await RouletteGameLog.create(gameLogData);
-        this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
+        this.casinoGameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       default:
         return 'INVALID_GAME_TYPE';
@@ -152,13 +152,13 @@ module.exports = class DBHelper {
     return newGameLog; // Return the newly created game log object
   }
   async deleteGameLog(id) {
-    const gameLog = this.casinoGames.get(id);
+    const gameLog = this.casinoGameLog.get(id);
 
     if (gameLog) {
       const affectedRows = await CasinoGameLog.destroy({ where: { id: id } });
 
       if (affectedRows > 0) {
-        this.casinoGames.delete(id);
+        this.casinoGameLog.delete(id);
         return gameLog; // Return the deleted game log object
       } else {
         throw new Error('No game log rows were deleted from the database.');

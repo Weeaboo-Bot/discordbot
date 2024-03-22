@@ -17,7 +17,7 @@ module.exports = async (client) => {
             const flattenedCasinoGameLogs = casinoGameLogs.flat();
             cacheData(casinoUsers, client.casinoUsers, 'id');
             cacheData(flattenedCasinoGames, client.casinoGames, 'id');
-            cacheData(flattenedCasinoGameLogs, client.casinoGameLogs, 'id');
+            cacheData(flattenedCasinoGameLogs, client.casinoGameLog, 'id');
             client.logger.info('Reloaded DB and Cache');
         } catch (error) {
             client.logger.error('Error fetching and caching data:', error);

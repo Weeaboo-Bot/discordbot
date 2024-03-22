@@ -91,10 +91,10 @@ module.exports = class WeabooClient extends CommandoClient {
         this.casinoChannel = config.discord.CASINO_CHANNEL;
         // Create the Casino and db
         this.casinoUsers = new Discord.Collection();
-        this.gameLog = new Discord.Collection();
+        this.casinoGameLog = new Discord.Collection();
         this.casinoGames = new Discord.Collection();
         this.database = sequelize;
-        this.dbHelper = new DBHelper(this.casinoUsers, this.games, this.gameLog, this.logger);
+        this.dbHelper = new DBHelper(this.casinoUsers, this.casinoGames, this.casinoGameLog, this.logger);
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;
