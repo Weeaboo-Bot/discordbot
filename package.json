@@ -31,7 +31,7 @@
         "animequote": "^1.1.1",
         "ansi-colors": "^4.1.1",
         "ascii-table": "0.0.9",
-        "axios": "^0.21.1",
+        "axios": "^0.28.0",
         "booru": "^0.3.6",
         "cheerio": "^1.0.0-rc.10",
         "color": "^3.2.1",
