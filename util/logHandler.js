@@ -87,7 +87,6 @@ function guildMessage(logger, guildEntry, reason) {
 }
 
 function readyMessage(readyEntry) {
-    readyEntry.client.logger.info(`${JSON.stringify(readyEntry)}`);
     return new Discord.MessageEmbed()
         .setAuthor(
             `${readyEntry.client.user.tag} has (re)started!`,
