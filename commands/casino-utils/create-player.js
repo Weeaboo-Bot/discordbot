@@ -33,7 +33,7 @@ module.exports = class CreatePlayer extends Command {
             });
             msg.client.logger.info(`Successfully added role "${role.name}" to user "${member.user.username}"`);
             return msg.reply(
-                `Created new player ${user.tag} with ID ${newPlayer.userId} at <t:${msg.client.dbHelper.convertTimestamp(newPlayer.createdAt)}:f>`
+                `Created new player ${user.tag} with ID ${newPlayer.id} at <t:${msg.client.dbHelper.convertTimestamp(newPlayer.createdAt)}:f>`
             );
         } catch (error) {
             msg.client.botLogger({
