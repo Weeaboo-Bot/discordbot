@@ -2,7 +2,6 @@ const { Player, PlayerLoss, PlayerWin, BJGame, BJGameLog, PokerGame, PokerGameLo
 const { v4: uuidv4 } = require('uuid');
 
 // Import the event types
-const gameEvents = require('../assets/json/game-events.json');
 const blackjackEvents = require('../assets/json/blackjack-events.json');
 const pokerEvents = require('../assets/json/poker-events.json');
 const rouletteEvents = require('../assets/json/roulette-events.json');
@@ -25,7 +24,7 @@ module.exports = class DBHelper {
     if (player) {
       player.balance += Number(amount);
       await Player.update({ balance: player.balance }, {
-        where: { userId: id },
+        where: { id: id },
       });
       return player ? player.balance : 0;
     }
@@ -37,14 +36,14 @@ module.exports = class DBHelper {
   }
   async createPlayer(playerData) {
     const newPlayer = await Player.create(playerData);
-    this.casinoUsers.set(newPlayer.userId, newPlayer);
+    this.casinoUsers.set(newPlayer.id, newPlayer);
     return newPlayer;
   }
   async deletePlayer(id) {
     const player = this.casinoUsers.get(id);
 
     if (player) {
-      const affectedRows = await Player.destroy({ where: { userId: id } });
+      const affectedRows = await Player.destroy({ where: { id: id } });
 
       if (affectedRows > 0) {
         this.casinoUsers.delete(id);
@@ -56,27 +55,25 @@ module.exports = class DBHelper {
       return null; // Indicate player not found
     }
   }
-  async createGame(gameData) {
+  async createGame(gameData, gameType) {
     let newGame;
+    gameData.id = uuidv4();
     // newGame.id = uuidv4();
-    switch (gameLogData.gameType) {
+    switch (gameType) {
       case gameTypes.BLACKJACK:
-        gameLogData.gameEvent = blackjackEvents;
-        newGame = await BJGame.create(gameLogData);
-        this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
+        newGame = await BJGame.create(gameData);
+        this.casinoGames.set(newGame.id, gameData); // Add the new game log to the collection
         break;
       case gameTypes.POKER:
-        gameLogData.gameEvent = pokerEvents;
-        newGame = await PokerGame.create(gameLogData);
-        this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
+        newGame = await PokerGame.create(gameData);
+        this.casinoGames.set(newGame.gameLogId, gameData); // Add the new game log to the collection
         break;
       case gameTypes.ROULETTE:
-        gameLogData.gameEvent = rouletteEvents;
         newGame = await RouletteGame.create(gameLogData);
-        this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
+        this.casinoGames.set(newGame.gameLogId, gameData); // Add the new game log to the collection
         break;
       default:
-        gameLogData.gameEvent = 'INVALID_GAME_TYPE';
+        return 'INVALID GAME_TYPE';
     }
     this.casinoGames.set(newGame.id, gameData); // Add the new game to the collection
     return newGame; // Return the newly created game log object
@@ -85,7 +82,7 @@ module.exports = class DBHelper {
     const game = this.casinoGames.get(id);
 
     if (game && force) {
-      const affectedRows = await CasinoGame.destroy({ where: { gameId: id } });
+      const affectedRows = await CasinoGame.destroy({ where: { id: id } });
 
       if (affectedRows > 0) {
         this.casinoGames.delete(id);
@@ -100,21 +97,19 @@ module.exports = class DBHelper {
       return null; // Indicate game not found
     }
   }
-  async createGameLog(gameLogData) {
+  async createGameLog(gameLogData, gameType) {
     let newGameLog;
-    switch (gameLogData.gameType) {
+    gameLogData.id = uuidv4();
+    switch (gameType) {
       case gameTypes.BLACKJACK:
-        gameLogData.gameEvent = blackjackEvents;
         newGameLog = await BJGameLog.create(gameLogData);
         this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       case gameTypes.POKER:
-        gameLogData.gameEvent = pokerEvents;
         newGameLog = await PokerGameLog.create(gameLogData);
         this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
       case gameTypes.ROULETTE:
-        gameLogData.gameEvent = rouletteEvents;
         newGameLog = await RouletteGameLog.create(gameLogData);
         this.gameLog.set(newGameLog.gameLogId, newGameLog); // Add the new game log to the collection
         break;
@@ -127,7 +122,7 @@ module.exports = class DBHelper {
     const gameLog = this.casinoGames.get(id);
 
     if (gameLog) {
-      const affectedRows = await CasinoGameLog.destroy({ where: { gameLogId: id } });
+      const affectedRows = await CasinoGameLog.destroy({ where: { id: id } });
 
       if (affectedRows > 0) {
         this.casinoGames.delete(id);

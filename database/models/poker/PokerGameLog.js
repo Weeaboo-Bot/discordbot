@@ -1,5 +1,5 @@
 const sequelize = require('../../db-connection');
-
+const { DataTypes } = require('sequelize');
 
 const PokerGameLog = sequelize.define('PokerGameLog', {
     id: {
@@ -13,6 +13,9 @@ const PokerGameLog = sequelize.define('PokerGameLog', {
         references: {
             model: 'PokerGame',
             key: 'id',
+            as: 'gameId',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
         },
     },
     eventAt: {
@@ -52,6 +55,12 @@ const PokerGameLog = sequelize.define('PokerGameLog', {
     tableName: 'PokerGameLog',
 });
 
-PokerGameLog.belongsTo(PokerGame, { foreignKey: 'gameId' });  // Define association with Game model
+PokerGameLog.associate = (models) => {
+    // Define associations with other models (e.g., Player, Hand)
+    // ...
+    PokerGameLog.belongsTo(models.PokerGame, { foreignKey: 'id' });
+    PokerGameLog.belongsTo(models.Player, { foreignKey: 'id' });
+    // ...
+  };
 
 module.exports = PokerGameLog;

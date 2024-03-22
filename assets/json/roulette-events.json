@@ -1,11 +1,10 @@
 {
-    "PLAYER_JOINED": "player_joined",  
-    "PLAYER_PLACED_BET": "player_placed_bet",
-    "PLACED_BETS_CLOSED": "placed_bets_closed",
-    "WHEEL_SPUN": "wheel_spun",
-    "BALL_LANDED": "ball_landed",
-    "WINNINGS_DISTRIBUTED": "winnings_distributed",
-    "ROUND_ENDED": "round_ended",
-    "GAME_ENDED": "game_ended"
-  }
-  
+  "PLAYER_JOINED": "PLAYER_JOINED",
+  "PLAYER_PLACED_BET": "PLAYER_PLACED_BET",
+  "PLACED_BETS_CLOSED": "PLACED_BETS_CLOSED",
+  "WHEEL_SPUN": "WHEEL_SPUN",
+  "BALL_LANDED": "BALL_LANDED",
+  "WINNINGS_DISTRIBUTED": "WINNINGS_DISTRIBUTED",
+  "ROUND_ENDED": "ROUND_ENDED",
+  "GAME_ENDED": "GAME_ENDED"
+}

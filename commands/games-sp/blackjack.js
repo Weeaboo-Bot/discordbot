@@ -27,145 +27,37 @@ module.exports = class BlackjackCommand extends Command {
         });
     }
 
-    async run(msg, { deckCount }) {
-        // if (msg.channel.id !== this.client.casinoUsersChannel) { // Replace with the actual channel ID
-        //     return; // Do nothing if channel doesn't match
-        // }
+    async run(msg , { deckCount}) {
         try {
-            const gameId = await this.client.dbHelper.createGame({
-                name: this.name,
+            const { id } = await this.client.dbHelper.createGame({
                 data: new Deck({ deckCount }),
-                gameType: 'blackjack',
-            });
-            const dealerHand = [];
-            this.draw(gameId, dealerHand);
-            this.draw(gameId, dealerHand);
-            const playerHand = [];
-            this.draw(gameId, playerHand);
-            this.draw(gameId, playerHand);
-            const dealerInitialTotal = this.calculate(dealerHand);
-            const playerInitialTotal = this.calculate(playerHand);
-            if (dealerInitialTotal === 21 && playerInitialTotal === 21) {
-                await this.client.dbHelper.deleteGame(gameId, false);
-                return msg.say(
-                    'Well, both of you just hit blackjack. Right away. Rigged.'
-                );
-            } else if (dealerInitialTotal === 21) {
-                await this.client.dbHelper.deleteGame(gameId, false);
-                return msg.say(
-                    'Ouch, the dealer hit blackjack right away! Try again!'
-                );
-            } else if (playerInitialTotal === 21) {
-                await this.client.dbHelper.deleteGame(gameId, false);
-                return msg.say('Wow, you hit blackjack right away! Lucky you!');
-            }
-            let playerTurn = true;
-            let win = false;
-            let reason;
-            while (!win) {
-                if (playerTurn) {
-                    await msg.say(stripIndents`
-						**First Dealer Card:** ${dealerHand[0].display}
-
-						**You (${this.calculate(playerHand)}):**
-						${playerHand.map((card) => card.display).join('\n')}
-
-						_Hit?_
-					`);
-                    const hit = await verify(msg.channel, msg.author, {
-                        extraYes: hitWords,
-                        extraNo: standWords,
-                    });
-                    if (hit) {
-                        const card = this.draw(gameId, playerHand);
-                        const total = this.calculate(playerHand);
-                        if (total > 21) {
-                            reason = `You drew ${card.display}, total of ${total}! Bust`;
-                            break;
-                        } else if (total === 21) {
-                            reason = `You drew ${card.display} and hit 21`;
-                            win = true;
-                        }
-                    } else {
-                        const dealerTotal = this.calculate(dealerHand);
-                        await msg.say(
-                            `Second dealer card is ${dealerHand[1].display}, total of ${dealerTotal}.`
-                        );
-                        playerTurn = false;
-                    }
-                } else {
-                    const inital = this.calculate(dealerHand);
-                    let card;
-                    if (inital < 17) card = this.draw(gameId, dealerHand);
-                    const total = this.calculate(dealerHand);
-                    if (total > 21) {
-                        reason = `Dealer drew ${card.display}, total of ${total}! Dealer bust`;
-                        win = true;
-                    } else if (total >= 17) {
-                        const playerTotal = this.calculate(playerHand);
-                        if (total === playerTotal) {
-                            reason = `${card
-                                ? `Dealer drew ${card.display}, making it `
-                                : ''
-                                }${playerTotal}-${total}`;
-                            break;
-                        } else if (total > playerTotal) {
-                            reason = `${card
-                                ? `Dealer drew ${card.display}, making it `
-                                : ''
-                                }${playerTotal}-**${total}**`;
-                            break;
-                        } else {
-                            reason = `${card
-                                ? `Dealer drew ${card.display}, making it `
-                                : ''
-                                }**${playerTotal}**-${total}`;
-                            win = true;
-                        }
-                    } else {
-                        await msg.say(
-                            `Dealer drew ${card.display}, total of ${total}.`
-                        );
-                    }
-                }
-            }
-            await this.client.dbHelper.deleteGame(gameId, false);
-            if (win) return msg.say(`${reason}! You won!`);
-            return msg.say(`${reason}! Too bad.`);
-        } catch (err) {
-            await this.client.dbHelper.deleteGame(gameId, true); // we full delete on error 
-            msg.client.botLogger({
-                embed: msg.client.errorMessage(
-                    err,
-                    msg.client.errorTypes.DATABASE,
-                    msg.command.name
-                ),
-            });
-        }
-    }
-
-    async playBlackjack(msg) {
-        try {
-            const gameId = await this.client.dbHelper.createGame({
-                name: this.name,
-                data: new Deck({ deckCount }),
-                gameType: 'blackjack',
-            });
+            }, 'blackjack');
+            msg.say(`Starting new Blackjack Game with ID: ${id}`);
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'PLAYER_JOINED',
+                playerId: msg.author.id,
+            }, 'blackjack');
 
             const dealerHand = [];
-            this.draw(gameId, dealerHand);
-            this.draw(gameId, dealerHand);
+            this.draw(id, dealerHand);
+            this.draw(id, dealerHand);
+            this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'DEALER_DRAWN',
+                playerId: '1',
+            }, 'blackjack');
 
             const playerHand = [];
-            this.draw(gameId, playerHand);
-            this.draw(gameId, playerHand);
+            this.draw(id, playerHand);
+            this.draw(id, playerHand);
 
             const dealerInitialTotal = this.calculate(dealerHand);
             const playerInitialTotal = this.calculate(playerHand);
 
-            let outcome = await this.handleInitialRound(dealerInitialTotal, playerInitialTotal, msg);
+            let outcome = await this.handleInitialRound(dealerInitialTotal, playerInitialTotal, id, msg.author.id);
             if (outcome) {
-                await this.client.dbHelper.deleteGame(gameId, false);
+                await this.client.dbHelper.deleteGame(id, false);
                 return msg.say(outcome);
             }
 
@@ -175,7 +67,7 @@ module.exports = class BlackjackCommand extends Command {
 
             while (!win) {
                 if (playerTurn) {
-                    outcome = await this.handlePlayerTurn(msg, playerHand);
+                    outcome = await this.handlePlayerTurn(msg, playerHand, dealerHand, id);
                     if (outcome) {
                         reason = outcome;
                         win = true;
@@ -183,7 +75,7 @@ module.exports = class BlackjackCommand extends Command {
                     }
                     playerTurn = false;
                 } else {
-                    outcome = await this.handleDealerTurn(dealerHand, msg);
+                    outcome = await this.handleDealerTurn(dealerHand, msg, id);
                     if (outcome) {
                         reason = outcome;
                         win = true;
@@ -193,7 +85,7 @@ module.exports = class BlackjackCommand extends Command {
                 }
             }
 
-            await this.client.dbHelper.deleteGame(gameId, false);
+            await this.client.dbHelper.deleteGame(id, false);
             return win ? msg.say(`${reason}! You won!`) : msg.say(`${reason}! Too bad.`);
         } catch (error) {
             msg.client.botLogger({
@@ -208,18 +100,33 @@ module.exports = class BlackjackCommand extends Command {
         }
     }
 
-    async handleInitialRound(dealerTotal, playerTotal) {
+    async handleInitialRound(dealerTotal, playerTotal, id, playerId) {
         if (dealerTotal === 21 && playerTotal === 21) {
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'PUSH',
+                playerId: playerId,
+            }, 'blackjack');
             return 'Well, both of you just hit blackjack. Right away. Rigged.';
         } else if (dealerTotal === 21) {
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'DEALER_BLACKJACK',
+                playerId: playerId,
+            }, 'blackjack');
             return 'Ouch, the dealer hit blackjack right away! Try again!';
         } else if (playerTotal === 21) {
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'PLAYER_BLACKJACK',
+                playerId: playerId,
+            }, 'blackjack');
             return 'Wow, you hit blackjack right away! Lucky you!';
         }
         return null;
     }
 
-    async  handlePlayerTurn(msg, playerHand) {
+    async handlePlayerTurn(msg, playerHand, dealerHand, id) {
         await msg.say(stripIndents`
           **First Dealer Card:** ${dealerHand[0].display}
       
@@ -228,61 +135,89 @@ module.exports = class BlackjackCommand extends Command {
       
           _Hit?_
         `);
-      
-        const hit = await verify(msg.channel, msg.author, {
-          extraYes: hitWords,
-          extraNo: standWords,
-        });
-      
-        if (hit) {
-          const card = this.draw(gameId, playerHand);
-          const total = this.calculate(playerHand);
-          if (total > 21) {
-            return `You drew ${card.display}, total of ${total}! Bust`;
-          } else if (total === 21) {
-            return `You drew ${card.display} and hit 21`;
-          }
-        } else {
-          const dealerTotal = this.calculate(dealerHand);
-          await msg.say(`Second dealer card is ${dealerHand[1].display}, total of ${dealerTotal}.`);
-        }
-    
-        this.client.dbHelper.createGameLog()
-        return null; // No outcome determined yet
-      }
-      
 
-    async handleDealerTurn(dealerHand, msg) {
-        let card;
-        let total = this.calculate(dealerHand);
-      
-        while (total < 17) {
-          card = this.draw(gameId, dealerHand);
-          total = this.calculate(dealerHand);
-          await msg.say(`Dealer drew ${card.display}, total of ${total}.`);
+        const hit = await verify(msg.channel, msg.author, {
+            extraYes: hitWords,
+            extraNo: standWords,
+        });
+
+        if (hit) {
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'PLAYER_HIT',
+                playerId: msg.author.id,
+            }, 'blackjack');
+            const card = this.draw(id, playerHand);
+            const total = this.calculate(playerHand);
+            if (total > 21) {
+                await this.client.dbHelper.createGameLog({
+                    gameId: id,
+                    event: 'PLAYER_BUST',
+                    playerId: msg.author.id,
+                }, 'blackjack');
+                return `You drew ${card.display}, total of ${total}! Bust`;
+            } else if (total === 21) {
+                await this.client.dbHelper.createGameLog({
+                    gameId: id,
+                    event: 'PLAYER_BLACKJACK',
+                    playerId: msg.author.id,
+                }, 'blackjack');
+                return `You drew ${card.display} and hit 21`;
+            }
+        } else {
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'PLAYER_STAND',
+                playerId: msg.author.id,
+            });
+            const dealerTotal = this.calculate(dealerHand);
+            await msg.say(`Second dealer card is ${dealerHand[1].display}, total of ${dealerTotal}.`);
         }
-      
-        if (total > 21) {
-          return `Dealer drew ${card.display}, total of ${total}! Dealer bust`;
-        } else if (total >= 17) {
-          const playerTotal = this.calculate(playerHand);
-          if (total === playerTotal) {
-            return `${card ? `Dealer drew ${card.display}, making it ` : ''}
-                    ${playerTotal}-${total}`;
-          } else if (total > playerTotal) {
-            return `${card ? `Dealer drew ${card.display}, making it ` : ''}
-                    ${playerTotal}-**${total}**`;
-          } else {
-            return `${card ? `Dealer drew ${card.display}, making it ` : ''}
-                    **${playerTotal}**-${total}`;
-          }
-        }
-      
         return null; // No outcome determined yet
     }
 
-    draw(gameId, hand) {
-        const deck = this.client.games.get(gameId).data;
+
+    async handleDealerTurn(dealerHand, msg, id) {
+        let card;
+        let total = this.calculate(dealerHand);
+
+        while (total < 17) {
+            card = this.draw(id, dealerHand);
+            total = this.calculate(dealerHand);
+            await msg.say(`Dealer drew ${card.display}, total of ${total}.`);
+        }
+
+        if (total > 21) {
+            await this.client.dbHelper.createGameLog({
+                gameId: id,
+                event: 'DEALER_BUST',
+                playerId: msg.author.id,
+            }, 'blackjack');
+            return `Dealer drew ${card.display}, total of ${total}! Dealer bust`;
+        } else if (total >= 17) {
+            const playerTotal = this.calculate(playerHand);
+            if (total === playerTotal) {
+                await this.client.dbHelper.createGameLog({
+                    gameId: id,
+                    event: 'PUSH',
+                    playerId: msg.author.id,
+                }, 'blackjack')
+                return `${card ? `Dealer drew ${card.display}, making it ` : ''}
+                    ${playerTotal}-${total}`;
+            } else if (total > playerTotal) {
+                return `${card ? `Dealer drew ${card.display}, making it ` : ''}
+                    ${playerTotal}-**${total}**`;
+            } else {
+                return `${card ? `Dealer drew ${card.display}, making it ` : ''}
+                    **${playerTotal}**-${total}`;
+            }
+        }
+
+        return null; // No outcome determined yet
+    }
+
+    draw(id, hand) {
+        const deck = this.client.games.get(id).data;
         const card = deck.draw();
         hand.push(card);
         return card;

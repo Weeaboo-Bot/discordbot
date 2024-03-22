@@ -1,14 +1,13 @@
 {
-    "PLAYER_JOINED": "player_joined",
-    "PLAYER_HIT": "player_hit",
-    "PLAYER_STAND": "player_stand",
-    "PLAYER_BUST": "player_bust",
-    "DEALER_DRAWN": "dealer_drawn",
-    "DEALER_BUST": "dealer_bust",
-    "PLAYER_BLACKJACK": "player_blackjack",
-    "DEALER_BLACKJACK": "dealer_blackjack",
-    "PLAYER_WIN": "player_win",
-    "DEALER_WIN": "dealer_win",
-    "PUSH": "push"
-  }
-  
+  "PLAYER_JOINED": "PLAYER_JOINED",
+  "PLAYER_HIT": "PLAYER_HIT",
+  "PLAYER_STAND": "PLAYER_STAND",
+  "PLAYER_BUST": "PLAYER_BUST",
+  "DEALER_DRAWN": "DEALER_DRAWN",
+  "DEALER_BUST": "DEALER_BUST",
+  "PLAYER_BLACKJACK": "PLAYER_BLACKJACK",
+  "DEALER_BLACKJACK": "DEALER_BLACKJACK",
+  "PLAYER_WIN": "PLAYER_WIN",
+  "DEALER_WIN": "DEALER_WIN",
+  "PUSH": "PUSH"
+}

@@ -13,7 +13,7 @@ module.exports = {
             references: {
               model: 'RouletteGame',
               key: 'id',
-              as: 'id',
+              as: 'gameId',
               onDelete: 'CASCADE',
               onUpdate: 'CASCADE',
             },
@@ -23,7 +23,7 @@ module.exports = {
             defaultValue: null,
             references: {
               model: 'Player',
-              key: 'playerId',
+              key: 'id',
               as: 'playerId',
               onDelete: 'CASCADE',
               onUpdate: 'CASCADE',

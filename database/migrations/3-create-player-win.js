@@ -24,12 +24,12 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-      userId: {
+      playerId: {
         type: Sequelize.STRING,
         defaultValue: null,
         references: {
           model: 'Player',
-          key: 'playerId',
+          key: 'id',
           as: 'playerId',
           onDelete: 'CASCADE',
           onUpdate: 'CASCADE',

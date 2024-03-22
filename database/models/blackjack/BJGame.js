@@ -1,5 +1,5 @@
 const sequelize = require('../../db-connection');
-
+const { DataTypes } = require('sequelize');
 const BJGame = sequelize.define('BJGame', {
   id: {
     type: DataTypes.UUID,

@@ -26,7 +26,7 @@ module.exports = class CreatePlayer extends Command {
             const role = msg.guild.roles.cache.find(role => role.name === 'Casino Player');
             await member.roles.add(role);
             const newPlayer = await msg.client.dbHelper.createPlayer({
-                userId: user.id,
+                id: user.id,
                 userName: user.username,
                 userTag: user.tag,
                 balance: 0,

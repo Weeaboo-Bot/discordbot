@@ -13,7 +13,7 @@ module.exports = {
             references: {
                 model: 'PokerGame',
                 key: 'id',
-                as: 'id',
+                as: 'gameId',
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
             },
@@ -29,10 +29,10 @@ module.exports = {
         },
         actingPlayerId: {
             type: Sequelize.STRING,
-            allowNull: true,
+            defaultValue: null,
             references: {
                 model: 'Player',
-                key: 'playerId',
+                key: 'id',
                 as: 'playerId',
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',

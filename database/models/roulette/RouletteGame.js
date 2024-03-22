@@ -1,4 +1,5 @@
 const sequelize = require('../../db-connection');
+const { DataTypes } = require('sequelize');
 
   const RouletteGame = sequelize.define('RouletteGame', {
     id: {

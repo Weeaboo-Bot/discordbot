@@ -1,5 +1,3 @@
-const sequelize = require('../db-connection');
-
 const Player = require('./player/Player');
 const PlayerWin = require('./player/PlayerWin');
 const PlayerLoss = require('./player/PlayerLoss');

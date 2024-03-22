@@ -1,7 +1,7 @@
 const sequelize = require('../../db-connection');
 const { DataTypes } = require('sequelize');
 
-const PokerGamePlayers = sequelize.define('PokerGamePlayers', {
+const BJHand = sequelize.define('BJHand', {
     id: {
         type: DataTypes.UUID,
         defaultValue: sequelize.fn('gen_random_uuid'),
@@ -11,19 +11,29 @@ const PokerGamePlayers = sequelize.define('PokerGamePlayers', {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: 'PokerGame',
+            model: 'BJGame',
             key: 'id',
+            as: 'gameId',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
         },
     },
     playerId: {
         type: DataTypes.STRING,
-        allowNull: false,
+        defaultValue: null,
         references: {
             model: 'Player',
             key: 'id',
+            as: 'playerId',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
         },
     },
-    seatNumber: {
+    cards: {
+        type: DataTypes.JSON, // Store card data as an array of objects
+        allowNull: false,
+    },
+    total: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
@@ -37,18 +47,17 @@ const PokerGamePlayers = sequelize.define('PokerGamePlayers', {
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    // Additional player-specific data for the game (e.g., stack size, buy-in)
 }, {
     timestamps: true,
-    tableName: 'PokerGamePlayers',
+    tableName: 'BJHand',
 });
 
-PokerGamePlayers.associate = (models) => {
+BJGameLog.associate = (models) => {
     // Define associations with other models (e.g., Player, Hand)
     // ...
-    PokerGamePlayers.belongsTo(models.PokerGame, { foreignKey: 'id' });
-    PokerGamePlayers.belongsTo(models.Player, { foreignKey: 'id' });
+    BJGameLog.belongsTo(models.BJGame, { foreignKey: 'id' });
+    BJGameLog.belongsTo(models.Player, { foreignKey: 'id' });
     // ...
-  };
+};
 
-module.exports = PokerGamePlayers;
+module.exports = BJHand;

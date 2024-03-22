@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PokerGamePlayers', {
+    await queryInterface.createTable('BJHand', {
         id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.fn('gen_random_uuid'),
@@ -9,28 +9,31 @@ module.exports = {
         },
         gameId: {
             type: Sequelize.UUID,
-            defaultValue: null,
+            allowNull: false,
             references: {
-                model: 'PokerGame',
+                model: 'BJGame',
                 key: 'id',
                 as: 'gameId',
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
-
             },
         },
         playerId: {
             type: Sequelize.STRING,
             defaultValue: null,
             references: {
-              model: 'Player',
-              key: 'id',
-              as: 'playerId',
-              onDelete: 'CASCADE',
-              onUpdate: 'CASCADE',
+                model: 'Player',
+                key: 'id',
+                as: 'playerId',
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
-          },
-        seatNumber: {
+        },
+        cards: {
+            type: Sequelize.JSON, // Store card data as an array of objects
+            allowNull: false,
+        },
+        total: {
             type: Sequelize.INTEGER,
             allowNull: false,
         },
@@ -47,6 +50,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PokerGamePlayers');
+    await queryInterface.dropTable('BJHand');
   }
 };

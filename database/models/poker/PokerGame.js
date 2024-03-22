@@ -1,5 +1,5 @@
 const sequelize = require('../../db-connection');
-
+const { DataTypes } = require('sequelize');
 const PokerGame = sequelize.define('PokerGame', {
   id: {
     type: DataTypes.UUID,
