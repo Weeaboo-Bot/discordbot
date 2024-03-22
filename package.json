@@ -32,7 +32,7 @@
         "ansi-colors": "^4.1.1",
         "ascii-table": "0.0.9",
         "axios": "^0.28.0",
-        "booru": "^0.3.6",
+        "booru": "^2.6.5",
         "cheerio": "^1.0.0-rc.10",
         "color": "^3.2.1",
         "common-tags": "^1.8.0",
