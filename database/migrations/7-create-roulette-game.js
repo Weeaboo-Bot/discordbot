@@ -7,6 +7,10 @@ module.exports = {
         defaultValue: Sequelize.fn('gen_random_uuid'),
         primaryKey: true,
       },
+      data: {
+        type: Sequelize.JSON,
+        allowNull: false,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

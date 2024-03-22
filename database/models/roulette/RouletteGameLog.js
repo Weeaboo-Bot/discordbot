@@ -3,7 +3,7 @@ const sequelize = require('../../db-connection');
   const RouletteGameLog = sequelize.define('RouletteGameLog', {
     id: {
       type: DataTypes.UUID,
-      defaultValue: Sequelize.fn('gen_random_uuid'),
+      defaultValue: sequelize.fn('gen_random_uuid'),
       primaryKey: true,
     },
     gameId: {
@@ -17,7 +17,7 @@ const sequelize = require('../../db-connection');
     eventAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.NOW,
+      defaultValue: DataTypes.NOW,
     },
     event: {
       type: DataTypes.ENUM(['PLAYER_JOINED', 'PLAYER_PLACED_BET', 'PLACED_BETS_CLOSED', 'WHEEL_SPUN', 'BALL_LANDED', 'WINNINGS_DISTRIBUTED', 'ROUND_ENDED', 'GAME_ENDED']),
@@ -38,12 +38,12 @@ const sequelize = require('../../db-connection');
     createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
       },
       updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
       },
     // Additional event-specific data (optional)
   });

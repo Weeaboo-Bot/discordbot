@@ -4,7 +4,7 @@ const sequelize = require('../../db-connection');
 const PokerGameLog = sequelize.define('PokerGameLog', {
     id: {
         type: DataTypes.UUID,
-        defaultValue: Sequelize.fn('gen_random_uuid'),
+        defaultValue: sequelize.fn('gen_random_uuid'),
         primaryKey: true,
     },
     gameId: {
@@ -18,7 +18,7 @@ const PokerGameLog = sequelize.define('PokerGameLog', {
     eventAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
     },
     event: {
         type: DataTypes.ENUM(['GAME_STARTED', 'PLAYER_JOINS', 'PLAYER_LEAVES', 'DEAL_HOLES', 'BLINDS_POSTED', 'PRE_FLOP_BETTING', 'FLOP_REVEALED', 'FLOP_BETTING', 'TURN_REVEALED', 'TURN_BETTING', 'RIVER_REVEALED', 'RIVER_BETTING', 'SHOWDOWN', 'POT_AWARDED', 'GAME_ENDED']),
@@ -35,12 +35,12 @@ const PokerGameLog = sequelize.define('PokerGameLog', {
     createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
     },
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
     },
     // Optional: Additional event-specific data (e.g., bet amount, card data)
     communityCards: {

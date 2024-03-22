@@ -3,18 +3,22 @@ const sequelize = require('../../db-connection');
 const BJGame = sequelize.define('BJGame', {
   id: {
     type: DataTypes.UUID,
-    defaultValue: Sequelize.fn('gen_random_uuid'),
+    defaultValue: sequelize.fn('gen_random_uuid'),
     primaryKey: true,
   },
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: Sequelize.NOW,
+    defaultValue: DataTypes.NOW,
   },
   updatedAt: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: Sequelize.NOW,
+    defaultValue: DataTypes.NOW,
+  },
+  data: {
+    type: DataTypes.JSON,
+    allowNull: false,
   },
 }, {
   timestamps: true,

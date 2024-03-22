@@ -3,7 +3,7 @@ const sequelize = require('../../db-connection');
 const PokerGamePlayers = sequelize.define('PokerGamePlayers', {
     id: {
         type: DataTypes.UUID,
-        defaultValue: Sequelize.fn('gen_random_uuid'),
+        defaultValue: sequelize.fn('gen_random_uuid'),
         primaryKey: true,
     },
     gameId: {
@@ -29,12 +29,12 @@ const PokerGamePlayers = sequelize.define('PokerGamePlayers', {
     createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
     },
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
     },
     // Additional player-specific data for the game (e.g., stack size, buy-in)
 }, {

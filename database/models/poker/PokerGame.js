@@ -3,8 +3,12 @@ const sequelize = require('../../db-connection');
 const PokerGame = sequelize.define('PokerGame', {
   id: {
     type: DataTypes.UUID,
-    defaultValue: Sequelize.fn('gen_random_uuid'),
+    defaultValue: sequelize.fn('gen_random_uuid'),
     primaryKey: true,
+  },
+  data: {
+    type: DataTypes.JSON,
+    allowNull: false,
   },
   tableName: {
     type: DataTypes.STRING(255),
@@ -21,12 +25,12 @@ const PokerGame = sequelize.define('PokerGame', {
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: Sequelize.NOW,
+    defaultValue: DataTypes.NOW,
   },
   updatedAt: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: Sequelize.NOW,
+    defaultValue: DataTypes.NOW,
   },
 }, {
   timestamps: true,
