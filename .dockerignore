@@ -93,3 +93,5 @@ test/
 
 *.exe
 node_modules
+venv
+database/config/config.json
