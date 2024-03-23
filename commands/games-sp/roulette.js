@@ -30,7 +30,7 @@ module.exports = class RouletteCommand extends Command {
 
   async run(msg, { bet }) {
     msg.client.casinoUtils.checkForCasinoChannel(msg.channel.id, msg.channel.casinoChannel);
-    await msg.client.casinoUtils.checkForPlayer(msg.author.id);
+    await msg.client.casinoUtils.checkForPlayer(msg);
 
     try {
       const { id } = await msg.client.dbHelper.createGame({
