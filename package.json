@@ -73,7 +73,6 @@
         "semver": "^7.3.5",
         "sequelize": "^6.37.1",
         "sherlockjs": "^1.4.2",
-        "simple-youtube-api": "^5.2.1",
         "speak-tts": "^2.0.8",
         "sqlite3": "^5.1.4",
         "urban": "^0.3.4",

@@ -1,8 +1,6 @@
 const Command = require('../../structures/Command');
-const { oneLine } = require('common-tags');
 
 const validBetTypes = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns'];
-
 module.exports = class RouletteCommand extends Command {
   constructor(client) {
     super(client, {
