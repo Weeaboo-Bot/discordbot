@@ -10,26 +10,15 @@ module.exports = class BlackjackCommand extends Command {
             group: 'games-sp',
             memberName: 'blackjack',
             description: 'Play a game of blackjack.',
-            args: [
-                {
-                    key: 'deckCount',
-                    label: 'amount of decks',
-                    prompt: 'How many decks do you want to use?',
-                    type: 'integer',
-                    default: 1,
-                    max: 8,
-                    min: 1,
-                },
-            ],
         });
     }
 
-    async run(msg, { deckCount }) {
+    async run(msg) {
         msg.client.casinoUtils.checkForCasinoChannel(msg.channel.id, msg.channel.casinoChannel);
         await msg.client.casinoUtils.checkForPlayer(msg);
         try {
             const { id } = await msg.client.dbHelper.createGame({
-                data: new Deck({ deckCount }),
+                data: new Deck(),
             }, 'blackjack');
             msg.say(`Starting new Blackjack Game with ID: ${id}`);
             await msg.client.dbHelper.createGameLog({

@@ -10,7 +10,7 @@ module.exports = class RouletteCommand extends Command {
       args: [
         {
           key: 'bet',
-          prompt: 'What betType would you like to place? i.e. redBlack',
+          prompt: `What betType would you like to place? i.e. ${['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', 'black']}`,
           type: 'string',
           validate: (bet) => {
             const betType = bet.split(' ')[0]; // Extract first word (bet type)
@@ -153,6 +153,14 @@ module.exports = class RouletteCommand extends Command {
         winnings = betAmount * payouts[betType] ** (winningColor === betAmount); // Color match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber} ${winningColor}`);
         break;
+      case 'black':
+        winnings = betAmount * payouts[betType] ** (winningNumber === 0); // Zero match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
+      case 'red':
+        winnings = betAmount * payouts[betType] ** (winningNumber !== 0 && winningNumber % 2 !== 0); // Red match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber}`);
+        break;
       case 'evenOdd':
         winnings = betAmount * payouts[betType] ** ((winningNumber % 2 === 0 && betAmount === 'even') || (winningNumber % 2 !== 0 && betAmount === 'odd')); // Even/odd match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
@@ -192,6 +200,8 @@ module.exports = class RouletteCommand extends Command {
         highLow: 1,
         dozens: 2,
         columns: 2,
+        black: 1,
+        red: 1,
       };
     } else if (rouletteVariant === 'american') {
       return {

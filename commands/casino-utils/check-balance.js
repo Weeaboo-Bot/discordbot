@@ -4,7 +4,7 @@ module.exports = class CheckBalanceCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'check-balance',
-            aliases: ['check-tokens'],
+            aliases: ['check-tokens', 'balance'],
             group: 'casino-utils',
             memberName: 'check-balance',
             description: 'Check a user\'s token balance',
@@ -22,7 +22,7 @@ module.exports = class CheckBalanceCommand extends Command {
     async run(msg, { user }) {
         const isPlayer = await this.client.dbHelper.isPlayer(user.id);
         if (!isPlayer) {
-            return msg.say('You need to register your account before playing!');
+            return msg.say(`You need to register your account before playing!, use ${this.client.prefix}create-player`);
         }
         const balance = await this.client.dbHelper.getBalance(user.id);
         return msg.say(

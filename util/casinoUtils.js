@@ -1,7 +1,7 @@
 
 module.exports = class CasinoUtils {
     constructor() {
-        this.validRouletteBets = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns'];
+        this.validRouletteBets = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', 'black'];
     }
 
     checkForCasinoChannel(channelId, casinoChannel) {

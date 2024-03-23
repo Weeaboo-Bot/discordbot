@@ -5,7 +5,7 @@ module.exports = class RemoveBalance extends Command {
     constructor(client) {
         super(client, {
             name: 'remove-balance',
-            aliases: ['remove-tokens'],
+            aliases: ['remove-tokens', 'delbalanace'],
             group: 'casino-utils',
             memberName: 'remove-balance',
             description: 'Remove token balance from a user',
