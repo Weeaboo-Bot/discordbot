@@ -1,7 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const alphakey = require('../../config').api.ALPHA_KEY;
-const alpha = require('alphavantage')({ key: alphakey });
 
 module.exports = class CryptoCommand extends Command {
     constructor(client) {
@@ -25,6 +23,7 @@ module.exports = class CryptoCommand extends Command {
     }
 
     run(message, { crypto }) {
+        const alpha = require('alphavantage')({ key: message.client.apiKeys.ALPHA_KEY });
         const currDate = new Date().toISOString().split('T')[0];
         try {
             alpha.crypto.daily(crypto, 'USD').then((data) => {

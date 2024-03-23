@@ -1,7 +1,6 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
 
-
 module.exports = class TodayCommand extends Command {
     constructor(client) {
         super(client, {

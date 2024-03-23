@@ -9,7 +9,7 @@ const { nodeProfilingIntegration } = require("@sentry/profiling-node");
 global.__basedir = __dirname;
 
 Sentry.init({
-  dsn: config.sentry.SENTRY_DSN,
+  dsn: config.api.SENTRY_DSN,
   integrations: [
     nodeProfilingIntegration(),
   ],

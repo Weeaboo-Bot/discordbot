@@ -1,5 +1,5 @@
 const Command = require('../../structures/Command');
-const rightThere = require('../../assets/json/rightthere');
+const rightThere = require('../../assets/json/rightthere.json');
 
 module.exports = class RightThereCommand extends Command {
     constructor(client) {

@@ -1,7 +1,5 @@
 const { CommandoClient } = require('discord.js-commando');
 const Discord = require('discord.js');
-const activities = require('../assets/json/activity');
-const leaveMsgs = require('../assets/json/leave-messages');
 const { errorMessage, auditMessage, readyMessage, roleMessage, guildMessage, newMessage, dmMessage, statusMessage } = require('../util/logHandler');
 const { readdir } = require('fs');
 const { join, resolve } = require('path');
@@ -18,18 +16,11 @@ const GROUPS = [
     ['games-mp', 'Multi-Player Games'],
     ['games-sp', 'Single-Player Games'],
     ['info', 'Info'],
-    ['memes', 'Memes'],
     ['moderation', 'Moderation'],
-    ['music', 'Music Commands'],
-    ['news', 'News'],
-    ['nsfw', 'NSFW'],
     ['numbers', 'Number Commands'],
     ['owner', 'Hidden + Owner'],
     ['text', 'Text Commands'],
     ['util', 'Utility'],
-    ['general', 'General'],
-    ['loyal', 'Loyalty Program Commands'],
-    ['other', 'Other'],
 ];
 
 module.exports = class WeabooClient extends CommandoClient {
@@ -38,7 +29,6 @@ module.exports = class WeabooClient extends CommandoClient {
 
         this.registry
             .registerDefaultTypes()
-            .registerTypesIn(join(__dirname, '../types'))
             .registerGroups(GROUPS)
             .registerDefaultCommands({
                 help: false,
@@ -54,48 +44,25 @@ module.exports = class WeabooClient extends CommandoClient {
          * Create logger
          */
         this.logger = require('../util/logger');
-
-        this.on('commandError', (command, err) =>
-            this.logger.error(`[COMMAND:${command.name}]\n${err.stack}`)
-        );
-
-        this.logger.info(config.discord.DISCORD_PREFIX);
-        /**
-         * Discord API Stuff
-         * @type {string}
-         */
-        this.successEmoji = config.api.SUCCESS_EMOJI_ID;
+        this.logger.info('Initializing...');
+        this.logger.info(`BOT PREFIX: ${config.discord.DISCORD_PREFIX}`);
+        this.BOT_LOG = config.logs.BOT_LOG;
         this.guildId = config.discord.GUILD_ID;
-
-        /**
-         * API keys
-         * @type {Object}
-         */
         this.apiKeys = config.api;
-
-        /**
-         * Weaboo's owner ID
-         * @type {string}
-         */
         this.ownerId = config.discord.DISCORD_OWNER_ID;
-
-        /**
-         * Weaboo's Log IDs
-         */
-
-        /**
-         * Utility functions
-         * @type {Object}
-         */
         this.utils = require('../util/Util');
-        this.casinoChannel = config.discord.CASINO_CHANNEL;
         // Create the Casino and db
+        this.casinoChannel = config.discord.CASINO_CHANNEL;
         this.casinoUsers = new Discord.Collection();
         this.casinoGameLog = new Discord.Collection();
         this.casinoGames = new Discord.Collection();
         this.casinoMapping = new Discord.Collection();
         this.database = sequelize;
         this.dbHelper = new DBHelper(this.casinoUsers, this.casinoGames, this.casinoGameLog, this.casinoMapping, this.logger);
+        // Setup logging
+        this.on('commandError', (command, err) =>
+        this.logger.error(`[COMMAND:${command.name}]\n${err.stack}`)
+    );
         this.errorMessage = errorMessage;
         this.auditMessage = auditMessage;
         this.readyMessage = readyMessage;
@@ -106,9 +73,6 @@ module.exports = class WeabooClient extends CommandoClient {
         this.dmMessage = dmMessage;
         this.statusTypes = require('../assets/json/status-types.json');
         this.errorTypes = require('../assets/json/errorTypes.json');
-        this.logger.info('Initializing...');
-        this.activities = activities;
-        this.leaveMessages = leaveMsgs;
         this.botLogger = (logMessage) => {
             this.channels.fetch(config.logs.BOT_LOG)
                 .then((channel) => {
@@ -149,7 +113,6 @@ module.exports = class WeabooClient extends CommandoClient {
                 delete require.cache[
                     require.resolve(resolve(__basedir, join(path, f)))
                 ]; // Clear cache
-                this.logger.info(`Loading event: ${eventName}`);
             });
         });
         return this;
@@ -161,9 +124,6 @@ module.exports = class WeabooClient extends CommandoClient {
     loadGroups() {
         this.logger.info('Loading groups...');
         this.logger.info(`${this.registry.groups.size} groups(s) found...`);
-        this.registry.groups.forEach((group) => {
-            this.logger.info(`Loading group: ${group.name}`);
-        });
         return this;
     }
 
@@ -173,9 +133,6 @@ module.exports = class WeabooClient extends CommandoClient {
     loadCommands() {
         this.logger.info('Loading commands...');
         this.logger.info(`${this.registry.commands.size} commands(s) found...`);
-        this.registry.commands.forEach((command) => {
-            this.logger.info(`Loading command: ${command.name}`);
-        });
         return this;
     }
 
@@ -195,7 +152,7 @@ module.exports = class WeabooClient extends CommandoClient {
      * @param {string} errorMessage
      */
     sendSystemErrorMessage(guild, error, errorMessage) {
-        const systemChannel = guild.channels.cache.get(this.errorLog);
+        const systemChannel = guild.channels.cache.get(this.BOT_LOG);
 
         // Check channel and permissions
         if (

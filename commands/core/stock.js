@@ -1,8 +1,5 @@
 const Command = require('../../structures/Command');
 const Discord = require('discord.js');
-const alphakey = require('../../config').api.ALPHA_KEY;
-const alpha = require('alphavantage')({ key: alphakey });
-
 module.exports = class StockCommand extends Command {
     constructor(client) {
         super(client, {
@@ -25,6 +22,7 @@ module.exports = class StockCommand extends Command {
     }
 
     run(message, { stock }) {
+        const alpha = require('alphavantage')({ key: message.client.apiKeys.ALPHA_KEY });
         try {
             alpha.data
                 .intraday(stock, 'compact', 'json', '5min')
