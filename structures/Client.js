@@ -52,7 +52,7 @@ module.exports = class WeabooClient extends CommandoClient {
         this.ownerId = config.discord.DISCORD_OWNER_ID;
         this.utils = require('../util/Util');
         // Create the Casino and db
-        this.casinoChannel = config.discord.CASINO_CHANNEL;
+        this.casinoChannel = config.logs.CASINO_CHANNEL;
         this.casinoUsers = new Discord.Collection();
         this.casinoGameLog = new Discord.Collection();
         this.casinoGames = new Discord.Collection();
