@@ -14,7 +14,9 @@ module.exports = class BlackjackCommand extends Command {
     }
 
     async run(msg) {
-        msg.client.casinoUtils.checkForCasinoChannel(msg.channel.id, msg.channel.casinoChannel);
+        if (msg.channel.id != msg.client.casinoChannel) {
+            return msg.reply('Please use this command in a casino channel.');
+          }
         await msg.client.casinoUtils.checkForPlayer(msg);
         try {
             const { id } = await msg.client.dbHelper.createGame({
@@ -103,8 +105,8 @@ module.exports = class BlackjackCommand extends Command {
         const sentMessage = await msg.channel.send(embed); // Send initial embed message
 
         while (isPlaying) {
-            const response = await msg.channel.awaitMessages(m => m.author.id === msg.author.id, { max: 1, time: 30000 });
-            const playerAction = response.first().content.toLowerCase();
+            await msg.channel.send('Please enter a option (hit, stand)');
+            const playerAction = await msg.client.casinoUtils.waitForOption(msg);
 
             if (playerAction === 'hit') {
                 await msg.client.dbHelper.createGameLog({ gameId, event: 'PLAYER_HIT', playerId: msg.author.id }, 'blackjack');
@@ -130,11 +132,12 @@ module.exports = class BlackjackCommand extends Command {
                 await msg.client.dbHelper.createGameLog({ gameId, event: 'PLAYER_STAND', playerId: msg.author.id }, 'blackjack');
                 isPlaying = false;
             } else if (playerAction === 'split' && canSplit) {
-                if (playerHand.length !== 2) {
-                    await msg.channel.send('Splitting is only allowed for initial two cards of the same value.');
-                    continue;
-                }
-                return await this.handleSplit(msg, deck, playerHand, dealerHand, betAmount); // Call handleSplit with logging params
+                await msg.channel.send('Split is not currently implemented');
+                // if (playerHand.length !== 2) {
+                //     await msg.channel.send('Splitting is only allowed for initial two cards of the same value.');
+                //     continue;
+                // }
+                // return await this.handleSplit(msg, deck, playerHand, dealerHand, betAmount, gameId); // Call handleSplit with logging params
             } else {
                 await msg.channel.send('Invalid action. Please enter "hit", "stand", or "split" (if applicable).');
             }
@@ -220,15 +223,15 @@ module.exports = class BlackjackCommand extends Command {
     checkSplitPossibility(hand) {
         return hand.length === 2 && hand[0][0] === hand[1][0]; // Check for initial two cards of the same value
     }
-    async handleSplit(message, deck, playerHand, dealerHand, betAmount) {
+    async handleSplit(message, deck, playerHand, dealerHand, betAmount, gameId) {
         const splitCard = playerHand.pop(); // Remove the card to be split
-        const secondHand = [splitCard, deck.pop()]; // Create the second hand with the split card and a new card from the deck
+        const secondHand = [splitCard, deck.deck.pop()]; // Create the second hand with the split card and a new card from the deck
 
         // Play the turn for the first hand (use recursion)
-        const firstHandResult = await this.playPlayerTurn(message, playerHand, dealerHand, betAmount); // Create a copy of the deck for Hand 1
+        const firstHandResult = await this.playPlayerTurn(message, deck, playerHand, dealerHand, gameId, betAmount); // Create a copy of the deck for Hand 1
 
         // Play the turn for the second hand (use recursion)
-        const secondHandResult = await this.playPlayerTurn(message, secondHand, dealerHand, betAmount);
+        const secondHandResult = await this.playPlayerTurn(message, secondHand, dealerHand, gameId, betAmount);
 
         // Combine the results to determine the overall winner (optional)
         let winner;

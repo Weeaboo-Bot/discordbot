@@ -1,13 +1,7 @@
 
 module.exports = class CasinoUtils {
     constructor() {
-        this.validRouletteBets = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', 'black'];
-    }
-
-    checkForCasinoChannel(channelId, casinoChannel) {
-        if (channelId !== casinoChannel) {
-            return; // Do nothing if channel doesn't match
-        }
+        this.validRouletteBets = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', ];
     }
 
     async checkForPlayer(msg) {
@@ -28,6 +22,31 @@ module.exports = class CasinoUtils {
             playerId: msg.author.id,
             betAmount: betAmount,
         }, gameType);
+    }
+
+    async waitForOption(msg, timeout = 30000) {
+        let userInput;
+        while (!userInput) {
+            try {
+                const messages = await msg.channel.awaitMessages(m => m.author.id === msg.author.id, { max: 1, time: timeout });
+                userInput = messages.first().content;
+
+                if (!['hit', 'stand', 'split'].includes(userInput)) {
+                    await msg.say(`Invalid bet amount. Please enter an integer.`);
+                    userInput = null; // Reset to continue the loop
+                }
+            } catch (error) {
+                if (error.name === 'MessageCollectorTimeout') {
+                    msg.client.logger.info(`User did not respond in time.`);
+                    return null; // Indicate timeout
+                } else {
+                    msg.client.logger.error('An error occurred:', error);
+                    return null; // Indicate other error
+                }
+            }
+        }
+
+        return userInput; // Return the valid integer bet amount
     }
 
     async waitForBet(msg, timeout = 30000) {
