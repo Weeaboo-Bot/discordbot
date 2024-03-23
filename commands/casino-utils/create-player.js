@@ -8,7 +8,6 @@ module.exports = class CreatePlayer extends Command {
             group: 'casino-utils',
             memberName: 'create-player',
             description: 'Create a new Casino Player',
-            ownerOnly: true,
             args: [
                 {
                     key: 'user',
@@ -22,6 +21,10 @@ module.exports = class CreatePlayer extends Command {
 
     async run(msg, { user }) {
         try {
+            if (await msg.client.dbHelper.isPlayer(user.id)) {
+                return await msg.reply('This user already exists in the casino');
+            }
+            await msg.client.casinoUtils.checkForPlayer(user.id);
             const member = msg.guild.members.cache.get(user.id);
             const role = msg.guild.roles.cache.find(role => role.name === 'Casino Player');
             await member.roles.add(role);

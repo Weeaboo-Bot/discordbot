@@ -14,9 +14,7 @@ module.exports = class BlackjackCommand extends Command {
     }
 
     async run(msg) {
-        if (msg.channel.id != msg.client.casinoChannel) {
-            return msg.reply('Please use this command in a casino channel.');
-          }
+        await msg.client.casinoUtils.checkChannel(msg);
         await msg.client.casinoUtils.checkForPlayer(msg);
         try {
             const { id } = await msg.client.dbHelper.createGame({
@@ -105,8 +103,9 @@ module.exports = class BlackjackCommand extends Command {
         const sentMessage = await msg.channel.send(embed); // Send initial embed message
 
         while (isPlaying) {
-            await msg.channel.send('Please enter a option (hit, stand)');
-            const playerAction = await msg.client.casinoUtils.waitForOption(msg);
+            await msg.say('Please enter one of the following options [hit, stand, split]');
+            const response = await msg.channel.awaitMessages(m => m.author.id === msg.author.id, { max: 1, time: 30000 });
+            const playerAction = response.first().content.toLowerCase();
 
             if (playerAction === 'hit') {
                 await msg.client.dbHelper.createGameLog({ gameId, event: 'PLAYER_HIT', playerId: msg.author.id }, 'blackjack');

@@ -4,10 +4,15 @@ module.exports = class CasinoUtils {
         this.validRouletteBets = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', ];
     }
 
+    async checkChannel(msg) {
+        if (msg.channel.channeId != msg.client.casinoId) {
+            return await msg.reply('Please use this command in a casino channel.');
+          }
+    }
     async checkForPlayer(msg) {
         const isPlayer = await msg.client.dbHelper.isPlayer(msg.author.id);
         if (!isPlayer) {
-            return msg.say('You need to register your account before playing!');
+            return await msg.reply('You need to register your account before playing!');
         }
     }
 
@@ -24,7 +29,7 @@ module.exports = class CasinoUtils {
         }, gameType);
     }
 
-    async waitForOption(msg, timeout = 30000) {
+    async waitForOption(msg, timeout = 30000, options) {
         let userInput;
         while (!userInput) {
             try {
@@ -32,7 +37,7 @@ module.exports = class CasinoUtils {
                 userInput = messages.first().content;
 
                 if (!['hit', 'stand', 'split'].includes(userInput)) {
-                    await msg.say(`Invalid bet amount. Please enter an integer.`);
+                    await msg.say(`Invalid option, Please enter one of ${options.join(',')}`);
                     userInput = null; // Reset to continue the loop
                 }
             } catch (error) {

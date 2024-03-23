@@ -29,11 +29,9 @@ module.exports = class RouletteCommand extends Command {
   }
 
   async run(msg, { bet }) {
-    if (msg.channel.id != msg.client.casinoChannel) {
-      return msg.reply('Please use this command in a casino channel.');
-    }
-    await msg.client.casinoUtils.checkForPlayer(msg);
-
+    await msg.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel);
+    await msg.client.casinoUtils.checkForPlayer(msg.author.id);
+    
     try {
       const { id } = await msg.client.dbHelper.createGame({
         data: 'New Roulette Game'
