@@ -158,16 +158,6 @@ module.exports = class DBHelper {
     try {
       const gameType = this.casinoMapping.get(id).gameType;
       const gameLogs = this.casinoGameLog.filter(gameLog => gameLog.gameId === id);
-      // switch (gameType) {
-      //   case gameTypes.BLACKJACK:
-      //     return await BJGameLog.findAll(id);
-      //   case gameTypes.POKER:
-      //     return await PokerGameLog.findAll(id);
-      //   case gameTypes.ROULETTE:
-      //     return await RouletteGameLog.findAll(id);
-      //   default:
-      //     return 'INVALID GAME_TYPE';
-      // }
       gameLogs.each((gameLog) => {
         gameLog.gameType = gameType;
       })

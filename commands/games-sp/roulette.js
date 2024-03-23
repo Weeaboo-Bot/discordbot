@@ -1,6 +1,5 @@
 const Command = require('../../structures/Command');
 
-const validBetTypes = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns'];
 module.exports = class RouletteCommand extends Command {
   constructor(client) {
     super(client, {
@@ -16,7 +15,7 @@ module.exports = class RouletteCommand extends Command {
           validate: (bet) => {
             const betType = bet.split(' ')[0]; // Extract first word (bet type)
 
-            if (this.validateBetType(betType)) {
+            if (this.client.casinoUtils.validateRouletteBet(betType)) {
               return true;
               // Proceed with processing the bet (considering other validations like bet amount)
             } else {
@@ -29,32 +28,23 @@ module.exports = class RouletteCommand extends Command {
     });
   }
 
-  validateBetType(betTypeInput) {
-    return validBetTypes.includes(betTypeInput);
-  }
-
   async run(msg, { bet }) {
-    if (msg.channel.id !== this.client.casinoChannel) { // Replace with the actual channel ID
-      return; // Do nothing if channel doesn't match
-    }
-    const isPlayer = await this.client.dbHelper.isPlayer(msg.author.id);
-    if (!isPlayer) {
-        return msg.say('You need to register your account before playing!');
-    }
+    msg.client.casinoUtils.checkForCasinoChannel(msg.channel.id, msg.channel.casinoChannel);
+    await msg.client.casinoUtils.checkForPlayer(msg.author.id);
 
     try {
-      const { id } = await this.client.dbHelper.createGame({
+      const { id } = await msg.client.dbHelper.createGame({
         data: 'New Roulette Game'
       }, 'roulette');
       msg.say(`Starting new Roulette Game with ID: ${id}`);
-      await this.client.dbHelper.createGameLog({
+      await msg.client.dbHelper.createGameLog({
         gameId: id,
         event: 'PLAYER_JOINED',
         playerId: msg.author.id,
       }, 'roulette');
-      const betAmount = await this.waitForBet(msg);
-      this.placeBets(betAmount, id, msg.author.id);
-      await this.client.dbHelper.createGameLog({
+      const betAmount = await msg.client.casinoUtils.waitForBet(msg);
+      await msg.client.casinoUtils.placeBet(msg, betAmount, id, 'roulette');
+      await msg.client.dbHelper.createGameLog({
         gameId: id,
         event: 'PLACED_BETS_CLOSED',
         playerId: msg.author.id,
@@ -63,33 +53,36 @@ module.exports = class RouletteCommand extends Command {
 
       // get winnings
       const winnings = this.calculateRouletteWinnings(msg, bet, betAmount, 'european');
-      await this.client.dbHelper.createGameLog({
+      await msg.client.dbHelper.createGameLog({
         gameId: id,
         event: 'WHEEL_SPUN',
         playerId: msg.author.id,
       }, 'roulette');
-      await this.client.dbHelper.createGameLog({
+      await msg.client.dbHelper.createGameLog({
         gameId: id,
         event: 'BALL_LANDED',
         playerId: msg.author.id,
       }, 'roulette');
 
       let resultMessage;
+      let newBal;
+
       if (winnings > 0) {
-        await this.client.dbHelper.createGameLog({
+        await msg.client.dbHelper.createGameLog({
           gameId: id,
           event: 'WINNINGS_DISTRIBUTED',
           playerId: msg.author.id,
         }, 'roulette');
+        newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, true, betAmount, winnings)
         resultMessage = `Congratulations! You won ${winnings} on your ${bet} bet.`;
-        resultMessage += ` Your new token balance is ${await this.calcWinAndUpdateBal(msg.author.id, winnings, betAmount, true)}.`;
+        resultMessage += ` Your new token balance is ${newBal}.`;
       } else {
-        newBal = await this.calcWinAndUpdateBal(msg.author.id, winnings, betAmount);
+        newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, false, betAmount, winnings);
         resultMessage = `Sorry, you didn't win this round.`;
-        resultMessage += ` Your new token balance is ${await this.calcWinAndUpdateBal(msg.author.id, winnings, betAmount, false)}.`;
+        resultMessage += ` Your new token balance is ${newBal}.`;
       }
 
-      await this.client.dbHelper.createGameLog({
+      await msg.client.dbHelper.createGameLog({
         gameId: id,
         event: 'GAME_ENDED',
         playerId: msg.author.id,
@@ -99,44 +92,16 @@ module.exports = class RouletteCommand extends Command {
     } catch (error) {
       msg.client.botLogger({
         embed: msg.client.errorMessage(
-          client.logger,
+          msg.client.logger,
           error,
           msg.client.errorTypes.DATABASE,
           msg.command.name
         ),
       });
-      this.client.logger.error(error);
+      msg.client.logger.error(error);
       return msg.say('An error occurred during the game. Please try again later.');
     }
   }
-  async waitForBet(msg, timeout = 30000) {
-    await msg.say(`You have ${await this.client.dbHelper.getBalance(msg.author.id)} tokens. Place your bet!`);
-    const filter = (m) => m.author.id === msg.author.id; // Filter for messages from the specified user
-    try {
-      const messages = await msg.channel.awaitMessages(filter, { max: 1, time: timeout });
-      return messages.first().content; // Return the first message received
-    } catch (error) {
-      if (error.name === 'MessageCollectorTimeout') {
-        console.log(`User did not respond in time.`);
-      } else {
-        console.error('An error occurred:', error);
-      }
-      return null; // Indicate timeout or other error
-    }
-  }
-  async placeBets(betAmount, id, playerId) {
-    await this.client.dbHelper.createGameLog({
-      gameId: id,
-      event: 'PLAYER_PLACED_BET',
-      playerId: playerId,
-    }, 'roulette');
-    await this.client.dbHelper.createGameBet({
-      gameId: id,
-      playerId: playerId,
-      betAmount: betAmount,
-    }, 'roulette');
-  }
-
 
   calculateRouletteWinnings(msg, betType, betAmount, rouletteVariant) {
     const payouts = this.getPayouts(rouletteVariant); // Function to retrieve payouts based on variant
@@ -252,10 +217,4 @@ module.exports = class RouletteCommand extends Command {
 
   }
 
-  async calcWinAndUpdateBal(playerId, winAmount, betAmount, isWin) {
-    if (isWin) {
-      return await this.client.dbHelper.addBalance(playerId, winAmount);
-    }
-    return await this.client.dbHelper.removeBalance(playerId, betAmount);
-  }
 };

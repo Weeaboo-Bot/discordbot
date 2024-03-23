@@ -6,6 +6,8 @@ const { join, resolve } = require('path');
 const { fail } = require('../assets/json/emojis.json');
 const DBHelper = require('../database/db-helper');
 const sequelize = require('../database/db-connection');
+const CasinoUtils = require('../util/casinoUtils');
+const Util = require('../util/Util');
 
 const GROUPS = [
     ['action', 'Action'],
@@ -50,7 +52,8 @@ module.exports = class WeabooClient extends CommandoClient {
         this.guildId = config.discord.GUILD_ID;
         this.apiKeys = config.api;
         this.ownerId = config.discord.DISCORD_OWNER_ID;
-        this.utils = require('../util/Util');
+        this.utils = new Util();
+        this.casinoUtils = new CasinoUtils();
         // Create the Casino and db
         this.casinoChannel = config.logs.CASINO_CHANNEL;
         this.casinoUsers = new Discord.Collection();
