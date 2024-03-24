@@ -5,14 +5,13 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
   host: config.host,
   dialect: config.dialect,
   dialectOptions: config.dialectOptions,
-  logging: false,
 });
 
 // Test connection (optional)
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log('DB Connection Completed.');
+    console.log('[DATABASE] DB Connection Completed.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }

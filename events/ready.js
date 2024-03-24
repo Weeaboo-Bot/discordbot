@@ -4,7 +4,7 @@ const { readyMessage } = require('../util/logHandler');
 const { Player, BJGame, PokerGame, RouletteGame, BJGameLog, RouletteGameLog, PokerGameLog, CasinoGame } = require('../database/models/index');
 // Export ready events
 module.exports = async (client) => {
-    client.database.sync();
+    client.database.sync({ logging: client.logger.info() });
     async function fetchAndCacheData() {
         try {
             const [casinoUsers, casinoGames, casinoGameLogs, casinoGameMapping] = await Promise.all([
