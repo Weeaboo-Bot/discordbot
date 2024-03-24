@@ -21,6 +21,9 @@ module.exports = class DeletePlayer extends Command {
     }
 
     async run(msg, { user }) {
+        if (await this.client.casinoUtils.playerNeedsRegister(msg, user.id)) {
+            return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
+        }
         try {
             const member = msg.guild.members.cache.get(user.id);
             const role = msg.guild.roles.cache.find(role => role.name === 'Casino Player');

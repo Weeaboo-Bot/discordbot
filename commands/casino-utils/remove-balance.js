@@ -28,6 +28,9 @@ module.exports = class RemoveBalance extends Command {
     }
 
     async run(msg, { user, amount }) {
+        if (await this.client.casinoUtils.playerNeedsRegister(msg, user.id)) {
+            return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
+        }
         const balance = await this.client.dbHelper.removeBalance(user.id, amount);
         return msg.say(
             `Removed ${amount} tokens from ${user.tag}! Their new balance is ${balance}`

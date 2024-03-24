@@ -4,16 +4,18 @@ module.exports = class CasinoUtils {
         this.validRouletteBets = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', ];
     }
 
-    async checkChannel(msg) {
-        if (msg.channel.channeId != msg.client.casinoId) {
-            return await msg.reply('Please use this command in a casino channel.');
+    checkChannel(channelId, casinoId) {
+        if (channelId != casinoId) {
+            return true;
           }
+          return false;
     }
-    async checkForPlayer(msg) {
-        const isPlayer = await msg.client.dbHelper.isPlayer(msg.author.id);
-        if (!isPlayer) {
-            return await msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
+    async playerNeedsRegister(msg, id) {
+        const isPlayer = await msg.client.dbHelper.isPlayer(id);
+        if (isPlayer) {
+            return false;
         }
+        return true;
     }
 
     async placeBet(msg, betAmount, gameId, gameType) {

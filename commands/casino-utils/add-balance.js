@@ -27,9 +27,8 @@ module.exports = class AddBalanceCommand extends Command {
     }
 
     async run(msg, { user, amount }) {
-        const isPlayer = await this.client.dbHelper.isPlayer(user.id);
-        if (!isPlayer) {
-            return msg.say('You need to register your account before playing!');
+        if (await this.client.casinoUtils.playerNeedsRegister(msg, user.id)) {
+            return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
         }
         const balance = await this.client.dbHelper.addBalance(user.id, amount);
         return msg.say(

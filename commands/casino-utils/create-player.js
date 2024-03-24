@@ -20,10 +20,9 @@ module.exports = class CreatePlayer extends Command {
     }
 
     async run(msg, { user }) {
+        await this.client.casinoUtils.playerIsRegistered(msg, user.id);
+
         try {
-            if (await msg.client.dbHelper.isPlayer(user.id)) {
-                return await msg.reply('This user already exists in the casino');
-            }
             await msg.client.casinoUtils.checkForPlayer(user.id);
             const member = msg.guild.members.cache.get(user.id);
             const role = msg.guild.roles.cache.find(role => role.name === 'Casino Player');

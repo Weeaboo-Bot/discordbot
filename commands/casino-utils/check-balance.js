@@ -20,11 +20,10 @@ module.exports = class CheckBalanceCommand extends Command {
     }
 
     async run(msg, { user }) {
-        const isPlayer = await this.client.dbHelper.isPlayer(user.id);
-        if (!isPlayer) {
-            return msg.say(`You need to register your account before playing!, use ${this.client.prefix}create-player`);
+        if (await this.client.casinoUtils.playerNeedsRegister(msg, user.id)) {
+            return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
         }
-        const balance = await this.client.dbHelper.getBalance(user.id);
+        const balance = await msg.client.dbHelper.getBalance(user.id);
         return msg.say(
             `Balance of ${user.tag}: ${balance} tokens`
         );

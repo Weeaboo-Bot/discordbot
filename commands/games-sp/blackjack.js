@@ -14,9 +14,12 @@ module.exports = class BlackjackCommand extends Command {
     }
 
     async run(msg) {
-        if (await msg.client.casinoUtils.checkChannel(msg) || await msg.client.casinoUtils.checkForPlayer(msg)) {
-            return;
-        }
+        if (await this.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel)) {
+            return msg.reply('Please use this command in a casino channel.');
+          }
+          if (await this.client.casinoUtils.playerNeedsRegister(msg, msg.author.id)) {
+            return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
+          }
         try {
             const { id } = await msg.client.dbHelper.createGame({
                 data: new Deck(),
