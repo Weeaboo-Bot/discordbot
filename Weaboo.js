@@ -64,7 +64,7 @@ const task = cron.schedule('0 0 * * *', () => {
 });
   client.dbHelper.getAllPlayers().then((players) => {
     players.forEach((player) => {
-      client.dbHelper.addBalance(player.id, 150);
+      client.dbHelper.addBalance(player.id, 200);
     });
   });
 });
