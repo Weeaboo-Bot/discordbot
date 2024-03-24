@@ -40,7 +40,7 @@ module.exports = class DBHelper {
         where: { id: id },
       });
       return player ? player.balance : 0;
-    }
+    } 
     this.logger.info('Player not found');
   }
   async removeBalance(id, amount) {

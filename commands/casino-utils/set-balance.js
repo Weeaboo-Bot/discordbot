@@ -17,6 +17,24 @@ module.exports = class SetBalanceCommand extends Command {
                         'How many tokens to remove?',
                     type: 'integer',
                     default: 0,
+                    validate: (amount) => {
+                        if (!amount.length) {
+                            return 'Please provide a number to validate, please try again.';
+                        }
+                      
+                          const number = parseInt(amount);
+                      
+                          // Check if conversion to integer resulted in NaN (Not a Number)
+                          if (isNaN(amount) || amount < 0) {
+                            return 'The provided value is not a valid number, please try again.';
+                          }
+                      
+                          // Check if the converted number is equal to the original string after conversion (removes decimals)
+                          if (number.toString() !== amount) {
+                            return 'The provided value is not an integer (contains decimals), please try again.';
+                          }
+                        return true;
+                    }
                 },
                 {
                     key: 'user',
@@ -32,9 +50,21 @@ module.exports = class SetBalanceCommand extends Command {
         if (await this.client.casinoUtils.playerNeedsRegister(msg, user.id)) {
             return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
         }
-        const balance = await this.client.dbHelper.setBalance(user.id, amount);
-        return msg.say(
-            `Set ${amount} tokens to ${user.tag}! Their new balance is ${balance}`
-        );
+        try {
+            const balance = await this.client.dbHelper.setBalance(user.id, amount);
+            return msg.say(
+                `Set ${amount} tokens to ${user.tag}! Their new balance is ${balance}`
+            );
+        } catch (error) {
+            msg.reply('Sorry, an error happened trying to set tokens.')
+            msg.client.botLogger({
+                embed: msg.client.errorMessage(
+                    msg.client.logger,
+                    error,
+                    msg.client.errorTypes.DATABASE,
+                    msg.command.name
+                ),
+            });
+        }
     }
 };

@@ -16,6 +16,24 @@ module.exports = class RemoveBalance extends Command {
                         'How many tokens to remove?',
                     type: 'integer',
                     default: 0,
+                    validate: (amount) => {
+                        if (!amount.length) {
+                            return 'Please provide a number to validate, please try again.';
+                        }
+                      
+                          const number = parseInt(amount);
+                      
+                          // Check if conversion to integer resulted in NaN (Not a Number)
+                          if (isNaN(amount) || amount < 0) {
+                            return 'The provided value is not a valid number, please try again.';
+                          }
+                      
+                          // Check if the converted number is equal to the original string after conversion (removes decimals)
+                          if (number.toString() !== amount) {
+                            return 'The provided value is not an integer (contains decimals), please try again.';
+                          }
+                        return true;
+                    }
                 },
                 {
                     key: 'user',
