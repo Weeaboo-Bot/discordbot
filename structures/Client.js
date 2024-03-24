@@ -56,6 +56,7 @@ module.exports = class WeabooClient extends CommandoClient {
         this.utils = new Util();
         this.casinoUtils = new CasinoUtils();
         // Create the Casino and db
+        this.DAILY_TOKEN_AMOUNT = config.api.DAILY_TOKEN_AMOUNT;
         this.casinoChannel = config.logs.CASINO_CHANNEL;
         this.casinoUsers = new Discord.Collection();
         this.casinoGameLog = new Discord.Collection();

@@ -90,7 +90,7 @@ module.exports = class BlackjackCommand extends Command {
                 event: 'PLAYER_WIN',
                 playerId: playerId,
             }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount * 1.5, betAmount, true);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount * 2, betAmount, true);
             return 'Wow, you hit blackjack right away! Lucky you!';
         }
         return null;
@@ -107,7 +107,7 @@ module.exports = class BlackjackCommand extends Command {
         const sentMessage = await msg.channel.send(embed); // Send initial embed message
 
         while (isPlaying) {
-            await msg.say('Please enter one of the following options [hit, stand, split]');
+            await msg.say('Please enter one of the following options [hit, stand]');
             const response = await msg.channel.awaitMessages(m => m.author.id === msg.author.id, { max: 1, time: 30000 });
             const playerAction = response.first().content.toLowerCase();
 
@@ -127,6 +127,11 @@ module.exports = class BlackjackCommand extends Command {
                     // Log dealer win event
                     await msg.client.dbHelper.createGameLog({ gameId, event: 'PLAYER_BUST', playerId: msg.author.id }, 'blackjack');
                     await msg.client.dbHelper.createGameLog({ gameId, event: 'DEALER_WIN', playerId: msg.author.id }, 'blackjack');
+                } else if (playerScore == 21) {
+                    isPlaying = false;
+                    embed.setTitle('You Win!');
+                    // Log player win event
+                    await msg.client.dbHelper.createGameLog({ gameId, event: 'PLAYER_WIN', playerId: msg.author.id }, 'blackjack');
                 } else {
                     embed.fields[0].value = `${playerHand.map(card => card.textDisplay).join(',')} (${this.calculate(playerHand)})`;
                     await sentMessage.edit(embed);
@@ -142,7 +147,7 @@ module.exports = class BlackjackCommand extends Command {
                 // }
                 // return await this.handleSplit(msg, deck, playerHand, dealerHand, betAmount, gameId); // Call handleSplit with logging params
             } else {
-                await msg.channel.send('Invalid action. Please enter "hit", "stand", or "split" (if applicable).');
+                await msg.channel.send('Invalid action. Please enter "hit", "stand"');
             }
         }
 

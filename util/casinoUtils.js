@@ -76,10 +76,10 @@ module.exports = class CasinoUtils {
             } catch (error) {
                 if (error.name === 'MessageCollectorTimeout') {
                     msg.client.logger.info(`User did not respond in time.`);
-                    return null; // Indicate timeout
+                    return 0; // Indicate timeout
                 } else {
                     msg.client.logger.error('An error occurred:', error);
-                    return null; // Indicate other error
+                    return 0; // Indicate other error
                 }
             }
         }
@@ -88,7 +88,7 @@ module.exports = class CasinoUtils {
             msg.say('Invalid input. Please enter an integer 0 or greater');
             return await this.waitForBet(msg); // Recursive call with return value
         }
-        if (betAmount <= currBal) {
+        if (betAmount > currBal) {
             msg.say('You do not have enough tokens to place this bet.');
             return await this.waitForBet(msg); // Recursive call with return value
         }

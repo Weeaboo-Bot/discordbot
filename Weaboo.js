@@ -58,13 +58,15 @@ const task = cron.schedule('0 0 * * *', () => {
     embed: message.client.statusMessage(
         client.logger,
         'Daily Token Refresh',
-        message.client.statusTypes.DAILY_TOKEN,
+        client.statusTypes.DAILY_TOKEN,
         'Adding daily free 150 tokens to all players'
     ),
 });
   client.dbHelper.getAllPlayers().then((players) => {
     players.forEach((player) => {
-      client.dbHelper.addBalance(player.id, 200);
+      if (player.balance < 1000) {
+        client.dbHelper.addBalance(player.id, (player.balance - client.DAILY_TOKEN_AMOUNT)); 
+      }
     });
   });
 });
