@@ -47,6 +47,7 @@ module.exports = class WeabooClient extends CommandoClient {
          */
         this.logger = require('../util/logger');
         this.logger.info('Initializing...');
+        this.prefix = config.discord.DISCORD_PREFIX;
         this.logger.info(`BOT PREFIX: ${config.discord.DISCORD_PREFIX}`);
         this.BOT_LOG = config.logs.BOT_LOG;
         this.guildId = config.discord.GUILD_ID;

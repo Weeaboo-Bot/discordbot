@@ -14,8 +14,9 @@ module.exports = class BlackjackCommand extends Command {
     }
 
     async run(msg) {
-        await msg.client.casinoUtils.checkChannel(msg);
-        await msg.client.casinoUtils.checkForPlayer(msg);
+        if (await msg.client.casinoUtils.checkChannel(msg) || await msg.client.casinoUtils.checkForPlayer(msg)) {
+            return;
+        }
         try {
             const { id } = await msg.client.dbHelper.createGame({
                 data: new Deck(),
