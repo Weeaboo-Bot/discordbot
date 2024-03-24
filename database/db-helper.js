@@ -67,6 +67,22 @@ module.exports = class DBHelper {
     }
     return player ? player.balance : 0;
   }
+  async setBalance(id, amount) {
+    const player = this.casinoUsers.get(id);
+
+    if (player) {
+      // Check if input is a number and non-negative
+      if (isNaN(amount) || amount < 0) {
+        return false;
+      }
+      player.balance = Number(amount);
+      await Player.update({ balance: player.balance }, {
+        where: { id: id },
+      });
+      return player ? player.balance : 0;
+    }
+    this.logger.info('Player not found');
+  }
   async isPlayer(id) {
     const player = this.casinoUsers.get(id);
     if (!player) {
