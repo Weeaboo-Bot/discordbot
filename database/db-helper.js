@@ -14,6 +14,9 @@ const { Player,
   PokerBet, CasinoGame } = require('../database/models/index');
 const { v4: uuidv4 } = require('uuid');
 
+const MAX_INT = 2147483647;
+const MIN_INT = 0;
+
 const gameTypes = require('../assets/json/game-types.json');
 module.exports = class DBHelper {
   constructor(casinoUsers, casinoGames, casinoGameLog, casinoMapping, logger) {
@@ -30,33 +33,32 @@ module.exports = class DBHelper {
   async addBalance(id, amount) {
     const player = this.casinoUsers.get(id);
   
-    if (player) {
-      // Check if input is a number and non-negative
-      if (isNaN(amount) || amount < 0) {
-        return false;
-      }
-  
-      // Clamp amount to fit within integer bounds (considering potential overflow)
-      const clampedAmount = Math.min(amount, Number.MAX_SAFE_INTEGER);
-      if (clampedAmount < amount) {
-        // Informative error: Amount exceeds maximum safe integer
-        return false;
-      }
-  
-      // Check for overflow after considering player's current balance
-      const potentialBalance = player.balance + clampedAmount;
-      if (potentialBalance > Number.MAX_SAFE_INTEGER) {
-        // Informative error: Overflow during addition
-        return false;
-      }
-  
-      player.balance += clampedAmount;
-      await Player.update({ balance: player.balance }, { where: { id: id } });
-      return player.balance;
-    } else {
+    if (!player) {
       this.logger.info('Player not found');
       return false;
     }
+  
+    // Check if input is a number and non-negative
+    if (isNaN(amount) || amount < 0) {
+      return false;
+    }
+  
+    // Clamp amount to fit within integer bounds (considering potential overflow)
+    const clampedAmount = Math.min(amount, MAX_INT);
+  
+    const maxBalance = MAX_INT - player.balance;
+  
+    // Limit amount to prevent overflow considering current balance
+    const safeAmount = Math.min(clampedAmount, maxBalance);
+  
+    if (safeAmount < clampedAmount) {
+      // Informative error: Amount would cause overflow
+      return false;
+    }
+  
+    player.balance += safeAmount;
+    await Player.update({ balance: player.balance }, { where: { id: id } });
+    return player.balance;
   }
   async removeBalance(id, amount) {
     const player = this.casinoUsers.get(id);

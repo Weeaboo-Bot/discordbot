@@ -79,11 +79,11 @@ module.exports = class RouletteCommand extends Command {
         }, 'roulette');
         newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, true, betAmount, winnings)
         resultMessage = `Congratulations! You won ${winnings} on your ${bet} bet.`;
-        resultMessage += ` Your new token balance is ${newBal}.`;
+        newBal ? resultMessage += ` Your new token balance is ${newBal}.` : resultMessage = 'Error updating balance';
       } else {
         newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, false, betAmount, winnings);
         resultMessage = `Sorry, you didn't win this round.`;
-        resultMessage += ` Your new token balance is ${newBal}.`;
+        newBal ? resultMessage += ` Your new token balance is ${newBal}.` : resultMessage = 'Error updating balance'
       }
 
       await msg.client.dbHelper.createGameLog({
