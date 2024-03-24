@@ -41,7 +41,7 @@ module.exports = class CreatePlayer extends Command {
         } catch (error) {
             msg.client.botLogger({
                 embed: msg.client.errorMessage(
-                    message.client.logger,
+                    msg.client.logger,
                     error,
                     msg.client.errorTypes.DATABASE,
                     msg.command.name

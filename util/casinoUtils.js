@@ -11,7 +11,7 @@ module.exports = class CasinoUtils {
     }
     async checkForPlayer(msg) {
         const isPlayer = await msg.client.dbHelper.isPlayer(msg.author.id);
-        if (isPlayer) {
+        if (!isPlayer) {
             return await msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
         }
     }
