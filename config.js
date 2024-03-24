@@ -30,6 +30,7 @@ exports.api = {
     SUCCESS_EMOJI_ID: process.env.SUCCESS_EMOJI_ID,
     FAILURE_EMOJI_ID: process.env.FAILURE_EMOJI_ID,
     AIRNOW_API: process.env.AIRNOW_API,
+    DAILY_TOKEN_AMOUNT: process.env.DAILY_TOKEN_AMOUNT,
 };
 
 exports.database = {

@@ -53,19 +53,20 @@ function init() {
 
 init();
 
-const task = cron.schedule('0 0 * * *', () => {
+const task = cron.schedule('0 0 * * *', async () => {
+  client.logger.info('[CASINO] Daily token refresh job started');
   client.botLogger({
-    embed: message.client.statusMessage(
+    embed: client.statusMessage(
         client.logger,
         'Daily Token Refresh',
         client.statusTypes.DAILY_TOKEN,
-        'Adding daily free 150 tokens to all players'
+        `Adding daily free tokens to all players with less than 1000 tokens`
     ),
 });
-  client.dbHelper.getAllPlayers().then((players) => {
+  await client.dbHelper.getAllPlayers().then((players) => {
     players.forEach((player) => {
-      if (player.balance < 1000) {
-        client.dbHelper.addBalance(player.id, (player.balance - client.DAILY_TOKEN_AMOUNT)); 
+      if (player.balance < 1000 && (player.id != '1' || '2')) {
+        client.dbHelper.addBalance(player.id, (client.DAILY_TOKEN_AMOUNT - player.balance)); 
       }
     });
   });
@@ -107,7 +108,7 @@ app.listen(port, () => {
 });
 
 task.start();
-client.logger.info('[CASINO] Daily token refresh job started');
+client.logger.info('[CASINO] Daily token refresh job registered!');
 
 
 process.on('unhandledRejection', (err) => client.logger.error(err));
