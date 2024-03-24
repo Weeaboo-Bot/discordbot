@@ -31,8 +31,12 @@ module.exports = class AddBalanceCommand extends Command {
             return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
         }
         const balance = await this.client.dbHelper.addBalance(user.id, amount);
-        return msg.say(
-            `Added ${balance} tokens to ${user.tag}! Their new balance is ${balance}`
-        );
+        if (balance) {
+            return msg.say(
+                `Added ${amount} tokens to ${user.tag}! Their new balance is ${balance}`
+            );
+        } else {
+            return msg.say(`Something went wrong`);
+        }
     }
 };

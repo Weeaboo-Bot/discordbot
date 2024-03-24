@@ -101,11 +101,11 @@ app.get('/health', (req, res) => {
 });
 
 app.listen(port, () => {
-  client.logger.info(`Health check server listening on port ${port}`);
+  client.logger.info(`[HEALTH CHECK] Health check server listening on port ${port}`);
 });
 
 task.start();
-client.logger.info('Cron job started');
+client.logger.info('[CASINO] Daily token refresh job started');
 
 
 process.on('unhandledRejection', (err) => client.logger.error(err));

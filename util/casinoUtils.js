@@ -1,14 +1,14 @@
 
 module.exports = class CasinoUtils {
     constructor() {
-        this.validRouletteBets = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', ];
+        this.validRouletteBets = ['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red',];
     }
 
     checkChannel(channelId, casinoId) {
         if (channelId != casinoId) {
             return true;
-          }
-          return false;
+        }
+        return false;
     }
     async playerNeedsRegister(msg, id) {
         const isPlayer = await msg.client.dbHelper.isPlayer(id);
@@ -57,6 +57,7 @@ module.exports = class CasinoUtils {
     }
 
     async waitForBet(msg, timeout = 30000) {
+        const currBal = await msg.client.dbHelper.getBalance(msg.author.id);
         await msg.say(`You have ${await msg.client.dbHelper.getBalance(msg.author.id)} tokens. Place your bet (integers only)!`);
 
         const filter = (m) => m.author.id === msg.author.id && Number.isInteger(parseInt(m.content));
@@ -82,9 +83,12 @@ module.exports = class CasinoUtils {
                 }
             }
         }
-
-        const currBal = await msg.client.dbHelper.getBalance(msg.author.id);
-        if (betAmount > currBal) {
+        // Check if input is an integer
+        if (!Number.isInteger(Number(input)) || (isNaN(input))) {
+            msg.say('Invalid input. Please enter an integer 0 or greater');
+            return await this.waitForBet(msg); // Recursive call with return value
+        }
+        if (numberInput <= currBal) {
             msg.say('You do not have enough tokens to place this bet.');
             return await this.waitForBet(msg); // Recursive call with return value
         }

@@ -46,9 +46,9 @@ module.exports = class WeabooClient extends CommandoClient {
          * Create logger
          */
         this.logger = require('../util/logger');
-        this.logger.info('Initializing...');
+        this.logger.info(`[STARTING DISCORD BOT] Initializing...`);
         this.prefix = config.discord.DISCORD_PREFIX;
-        this.logger.info(`BOT PREFIX: ${config.discord.DISCORD_PREFIX}`);
+        this.logger.info(`[PREFIX] ${config.discord.DISCORD_PREFIX}`);
         this.BOT_LOG = config.logs.BOT_LOG;
         this.guildId = config.discord.GUILD_ID;
         this.apiKeys = config.api;
@@ -105,11 +105,12 @@ module.exports = class WeabooClient extends CommandoClient {
      * @param {string} path
      */
     loadEvents(path) {
+        this.logger.info('[EVENTS] Loading events...');
         readdir(path, (err, files) => {
             if (err) this.logger.error(err);
             files = files.filter((f) => f.split('.').pop() === 'js');
             if (files.length === 0) return this.logger.warn('No events found');
-            this.logger.info(`${files.length} event(s) found...`);
+            this.logger.info(`[EVENTS] ${files.length} event(s) found...`);
             files.forEach((f) => {
                 const eventName = f.substring(0, f.indexOf('.'));
                 const event = require(resolve(__basedir, join(path, f)));
@@ -126,8 +127,8 @@ module.exports = class WeabooClient extends CommandoClient {
      * Loads all available commands
      */
     loadGroups() {
-        this.logger.info('Loading groups...');
-        this.logger.info(`${this.registry.groups.size} groups(s) found...`);
+        this.logger.info('[GROUPS] Loading groups...');
+        this.logger.info(`[GROUPS] ${this.registry.groups.size} groups(s) found...`);
         return this;
     }
 
@@ -135,8 +136,8 @@ module.exports = class WeabooClient extends CommandoClient {
      * Loads all available commands
      */
     loadCommands() {
-        this.logger.info('Loading commands...');
-        this.logger.info(`${this.registry.commands.size} commands(s) found...`);
+        this.logger.info('[COMMANDS] Loading commands...');
+        this.logger.info(`[COMMANDS] ${this.registry.commands.size} commands(s) found...`);
         return this;
     }
 

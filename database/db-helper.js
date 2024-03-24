@@ -1,16 +1,16 @@
-const { Player, 
-  PlayerLoss, 
-  PlayerWin, 
-  BJGame, 
-  BJGameLog, 
-  BJHand, 
-  PokerGame, 
-  PokerGameLog, 
-  PokerGamePlayers, 
-  PokerHand, 
-  RouletteGame, 
-  RouletteGameLog, 
-  BJBet, 
+const { Player,
+  PlayerLoss,
+  PlayerWin,
+  BJGame,
+  BJGameLog,
+  BJHand,
+  PokerGame,
+  PokerGameLog,
+  PokerGamePlayers,
+  PokerHand,
+  RouletteGame,
+  RouletteGameLog,
+  BJBet,
   PokerBet, CasinoGame } = require('../database/models/index');
 const { v4: uuidv4 } = require('uuid');
 
@@ -31,6 +31,10 @@ module.exports = class DBHelper {
     const player = this.casinoUsers.get(id);
 
     if (player) {
+      // Check if input is a number and non-negative
+      if (isNaN(amount) || amount < 0) {
+        return false;
+      }
       player.balance += Number(amount);
       await Player.update({ balance: player.balance }, {
         where: { id: id },
