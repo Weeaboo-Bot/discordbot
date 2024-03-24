@@ -29,31 +29,53 @@ module.exports = class DBHelper {
   }
   async addBalance(id, amount) {
     const player = this.casinoUsers.get(id);
-
+  
     if (player) {
       // Check if input is a number and non-negative
       if (isNaN(amount) || amount < 0) {
         return false;
       }
-      player.balance += Number(amount);
-      await Player.update({ balance: player.balance }, {
-        where: { id: id },
-      });
-      return player ? player.balance : 0;
-    } 
-    this.logger.info('Player not found');
+  
+      // Clamp amount to fit within integer bounds (considering potential overflow)
+      const clampedAmount = Math.min(amount, Number.MAX_SAFE_INTEGER);
+      if (clampedAmount < amount) {
+        // Informative error: Amount exceeds maximum safe integer
+        return false;
+      }
+  
+      // Check for overflow after considering player's current balance
+      const potentialBalance = player.balance + clampedAmount;
+      if (potentialBalance > Number.MAX_SAFE_INTEGER) {
+        // Informative error: Overflow during addition
+        return false;
+      }
+  
+      player.balance += clampedAmount;
+      await Player.update({ balance: player.balance }, { where: { id: id } });
+      return true;
+    } else {
+      this.logger.info('Player not found');
+      return false;
+    }
   }
   async removeBalance(id, amount) {
     const player = this.casinoUsers.get(id);
-
+  
     if (player) {
-      player.balance -= Number(amount);
-      await Player.update({ balance: player.balance }, {
-        where: { id: id },
-      });
-      return player ? player.balance : 0;
+      // Check if input is a number and non-negative
+      if (isNaN(amount) || amount < 0) {
+        return false;
+      }
+  
+      // Reduce balance but clamp to minimum of 0
+      player.balance = Math.max(player.balance - Number(amount), 0);
+  
+      await Player.update({ balance: player.balance }, { where: { id: id } });
+      return player.balance;
+    } else {
+      this.logger.info('Player not found');
+      return false;
     }
-    this.logger.info('Player not found');
   }
   async getBalance(id) {
     const player = this.casinoUsers.get(id);
@@ -69,20 +91,24 @@ module.exports = class DBHelper {
   }
   async setBalance(id, amount) {
     const player = this.casinoUsers.get(id);
-
+  
     if (player) {
-      // Check if input is a number and non-negative
-      if (isNaN(amount) || amount < 0) {
+      // Check if input is a valid number and within allowed bounds
+      if (isNaN(amount) || amount < 0 || amount > Number.MAX_SAFE_INTEGER) {
         return false;
       }
-      player.balance = Number(amount);
-      await Player.update({ balance: player.balance }, {
-        where: { id: id },
-      });
-      return player ? player.balance : 0;
+  
+      // Clamp amount to Integer.MAX_SAFE_INTEGER to ensure it fits within integer bounds
+      amount = Math.min(amount, Number.MAX_SAFE_INTEGER);
+  
+      player.balance = amount; // No need to use Number() as it's already a number
+      await Player.update({ balance: player.balance }, { where: { id: id } });
+      return player.balance;
+    } else {
+      this.logger.info('Player not found');
+      return 0;
     }
-    this.logger.info('Player not found');
-  }
+  }  
   async isPlayer(id) {
     const player = this.casinoUsers.get(id);
     if (!player) {
