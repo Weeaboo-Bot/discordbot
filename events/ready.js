@@ -4,7 +4,7 @@ const { readyMessage } = require('../util/logHandler');
 const { Player, BJGame, PokerGame, RouletteGame, BJGameLog, RouletteGameLog, PokerGameLog, CasinoGame } = require('../database/models/index');
 // Export ready events
 module.exports = async (client) => {
-    client.database.sync({ logging: client.logger.info() });
+    client.database.sync();
     async function fetchAndCacheData() {
         try {
             const [casinoUsers, casinoGames, casinoGameLogs, casinoGameMapping] = await Promise.all([
@@ -20,7 +20,7 @@ module.exports = async (client) => {
             cacheData(flattenedCasinoGames, client.casinoGames, 'id');
             cacheData(flattenedCasinoGameLogs, client.casinoGameLog, 'id');
             cacheData(casinoGameMapping, client.casinoMapping, 'id');
-            client.logger.info('Reloaded DB and Cache');
+            client.logger.info('[DATABASE CACHE] Reloaded DB and Cache');
         } catch (error) {
             client.logger.error('Error fetching and caching data:', error);
         }
