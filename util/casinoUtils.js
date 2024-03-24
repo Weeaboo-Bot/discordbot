@@ -84,11 +84,11 @@ module.exports = class CasinoUtils {
             }
         }
         // Check if input is an integer
-        if (!Number.isInteger(Number(input)) || (isNaN(input))) {
+        if (!(Number.isInteger(Number(betAmount))) || (isNaN(betAmount)) || (betAmount < 0)) {
             msg.say('Invalid input. Please enter an integer 0 or greater');
             return await this.waitForBet(msg); // Recursive call with return value
         }
-        if (numberInput <= currBal) {
+        if (betAmount <= currBal) {
             msg.say('You do not have enough tokens to place this bet.');
             return await this.waitForBet(msg); // Recursive call with return value
         }
