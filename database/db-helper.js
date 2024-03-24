@@ -52,7 +52,7 @@ module.exports = class DBHelper {
   
       player.balance += clampedAmount;
       await Player.update({ balance: player.balance }, { where: { id: id } });
-      return true;
+      return player.balance;
     } else {
       this.logger.info('Player not found');
       return false;
