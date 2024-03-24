@@ -8,7 +8,7 @@ const logFormat = format.printf((info) => {
     let log;
     const { timestamp, level, label, message, ...rest } = info;
     if (level == 'error') {
-        log = `ERROR - ${timestamp} - ${level} [${label}]: ${message}`;
+        log = `${id} ERROR - ${timestamp} - ${level} [${label}]: ${message}`;
     }
     log = `${timestamp} - ${level} [${label}]: ${message}`;
 
