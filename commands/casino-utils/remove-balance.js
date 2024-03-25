@@ -7,6 +7,7 @@ module.exports = class RemoveBalance extends Command {
             name: 'remove-balance',
             aliases: ['remove-tokens', 'delbalanace'],
             group: 'casino-utils',
+            ownerOnly: true,
             memberName: 'remove-balance',
             description: 'Remove token balance from a user',
             args: [
