@@ -12,10 +12,10 @@ module.exports = class RouletteCommand extends Command {
           key: 'betType',
           prompt: `What betType would you like to place? i.e. ${['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', 'black']}`,
           type: 'string',
-          validate: (bet) => {
-            const betType = bet.split(' ')[0]; // Extract first word (bet type)
+          validate: (betType) => {
+            const validatedBetType = betType.split(' ')[0]; // Extract first word (bet type)
 
-            if (this.client.casinoUtils.validateRouletteBet(betType)) {
+            if (this.client.casinoUtils.validateRouletteBet(validatedBetType)) {
               return true;
               // Proceed with processing the bet (considering other validations like bet amount)
             } else {
@@ -89,7 +89,7 @@ module.exports = class RouletteCommand extends Command {
           playerId: msg.author.id,
         }, 'roulette');
         newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, true, finalBet, winnings)
-        resultMessage = `Congratulations! You won ${winnings} on your ${bet} bet.`;
+        resultMessage = `Congratulations! You won ${winnings} on your ${betType} bet.`;
         newBal ? resultMessage += ` Your new token balance is ${newBal}.` : resultMessage = 'Error updating balance';
       } else {
         newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, false, finalBet, winnings);

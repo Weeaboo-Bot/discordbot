@@ -12,7 +12,7 @@ module.exports = class BlackjackCommand extends Command {
             description: 'Play a game of blackjack.',
             args: [
                 {
-                    key: 'bet',
+                    key: 'betAmount',
                     prompt: 'How much would you like to bet?',
                     type: 'integer',
                     default: 0,
@@ -43,7 +43,7 @@ module.exports = class BlackjackCommand extends Command {
             if (betAmount <= 0) {
                 finalBet = await msg.client.casinoUtils.waitForBet(msg);
             }
-            finalBet = bet;
+            finalBet = betAmount;
             await msg.client.casinoUtils.placeBet(msg, finalBet, id, 'blackjack');
             const deck = msg.client.casinoGames.get(id).data;
 
