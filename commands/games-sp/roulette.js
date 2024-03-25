@@ -9,7 +9,7 @@ module.exports = class RouletteCommand extends Command {
       description: 'Play a game of roulette.',
       args: [
         {
-          key: 'bet',
+          key: 'betType',
           prompt: `What betType would you like to place? i.e. ${['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', 'black']}`,
           type: 'string',
           validate: (bet) => {
@@ -24,11 +24,19 @@ module.exports = class RouletteCommand extends Command {
             }
           },
         },
+        {
+          key: 'betAmount',
+          prompt: 'How much would you like to bet?',
+          type: 'integer',
+          default: 0,
+          max: (msg) => msg.client.casinoUtils.getBalance(msg.author.id),
+        },
       ],
     });
   }
 
-  async run(msg, { bet }) {
+  async run(msg, { betType, betAmount }) {
+    let finalBet;
     if (await this.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel)) {
       return msg.reply('Please use this command in a casino channel.');
     }
@@ -46,8 +54,11 @@ module.exports = class RouletteCommand extends Command {
         event: 'PLAYER_JOINED',
         playerId: msg.author.id,
       }, 'roulette');
-      const betAmount = await msg.client.casinoUtils.waitForBet(msg);
-      await msg.client.casinoUtils.placeBet(msg, betAmount, id, 'roulette');
+      if (betAmount <= 0) {
+        finalBet = await msg.client.casinoUtils.waitForBet(msg);
+      }
+      finalBet = betAmount;
+      await msg.client.casinoUtils.placeBet(msg, finalBet, id, 'roulette');
       await msg.client.dbHelper.createGameLog({
         gameId: id,
         event: 'PLACED_BETS_CLOSED',
@@ -56,7 +67,7 @@ module.exports = class RouletteCommand extends Command {
       msg.say('Bets placed. Game starting...');
 
       // get winnings
-      const winnings = this.calculateRouletteWinnings(msg, bet, betAmount, 'european');
+      const winnings = this.calculateRouletteWinnings(msg, betType, finalBet, 'european');
       await msg.client.dbHelper.createGameLog({
         gameId: id,
         event: 'WHEEL_SPUN',
@@ -77,11 +88,11 @@ module.exports = class RouletteCommand extends Command {
           event: 'WINNINGS_DISTRIBUTED',
           playerId: msg.author.id,
         }, 'roulette');
-        newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, true, betAmount, winnings)
+        newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, true, finalBet, winnings)
         resultMessage = `Congratulations! You won ${winnings} on your ${bet} bet.`;
         newBal ? resultMessage += ` Your new token balance is ${newBal}.` : resultMessage = 'Error updating balance';
       } else {
-        newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, false, betAmount, winnings);
+        newBal = await msg.client.casinoUtils.calcWinUpdateBal(msg, false, finalBet, winnings);
         resultMessage = `Sorry, you didn't win this round.`;
         newBal ? resultMessage += ` Your new token balance is ${newBal}.` : resultMessage = 'Error updating balance'
       }
@@ -107,7 +118,7 @@ module.exports = class RouletteCommand extends Command {
     }
   }
 
-  calculateRouletteWinnings(msg, betType, betAmount, rouletteVariant) {
+  calculateRouletteWinnings(msg, betType, finalBet, rouletteVariant) {
     const payouts = this.getPayouts(rouletteVariant); // Function to retrieve payouts based on variant
 
     // Check if the bet type exists
@@ -121,68 +132,68 @@ module.exports = class RouletteCommand extends Command {
     let winnings = 0;
     switch (betType) {
       case 'straightUp':
-        winnings = betAmount * payouts[betType] ** (winningNumber === betAmount); // Direct number match using exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** (winningNumber === finalBet); // Direct number match using exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'split':
-        winnings = betAmount * payouts[betType] ** ([betAmount - 1, betAmount + 1].includes(winningNumber)); // Adjacent numbers, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** ([finalBet - 1, finalBet + 1].includes(winningNumber)); // Adjacent numbers, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'street':
-        const streetStart = Math.floor((betAmount - 1) / 3) * 3 + 1; // Calculate street starting number
-        winnings = betAmount * payouts[betType] ** ([streetStart, streetStart + 1, streetStart + 2].includes(winningNumber)); // Numbers in the street, exponentiation for boolean conversion
+        const streetStart = Math.floor((finalBet - 1) / 3) * 3 + 1; // Calculate street starting number
+        winnings = finalBet * payouts[betType] ** ([streetStart, streetStart + 1, streetStart + 2].includes(winningNumber)); // Numbers in the street, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'corner':
-        const cornerRow = Math.floor((betAmount - 1) / 4); // Calculate corner row
-        const cornerCol = (betAmount - 1) % 4; // Calculate corner column
+        const cornerRow = Math.floor((finalBet - 1) / 4); // Calculate corner row
+        const cornerCol = (finalBet - 1) % 4; // Calculate corner column
         const cornerNumbers = [
           cornerRow * 4 + cornerCol + 1,
           cornerRow * 4 + cornerCol + 2,
           (cornerRow + 1) * 4 + cornerCol + 1,
           (cornerRow + 1) * 4 + cornerCol + 2,
         ];
-        winnings = betAmount * payouts[betType] ** (cornerNumbers.includes(winningNumber)); // Numbers in the corner, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** (cornerNumbers.includes(winningNumber)); // Numbers in the corner, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'fiveNumberBet': // American Roulette only
         if (rouletteVariant !== 'american') {
           throw new Error('Five Number Bet is only available in American Roulette');
         }
-        winnings = betAmount * payouts[betType] * ([0, 0o0, 1, 2, 3].includes(winningNumber));
+        winnings = finalBet * payouts[betType] * ([0, 0o0, 1, 2, 3].includes(winningNumber));
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'redBlack':
         const winningColor = winningNumber === 0 ? 'green' : (winningNumber % 2 === 0 ? 'black' : 'red');
-        winnings = betAmount * payouts[betType] ** (winningColor === betAmount); // Color match, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** (winningColor === finalBet); // Color match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber} ${winningColor}`);
         break;
       case 'black':
-        winnings = betAmount * payouts[betType] ** (winningNumber === 0); // Zero match, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** (winningNumber === 0); // Zero match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'red':
-        winnings = betAmount * payouts[betType] ** (winningNumber !== 0 && winningNumber % 2 !== 0); // Red match, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** (winningNumber !== 0 && winningNumber % 2 !== 0); // Red match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'evenOdd':
-        winnings = betAmount * payouts[betType] ** ((winningNumber % 2 === 0 && betAmount === 'even') || (winningNumber % 2 !== 0 && betAmount === 'odd')); // Even/odd match, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** ((winningNumber % 2 === 0 && finalBet === 'even') || (winningNumber % 2 !== 0 && finalBet === 'odd')); // Even/odd match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'highLow':
         const highLowBoundary = 18;
-        winnings = betAmount * payouts[betType] ** ((winningNumber >= highLowBoundary && betAmount === 'high') || (winningNumber < highLowBoundary && betAmount === 'low')); // High/low match, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** ((winningNumber >= highLowBoundary && finalBet === 'high') || (winningNumber < highLowBoundary && finalBet === 'low')); // High/low match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'dozens':
         const dozen = Math.ceil(winningNumber / 12);
-        winnings = betAmount * payouts[betType] ** (dozen === betAmount); // Dozen match, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** (dozen === finalBet); // Dozen match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'columns':
         const column = Math.ceil(betAmount / 3);
         const columnNumbers = [column, column + 3, column + 6];
-        winnings = betAmount * payouts[betType] ** (columnNumbers.includes(winningNumber)); // Column match, exponentiation for boolean conversion
+        winnings = finalBet * payouts[betType] ** (columnNumbers.includes(winningNumber)); // Column match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       default:

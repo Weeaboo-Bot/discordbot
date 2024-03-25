@@ -10,10 +10,20 @@ module.exports = class BlackjackCommand extends Command {
             group: 'games-sp',
             memberName: 'blackjack',
             description: 'Play a game of blackjack.',
+            args: [
+                {
+                    key: 'bet',
+                    prompt: 'How much would you like to bet?',
+                    type: 'integer',
+                    default: 0,
+                    max: (msg) => msg.client.casinoUtils.getBalance(msg.author.id),
+                }
+            ]
         });
     }
 
-    async run(msg) {
+    async run(msg, { betAmount }) {
+        let finalBet;
         if (await this.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel)) {
             return msg.reply('Please use this command in a casino channel.');
           }
@@ -30,8 +40,11 @@ module.exports = class BlackjackCommand extends Command {
                 event: 'PLAYER_JOINED',
                 playerId: msg.author.id,
             }, 'blackjack');
-            const betAmount = await msg.client.casinoUtils.waitForBet(msg);
-            await msg.client.casinoUtils.placeBet(msg, betAmount, id, 'blackjack');
+            if (betAmount <= 0) {
+                finalBet = await msg.client.casinoUtils.waitForBet(msg);
+            }
+            finalBet = bet;
+            await msg.client.casinoUtils.placeBet(msg, finalBet, id, 'blackjack');
             const deck = msg.client.casinoGames.get(id).data;
 
             const dealerHand = [];
@@ -44,7 +57,7 @@ module.exports = class BlackjackCommand extends Command {
                 return msg.say(`Your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
             }
 
-            await this.playPlayerTurn(msg, deck, playerHand, dealerHand, id, betAmount);
+            await this.playPlayerTurn(msg, deck, playerHand, dealerHand, id, finalBet);
         } catch (error) {
             msg.client.botLogger({
                 embed: msg.client.errorMessage(
@@ -58,7 +71,7 @@ module.exports = class BlackjackCommand extends Command {
             return msg.say('An error occurred during the game. Please try again later.');
         }
     }
-    async handleInitialRound(msg, dealerTotal, playerTotal, id, playerId, betAmount) {
+    async handleInitialRound(msg, dealerTotal, playerTotal, id, playerId, finalBet) {
         if (dealerTotal === 21 && playerTotal === 21) { // PUSH
             await msg.client.dbHelper.createGameLog({
                 gameId: id,
@@ -77,7 +90,7 @@ module.exports = class BlackjackCommand extends Command {
                 event: 'DEALER_WIN',
                 playerId: '1'
             }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, 0, betAmount, false);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, 0, finalBet, false);
             return 'Ouch, the dealer hit blackjack right away! Try again!';
         } else if (playerTotal === 21) { // Player BJ
             await msg.client.dbHelper.createGameLog({
@@ -90,12 +103,12 @@ module.exports = class BlackjackCommand extends Command {
                 event: 'PLAYER_WIN',
                 playerId: playerId,
             }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount * 2, betAmount, true);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, finalBet * 2, finalBet, true);
             return 'Wow, you hit blackjack right away! Lucky you!';
         }
         return null;
     }
-    async playPlayerTurn(msg, deck, playerHand, dealerHand, gameId, betAmount) {
+    async playPlayerTurn(msg, deck, playerHand, dealerHand, gameId, finalBet) {
         let isPlaying = true;
         let canSplit = this.checkSplitPossibility(playerHand);
 
@@ -172,19 +185,19 @@ module.exports = class BlackjackCommand extends Command {
         if (winner === 'Dealer Wins!') {
             // Log dealer win event after confirming outcome
             await msg.client.dbHelper.createGameLog({ gameId, event: 'DEALER_WIN', playerId: msg.author.id }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, false, betAmount, betAmount);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, false, finalBet, finalBet);
             return msg.reply(`You lost!, your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
         } else if (winner === 'You Win!') {
             let winAmount;
             // Calculate win amount based on bet and blackjack payout (optional)
             if (this.calculate(playerHand) === 21 && playerHand.length === 2) { // Check for Blackjack
-                winAmount = betAmount * 2.5; // Hypothetical 3:2 payout for Blackjack
+                winAmount = finalBet * 2.5; // Hypothetical 3:2 payout for Blackjack
             } else {
-                winAmount = betAmount; // Hypothetical 1:1 payout for regular win
+                winAmount = finalBet; // Hypothetical 1:1 payout for regular win
             }
             // You can optionally add logic here to log a player win event
             await msg.client.dbHelper.createGameLog({ gameId, event: 'PLAYER_WIN', playerId: msg.author.id }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, true, betAmount, winAmount);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, true, finalBet, winAmount);
             return msg.reply(`You won!, your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
         } else if (winner === 'Push!') {
             // You can optionally add logic here to log a push event
