@@ -1,3 +1,5 @@
+const Jimp = require('jimp');
+const fs = require('fs/promises');
 
 module.exports = class CasinoUtils {
     constructor() {
@@ -105,5 +107,74 @@ module.exports = class CasinoUtils {
 
     validateRouletteBet(betInput) {
         return this.validRouletteBets.includes(betInput);
+    }
+
+    getImagePath(value) {
+        return `./assets/images/deck/${value}.png`;
+    }
+
+    async combineImagesToFile(imagePaths, outputWidth = 200, outputHeight = 200) {
+        if (!imagePaths || imagePaths.length === 0) {
+            throw new Error('No image paths provided');
+        }
+
+        try {
+            // Read all images using Promise.all for efficiency
+            const images = await Promise.all(imagePaths.map(async (imagePath) => {
+                try {
+                    return await Jimp.read(imagePath);
+                } catch (error) {
+                    console.error(`Error reading image: ${imagePath}`, error);
+                    // Optionally handle individual image reading errors (e.g., return null)
+                    return null;
+                }
+            }));
+
+            // Filter out any images that failed to read (if applicable)
+            const validImages = images.filter(image => image !== null);
+            if (validImages.length === 0) {
+                // Handle the case where no images were successfully read
+                console.error('No valid images found.');
+                return null;
+            }
+
+            // Calculate total width based on desired output width per image
+            const totalWidth = validImages.length * outputWidth;
+
+            // Get maximum image height based on valid images and aspect ratio preservation
+            const maxHeight = Math.max(...validImages.map(image => {
+                const aspectRatio = image.bitmap.width / image.bitmap.height;
+                return outputHeight * aspectRatio;
+            }));
+
+            // Create a new Jimp image with desired format (e.g., PNG)
+            const combinedImage = new Jimp(totalWidth, maxHeight, (mime) => mime.png());
+
+            let currentX = 0;
+            for (const image of validImages) {
+                // Resize image to fit output dimensions while maintaining aspect ratio
+                const aspectRatio = image.bitmap.width / image.bitmap.height;
+                const resizeWidth = Math.min(outputWidth, image.bitmap.width);
+                const resizeHeight = Math.min(outputHeight, aspectRatio * outputWidth);
+                await image.resize(resizeWidth, resizeHeight);
+
+                // Composite image onto combinedImage
+                await combinedImage.composite(image, currentX, 0);
+
+                // Update currentX for next image placement
+                currentX += outputWidth;
+            }
+
+            // Generate a unique filename for the combined image
+            const filename = `combined.png`;
+
+            // Write the combined image to a temporary file
+            await combinedImage.writeAsync(filename);
+
+            return filename; // Return the filename of the combined image
+        } catch (error) {
+            console.error('Error combining images:', error);
+            return null;
+        }
     }
 }
