@@ -6,6 +6,7 @@ module.exports = class AddBalanceCommand extends Command {
             name: 'add-balance',
             aliases: ['add-tokens', 'addbal'],
             group: 'casino-utils',
+            ownerOnly: true,
             memberName: 'add-balance',
             description: 'Add token balance to a user, use like (amount)(user)',
             args: [
