@@ -13,9 +13,8 @@ module.exports = class RouletteCommand extends Command {
           prompt: `What betType would you like to place? i.e. ${['straightUp', 'split', 'street', 'corner', 'fiveNumberBet', 'redBlack', 'evenOdd', 'highLow', 'dozens', 'columns', 'red', 'black']}`,
           type: 'string',
           validate: (betType) => {
-            const validatedBetType = betType.split(' ')[0]; // Extract first word (bet type)
 
-            if (this.client.casinoUtils.validateRouletteBet(validatedBetType)) {
+            if (this.client.casinoUtils.validateRouletteBet(betType)) {
               return true;
               // Proceed with processing the bet (considering other validations like bet amount)
             } else {
