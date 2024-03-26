@@ -24,9 +24,9 @@ module.exports = class BlackjackCommand extends Command {
 
     async run(msg, { betAmount }) {
         let finalBet;
-        if (await this.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel)) {
-            return msg.reply('Please use this command in a casino channel.');
-          }
+        // if (await this.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel)) {
+        //     return msg.reply('Please use this command in a casino channel.');
+        //   }
           if (await this.client.casinoUtils.playerNeedsRegister(msg, msg.author.id)) {
             return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
           }
@@ -178,7 +178,7 @@ module.exports = class BlackjackCommand extends Command {
         }
         embed.fields[0].value = `${playerHand.map(card => card.textDisplay).join(',')} (${playerScore})`;
         embed.fields[1].value = `${dealerHand.map(card => card.textDisplay).join(',')} (${dealerScore})`;
-        const winner = (playerScore > 21) ? 'Dealer Wins!' : (dealerScore > 21) ? 'You Win!' : (dealerScore > playerScore) ? 'Dealer Wins!' : 'Push!';
+        const winner = (playerScore > 21) ? 'Dealer Wins!' : (dealerScore > 21) ? 'You Win!' : (Math.min(playerScore, 21) > dealerScore) ? 'You Win!' : 'Push!';
         embed.setTitle(winner);
         await sentMessage.edit(embed);
 
