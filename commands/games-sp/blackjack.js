@@ -71,7 +71,7 @@ module.exports = class BlackjackCommand extends Command {
             return msg.say('An error occurred during the game. Please try again later.');
         }
     }
-    async handleInitialRound(msg, dealerTotal, playerTotal, id, playerId, finalBet) {
+    async handleInitialRound(msg, dealerTotal, playerTotal, id, playerId, betAmount) {
         if (dealerTotal === 21 && playerTotal === 21) { // PUSH
             await msg.client.dbHelper.createGameLog({
                 gameId: id,
@@ -90,7 +90,7 @@ module.exports = class BlackjackCommand extends Command {
                 event: 'DEALER_WIN',
                 playerId: '1'
             }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, 0, finalBet, false);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, 0, betAmount, false);
             return 'Ouch, the dealer hit blackjack right away! Try again!';
         } else if (playerTotal === 21) { // Player BJ
             await msg.client.dbHelper.createGameLog({
@@ -103,12 +103,12 @@ module.exports = class BlackjackCommand extends Command {
                 event: 'PLAYER_WIN',
                 playerId: playerId,
             }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, finalBet * 2, finalBet, true);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount * 2, betAmount, true);
             return 'Wow, you hit blackjack right away! Lucky you!';
         }
         return null;
     }
-    async playPlayerTurn(msg, deck, playerHand, dealerHand, gameId, finalBet) {
+    async playPlayerTurn(msg, deck, playerHand, dealerHand, gameId, betAmount) {
         let isPlaying = true;
         let canSplit = this.checkSplitPossibility(playerHand);
 
@@ -185,19 +185,19 @@ module.exports = class BlackjackCommand extends Command {
         if (winner === 'Dealer Wins!') {
             // Log dealer win event after confirming outcome
             await msg.client.dbHelper.createGameLog({ gameId, event: 'DEALER_WIN', playerId: msg.author.id }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, false, finalBet, finalBet);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, false, betAmount, betAmount);
             return msg.reply(`You lost!, your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
         } else if (winner === 'You Win!') {
             let winAmount;
             // Calculate win amount based on bet and blackjack payout (optional)
             if (this.calculate(playerHand) === 21 && playerHand.length === 2) { // Check for Blackjack
-                winAmount = finalBet * 2.5; // Hypothetical 3:2 payout for Blackjack
+                winAmount = betAmount * 2.5; // Hypothetical 3:2 payout for Blackjack
             } else {
-                winAmount = finalBet; // Hypothetical 1:1 payout for regular win
+                winAmount = betAmount; // Hypothetical 1:1 payout for regular win
             }
             // You can optionally add logic here to log a player win event
             await msg.client.dbHelper.createGameLog({ gameId, event: 'PLAYER_WIN', playerId: msg.author.id }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, true, finalBet, winAmount);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, true, betAmount, winAmount);
             return msg.reply(`You won!, your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
         } else if (winner === 'Push!') {
             // You can optionally add logic here to log a push event
@@ -288,29 +288,5 @@ module.exports = class BlackjackCommand extends Command {
             playerStr += `${card.textDisplay}`
         });
         return playerStr;
-    }
-    convertToSuitAbbreviation(suit) {
-        const suitMap = {
-          "Hearts": "H",
-          "Diamonds": "D",
-          "Spades": "S",
-          "Clubs": "C"
-        };
-      
-        return suitMap[suit] || suit; // Return original value if not a known suit
-    }
-    convertValueToAbbreviation(card) {
-        const faceCardMap = {
-          "Jack": "J",
-          "Queen": "Q",
-          "King": "K"
-        };
-      
-        return faceCardMap[card] || card; // Return original value if not a face card
-    }
-    getCardImage(card) {
-        const suit = this.convertToSuitAbbreviation(card.suit);
-        const value = this.convertValueToAbbreviation(card.value);
-        return `../assets/images/deck/${suit}${value}.png`;
     }
 };

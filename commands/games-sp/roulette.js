@@ -117,7 +117,7 @@ module.exports = class RouletteCommand extends Command {
     }
   }
 
-  calculateRouletteWinnings(msg, betType, finalBet, rouletteVariant) {
+  calculateRouletteWinnings(msg, betType, betAmount, rouletteVariant) {
     const payouts = this.getPayouts(rouletteVariant); // Function to retrieve payouts based on variant
 
     // Check if the bet type exists
@@ -131,69 +131,69 @@ module.exports = class RouletteCommand extends Command {
     let winnings = 0;
     switch (betType) {
       case 'straightUp':
-        winnings = finalBet * payouts[betType] ** (winningNumber === finalBet); // Direct number match using exponentiation for boolean conversion
+        winnings = betAmount * payouts[betType] ** (winningNumber === betAmount); // Direct number match using exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'split':
-        winnings = finalBet * payouts[betType] ** ([finalBet - 1, finalBet + 1].includes(winningNumber)); // Adjacent numbers, exponentiation for boolean conversion
+        winnings = betAmount * payouts[betType] ** ([betAmount - 1, betAmount + 1].includes(winningNumber)); // Adjacent numbers, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'street':
-        const streetStart = Math.floor((finalBet - 1) / 3) * 3 + 1; // Calculate street starting number
-        winnings = finalBet * payouts[betType] ** ([streetStart, streetStart + 1, streetStart + 2].includes(winningNumber)); // Numbers in the street, exponentiation for boolean conversion
+        const streetStart = Math.floor((betAmount - 1) / 3) * 3 + 1; // Calculate street starting number
+        winnings = betAmount * payouts[betType] ** ([streetStart, streetStart + 1, streetStart + 2].includes(winningNumber)); // Numbers in the street, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'corner':
-        const cornerRow = Math.floor((finalBet - 1) / 4); // Calculate corner row
-        const cornerCol = (finalBet - 1) % 4; // Calculate corner column
+        const cornerRow = Math.floor((betAmount - 1) / 4); // Calculate corner row
+        const cornerCol = (betAmount - 1) % 4; // Calculate corner column
         const cornerNumbers = [
           cornerRow * 4 + cornerCol + 1,
           cornerRow * 4 + cornerCol + 2,
           (cornerRow + 1) * 4 + cornerCol + 1,
           (cornerRow + 1) * 4 + cornerCol + 2,
         ];
-        winnings = finalBet * payouts[betType] ** (cornerNumbers.includes(winningNumber)); // Numbers in the corner, exponentiation for boolean conversion
+        winnings = betAmount * payouts[betType] ** (cornerNumbers.includes(winningNumber)); // Numbers in the corner, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber}`);
         break;
       case 'fiveNumberBet': // American Roulette only
         if (rouletteVariant !== 'american') {
           throw new Error('Five Number Bet is only available in American Roulette');
         }
-        winnings = finalBet * payouts[betType] * ([0, 0o0, 1, 2, 3].includes(winningNumber));
-        msg.say(`The winning number is ${winningNumber}`);
+        winnings = betAmount * payouts[betType] * ([0, 0o0, 1, 2, 3].includes(winningNumber));
+        msg.say(`The winning number is ${winningNumber} fiveNumberBet`);
         break;
       case 'redBlack':
         const winningColor = winningNumber === 0 ? 'green' : (winningNumber % 2 === 0 ? 'black' : 'red');
-        winnings = finalBet * payouts[betType] ** (winningColor === finalBet); // Color match, exponentiation for boolean conversion
+        winnings = betAmount * payouts[betType] ** (winningColor === betAmount); // Color match, exponentiation for boolean conversion
         msg.say(`The winning number is ${winningNumber} ${winningColor}`);
         break;
       case 'black':
-        winnings = finalBet * payouts[betType] ** (winningNumber === 0); // Zero match, exponentiation for boolean conversion
-        msg.say(`The winning number is ${winningNumber}`);
+        winnings = betAmount * payouts[betType] ** (winningNumber === 0); // Zero match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber} black`);
         break;
       case 'red':
-        winnings = finalBet * payouts[betType] ** (winningNumber !== 0 && winningNumber % 2 !== 0); // Red match, exponentiation for boolean conversion
-        msg.say(`The winning number is ${winningNumber}`);
+        winnings = betAmount * payouts[betType] ** (winningNumber !== 0 && winningNumber % 2 !== 0); // Red match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber} red`);
         break;
       case 'evenOdd':
-        winnings = finalBet * payouts[betType] ** ((winningNumber % 2 === 0 && finalBet === 'even') || (winningNumber % 2 !== 0 && finalBet === 'odd')); // Even/odd match, exponentiation for boolean conversion
-        msg.say(`The winning number is ${winningNumber}`);
+        winnings = betAmount * payouts[betType] ** ((winningNumber % 2 === 0 && betAmount === 'even') || (winningNumber % 2 !== 0 && betAmount === 'odd')); // Even/odd match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber} evenOdd`);
         break;
       case 'highLow':
         const highLowBoundary = 18;
-        winnings = finalBet * payouts[betType] ** ((winningNumber >= highLowBoundary && finalBet === 'high') || (winningNumber < highLowBoundary && finalBet === 'low')); // High/low match, exponentiation for boolean conversion
-        msg.say(`The winning number is ${winningNumber}`);
+        winnings = betAmount * payouts[betType] ** ((winningNumber >= highLowBoundary && betAmount === 'high') || (winningNumber < highLowBoundary && betAmount === 'low')); // High/low match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber} highLow`);
         break;
       case 'dozens':
         const dozen = Math.ceil(winningNumber / 12);
-        winnings = finalBet * payouts[betType] ** (dozen === finalBet); // Dozen match, exponentiation for boolean conversion
-        msg.say(`The winning number is ${winningNumber}`);
+        winnings = betAmount * payouts[betType] ** (dozen === betAmount); // Dozen match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber} dozens`);
         break;
       case 'columns':
         const column = Math.ceil(betAmount / 3);
         const columnNumbers = [column, column + 3, column + 6];
-        winnings = finalBet * payouts[betType] ** (columnNumbers.includes(winningNumber)); // Column match, exponentiation for boolean conversion
-        msg.say(`The winning number is ${winningNumber}`);
+        winnings = betAmount * payouts[betType] ** (columnNumbers.includes(winningNumber)); // Column match, exponentiation for boolean conversion
+        msg.say(`The winning number is ${winningNumber} columns`);
         break;
       default:
         throw new Error(`Unhandled bet type: ${betType}`);
