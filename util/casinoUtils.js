@@ -98,7 +98,7 @@ module.exports = class CasinoUtils {
         return betAmount; // Return the valid integer bet amount
     }
 
-    async calcWinUpdateBal(msg, isWin, betAmount, winAmount) {
+    async calcWinUpdateBal(msg, betAmount, winAmount, isWin) {
         if (isWin) {
             return await msg.client.dbHelper.addBalance(msg.author.id, winAmount);
         }

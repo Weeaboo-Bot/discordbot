@@ -24,9 +24,9 @@ module.exports = class BlackjackCommand extends Command {
 
     async run(msg, { betAmount }) {
         let finalBet;
-        // if (await this.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel)) {
-        //     return msg.reply('Please use this command in a casino channel.');
-        //   }
+        if (await this.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel)) {
+            return msg.reply('Please use this command in a casino channel.');
+          }
           if (await this.client.casinoUtils.playerNeedsRegister(msg, msg.author.id)) {
             return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
           }
@@ -185,7 +185,7 @@ module.exports = class BlackjackCommand extends Command {
         if (winner === 'Dealer Wins!') {
             // Log dealer win event after confirming outcome
             await msg.client.dbHelper.createGameLog({ gameId, event: 'DEALER_WIN', playerId: msg.author.id }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, false, betAmount, betAmount);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount, betAmount, false);
             return msg.reply(`You lost!, your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
         } else if (winner === 'You Win!') {
             let winAmount;
@@ -197,7 +197,7 @@ module.exports = class BlackjackCommand extends Command {
             }
             // You can optionally add logic here to log a player win event
             await msg.client.dbHelper.createGameLog({ gameId, event: 'PLAYER_WIN', playerId: msg.author.id }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, true, betAmount, winAmount);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount, winAmount, true);
             return msg.reply(`You won!, your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
         } else if (winner === 'Push!') {
             // You can optionally add logic here to log a push event
