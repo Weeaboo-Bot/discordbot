@@ -17,9 +17,9 @@ module.exports = class BanCommand extends Command {
             },
             args: [
                 {
-                    key: 'memberId',
+                    key: 'member',
                     prompt: 'Please provide me a user to ban!',
-                    type: 'string',
+                    type: 'member',
                 },
                 {
                     key: 'reason',
@@ -36,8 +36,7 @@ module.exports = class BanCommand extends Command {
         });
     }
 
-    async run(message, { memberId, reason }) {
-        const member = await this.client.users.fetch(memberId);
+    async run(message, { meber, reason }) {
 
         if (member.id === this.client.user.id) {
             return message.channel.send("Please don't ban me...!");
