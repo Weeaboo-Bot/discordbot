@@ -36,7 +36,7 @@ module.exports = class BanCommand extends Command {
         });
     }
 
-    async run(message, { meber, reason }) {
+    async run(message, { member, reason }) {
 
         if (member.id === this.client.user.id) {
             return message.channel.send("Please don't ban me...!");
