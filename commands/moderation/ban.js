@@ -72,7 +72,7 @@ module.exports = class BanCommand extends Command {
         const canBan = !cannotBan(message, member, "Please don't ban me...!"); // Example reason for self-ban
         if (canBan) {
             await message.channel.send(
-                `Are you sure you want to ban **${member.tag}**? \`\`(y/n)\`\``
+                `Are you sure you want to ban **${member.user.tag}**? \`\`(y/n)\`\``
             );
             const msgs = await message.channel.awaitMessages(
                 (res) => res.author.id === message.author.id,
