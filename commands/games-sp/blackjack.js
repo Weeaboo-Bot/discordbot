@@ -178,7 +178,7 @@ module.exports = class BlackjackCommand extends Command {
         }
         embed.fields[0].value = `${playerHand.map(card => card.textDisplay).join(',')} (${playerScore})`;
         embed.fields[1].value = `${dealerHand.map(card => card.textDisplay).join(',')} (${dealerScore})`;
-        const winner = (playerScore > 21) ? 'Dealer Wins!' : (dealerScore > 21) ? 'You Win!' : (Math.min(playerScore, 21) > dealerScore) ? 'You Win!' : 'Push!';
+        const winner = this.determineWinner(playerScore, dealerScore);
         embed.setTitle(winner);
         await sentMessage.edit(embed);
 
@@ -207,6 +207,17 @@ module.exports = class BlackjackCommand extends Command {
 
         return winner; // Optionally return the winner result
     }
+    determineWinner(playerScore, dealerScore) {      
+        // Check for busted scores
+        if (playerScore > 21) {
+          return "Dealer Wins!";
+        } else if (dealerScore > 21) {
+          return "You Win!";
+        }
+      
+        // Compare non-busted scores to determine winner
+        return playerScore > dealerScore ? "You Win!" : "Push!";
+      }
     playDealerTurn(deck, dealerHand) {
         let dealerScore = this.calculate(dealerHand);
         while (dealerScore < 17) {
