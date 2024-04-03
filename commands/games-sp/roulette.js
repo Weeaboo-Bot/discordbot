@@ -54,7 +54,7 @@ module.exports = class RouletteCommand extends Command {
         playerId: msg.author.id,
       }, 'roulette');
       if (betAmount <= 0) {
-        finalBet = await msg.client.casinoUtils.waitForBet(msg);
+        finalBet = await msg.client.casinoUtils.waitForBet(msg, 30000, 'roulette');
       }
       finalBet = betAmount;
       await msg.client.casinoUtils.placeBet(msg, finalBet, id, 'roulette');

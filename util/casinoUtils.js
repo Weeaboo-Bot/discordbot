@@ -58,7 +58,14 @@ module.exports = class CasinoUtils {
         return userInput; // Return the valid integer bet amount
     }
 
-    async waitForBet(msg, timeout = 30000) {
+    async waitForBet(msg, timeout = 30000, gameType) {
+        switch (gameType) {
+            case 'blackjack':
+                msg.say('BlackJack pay 2.5x');
+                break;
+            default:
+                break;
+        }
         const currBal = await msg.client.dbHelper.getBalance(msg.author.id);
         await msg.say(`You have ${await msg.client.dbHelper.getBalance(msg.author.id)} tokens. Place your bet (integers only)!`);
 

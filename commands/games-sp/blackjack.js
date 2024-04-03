@@ -2,6 +2,8 @@ const Command = require('../../structures/Command');
 const { MessageEmbed } = require('discord.js');
 const Deck = require('../../structures/cards/Deck');
 
+const BJ_WIN = 2.5;
+
 module.exports = class BlackjackCommand extends Command {
     constructor(client) {
         super(client, {
@@ -9,11 +11,11 @@ module.exports = class BlackjackCommand extends Command {
             aliases: ['twenty-one', '21', 'bj'],
             group: 'games-sp',
             memberName: 'blackjack',
-            description: 'Play a game of blackjack.',
+            description: 'Play a game of blackjack',
             args: [
                 {
                     key: 'betAmount',
-                    prompt: 'How much would you like to bet?',
+                    prompt: 'How much would you like to bet?, hitting BJ pays 2.5x',
                     type: 'integer',
                     default: 0,
                     max: (msg) => msg.client.casinoUtils.getBalance(msg.author.id),
@@ -26,10 +28,10 @@ module.exports = class BlackjackCommand extends Command {
         let finalBet;
         if (await this.client.casinoUtils.checkChannel(msg.channel.id, msg.client.casinoChannel)) {
             return msg.reply('Please use this command in a casino channel.');
-          }
-          if (await this.client.casinoUtils.playerNeedsRegister(msg, msg.author.id)) {
+        }
+        if (await this.client.casinoUtils.playerNeedsRegister(msg, msg.author.id)) {
             return msg.reply(`You need to register your account before playing!, run ${msg.client.prefix}create-player`);
-          }
+        }
         try {
             const { id } = await msg.client.dbHelper.createGame({
                 data: new Deck(),
@@ -41,7 +43,7 @@ module.exports = class BlackjackCommand extends Command {
                 playerId: msg.author.id,
             }, 'blackjack');
             if (betAmount <= 0) {
-                finalBet = await msg.client.casinoUtils.waitForBet(msg);
+            finalBet = await msg.client.casinoUtils.waitForBet(msg, 30000, 'blackjack');
             } else {
                 finalBet = betAmount;
             }
@@ -50,7 +52,7 @@ module.exports = class BlackjackCommand extends Command {
 
             const dealerHand = [];
             const playerHand = [];
-            const { dealerInitialTotal, playerInitialTotal } = this.handleFirstDraw(msg,id, playerHand, dealerHand, deck)
+            const { dealerInitialTotal, playerInitialTotal } = this.handleFirstDraw(msg, id, playerHand, dealerHand, deck)
 
             let outcome = await this.handleInitialRound(msg, dealerInitialTotal, playerInitialTotal, id, msg.author.id, finalBet);
             if (outcome) {
@@ -73,6 +75,7 @@ module.exports = class BlackjackCommand extends Command {
         }
     }
     async handleInitialRound(msg, dealerTotal, playerTotal, id, playerId, betAmount) {
+        playerTotal = 21;
         if (dealerTotal === 21 && playerTotal === 21) { // PUSH
             await msg.client.dbHelper.createGameLog({
                 gameId: id,
@@ -104,7 +107,7 @@ module.exports = class BlackjackCommand extends Command {
                 event: 'PLAYER_WIN',
                 playerId: playerId,
             }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount * 2, betAmount, true);
+            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount, betAmount * BJ_WIN, true);
             return 'Wow, you hit blackjack right away! Lucky you!';
         }
         return null;
@@ -186,13 +189,13 @@ module.exports = class BlackjackCommand extends Command {
         if (winner === 'Dealer Wins!') {
             // Log dealer win event after confirming outcome
             await msg.client.dbHelper.createGameLog({ gameId, event: 'DEALER_WIN', playerId: msg.author.id }, 'blackjack');
-            await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount, betAmount, false);
+        await msg.client.casinoUtils.calcWinUpdateBal(msg, betAmount, betAmount, false);
             return msg.reply(`You lost!, your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
         } else if (winner === 'You Win!') {
             let winAmount;
             // Calculate win amount based on bet and blackjack payout (optional)
             if (this.calculate(playerHand) === 21 && playerHand.length === 2) { // Check for Blackjack
-                winAmount = betAmount * 2.5; // Hypothetical 3:2 payout for Blackjack
+                winAmount = betAmount * BJ_WIN; // Hypothetical 3:2 payout for Blackjack
             } else {
                 winAmount = betAmount; // Hypothetical 1:1 payout for regular win
             }
@@ -208,17 +211,14 @@ module.exports = class BlackjackCommand extends Command {
 
         return winner; // Optionally return the winner result
     }
-    determineWinner(playerScore, dealerScore) {      
-        // Check for busted scores
-        if (playerScore > 21) {
-          return "Dealer Wins!";
-        } else if (dealerScore > 21) {
-          return "You Win!";
-        }
+    determineWinner(playerScore, dealerScore) {
+        // Check for busted scores first
+        if (playerScore > 21) return "Dealer Wins!";
+        if (dealerScore > 21) return "You Win!";
       
-        // Compare non-busted scores to determine winner
-        return playerScore > dealerScore ? "You Win!" : "Push!";
-      }
+        // Handle dealer blackjack and other cases
+        return dealerScore === 21 ? "Dealer Wins!" : playerScore > dealerScore ? "You Win!" : "Push!";
+    }
     playDealerTurn(deck, dealerHand) {
         let dealerScore = this.calculate(dealerHand);
         while (dealerScore < 17) {
