@@ -42,8 +42,9 @@ module.exports = class BlackjackCommand extends Command {
             }, 'blackjack');
             if (betAmount <= 0) {
                 finalBet = await msg.client.casinoUtils.waitForBet(msg);
+            } else {
+                finalBet = betAmount;
             }
-            finalBet = betAmount;
             await msg.client.casinoUtils.placeBet(msg, finalBet, id, 'blackjack');
             const deck = msg.client.casinoGames.get(id).data;
 
@@ -51,7 +52,7 @@ module.exports = class BlackjackCommand extends Command {
             const playerHand = [];
             const { dealerInitialTotal, playerInitialTotal } = this.handleFirstDraw(msg,id, playerHand, dealerHand, deck)
 
-            let outcome = await this.handleInitialRound(msg, dealerInitialTotal, playerInitialTotal, id, msg.author.id, betAmount);
+            let outcome = await this.handleInitialRound(msg, dealerInitialTotal, playerInitialTotal, id, msg.author.id, finalBet);
             if (outcome) {
                 msg.say(outcome);
                 return msg.say(`Your new token balance is ${await msg.client.dbHelper.getBalance(msg.author.id)}`);
