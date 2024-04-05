@@ -75,7 +75,6 @@ module.exports = class BlackjackCommand extends Command {
         }
     }
     async handleInitialRound(msg, dealerTotal, playerTotal, id, playerId, betAmount) {
-        playerTotal = 21;
         if (dealerTotal === 21 && playerTotal === 21) { // PUSH
             await msg.client.dbHelper.createGameLog({
                 gameId: id,
