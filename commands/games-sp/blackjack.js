@@ -216,9 +216,16 @@ module.exports = class BlackjackCommand extends Command {
         if (playerScore > 21) return "Dealer Wins!";
         if (dealerScore > 21) return "You Win!";
       
-        // Handle dealer blackjack and other cases
-        return dealerScore === 21 ? "Dealer Wins!" : playerScore > dealerScore ? "You Win!" : "Push!";
-    }
+        // Handle ties and dealer blackjack
+        if (playerScore === dealerScore) {
+          return "Push"; // Correctly return "Push" for ties
+        } else if (dealerScore === 21) {
+          return "Dealer Wins!";
+        } else {
+          // Determine winner based on score
+          return playerScore > dealerScore ? "You Win!" : "Dealer Wins!";
+        }
+      }
     playDealerTurn(deck, dealerHand) {
         let dealerScore = this.calculate(dealerHand);
         while (dealerScore < 17) {
